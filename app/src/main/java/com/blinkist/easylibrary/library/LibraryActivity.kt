@@ -11,7 +11,7 @@ import timber.log.Timber
 class LibraryActivity : AppCompatActivity() {
 
     private val viewModel by lazy {
-        ViewModelProviders.of(this).get(LibraryViewModel::class.java).apply { init() }
+        ViewModelProviders.of(this).get(LibraryViewModel::class.java)
     }
 
     override fun onCreate(savedInstanceState: Bundle?) {

@@ -1,7 +1,7 @@
 package com.blinkist.easylibrary.di
 
+import android.app.Application
 import android.content.Context
-import com.blinkist.easylibrary.EasyLibraryApplication
 import com.blinkist.easylibrary.library.LibraryViewModel
 import com.blinkist.easylibrary.service.BooksService
 import dagger.Component
@@ -22,7 +22,10 @@ interface ApplicationComponent {
 }
 
 @Module
-class ApplicationModule {
+class ApplicationModule(private val application: Application) {
+
+    @Provides
+    fun provideApplicationContext(): Context = application.applicationContext
 
     @Provides
     @Singleton

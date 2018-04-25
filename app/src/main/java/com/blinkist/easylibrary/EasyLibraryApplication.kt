@@ -16,7 +16,7 @@ class EasyLibraryApplication : Application() {
     val component: ApplicationComponent by lazy {
         DaggerApplicationComponent
             .builder()
-            .applicationModule(ApplicationModule())
+            .applicationModule(ApplicationModule(this))
             .build()
     }
 

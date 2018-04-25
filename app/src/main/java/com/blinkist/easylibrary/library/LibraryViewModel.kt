@@ -13,7 +13,7 @@ class LibraryViewModel(application: Application) : AndroidViewModel(application)
     @Inject
     lateinit var booksService: BooksService
 
-    fun init() {
+    init {
         getApplication<EasyLibraryApplication>().component.inject(this)
     }
 
