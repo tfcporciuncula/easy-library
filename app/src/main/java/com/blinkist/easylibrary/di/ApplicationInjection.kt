@@ -6,11 +6,15 @@ import android.content.Context
 import com.blinkist.easylibrary.data.EasyLibraryDatabase
 import com.blinkist.easylibrary.library.LibraryViewModel
 import com.blinkist.easylibrary.service.LibraryService
+import com.squareup.moshi.KotlinJsonAdapterFactory
+import com.squareup.moshi.Moshi
 import dagger.Component
 import dagger.Module
 import dagger.Provides
 import io.appflate.restmock.RESTMockServer
 import okhttp3.OkHttpClient
+import retrofit2.CallAdapter
+import retrofit2.Converter
 import retrofit2.Retrofit
 import retrofit2.adapter.rxjava2.RxJava2CallAdapterFactory
 import retrofit2.converter.moshi.MoshiConverterFactory
@@ -31,13 +35,33 @@ class ApplicationModule(private val application: Application) {
 
     @Provides
     @Singleton
-    fun provideBooksService(): LibraryService = Retrofit.Builder()
-        .baseUrl(RESTMockServer.getUrl())
-        .client(OkHttpClient.Builder().build())
-        .addConverterFactory(MoshiConverterFactory.create())
-        .addCallAdapterFactory(RxJava2CallAdapterFactory.create())
-        .build()
-        .create(LibraryService::class.java)
+    fun provideHttpClient(): OkHttpClient = OkHttpClient.Builder().build()
+
+    @Provides
+    @Singleton
+    fun provideConverterFactory(): Converter.Factory {
+        return MoshiConverterFactory.create(Moshi.Builder().add(KotlinJsonAdapterFactory()).build())
+    }
+
+    @Provides
+    @Singleton
+    fun provideCallAdapterFactory(): CallAdapter.Factory = RxJava2CallAdapterFactory.create()
+
+    @Provides
+    @Singleton
+    fun provideBooksService(
+        httpClient: OkHttpClient,
+        converterFactory: Converter.Factory,
+        callAdapterFactory: CallAdapter.Factory
+    ): LibraryService {
+        return Retrofit.Builder()
+            .baseUrl(RESTMockServer.getUrl())
+            .client(httpClient)
+            .addConverterFactory(converterFactory)
+            .addCallAdapterFactory(callAdapterFactory)
+            .build()
+            .create(LibraryService::class.java)
+    }
 
     @Provides
     @Singleton
