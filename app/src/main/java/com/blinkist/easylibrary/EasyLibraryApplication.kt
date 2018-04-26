@@ -10,6 +10,7 @@ import io.appflate.restmock.android.AndroidAssetsFileParser
 import io.appflate.restmock.android.AndroidLogger
 import io.appflate.restmock.utils.RequestMatchers.pathContains
 import timber.log.Timber
+import java.util.concurrent.TimeUnit
 
 class EasyLibraryApplication : Application() {
 
@@ -34,8 +35,11 @@ class EasyLibraryApplication : Application() {
     private fun setupMockApi() {
         RESTMockServerStarter.startSync(AndroidAssetsFileParser(this), AndroidLogger());
         RESTMockServer.whenGET(pathContains("books"))
+            .delay(TimeUnit.SECONDS, 2)
             .thenReturnFile(200, "books.json")
+            .delay(TimeUnit.SECONDS, 2)
             .thenReturnFile(200, "books.json")
+            .delay(TimeUnit.SECONDS, 2)
             .thenReturnString("this will trigger an error")
     }
 }

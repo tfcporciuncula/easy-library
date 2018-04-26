@@ -1,0 +1,71 @@
+<?xml version="1.0" encoding="utf-8"?>
+<android.support.v7.widget.CardView xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="160dp"
+    android:layout_marginBottom="@dimen/half_standard_margin"
+    android:layout_marginEnd="@dimen/standard_margin"
+    android:layout_marginStart="@dimen/standard_margin"
+    android:layout_marginTop="@dimen/half_standard_margin"
+    android:clickable="true"
+    android:focusable="true"
+    android:foreground="?attr/selectableItemBackground"
+    app:cardCornerRadius="0dp">
+
+    <!-- TODO: try to make this look better -->
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:padding="@dimen/standard_margin">
+
+        <ImageView
+            android:id="@+id/coverImageView"
+            android:layout_width="wrap_content"
+            android:layout_height="match_parent"
+            android:adjustViewBounds="true"
+            android:contentDescription="@string/library_item_image_description"
+            android:scaleType="fitCenter"
+            tools:src="@drawable/ic_launcher_background" />
+
+        <TextView
+            android:id="@+id/titleTextView"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginEnd="@dimen/half_standard_margin"
+            android:layout_marginStart="@dimen/half_standard_margin"
+            android:layout_toEndOf="@id/coverImageView"
+            android:ellipsize="end"
+            android:maxLines="3"
+            android:textSize="16sp"
+            android:textStyle="bold"
+            tools:text="Clean Code" />
+
+        <TextView
+            android:id="@+id/authorsTextView"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_below="@id/titleTextView"
+            android:layout_marginEnd="@dimen/half_standard_margin"
+            android:layout_marginStart="@dimen/half_standard_margin"
+            android:layout_toEndOf="@id/coverImageView"
+            android:ellipsize="end"
+            android:maxLines="3"
+            android:textSize="14sp"
+            tools:text="Robert C. Martin" />
+
+        <TextView
+            android:id="@+id/publishedDateTextView"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentBottom="true"
+            android:layout_marginStart="@dimen/half_standard_margin"
+            android:layout_toEndOf="@id/coverImageView"
+            android:textSize="12sp"
+            android:textStyle="italic"
+            tools:text="2008-08-01" />
+
+    </RelativeLayout>
+
+</android.support.v7.widget.CardView>

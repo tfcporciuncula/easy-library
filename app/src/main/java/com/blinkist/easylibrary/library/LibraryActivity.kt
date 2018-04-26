@@ -3,13 +3,13 @@ package com.blinkist.easylibrary.library
 import android.arch.lifecycle.Observer
 import android.arch.lifecycle.ViewModelProviders
 import android.os.Bundle
+import android.support.design.widget.Snackbar
 import android.support.v7.app.AppCompatActivity
-import android.widget.Toast
 import com.blinkist.easylibrary.R
 import io.reactivex.android.schedulers.AndroidSchedulers
 import io.reactivex.disposables.Disposables
 import io.reactivex.schedulers.Schedulers
-import timber.log.Timber
+import kotlinx.android.synthetic.main.activity_library.*
 
 class LibraryActivity : AppCompatActivity() {
 
@@ -21,16 +21,15 @@ class LibraryActivity : AppCompatActivity() {
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        setContentView(R.layout.activity_main)
+        setContentView(R.layout.activity_library)
 
-        if (savedInstanceState == null) {
-            updateBooks()
-        }
+        if (savedInstanceState == null) updateBooks()
+        swipeRefreshLayout.setOnRefreshListener { updateBooks() }
 
         viewModel.books()
-            .observe(this, Observer {
-                Timber.d("Books changed")
-                Toast.makeText(this, "Got ${it?.size} books!", Toast.LENGTH_LONG).show()
+            .observe(this, Observer { books ->
+                // TODO: avoid creating a new adapter everytime to avoid blinking UI
+                books?.let { recyclerView.adapter = LibraryAdapter(it) }
             })
     }
 
@@ -38,29 +37,25 @@ class LibraryActivity : AppCompatActivity() {
         updateBooksDisposable = viewModel.updateBooks()
             .subscribeOn(Schedulers.io())
             .observeOn(AndroidSchedulers.mainThread())
-            .doOnSubscribe {
-                Timber.d("Show loading")
-                showProgressBar()
-            }
+            .doOnSubscribe { showProgressBar() }
             .subscribe({
-                Timber.d("Books updated successfully")
                 hideProgressBar()
             }, {
-                Timber.e(it, "Error while updating books")
+                hideProgressBar()
                 showNetworkError()
             })
     }
 
     private fun showProgressBar() {
-
+        swipeRefreshLayout.isRefreshing = true
     }
 
     private fun hideProgressBar() {
-
+        swipeRefreshLayout.isRefreshing = false
     }
 
     private fun showNetworkError() {
-
+        Snackbar.make(recyclerView, R.string.network_error_message, Snackbar.LENGTH_LONG).show()
     }
 
     override fun onDestroy() {
