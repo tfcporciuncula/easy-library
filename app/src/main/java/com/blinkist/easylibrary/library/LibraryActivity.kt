@@ -26,10 +26,11 @@ class LibraryActivity : AppCompatActivity() {
         if (savedInstanceState == null) updateBooks()
         swipeRefreshLayout.setOnRefreshListener { updateBooks() }
 
+        val adapter = LibraryAdapter()
+        recyclerView.adapter = adapter
         viewModel.books()
             .observe(this, Observer { books ->
-                // TODO: avoid creating a new adapter everytime to avoid blinking UI
-                books?.let { recyclerView.adapter = LibraryAdapter(it) }
+                books?.let { adapter.submitList(it) }
             })
     }
 

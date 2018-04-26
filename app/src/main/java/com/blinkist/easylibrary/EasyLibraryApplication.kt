@@ -38,6 +38,8 @@ class EasyLibraryApplication : Application() {
             .delay(TimeUnit.SECONDS, 2)
             .thenReturnFile(200, "books.json")
             .delay(TimeUnit.SECONDS, 2)
+            .thenReturnFile(200, "onemorebook.json")
+            .delay(TimeUnit.SECONDS, 2)
             .thenReturnFile(200, "books.json")
             .delay(TimeUnit.SECONDS, 2)
             .thenReturnString("this will trigger an error")

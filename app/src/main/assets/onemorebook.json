@@ -16,6 +16,14 @@
     "url": "https://play.google.com/store/books/details?id=BIpDDwAAQBAJ"
   },
   {
+    "id": 25,
+    "title": "The Lord of the Rings",
+    "authors": "The Lord of the Rings",
+    "publishedDate": "2012-02-15",
+    "thumbnail": "http://books.google.com/books/content?id=yl4dILkcqm4C&printsec=frontcover&img=1&zoom=2",
+    "url": "https://play.google.com/store/books/details?id=yl4dILkcqm4C"
+  },
+  {
     "id": 30,
     "title": "Java Puzzlers",
     "authors": "Joshua Bloch and Neal Gafter",
