@@ -29,8 +29,8 @@ class LibraryActivity : AppCompatActivity() {
         val adapter = LibraryAdapter()
         recyclerView.adapter = adapter
         viewModel.books()
-            .observe(this, Observer { books ->
-                books?.let { adapter.submitList(it) }
+            .observe(this, Observer { librariables ->
+                librariables?.let { adapter.submitList(it) }
             })
     }
 

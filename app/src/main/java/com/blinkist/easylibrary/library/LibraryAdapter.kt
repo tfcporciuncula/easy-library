@@ -6,27 +6,36 @@ import android.support.v7.widget.RecyclerView
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.TextView
 import com.blinkist.easylibrary.R
 import com.blinkist.easylibrary.model.Book
+import com.blinkist.easylibrary.model.WeekSection
 import com.bumptech.glide.Glide
-import kotlinx.android.synthetic.main.item_library.view.*
+import kotlinx.android.synthetic.main.item_book.view.*
 
-class LibraryAdapter : ListAdapter<Book, LibraryAdapter.ViewHolder>(DiffCallback()) {
+class LibraryAdapter : ListAdapter<Librariable, LibraryAdapter.ViewHolder>(DiffCallback()) {
 
-    class DiffCallback : DiffUtil.ItemCallback<Book>() {
+    companion object {
+        private const val ITEM_VIEW_TYPE_BOOK = 0
+        private const val ITEM_VIEW_TYPE_WEEK_SECTION = 1
+    }
 
-        override fun areItemsTheSame(oldItem: Book, newItem: Book): Boolean {
-            return oldItem.id == newItem.id
+    class DiffCallback : DiffUtil.ItemCallback<Librariable>() {
+
+        override fun areItemsTheSame(oldItem: Librariable, newItem: Librariable) = when {
+            oldItem is Book && newItem is Book -> oldItem.id == newItem.id
+            oldItem is WeekSection && newItem is WeekSection -> oldItem.title == newItem.title
+            else -> false
         }
 
-        override fun areContentsTheSame(oldItem: Book, newItem: Book): Boolean {
+        override fun areContentsTheSame(oldItem: Librariable, newItem: Librariable): Boolean {
             return oldItem == newItem
         }
     }
 
     class ViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView) {
 
-        fun bind(book: Book) {
+        fun bindBook(book: Book) {
             itemView.apply {
                 titleTextView.text = book.title
                 authorsTextView.text = book.authors
@@ -35,14 +44,36 @@ class LibraryAdapter : ListAdapter<Book, LibraryAdapter.ViewHolder>(DiffCallback
                 Glide.with(coverImageView).load(book.thumbnail).into(coverImageView)
             }
         }
+
+        fun bindWeekSection(weekSection: WeekSection) {
+            (itemView as TextView).text = weekSection.title
+        }
     }
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ViewHolder {
-        val view = LayoutInflater.from(parent.context).inflate(R.layout.item_library, parent, false)
+        val layoutResId = if (viewType == ITEM_VIEW_TYPE_BOOK) {
+            R.layout.item_book
+        } else {
+            R.layout.item_section
+        }
+
+        val view = LayoutInflater.from(parent.context).inflate(layoutResId, parent, false)
         return ViewHolder(view)
     }
 
     override fun onBindViewHolder(holder: ViewHolder, position: Int) {
-        holder.bind(getItem(position))
+        val librariable = getItem(position)
+        when (librariable) {
+            is Book -> holder.bindBook(librariable)
+            is WeekSection -> holder.bindWeekSection(librariable)
+        }
+    }
+
+    override fun getItemViewType(position: Int): Int {
+        return if (getItem(position) is Book) {
+            ITEM_VIEW_TYPE_BOOK
+        } else {
+            ITEM_VIEW_TYPE_WEEK_SECTION
+        }
     }
 }

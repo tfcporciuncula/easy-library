@@ -19,7 +19,7 @@
             android:paddingTop="@dimen/half_standard_margin"
             app:layoutManager="android.support.v7.widget.LinearLayoutManager"
             tools:itemCount="4"
-            tools:listitem="@layout/item_library" />
+            tools:listitem="@layout/item_book" />
 
     </android.support.v4.widget.SwipeRefreshLayout>
 
