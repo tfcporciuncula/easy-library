@@ -1,9 +1,11 @@
 package com.blinkist.easylibrary.di
 
 import android.app.Application
+import android.arch.persistence.room.Room
 import android.content.Context
+import com.blinkist.easylibrary.data.EasyLibraryDatabase
 import com.blinkist.easylibrary.library.LibraryViewModel
-import com.blinkist.easylibrary.service.BooksService
+import com.blinkist.easylibrary.service.LibraryService
 import dagger.Component
 import dagger.Module
 import dagger.Provides
@@ -29,11 +31,21 @@ class ApplicationModule(private val application: Application) {
 
     @Provides
     @Singleton
-    fun provideBooksService(): BooksService = Retrofit.Builder()
+    fun provideBooksService(): LibraryService = Retrofit.Builder()
         .baseUrl(RESTMockServer.getUrl())
         .client(OkHttpClient.Builder().build())
         .addConverterFactory(MoshiConverterFactory.create())
         .addCallAdapterFactory(RxJava2CallAdapterFactory.create())
         .build()
-        .create(BooksService::class.java)
+        .create(LibraryService::class.java)
+
+    @Provides
+    @Singleton
+    fun provideDatabase(context: Context): EasyLibraryDatabase {
+        return Room.databaseBuilder(context, EasyLibraryDatabase::class.java, "easy-library").build()
+    }
+
+    @Provides
+    @Singleton
+    fun provideBookDao(database: EasyLibraryDatabase) = database.bookDao()
 }

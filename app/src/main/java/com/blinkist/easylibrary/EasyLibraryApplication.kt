@@ -34,6 +34,8 @@ class EasyLibraryApplication : Application() {
     private fun setupMockApi() {
         RESTMockServerStarter.startSync(AndroidAssetsFileParser(this), AndroidLogger());
         RESTMockServer.whenGET(pathContains("books"))
-            .thenReturnFile(200, "books.json");
+            .thenReturnFile(200, "books.json")
+            .thenReturnFile(200, "books.json")
+            .thenReturnString("this will trigger an error")
     }
 }

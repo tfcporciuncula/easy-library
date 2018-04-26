@@ -1,6 +1,7 @@
 package com.blinkist.easylibrary.di
 
-import com.blinkist.easylibrary.service.BooksService
+import com.blinkist.easylibrary.data.BookDao
+import com.blinkist.easylibrary.service.LibraryService
 import dagger.Component
 import dagger.Module
 import dagger.Provides
@@ -16,5 +17,9 @@ class TestModule {
 
     @Provides
     @Singleton
-    fun provideBooksService(): BooksService = mock(BooksService::class.java)
+    fun provideBooksService(): LibraryService = mock(LibraryService::class.java)
+
+    @Provides
+    @Singleton
+    fun provideBookDao(): BookDao = mock(BookDao::class.java)
 }
