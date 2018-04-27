@@ -20,10 +20,9 @@
         <ImageView
             android:id="@+id/coverImageView"
             android:layout_width="@dimen/book_cover_image_width"
-            android:layout_height="wrap_content"
-            android:adjustViewBounds="true"
+            android:layout_height="@dimen/book_cover_image_height"
             android:contentDescription="@string/library_item_image_description"
-            android:scaleType="fitCenter"
+            android:scaleType="centerCrop"
             tools:src="@drawable/ic_launcher_background" />
 
         <TextView
@@ -35,7 +34,7 @@
             android:layout_marginTop="@dimen/standard_margin"
             android:layout_toEndOf="@id/coverImageView"
             android:ellipsize="end"
-            android:maxLines="3"
+            android:maxLines="2"
             android:textSize="@dimen/book_title_text_size"
             android:textStyle="bold"
             tools:text="Clean Code" />
@@ -49,7 +48,7 @@
             android:layout_marginStart="@dimen/standard_margin"
             android:layout_toEndOf="@id/coverImageView"
             android:ellipsize="end"
-            android:maxLines="3"
+            android:maxLines="2"
             android:textSize="@dimen/book_authors_text_size"
             tools:text="Robert C. Martin" />
 
@@ -58,6 +57,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_below="@id/authorsTextView"
+            android:layout_marginBottom="@dimen/standard_margin"
             android:layout_marginStart="@dimen/standard_margin"
             android:layout_marginTop="@dimen/half_standard_margin"
             android:layout_toEndOf="@id/coverImageView"

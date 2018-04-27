@@ -11,6 +11,7 @@ import com.blinkist.easylibrary.R
 import com.blinkist.easylibrary.model.Book
 import com.blinkist.easylibrary.model.WeekSection
 import com.bumptech.glide.Glide
+import com.bumptech.glide.load.resource.drawable.DrawableTransitionOptions.withCrossFade
 import kotlinx.android.synthetic.main.item_book.view.*
 
 class LibraryAdapter : ListAdapter<Librariable, LibraryAdapter.ViewHolder>(DiffCallback()) {
@@ -40,7 +41,10 @@ class LibraryAdapter : ListAdapter<Librariable, LibraryAdapter.ViewHolder>(DiffC
                 authorsTextView.text = book.authors
                 publishedDateTextView.text = book.publishedDate
 
-                Glide.with(coverImageView).load(book.thumbnail).into(coverImageView)
+                Glide.with(coverImageView)
+                    .load(book.thumbnail)
+                    .transition(withCrossFade())
+                    .into(coverImageView)
             }
         }
 
