@@ -3,7 +3,7 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
-    android:layout_height="@dimen/book_card_height"
+    android:layout_height="wrap_content"
     android:layout_marginBottom="@dimen/half_standard_margin"
     android:layout_marginEnd="@dimen/standard_margin"
     android:layout_marginStart="@dimen/standard_margin"
@@ -15,13 +15,12 @@
 
     <RelativeLayout
         android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:padding="@dimen/standard_margin">
+        android:layout_height="match_parent">
 
         <ImageView
             android:id="@+id/coverImageView"
-            android:layout_width="wrap_content"
-            android:layout_height="match_parent"
+            android:layout_width="@dimen/book_cover_image_width"
+            android:layout_height="wrap_content"
             android:adjustViewBounds="true"
             android:contentDescription="@string/library_item_image_description"
             android:scaleType="fitCenter"
@@ -32,7 +31,8 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginEnd="@dimen/half_standard_margin"
-            android:layout_marginStart="@dimen/half_standard_margin"
+            android:layout_marginStart="@dimen/standard_margin"
+            android:layout_marginTop="@dimen/standard_margin"
             android:layout_toEndOf="@id/coverImageView"
             android:ellipsize="end"
             android:maxLines="3"
@@ -46,7 +46,7 @@
             android:layout_height="wrap_content"
             android:layout_below="@id/titleTextView"
             android:layout_marginEnd="@dimen/half_standard_margin"
-            android:layout_marginStart="@dimen/half_standard_margin"
+            android:layout_marginStart="@dimen/standard_margin"
             android:layout_toEndOf="@id/coverImageView"
             android:ellipsize="end"
             android:maxLines="3"
@@ -57,8 +57,9 @@
             android:id="@+id/publishedDateTextView"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_alignParentBottom="true"
-            android:layout_marginStart="@dimen/half_standard_margin"
+            android:layout_below="@id/authorsTextView"
+            android:layout_marginStart="@dimen/standard_margin"
+            android:layout_marginTop="@dimen/half_standard_margin"
             android:layout_toEndOf="@id/coverImageView"
             android:textSize="@dimen/book_published_date_text_size"
             android:textStyle="italic"
