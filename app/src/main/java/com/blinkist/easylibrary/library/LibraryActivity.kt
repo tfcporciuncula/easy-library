@@ -4,18 +4,18 @@ import android.arch.lifecycle.Observer
 import android.arch.lifecycle.ViewModelProviders
 import android.os.Bundle
 import android.support.design.widget.Snackbar
-import android.support.v7.app.AppCompatActivity
 import android.view.Menu
 import android.view.MenuItem
 import com.blinkist.easylibrary.R
+import com.blinkist.easylibrary.base.BaseActivity
 import io.reactivex.android.schedulers.AndroidSchedulers
-import io.reactivex.disposables.Disposables
 import io.reactivex.schedulers.Schedulers
 import kotlinx.android.synthetic.main.activity_library.*
+import timber.log.Timber
 
-class LibraryActivity : AppCompatActivity() {
+class LibraryActivity : BaseActivity() {
 
-    private var updateBooksDisposable = Disposables.empty()
+    private val adapter = LibraryAdapter()
 
     private val viewModel by lazy {
         ViewModelProviders.of(this).get(LibraryViewModel::class.java)
@@ -28,12 +28,10 @@ class LibraryActivity : AppCompatActivity() {
         if (savedInstanceState == null) updateBooks()
         swipeRefreshLayout.setOnRefreshListener { updateBooks() }
 
-        val adapter = LibraryAdapter()
         recyclerView.adapter = adapter
-        viewModel.books()
-            .observe(this, Observer { librariables ->
-                librariables?.let { adapter.submitList(it) }
-            })
+        viewModel.books().observe(this, Observer { librariables ->
+            librariables?.let(adapter::submitList)
+        })
     }
 
     override fun onCreateOptionsMenu(menu: Menu): Boolean {
@@ -42,20 +40,30 @@ class LibraryActivity : AppCompatActivity() {
     }
 
     override fun onOptionsItemSelected(item: MenuItem): Boolean {
-        if (item.itemId == R.id.menu_sort) {
-            viewModel.changeSort()
-        }
+        if (item.itemId == R.id.menu_sort) changeBooksSortOrder()
         return super.onOptionsItemSelected(item)
     }
 
-    private fun updateBooks() {
-        updateBooksDisposable = viewModel.updateBooks()
+    private fun changeBooksSortOrder() {
+        viewModel.booksSortedDifferently()
             .subscribeOn(Schedulers.io())
             .observeOn(AndroidSchedulers.mainThread())
-            .doOnSubscribe { showProgressBar() }
+            .doOnSubscribe(::manageDisposable)
+            .subscribe(adapter::submitList, Timber::e)
+    }
+
+    private fun updateBooks() {
+        viewModel.updateBooks()
+            .subscribeOn(Schedulers.io())
+            .observeOn(AndroidSchedulers.mainThread())
+            .doOnSubscribe {
+                manageDisposable(it)
+                showProgressBar()
+            }
             .subscribe({
                 hideProgressBar()
             }, {
+                Timber.e(it)
                 hideProgressBar()
                 showNetworkError()
             })
@@ -71,10 +79,5 @@ class LibraryActivity : AppCompatActivity() {
 
     private fun showNetworkError() {
         Snackbar.make(recyclerView, R.string.network_error_message, Snackbar.LENGTH_LONG).show()
-    }
-
-    override fun onDestroy() {
-        updateBooksDisposable.dispose()
-        super.onDestroy()
     }
 }

@@ -1,7 +1,7 @@
 <resources>
     <string name="app_name">Easy Library</string>
 
-    <string name="sort_menu_item_title">Sort</string>
+    <string name="sort_menu_item_title">Change sort order</string>
     <string name="library_item_image_description">Book cover</string>
     <string name="network_error_message">We couldn\'t fetch your books…</string>
 </resources>

@@ -3,13 +3,16 @@ package com.blinkist.easylibrary.data
 import android.arch.lifecycle.LiveData
 import android.arch.persistence.room.*
 import com.blinkist.easylibrary.model.Book
-import io.reactivex.Flowable
+import io.reactivex.Single
 
 @Dao
 interface BookDao {
 
     @Query("SELECT * FROM books")
-    fun books(): LiveData<List<Book>>
+    fun booksLive(): LiveData<List<Book>>
+
+    @Query("SELECT * FROM books")
+    fun books(): Single<List<Book>>
 
     @Insert(onConflict = OnConflictStrategy.REPLACE)
     fun insert(vararg books: Book)

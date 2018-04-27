@@ -1,6 +1,5 @@
 package com.blinkist.easylibrary.model
 
-import android.annotation.SuppressLint
 import com.blinkist.easylibrary.library.Librariable
 import java.text.SimpleDateFormat
 import java.util.*
@@ -12,7 +11,8 @@ data class WeekSection(
     val title: String = buildTitle(book.publishedDateTime)
 ) : Librariable
 
-@SuppressLint("SimpleDateFormat")
+val dateFormat = SimpleDateFormat.getDateInstance(SimpleDateFormat.LONG)
+
 private fun buildTitle(bookPublishedDate: Long): String {
     val calendar = Calendar.getInstance().apply {
         firstDayOfWeek = Calendar.MONDAY
@@ -20,10 +20,10 @@ private fun buildTitle(bookPublishedDate: Long): String {
     }
 
     calendar.set(Calendar.DAY_OF_WEEK, Calendar.MONDAY)
-    val initialDate = SimpleDateFormat("yyyy-MM-dd").format(calendar.time)
+    val initialDate = dateFormat.format(calendar.time)
 
     calendar.set(Calendar.DAY_OF_WEEK, Calendar.SUNDAY)
-    val finalDate = SimpleDateFormat("yyyy-MM-dd").format(calendar.time)
+    val finalDate = dateFormat.format(calendar.time)
 
     return "$initialDate to $finalDate"
 }

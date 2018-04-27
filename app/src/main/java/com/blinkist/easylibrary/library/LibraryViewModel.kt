@@ -4,7 +4,6 @@ import android.app.Application
 import android.arch.lifecycle.AndroidViewModel
 import android.arch.lifecycle.LiveData
 import android.arch.lifecycle.Transformations
-import android.os.AsyncTask
 import com.blinkist.easylibrary.EasyLibraryApplication
 import com.blinkist.easylibrary.data.BookDao
 import com.blinkist.easylibrary.model.Book
@@ -21,37 +20,31 @@ class LibraryViewModel(application: Application) : AndroidViewModel(application)
     @Inject
     lateinit var booksDao: BookDao
 
-    var descending = true
-
-    var currentBooks = mutableListOf<Book>()
+    var sortByDescending = true
 
     init {
         getApplication<EasyLibraryApplication>().component.inject(this)
     }
 
-    fun books(): LiveData<List<Librariable>> = Transformations.map(booksDao.books()) {
+    fun books(): LiveData<List<Librariable>> = Transformations.map(booksDao.booksLive()) {
         groupBooksByWeek(it)
     }
 
     fun updateBooks(): Single<List<Book>> = libraryService.books()
         .doOnSuccess {
-            currentBooks.clear()
-            currentBooks.addAll(it)
-
             booksDao.clear()
             booksDao.insert(it)
         }
 
-    fun changeSort() {
-        descending = !descending
-
-        AsyncTask.execute { booksDao.insert(currentBooks) }
+    fun booksSortedDifferently(): Single<List<Librariable>> {
+        sortByDescending = !sortByDescending
+        return booksDao.books().map(::groupBooksByWeek)
     }
 
     private fun groupBooksByWeek(books: List<Book>): List<Librariable> {
         if (books.isEmpty()) return emptyList()
 
-        val sortedBooks = if (descending) {
+        val sortedBooks = if (sortByDescending) {
             books.sortedByDescending { it.publishedDateTime }
         } else {
             books.sortedBy { it.publishedDateTime }
