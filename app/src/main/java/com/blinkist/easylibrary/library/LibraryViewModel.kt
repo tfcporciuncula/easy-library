@@ -10,6 +10,7 @@ import com.blinkist.easylibrary.model.Book
 import com.blinkist.easylibrary.model.WeekSection
 import com.blinkist.easylibrary.model.belongsTo
 import com.blinkist.easylibrary.service.LibraryService
+import io.reactivex.Completable
 import io.reactivex.Single
 import javax.inject.Inject
 
@@ -21,7 +22,7 @@ class LibraryViewModel(application: Application) : AndroidViewModel(application)
     @Inject
     lateinit var booksDao: BookDao
 
-    var sortByDescending = true
+    private var sortByDescending = true
 
     init {
         getApplication<EasyLibraryApplication>().component.inject(this)
@@ -31,11 +32,12 @@ class LibraryViewModel(application: Application) : AndroidViewModel(application)
         groupBooksByWeek(it)
     }
 
-    fun updateBooks(): Single<List<Book>> = libraryService.books()
+    fun updateBooks(): Completable = libraryService.books()
         .doOnSuccess {
             booksDao.clear()
             booksDao.insert(it)
         }
+        .toCompletable()
 
     fun booksSortedDifferently(): Single<List<Librariable>> {
         sortByDescending = !sortByDescending

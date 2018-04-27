@@ -41,7 +41,7 @@ class LibraryViewModelTest : BaseTest() {
 
         given(libraryService.books()).willReturn(Single.just(books))
 
-        viewModel.updateBooks().test().assertValue(books)
+        viewModel.updateBooks().test().assertNoErrors()
         verify(libraryService).books()
         verify(bookDao).clear()
         verify(bookDao).insert(books)

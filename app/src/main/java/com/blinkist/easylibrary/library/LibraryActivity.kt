@@ -26,12 +26,9 @@ class LibraryActivity : BaseActivity() {
         setContentView(R.layout.activity_library)
 
         if (savedInstanceState == null) updateBooks()
-        swipeRefreshLayout.setOnRefreshListener { updateBooks() }
 
-        recyclerView.adapter = adapter
-        viewModel.books().observe(this, Observer { librariables ->
-            librariables?.let(adapter::submitList)
-        })
+        setupSwipeRefreshLayout()
+        setupList()
     }
 
     override fun onCreateOptionsMenu(menu: Menu): Boolean {
@@ -42,6 +39,17 @@ class LibraryActivity : BaseActivity() {
     override fun onOptionsItemSelected(item: MenuItem): Boolean {
         if (item.itemId == R.id.menu_sort) changeBooksSortOrder()
         return super.onOptionsItemSelected(item)
+    }
+
+    private fun setupSwipeRefreshLayout() {
+        swipeRefreshLayout.setOnRefreshListener { updateBooks() }
+    }
+
+    private fun setupList() {
+        recyclerView.adapter = adapter
+        viewModel.books().observe(this, Observer { librariables ->
+            librariables?.let(adapter::submitList)
+        })
     }
 
     private fun changeBooksSortOrder() {
