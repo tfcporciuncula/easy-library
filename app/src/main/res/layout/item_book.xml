@@ -3,7 +3,7 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
-    android:layout_height="160dp"
+    android:layout_height="@dimen/book_card_height"
     android:layout_marginBottom="@dimen/half_standard_margin"
     android:layout_marginEnd="@dimen/standard_margin"
     android:layout_marginStart="@dimen/standard_margin"
@@ -11,9 +11,7 @@
     android:clickable="true"
     android:focusable="true"
     android:foreground="?attr/selectableItemBackground"
-    app:cardCornerRadius="0dp">
-
-    <!-- TODO: try to make this look better -->
+    app:cardCornerRadius="@dimen/book_card_corner_radius">
 
     <RelativeLayout
         android:layout_width="match_parent"
@@ -38,7 +36,7 @@
             android:layout_toEndOf="@id/coverImageView"
             android:ellipsize="end"
             android:maxLines="3"
-            android:textSize="16sp"
+            android:textSize="@dimen/book_title_text_size"
             android:textStyle="bold"
             tools:text="Clean Code" />
 
@@ -52,7 +50,7 @@
             android:layout_toEndOf="@id/coverImageView"
             android:ellipsize="end"
             android:maxLines="3"
-            android:textSize="14sp"
+            android:textSize="@dimen/book_authors_text_size"
             tools:text="Robert C. Martin" />
 
         <TextView
@@ -62,7 +60,7 @@
             android:layout_alignParentBottom="true"
             android:layout_marginStart="@dimen/half_standard_margin"
             android:layout_toEndOf="@id/coverImageView"
-            android:textSize="12sp"
+            android:textSize="@dimen/book_published_date_text_size"
             android:textStyle="italic"
             tools:text="2008-08-01" />
 

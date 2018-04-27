@@ -23,28 +23,26 @@ import java.text.SimpleDateFormat
 @RunWith(AndroidJUnit4::class)
 class LibraryServiceTest {
 
-    companion object {
-        private const val books = """
-                [
-                  {
-                    "id": 1,
-                    "title": "book1",
-                    "authors": "author1",
-                    "publishedDate": "2018-04-03",
-                    "thumbnail": "thumbnail1",
-                    "url": "url1"
-                  },
-                  {
-                    "id": 2,
-                    "title": "book2",
-                    "authors": "author2",
-                    "publishedDate": "2018-04-04",
-                    "thumbnail": "thumbnail2",
-                    "url": "url2"
-                  }
-                ]
-                """
-    }
+    private val books = """
+        [
+          {
+            "id": 1,
+            "title": "book1",
+            "authors": "author1",
+            "publishedDate": "2018-04-03",
+            "thumbnail": "thumbnail1",
+            "url": "url1"
+          },
+          {
+            "id": 2,
+            "title": "book2",
+            "authors": "author2",
+            "publishedDate": "2018-04-04",
+            "thumbnail": "thumbnail2",
+            "url": "url2"
+          }
+        ]
+        """
 
     private val libraryService
         get() = Retrofit.Builder()

@@ -2,4 +2,11 @@
 <resources>
     <dimen name="half_standard_margin">8dp</dimen>
     <dimen name="standard_margin">16dp</dimen>
+
+    <dimen name="section_title_text_size">20sp</dimen>
+    <dimen name="book_card_corner_radius">0dp</dimen>
+    <dimen name="book_card_height">160dp</dimen>
+    <dimen name="book_title_text_size">16sp</dimen>
+    <dimen name="book_authors_text_size">14sp</dimen>
+    <dimen name="book_published_date_text_size">12sp</dimen>
 </resources>

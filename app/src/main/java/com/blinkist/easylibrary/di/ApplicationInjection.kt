@@ -31,37 +31,37 @@ interface ApplicationComponent {
 class ApplicationModule(private val application: Application) {
 
     @Provides
+    @Singleton
     fun provideApplicationContext(): Context = application.applicationContext
 
     @Provides
-    @Singleton
+    fun provideBaseUrl(): String = RESTMockServer.getUrl()
+
+    @Provides
     fun provideHttpClient(): OkHttpClient = OkHttpClient.Builder().build()
 
     @Provides
-    @Singleton
     fun provideConverterFactory(): Converter.Factory {
         return MoshiConverterFactory.create(Moshi.Builder().add(KotlinJsonAdapterFactory()).build())
     }
 
     @Provides
-    @Singleton
     fun provideCallAdapterFactory(): CallAdapter.Factory = RxJava2CallAdapterFactory.create()
 
     @Provides
     @Singleton
     fun provideBooksService(
+        baseUrl: String,
         httpClient: OkHttpClient,
         converterFactory: Converter.Factory,
         callAdapterFactory: CallAdapter.Factory
-    ): LibraryService {
-        return Retrofit.Builder()
-            .baseUrl(RESTMockServer.getUrl())
-            .client(httpClient)
-            .addConverterFactory(converterFactory)
-            .addCallAdapterFactory(callAdapterFactory)
-            .build()
-            .create(LibraryService::class.java)
-    }
+    ): LibraryService = Retrofit.Builder()
+        .baseUrl(baseUrl)
+        .client(httpClient)
+        .addConverterFactory(converterFactory)
+        .addCallAdapterFactory(callAdapterFactory)
+        .build()
+        .create(LibraryService::class.java)
 
     @Provides
     @Singleton
