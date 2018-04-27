@@ -4,6 +4,7 @@ import android.app.Application
 import android.arch.persistence.room.Room
 import android.content.Context
 import com.blinkist.easylibrary.data.EasyLibraryDatabase
+import com.blinkist.easylibrary.library.LibraryAdapter
 import com.blinkist.easylibrary.library.LibraryViewModel
 import com.blinkist.easylibrary.service.LibraryService
 import com.squareup.moshi.KotlinJsonAdapterFactory
@@ -70,6 +71,8 @@ class ApplicationModule(private val application: Application) {
     }
 
     @Provides
-    @Singleton
     fun provideBookDao(database: EasyLibraryDatabase) = database.bookDao()
+
+    @Provides
+    fun provideLibraryAdapter(): LibraryAdapter = LibraryAdapter()
 }

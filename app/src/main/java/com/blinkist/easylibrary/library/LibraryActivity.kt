@@ -15,8 +15,6 @@ import timber.log.Timber
 
 class LibraryActivity : BaseActivity() {
 
-    private val adapter = LibraryAdapter()
-
     private val viewModel by lazy {
         ViewModelProviders.of(this).get(LibraryViewModel::class.java)
     }
@@ -46,9 +44,9 @@ class LibraryActivity : BaseActivity() {
     }
 
     private fun setupList() {
-        recyclerView.adapter = adapter
+        recyclerView.adapter = viewModel.adapter
         viewModel.books().observe(this, Observer { librariables ->
-            librariables?.let(adapter::submitList)
+            librariables?.let(viewModel.adapter::submitList)
         })
     }
 
@@ -57,7 +55,7 @@ class LibraryActivity : BaseActivity() {
             .subscribeOn(Schedulers.io())
             .observeOn(AndroidSchedulers.mainThread())
             .doOnSubscribe(::manageDisposable)
-            .subscribe(adapter::submitList, Timber::e)
+            .subscribe(viewModel.adapter::submitList, Timber::e)
     }
 
     private fun updateBooks() {

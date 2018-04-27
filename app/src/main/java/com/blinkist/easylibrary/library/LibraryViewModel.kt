@@ -22,6 +22,9 @@ class LibraryViewModel(application: Application) : AndroidViewModel(application)
     @Inject
     lateinit var booksDao: BookDao
 
+    @Inject
+    lateinit var adapter: LibraryAdapter
+
     private var sortByDescending = true
 
     init {
