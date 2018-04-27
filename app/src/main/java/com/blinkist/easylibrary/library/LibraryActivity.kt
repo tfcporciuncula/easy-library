@@ -5,6 +5,8 @@ import android.arch.lifecycle.ViewModelProviders
 import android.os.Bundle
 import android.support.design.widget.Snackbar
 import android.support.v7.app.AppCompatActivity
+import android.view.Menu
+import android.view.MenuItem
 import com.blinkist.easylibrary.R
 import io.reactivex.android.schedulers.AndroidSchedulers
 import io.reactivex.disposables.Disposables
@@ -32,6 +34,18 @@ class LibraryActivity : AppCompatActivity() {
             .observe(this, Observer { librariables ->
                 librariables?.let { adapter.submitList(it) }
             })
+    }
+
+    override fun onCreateOptionsMenu(menu: Menu): Boolean {
+        menuInflater.inflate(R.menu.menu, menu)
+        return true
+    }
+
+    override fun onOptionsItemSelected(item: MenuItem): Boolean {
+        if (item.itemId == R.id.menu_sort) {
+            viewModel.changeSort()
+        }
+        return super.onOptionsItemSelected(item)
     }
 
     private fun updateBooks() {
