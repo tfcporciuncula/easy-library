@@ -11,7 +11,7 @@ import org.mockito.Mock
 import org.mockito.junit.MockitoJUnitRunner
 
 @RunWith(MockitoJUnitRunner::class)
-abstract class BaseTest {
+abstract class InjectionAwareTest {
 
     protected lateinit var component: TestComponent
 

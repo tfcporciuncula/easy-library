@@ -2,7 +2,7 @@ package com.blinkist.easylibrary.library
 
 import android.arch.core.executor.testing.InstantTaskExecutorRule
 import android.arch.lifecycle.MutableLiveData
-import com.blinkist.easylibrary.base.BaseTest
+import com.blinkist.easylibrary.base.InjectionAwareTest
 import com.blinkist.easylibrary.data.BookDao
 import com.blinkist.easylibrary.model.Book
 import com.blinkist.easylibrary.model.ModelFactory.newBook
@@ -17,7 +17,7 @@ import org.mockito.BDDMockito.given
 import org.mockito.BDDMockito.verify
 import javax.inject.Inject
 
-class LibraryViewModelTest : BaseTest() {
+class LibraryViewModelTest : InjectionAwareTest() {
 
     @get:Rule
     val instantTaskExecutorRule = InstantTaskExecutorRule()
@@ -46,7 +46,7 @@ class LibraryViewModelTest : BaseTest() {
             MutableLiveData<List<Book>>().apply { value = books }
         )
 
-        val librariables = listOf(WeekSection(books.first())) + books
+        val librariables = listOf(WeekSection("", "")) + books
         given(bookGrouper.groupBooksByWeek(books)).willReturn(librariables)
 
         viewModel.books().observeForever {
