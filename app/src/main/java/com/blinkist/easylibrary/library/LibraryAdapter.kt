@@ -24,8 +24,7 @@ class LibraryAdapter : ListAdapter<Librariable, LibraryAdapter.ViewHolder>(DiffC
 
         override fun areItemsTheSame(oldItem: Librariable, newItem: Librariable) = when {
             oldItem is Book && newItem is Book -> oldItem.id == newItem.id
-            oldItem is WeekSection && newItem is WeekSection -> oldItem.title == newItem.title
-            else -> false
+            else -> oldItem == newItem
         }
 
         override fun areContentsTheSame(oldItem: Librariable, newItem: Librariable): Boolean {
@@ -46,7 +45,11 @@ class LibraryAdapter : ListAdapter<Librariable, LibraryAdapter.ViewHolder>(DiffC
         }
 
         fun bindWeekSection(weekSection: WeekSection) {
-            (itemView as TextView).text = weekSection.title
+            val title = itemView.context.getString(
+                R.string.week_section_title, weekSection.initialDate, weekSection.finalDate
+            )
+            (itemView as TextView).text = title
+
         }
     }
 

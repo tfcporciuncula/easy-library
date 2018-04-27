@@ -20,6 +20,9 @@ import retrofit2.Converter
 import retrofit2.Retrofit
 import retrofit2.adapter.rxjava2.RxJava2CallAdapterFactory
 import retrofit2.converter.moshi.MoshiConverterFactory
+import java.text.DateFormat
+import java.text.SimpleDateFormat
+import java.util.*
 import javax.inject.Singleton
 
 @Singleton
@@ -75,7 +78,18 @@ class ApplicationModule(private val application: Application) {
     fun provideBookDao(database: EasyLibraryDatabase) = database.bookDao()
 
     @Provides
-    fun provideBookGrouper(): BookGrouper = BookGrouper()
+    fun provideCalendar(): Calendar = Calendar.getInstance().apply {
+        firstDayOfWeek = Calendar.MONDAY
+    }
+
+    @Provides
+    fun provideDateFormat(): DateFormat = SimpleDateFormat.getDateInstance(SimpleDateFormat.LONG)
+
+    @Provides
+    fun provideBookGrouper(
+        calendar: Calendar,
+        dateFormat: DateFormat
+    ): BookGrouper = BookGrouper(calendar, dateFormat)
 
     @Provides
     fun provideLibraryAdapter(): LibraryAdapter = LibraryAdapter()
