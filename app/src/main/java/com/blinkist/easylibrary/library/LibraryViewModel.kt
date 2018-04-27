@@ -8,6 +8,7 @@ import com.blinkist.easylibrary.EasyLibraryApplication
 import com.blinkist.easylibrary.data.BookDao
 import com.blinkist.easylibrary.model.Book
 import com.blinkist.easylibrary.model.WeekSection
+import com.blinkist.easylibrary.model.belongsTo
 import com.blinkist.easylibrary.service.LibraryService
 import io.reactivex.Single
 import javax.inject.Inject
