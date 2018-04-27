@@ -1,6 +1,7 @@
 package com.blinkist.easylibrary.di
 
 import com.blinkist.easylibrary.data.BookDao
+import com.blinkist.easylibrary.library.LibraryViewModelTest
 import com.blinkist.easylibrary.service.LibraryService
 import dagger.Component
 import dagger.Module
@@ -10,7 +11,10 @@ import javax.inject.Singleton
 
 @Singleton
 @Component(modules = [TestModule::class])
-interface TestComponent : ApplicationComponent
+interface TestComponent : ApplicationComponent {
+
+    fun inject(test: LibraryViewModelTest)
+}
 
 @Module
 class TestModule {

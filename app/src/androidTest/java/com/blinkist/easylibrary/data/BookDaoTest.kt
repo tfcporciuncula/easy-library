@@ -5,6 +5,7 @@ import android.arch.persistence.room.Room
 import android.support.test.InstrumentationRegistry
 import android.support.test.runner.AndroidJUnit4
 import com.blinkist.easylibrary.model.Book
+import com.blinkist.easylibrary.model.ModelFactory.newBook
 import org.junit.After
 import org.junit.Assert.assertEquals
 import org.junit.Before
@@ -36,7 +37,7 @@ class BookDaoTest {
 
     @Test
     fun testInsert() {
-        val books = listOf(newBook(1, "book1"), newBook(2, "book2"))
+        val books = listOf(newBook(id = 1), newBook(id = 2))
 
         bookDao.insert(books)
 
@@ -46,7 +47,7 @@ class BookDaoTest {
 
     @Test
     fun testReplace() {
-        val book = newBook(1, "book1")
+        val book = newBook(id = 20)
 
         bookDao.insert(book)
         val updatedBook = book.copy(title = "updatedBook1")
@@ -58,8 +59,8 @@ class BookDaoTest {
 
     @Test
     fun testDelete() {
-        val book1 = newBook(1, "book1")
-        val book2 = newBook(2, "book2")
+        val book1 = newBook(id = 100)
+        val book2 = newBook(id = 200)
 
         bookDao.insert(book1, book2)
         bookDao.delete(book1)
@@ -70,23 +71,12 @@ class BookDaoTest {
 
     @Test
     fun testClear() {
-        val books = listOf(newBook(5, "book5"), newBook(6, "book6"))
+        val books = listOf(newBook(id = 123), newBook(id = 456))
 
         bookDao.insert(books)
         bookDao.clear()
 
         bookDao.books().test().assertValues(emptyList())
         bookDao.booksLive().observeForever { assertEquals(emptyList<Book>(), it) }
-    }
-
-    private fun newBook(id: Long, title: String): Book {
-        return Book(
-            id = id,
-            title = title,
-            publishedDate = "2018-04-03",
-            authors = "authors",
-            thumbnail = "thumbnail",
-            url = "url"
-        )
     }
 }
