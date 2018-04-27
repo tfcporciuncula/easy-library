@@ -4,6 +4,7 @@ import android.app.Application
 import android.arch.persistence.room.Room
 import android.content.Context
 import com.blinkist.easylibrary.data.EasyLibraryDatabase
+import com.blinkist.easylibrary.library.BookGrouper
 import com.blinkist.easylibrary.library.LibraryAdapter
 import com.blinkist.easylibrary.library.LibraryViewModel
 import com.blinkist.easylibrary.service.LibraryService
@@ -72,6 +73,9 @@ class ApplicationModule(private val application: Application) {
 
     @Provides
     fun provideBookDao(database: EasyLibraryDatabase) = database.bookDao()
+
+    @Provides
+    fun provideBookGrouper(): BookGrouper = BookGrouper()
 
     @Provides
     fun provideLibraryAdapter(): LibraryAdapter = LibraryAdapter()

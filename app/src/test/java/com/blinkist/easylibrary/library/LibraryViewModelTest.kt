@@ -9,7 +9,7 @@ import com.blinkist.easylibrary.model.ModelFactory.newBook
 import com.blinkist.easylibrary.model.WeekSection
 import com.blinkist.easylibrary.service.LibraryService
 import io.reactivex.Single
-import junit.framework.Assert.*
+import junit.framework.Assert.assertEquals
 import org.junit.Before
 import org.junit.Rule
 import org.junit.Test
@@ -28,6 +28,9 @@ class LibraryViewModelTest : BaseTest() {
     @Inject
     lateinit var bookDao: BookDao
 
+    @Inject
+    lateinit var bookGrouper: BookGrouper
+
     private val viewModel get() = LibraryViewModel(application)
 
     @Before
@@ -37,71 +40,23 @@ class LibraryViewModelTest : BaseTest() {
     }
 
     @Test
-    fun testBooksFromTheSameWeek() {
-        val booksInTheSameWeek = listOf(
-            newBook(publishedDate = "2018-04-28"),
-            newBook(publishedDate = "2018-04-27")
-        )
-
+    fun testBooks() {
+        val books = listOf(newBook(id = 11), newBook(id = 22))
         given(bookDao.booksLive()).willReturn(
-            MutableLiveData<List<Book>>().apply { value = booksInTheSameWeek }
+            MutableLiveData<List<Book>>().apply { value = books }
         )
 
-        viewModel.books().observeForever { librariables ->
-            librariables?.let {
-                assertTrue(it[0] is WeekSection)
-                assertEquals(booksInTheSameWeek[0], it[1] as Book)
-                assertEquals(booksInTheSameWeek[1], it[2] as Book)
-            } ?: fail()
+        val librariables = listOf(WeekSection(books.first())) + books
+        given(bookGrouper.groupBooksByWeek(books)).willReturn(librariables)
+
+        viewModel.books().observeForever {
+            assertEquals(librariables, it)
         }
-    }
-
-    @Test
-    fun testBooksFromDifferentWeek() {
-        val booksInTheSameWeek = listOf(
-            newBook(publishedDate = "2018-04-28"),
-            newBook(publishedDate = "2017-04-27")
-        )
-
-        given(bookDao.booksLive()).willReturn(
-            MutableLiveData<List<Book>>().apply { value = booksInTheSameWeek }
-        )
-
-        viewModel.books().observeForever { librariables ->
-            librariables?.let {
-                assertTrue(it[0] is WeekSection)
-                assertEquals(booksInTheSameWeek[0], it[1] as Book)
-                assertTrue(it[2] is WeekSection)
-                assertEquals(booksInTheSameWeek[1], it[3] as Book)
-            } ?: fail()
-        }
-    }
-
-    @Test
-    fun testChangingBooksSortOrder() {
-        val books = listOf(
-            newBook(publishedDate = "2018-04-03"),
-            newBook(publishedDate = "2018-04-04")
-        )
-
-        given(bookDao.books()).willReturn(Single.just(books))
-
-        val viewModel = this.viewModel
-        val sortedBooks1 =
-            viewModel.booksSortedDifferently().test().values().first().filter { it is Book }
-        val sortedBooks2 =
-            viewModel.booksSortedDifferently().test().values().first().filter { it is Book }
-
-        assertEquals(books, sortedBooks1)
-        assertEquals(books.reversed(), sortedBooks2)
     }
 
     @Test
     fun testUpdateBooks() {
-        val books = listOf(
-            newBook(title = "book1"),
-            newBook(title = "book2")
-        )
+        val books = listOf(newBook(id = 12), newBook(id = 34))
 
         given(libraryService.books()).willReturn(Single.just(books))
 
@@ -109,5 +64,18 @@ class LibraryViewModelTest : BaseTest() {
         verify(libraryService).books()
         verify(bookDao).clear()
         verify(bookDao).insert(books)
+    }
+
+    @Test
+    fun testChangingBooksSortOrder() {
+        val viewModel = this.viewModel
+
+        val books = listOf(newBook(id = 10), newBook(id = 20))
+        given(bookDao.books()).willReturn(Single.just(books))
+
+        viewModel.booksSortedDifferently().test()
+        verify(bookGrouper).groupBooksByWeek(books, sortByDescending = false)
+        viewModel.booksSortedDifferently().test()
+        verify(bookGrouper).groupBooksByWeek(books, sortByDescending = true)
     }
 }

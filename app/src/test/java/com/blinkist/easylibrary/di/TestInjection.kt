@@ -1,6 +1,7 @@
 package com.blinkist.easylibrary.di
 
 import com.blinkist.easylibrary.data.BookDao
+import com.blinkist.easylibrary.library.BookGrouper
 import com.blinkist.easylibrary.library.LibraryAdapter
 import com.blinkist.easylibrary.library.LibraryViewModelTest
 import com.blinkist.easylibrary.service.LibraryService
@@ -27,6 +28,10 @@ class TestModule {
     @Provides
     @Singleton
     fun provideBookDao(): BookDao = mock(BookDao::class.java)
+
+    @Provides
+    @Singleton
+    fun provideBookGrouper(): BookGrouper = mock(BookGrouper::class.java)
 
     @Provides
     @Singleton
