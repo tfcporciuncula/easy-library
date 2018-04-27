@@ -17,7 +17,7 @@ class LibraryViewModel(application: Application) : AndroidViewModel(application)
     lateinit var libraryService: LibraryService
 
     @Inject
-    lateinit var booksDao: BookDao
+    lateinit var bookDao: BookDao
 
     @Inject
     lateinit var bookGrouper: BookGrouper
@@ -31,19 +31,19 @@ class LibraryViewModel(application: Application) : AndroidViewModel(application)
         getApplication<EasyLibraryApplication>().component.inject(this)
     }
 
-    fun books(): LiveData<List<Librariable>> = Transformations.map(booksDao.booksLive()) {
+    fun books(): LiveData<List<Librariable>> = Transformations.map(bookDao.booksLive()) {
         bookGrouper.groupBooksByWeek(it)
     }
 
     fun updateBooks(): Completable = libraryService.books()
         .doOnSuccess {
-            booksDao.clear()
-            booksDao.insert(it)
+            bookDao.clear()
+            bookDao.insert(it)
         }
         .toCompletable()
 
     fun booksSortedDifferently(): Single<List<Librariable>> {
         sortByDescending = !sortByDescending
-        return booksDao.books().map { bookGrouper.groupBooksByWeek(it, sortByDescending) }
+        return bookDao.books().map { bookGrouper.groupBooksByWeek(it, sortByDescending) }
     }
 }
