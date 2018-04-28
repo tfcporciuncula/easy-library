@@ -53,7 +53,6 @@ class LibraryAdapter : ListAdapter<Librariable, LibraryAdapter.ViewHolder>(DiffC
                 R.string.week_section_title, weekSection.initialDate, weekSection.finalDate
             )
             (itemView as TextView).text = title
-
         }
     }
 

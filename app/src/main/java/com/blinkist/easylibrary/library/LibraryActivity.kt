@@ -84,6 +84,6 @@ class LibraryActivity : BaseActivity() {
     }
 
     private fun showNetworkError() {
-        Snackbar.make(recyclerView, R.string.network_error_message, Snackbar.LENGTH_LONG).show()
+        Snackbar.make(swipeRefreshLayout, R.string.network_error_message, Snackbar.LENGTH_LONG).show()
     }
 }

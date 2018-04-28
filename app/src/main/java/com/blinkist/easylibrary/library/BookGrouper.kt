@@ -13,29 +13,33 @@ class BookGrouper(
     fun groupBooksByWeek(books: List<Book>, sortByDescending: Boolean = true): List<Librariable> {
         if (books.isEmpty()) return emptyList()
 
-        val sortedBooks = if (sortByDescending) {
+        val sortedBooks = sortBooks(sortByDescending, books)
+        val groupedBooks = mutableListOf<Librariable>()
+
+        var currentDate = sortedBooks.first().publishedDateTime
+        var currentWeekSection = buildWeekSection(currentDate)
+        groupedBooks.add(currentWeekSection)
+
+        sortedBooks.forEach {
+            if (it.belongsToSameWeekAs(currentDate)) {
+                groupedBooks.add(it)
+            } else {
+                currentDate = it.publishedDateTime
+                currentWeekSection = buildWeekSection(currentDate)
+                groupedBooks.add(currentWeekSection)
+                groupedBooks.add(it)
+            }
+        }
+
+        return groupedBooks
+    }
+
+    private fun sortBooks(sortByDescending: Boolean, books: List<Book>): List<Book> {
+        return if (sortByDescending) {
             books.sortedByDescending { it.publishedDateTime }
         } else {
             books.sortedBy { it.publishedDateTime }
         }
-        val listItems = mutableListOf<Librariable>()
-
-        var currentDate = sortedBooks.first().publishedDateTime
-        var currentWeekSection = buildWeekSection(currentDate)
-        listItems.add(currentWeekSection)
-
-        sortedBooks.forEach {
-            if (it.belongsToSameWeekAs(currentDate)) {
-                listItems.add(it)
-            } else {
-                currentDate = it.publishedDateTime
-                currentWeekSection = buildWeekSection(currentDate)
-                listItems.add(currentWeekSection)
-                listItems.add(it)
-            }
-        }
-
-        return listItems
     }
 
     private fun buildWeekSection(date: Long): WeekSection {
