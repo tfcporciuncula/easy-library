@@ -1,6 +1,6 @@
 # Easy Library
 
->Download the APK here: [soon]
+>Download the APK here: http://bit.do/easylibraryapk
 
 Ever needed a simplified version of Blinkist's library view that allows you to browse your books in a convenient way? This is it! Except the list of books is made up and all the published dates are wrong.
 
@@ -21,7 +21,7 @@ I chose my favorite technologies to work with when it comes to Android developme
 
 And I added [RESTMock](https://github.com/andrzejchm/RESTMock) for the mock API.
 
-## Data
+## Data Flow
 
 All my decisions towards how to handle the data were made based on my needs and opinion as an user:
 
