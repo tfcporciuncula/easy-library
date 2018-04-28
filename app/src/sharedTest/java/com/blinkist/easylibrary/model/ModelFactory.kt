@@ -17,4 +17,9 @@ object ModelFactory {
         thumbnail = thumbnail,
         url = url
     )
+
+    fun newWeekSection(
+        initialDate: String = "init",
+        finalDate: String = "final"
+    ) = WeekSection(initialDate, finalDate)
 }

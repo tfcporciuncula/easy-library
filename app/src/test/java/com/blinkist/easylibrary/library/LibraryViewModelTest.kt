@@ -6,7 +6,7 @@ import com.blinkist.easylibrary.base.InjectionAwareTest
 import com.blinkist.easylibrary.data.BookDao
 import com.blinkist.easylibrary.model.Book
 import com.blinkist.easylibrary.model.ModelFactory.newBook
-import com.blinkist.easylibrary.model.WeekSection
+import com.blinkist.easylibrary.model.ModelFactory.newWeekSection
 import com.blinkist.easylibrary.service.LibraryService
 import io.reactivex.Single
 import junit.framework.Assert.assertEquals
@@ -46,7 +46,7 @@ class LibraryViewModelTest : InjectionAwareTest() {
             MutableLiveData<List<Book>>().apply { value = books }
         )
 
-        val librariables = listOf(WeekSection("", "")) + books
+        val librariables = listOf(newWeekSection()) + books
         given(bookGrouper.groupBooksByWeek(books)).willReturn(librariables)
 
         viewModel.books().observeForever {
