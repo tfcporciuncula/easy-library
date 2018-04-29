@@ -21,6 +21,12 @@ I chose my favorite technologies to work with when it comes to Android developme
 
 And I added [RESTMock](https://github.com/andrzejchm/RESTMock) for the mock API.
 
+## Architecture
+
+It's a simple MVVM with the new [ViewModel](https://developer.android.com/topic/libraries/architecture/viewmodel) and no [Data Binding](https://developer.android.com/topic/libraries/data-binding).
+
+There's no state in the view (except for some disposables) or any other dependency besides the ViewModel. Android's standard way of injecting the ViewModel into the Activity is already pretty good, so I'm sticking to it instead of using Dagger. However, the ViewModel has its own dependencies, and Dagger provides those. The nice thing about providing the ViewModel dependencies through Dagger (besides all the good things dependency injection brings) is that once we want to test the ViewModel, we can simply switch the dependencies for mocks and test the ViewModel in isolation.
+
 ## Data Flow
 
 All my decisions towards how to handle the data were made based on my needs and opinion as an user:
@@ -34,3 +40,11 @@ All my decisions towards how to handle the data were made based on my needs and 
 - If the data updates while I'm interacting with it, my interaction shouldn't be interfered (e.g. losing scroll state or blinking the whole list to add a new item should be avoided)
 
 I wrote the data code with the goal of achieving every single item from this list - that and building a testable architecture were the two guiding principles for most of the code in the app.
+
+The data is coming from RESTMock, and the [current configuration](https://github.com/tfcporciuncula/easy-library/blob/master/app/src/main/java/com/blinkist/easylibrary/EasyLibraryApplication.kt#L35-L48) makes each request take 2 seconds to respond. The sequence of responses are configured in a way one can test different aspects of the app in a single run with only few data syncs:
+
+- The first request returns a simple list with 16 books
+- The second request returns the same list with one more book
+- The third request returns the original list with 16 books
+- The fourth request returns an error
+- The rest of the requests will always return the same list with 16 books
