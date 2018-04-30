@@ -1,11 +1,11 @@
 package com.blinkist.easylibrary.model
 
-import android.annotation.SuppressLint
 import android.arch.persistence.room.ColumnInfo
 import android.arch.persistence.room.Entity
 import android.arch.persistence.room.PrimaryKey
 import com.blinkist.easylibrary.library.Librariable
 import java.text.SimpleDateFormat
+import java.util.*
 
 @Entity(tableName = "books")
 data class Book(
@@ -26,5 +26,4 @@ data class Book(
 ) : Librariable
 
 private val String.time
-    @SuppressLint("SimpleDateFormat")
-    get() = SimpleDateFormat("yyyy-MM-dd").parse(this).time
+    get() = SimpleDateFormat("yyyy-MM-dd", Locale.getDefault()).parse(this).time
