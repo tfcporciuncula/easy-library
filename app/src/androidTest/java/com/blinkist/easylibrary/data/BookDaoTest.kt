@@ -49,24 +49,12 @@ class BookDaoTest {
     fun testReplace() {
         val book = newBook(id = 20)
 
-        bookDao.insert(book)
+        bookDao.insert(listOf(book))
         val updatedBook = book.copy(title = "updatedBook1")
-        bookDao.insert(updatedBook)
+        bookDao.insert(listOf(updatedBook))
 
         bookDao.books().test().assertValues(listOf(updatedBook))
         bookDao.booksLive().observeForever { assertEquals(listOf(updatedBook), it) }
-    }
-
-    @Test
-    fun testDelete() {
-        val book1 = newBook(id = 100)
-        val book2 = newBook(id = 200)
-
-        bookDao.insert(book1, book2)
-        bookDao.delete(book1)
-
-        bookDao.books().test().assertValue(listOf(book2))
-        bookDao.booksLive().observeForever { assertEquals(listOf(book2), it) }
     }
 
     @Test
