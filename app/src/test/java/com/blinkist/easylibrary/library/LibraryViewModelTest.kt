@@ -67,15 +67,15 @@ class LibraryViewModelTest : InjectionAwareTest() {
     }
 
     @Test
-    fun testChangingBooksSortOrder() {
+    fun testRearrangeBooks() {
         val viewModel = this.viewModel
 
         val books = listOf(newBook(id = 10), newBook(id = 20))
         given(bookDao.books()).willReturn(Single.just(books))
 
-        viewModel.booksRearranged().test()
+        viewModel.rearrangeBooks().test()
         verify(bookGrouper).groupBooksByWeek(books, sortByDescending = false)
-        viewModel.booksRearranged().test()
+        viewModel.rearrangeBooks().test()
         verify(bookGrouper).groupBooksByWeek(books, sortByDescending = true)
     }
 }

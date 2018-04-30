@@ -42,7 +42,7 @@ class LibraryViewModel(application: Application) : AndroidViewModel(application)
         }
         .toCompletable()
 
-    fun booksRearranged(): Single<List<Librariable>> {
+    fun rearrangeBooks(): Single<List<Librariable>> {
         sortByDescending = !sortByDescending
         return bookDao.books().map { bookGrouper.groupBooksByWeek(it, sortByDescending) }
     }
