@@ -51,7 +51,7 @@ class LibraryActivity : BaseActivity() {
     }
 
     private fun changeBooksSortOrder() {
-        viewModel.booksSortedDifferently()
+        viewModel.booksRearranged()
             .subscribeOn(Schedulers.io())
             .observeOn(AndroidSchedulers.mainThread())
             .doOnSubscribe(::manageDisposable)

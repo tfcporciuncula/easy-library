@@ -73,9 +73,9 @@ class LibraryViewModelTest : InjectionAwareTest() {
         val books = listOf(newBook(id = 10), newBook(id = 20))
         given(bookDao.books()).willReturn(Single.just(books))
 
-        viewModel.booksSortedDifferently().test()
+        viewModel.booksRearranged().test()
         verify(bookGrouper).groupBooksByWeek(books, sortByDescending = false)
-        viewModel.booksSortedDifferently().test()
+        viewModel.booksRearranged().test()
         verify(bookGrouper).groupBooksByWeek(books, sortByDescending = true)
     }
 }

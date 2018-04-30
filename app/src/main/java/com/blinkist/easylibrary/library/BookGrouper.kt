@@ -10,7 +10,7 @@ class BookGrouper(
     private val dateFormat: DateFormat
 ) {
 
-    fun groupBooksByWeek(books: List<Book>, sortByDescending: Boolean = true): List<Librariable> {
+    fun groupBooksByWeek(books: List<Book>, sortByDescending: Boolean): List<Librariable> {
         if (books.isEmpty()) return emptyList()
 
         val sortedBooks = sortBooks(sortByDescending, books)

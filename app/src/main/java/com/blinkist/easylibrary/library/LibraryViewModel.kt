@@ -32,7 +32,7 @@ class LibraryViewModel(application: Application) : AndroidViewModel(application)
     }
 
     fun books(): LiveData<List<Librariable>> = Transformations.map(bookDao.booksLive()) {
-        bookGrouper.groupBooksByWeek(it)
+        bookGrouper.groupBooksByWeek(it, sortByDescending)
     }
 
     fun updateBooks(): Completable = libraryService.books()
@@ -42,7 +42,7 @@ class LibraryViewModel(application: Application) : AndroidViewModel(application)
         }
         .toCompletable()
 
-    fun booksSortedDifferently(): Single<List<Librariable>> {
+    fun booksRearranged(): Single<List<Librariable>> {
         sortByDescending = !sortByDescending
         return bookDao.books().map { bookGrouper.groupBooksByWeek(it, sortByDescending) }
     }
