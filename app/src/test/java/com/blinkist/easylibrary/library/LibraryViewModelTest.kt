@@ -47,7 +47,7 @@ class LibraryViewModelTest : InjectionAwareTest() {
         )
 
         val librariables = listOf(newWeekSection()) + books
-        given(bookGrouper.groupBooksByWeek(books)).willReturn(librariables)
+        given(bookGrouper.groupBooksByWeek(books, sortByDescending = true)).willReturn(librariables)
 
         viewModel.books().observeForever {
             assertEquals(librariables, it)

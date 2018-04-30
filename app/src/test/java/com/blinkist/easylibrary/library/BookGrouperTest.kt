@@ -27,7 +27,7 @@ class BookGrouperTest {
             newBook(publishedDate = "2018-04-27")
         )
 
-        val groupedBooks = bookGrouper.groupBooksByWeek(books)
+        val groupedBooks = bookGrouper.groupBooksByWeek(books, sortByDescending = true)
 
         assertTrue(groupedBooks[0] is WeekSection)
         assertEquals(books[0], groupedBooks[1] as Book)
@@ -41,7 +41,7 @@ class BookGrouperTest {
             newBook(publishedDate = "2017-04-27")
         )
 
-        val groupedBooks = bookGrouper.groupBooksByWeek(books)
+        val groupedBooks = bookGrouper.groupBooksByWeek(books, sortByDescending = true)
 
         assertTrue(groupedBooks[0] is WeekSection)
         assertEquals(books[0], groupedBooks[1] as Book)
