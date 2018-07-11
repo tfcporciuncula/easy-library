@@ -44,9 +44,9 @@ dependencies {
 
     // Architecture components
     implementation 'android.arch.lifecycle:extensions:1.1.1'
-    implementation 'android.arch.persistence.room:runtime:1.0.0'
-    implementation 'android.arch.persistence.room:rxjava2:1.0.0'
-    kapt 'android.arch.persistence.room:compiler:1.0.0'
+    implementation 'android.arch.persistence.room:runtime:1.1.1'
+    implementation 'android.arch.persistence.room:rxjava2:1.1.1'
+    kapt 'android.arch.persistence.room:compiler:1.1.1'
 
     // Dagger
     implementation 'com.google.dagger:dagger:2.15'
