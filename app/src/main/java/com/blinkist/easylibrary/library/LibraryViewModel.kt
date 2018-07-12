@@ -23,10 +23,12 @@ class LibraryViewModel(application: Application) : AndroidViewModel(application)
     @Inject
     lateinit var adapter: LibraryAdapter
 
-    private val books by lazy { bookDao.books() }
-    private var sortByDescending = true
+    var sortByDescending = true
+        private set
 
     val librariables = MediatorLiveData<List<Librariable>>()
+
+    private val books by lazy { bookDao.books() }
 
     init {
         getApplication<EasyLibraryApplication>().component.inject(this)
@@ -43,8 +45,8 @@ class LibraryViewModel(application: Application) : AndroidViewModel(application)
         }
         .toCompletable()
 
-    fun rearrangeBooks() = books.value?.let {
-        sortByDescending = !sortByDescending
+    fun rearrangeBooks(sortByDescending: Boolean) = books.value?.let {
+        this.sortByDescending = sortByDescending
         librariables.value = bookGrouper.groupBooksByWeek(it, sortByDescending)
     }
 }

@@ -35,7 +35,9 @@ class LibraryActivity : BaseActivity() {
     }
 
     override fun onOptionsItemSelected(item: MenuItem): Boolean {
-        if (item.itemId == R.id.menu_sort) viewModel.rearrangeBooks()
+        if (item.itemId == R.id.menu_sort) {
+            SortOptionDialog.newInstance().show(supportFragmentManager, SortOptionDialog.TAG)
+        }
         return super.onOptionsItemSelected(item)
     }
 

@@ -9,7 +9,7 @@ import com.blinkist.easylibrary.model.ModelFactory.newBook
 import com.blinkist.easylibrary.model.ModelFactory.newWeekSection
 import com.blinkist.easylibrary.service.LibraryService
 import io.reactivex.Single
-import junit.framework.Assert.assertEquals
+import junit.framework.Assert.*
 import org.junit.Before
 import org.junit.Rule
 import org.junit.Test
@@ -40,7 +40,7 @@ class LibraryViewModelTest : InjectionAwareTest() {
     }
 
     @Test
-    fun testBooks() {
+    fun testLibrariables() {
         val books = listOf(newBook(id = 11), newBook(id = 22))
         given(bookDao.books()).willReturn(
             MutableLiveData<List<Book>>().apply { value = books }
@@ -49,7 +49,7 @@ class LibraryViewModelTest : InjectionAwareTest() {
         val librariables = listOf(newWeekSection()) + books
         given(bookGrouper.groupBooksByWeek(books, sortByDescending = true)).willReturn(librariables)
 
-        viewModel.books().observeForever {
+        viewModel.librariables.observeForever {
             assertEquals(librariables, it)
         }
     }
@@ -60,7 +60,7 @@ class LibraryViewModelTest : InjectionAwareTest() {
 
         given(libraryService.books()).willReturn(Single.just(books))
 
-        viewModel.updateBooks().test().assertNoErrors()
+        viewModel.updateBooks().test().assertComplete()
         verify(libraryService).books()
         verify(bookDao).clear()
         verify(bookDao).insert(books)
@@ -68,14 +68,19 @@ class LibraryViewModelTest : InjectionAwareTest() {
 
     @Test
     fun testRearrangeBooks() {
+        val books = listOf(newBook(id = 10), newBook(id = 20))
+        given(bookDao.books()).willReturn(
+            MutableLiveData<List<Book>>().apply { value = books }
+        )
+
         val viewModel = this.viewModel
 
-        val books = listOf(newBook(id = 10), newBook(id = 20))
-        given(bookDao.books()).willReturn(Single.just(books))
-
-        viewModel.rearrangeBooks().test()
+        viewModel.rearrangeBooks(sortByDescending = false)
+        assertFalse(viewModel.sortByDescending)
         verify(bookGrouper).groupBooksByWeek(books, sortByDescending = false)
-        viewModel.rearrangeBooks().test()
+
+        viewModel.rearrangeBooks(sortByDescending = true)
+        assertTrue(viewModel.sortByDescending)
         verify(bookGrouper).groupBooksByWeek(books, sortByDescending = true)
     }
 }

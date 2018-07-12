@@ -1,8 +1,14 @@
 <resources>
     <string name="app_name">Easy Library</string>
 
+    <!-- Library Activity -->
     <string name="sort_menu_item_title">Change sort order</string>
+    <string name="network_error_message">We couldn\'t fetch your books…</string>
     <string name="week_section_title">%s to %s</string>
     <string name="library_item_image_description">Book cover</string>
-    <string name="network_error_message">We couldn\'t fetch your books…</string>
+
+    <!-- Sort Option Dialog -->
+    <string name="sort_option_ascending">Ascending</string>
+    <string name="sort_option_descending">Descending</string>
+    <string name="sort_option_check_icon_content_description">Checked</string>
 </resources>
