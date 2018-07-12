@@ -35,7 +35,7 @@ class LibraryActivity : BaseActivity() {
     }
 
     override fun onOptionsItemSelected(item: MenuItem): Boolean {
-        if (item.itemId == R.id.menu_sort) changeBooksSortOrder()
+        if (item.itemId == R.id.menu_sort) viewModel.rearrangeBooks()
         return super.onOptionsItemSelected(item)
     }
 
@@ -45,17 +45,9 @@ class LibraryActivity : BaseActivity() {
 
     private fun setupList() {
         recyclerView.adapter = viewModel.adapter
-        viewModel.books().observe(this, Observer { librariables ->
+        viewModel.librariables.observe(this, Observer { librariables ->
             librariables?.let(viewModel.adapter::submitList)
         })
-    }
-
-    private fun changeBooksSortOrder() {
-        viewModel.rearrangeBooks()
-            .subscribeOn(Schedulers.io())
-            .observeOn(AndroidSchedulers.mainThread())
-            .doOnSubscribe(::manageDisposable)
-            .subscribe(viewModel.adapter::submitList, Timber::e)
     }
 
     private fun updateBooks() {

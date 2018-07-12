@@ -42,7 +42,7 @@ class BookDaoTest {
         bookDao.insert(books)
 
         bookDao.books().test().assertValues(books)
-        bookDao.booksLive().observeForever { assertEquals(books, it) }
+        bookDao.books().observeForever { assertEquals(books, it) }
     }
 
     @Test
@@ -54,7 +54,7 @@ class BookDaoTest {
         bookDao.insert(listOf(updatedBook))
 
         bookDao.books().test().assertValues(listOf(updatedBook))
-        bookDao.booksLive().observeForever { assertEquals(listOf(updatedBook), it) }
+        bookDao.books().observeForever { assertEquals(listOf(updatedBook), it) }
     }
 
     @Test
@@ -65,6 +65,6 @@ class BookDaoTest {
         bookDao.clear()
 
         bookDao.books().test().assertValues(emptyList())
-        bookDao.booksLive().observeForever { assertEquals(emptyList<Book>(), it) }
+        bookDao.books().observeForever { assertEquals(emptyList<Book>(), it) }
     }
 }

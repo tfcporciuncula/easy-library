@@ -42,7 +42,7 @@ class LibraryViewModelTest : InjectionAwareTest() {
     @Test
     fun testBooks() {
         val books = listOf(newBook(id = 11), newBook(id = 22))
-        given(bookDao.booksLive()).willReturn(
+        given(bookDao.books()).willReturn(
             MutableLiveData<List<Book>>().apply { value = books }
         )
 

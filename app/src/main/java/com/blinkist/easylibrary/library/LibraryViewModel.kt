@@ -2,13 +2,11 @@ package com.blinkist.easylibrary.library
 
 import android.app.Application
 import android.arch.lifecycle.AndroidViewModel
-import android.arch.lifecycle.LiveData
-import android.arch.lifecycle.Transformations
+import android.arch.lifecycle.MediatorLiveData
 import com.blinkist.easylibrary.EasyLibraryApplication
 import com.blinkist.easylibrary.data.BookDao
 import com.blinkist.easylibrary.service.LibraryService
 import io.reactivex.Completable
-import io.reactivex.Single
 import javax.inject.Inject
 
 class LibraryViewModel(application: Application) : AndroidViewModel(application) {
@@ -25,14 +23,17 @@ class LibraryViewModel(application: Application) : AndroidViewModel(application)
     @Inject
     lateinit var adapter: LibraryAdapter
 
+    private val books by lazy { bookDao.books() }
     private var sortByDescending = true
+
+    val librariables = MediatorLiveData<List<Librariable>>()
 
     init {
         getApplication<EasyLibraryApplication>().component.inject(this)
-    }
 
-    fun books(): LiveData<List<Librariable>> = Transformations.map(bookDao.booksLive()) {
-        bookGrouper.groupBooksByWeek(it, sortByDescending)
+        librariables.addSource(books) {
+            it?.let { librariables.value = bookGrouper.groupBooksByWeek(it, sortByDescending) }
+        }
     }
 
     fun updateBooks(): Completable = libraryService.books()
@@ -42,8 +43,8 @@ class LibraryViewModel(application: Application) : AndroidViewModel(application)
         }
         .toCompletable()
 
-    fun rearrangeBooks(): Single<List<Librariable>> {
+    fun rearrangeBooks() = books.value?.let {
         sortByDescending = !sortByDescending
-        return bookDao.books().map { bookGrouper.groupBooksByWeek(it, sortByDescending) }
+        librariables.value = bookGrouper.groupBooksByWeek(it, sortByDescending)
     }
 }
