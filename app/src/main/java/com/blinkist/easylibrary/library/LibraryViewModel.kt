@@ -18,7 +18,7 @@ class LibraryViewModel(
 
     val librariables = MediatorLiveData<List<Librariable>>()
 
-    private val books by lazy { bookDao.books() }
+    private val books = bookDao.books()
 
     init {
         librariables.addSource(books) {
