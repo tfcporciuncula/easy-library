@@ -2,7 +2,6 @@ package com.blinkist.easylibrary.library
 
 import android.arch.core.executor.testing.InstantTaskExecutorRule
 import android.arch.lifecycle.MutableLiveData
-import com.blinkist.easylibrary.base.InjectionAwareTest
 import com.blinkist.easylibrary.data.BookDao
 import com.blinkist.easylibrary.model.Book
 import com.blinkist.easylibrary.model.ModelFactory.newBook
@@ -10,34 +9,39 @@ import com.blinkist.easylibrary.model.ModelFactory.newWeekSection
 import com.blinkist.easylibrary.service.LibraryService
 import io.reactivex.Single
 import junit.framework.Assert.*
-import org.junit.Before
 import org.junit.Rule
 import org.junit.Test
+import org.junit.runner.RunWith
 import org.mockito.BDDMockito.given
 import org.mockito.BDDMockito.verify
-import javax.inject.Inject
+import org.mockito.Mock
+import org.mockito.junit.MockitoJUnitRunner
 
-class LibraryViewModelTest : InjectionAwareTest() {
+@RunWith(MockitoJUnitRunner::class)
+class LibraryViewModelTest {
 
     @get:Rule
     val instantTaskExecutorRule = InstantTaskExecutorRule()
 
-    @Inject
+    @Mock
     lateinit var libraryService: LibraryService
 
-    @Inject
+    @Mock
     lateinit var bookDao: BookDao
 
-    @Inject
+    @Mock
     lateinit var bookGrouper: BookGrouper
 
-    private val viewModel get() = LibraryViewModel(application)
+    @Mock
+    lateinit var libraryAdapter: LibraryAdapter
 
-    @Before
-    override fun setup() {
-        super.setup()
-        component.inject(this)
-    }
+    private val viewModel
+        get() = LibraryViewModel(
+            libraryService,
+            bookDao,
+            bookGrouper,
+            libraryAdapter
+        )
 
     @Test
     fun testLibrariables() {
