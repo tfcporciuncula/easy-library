@@ -6,5 +6,7 @@
     android:layout_marginEnd="@dimen/standard_margin"
     android:layout_marginStart="@dimen/standard_margin"
     android:layout_marginTop="@dimen/half_standard_margin"
+    android:ellipsize="end"
+    android:maxLines="1"
     android:textSize="@dimen/section_title_text_size"
     android:textStyle="bold" />

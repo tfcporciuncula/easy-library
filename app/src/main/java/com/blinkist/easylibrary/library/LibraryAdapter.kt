@@ -17,8 +17,8 @@ import kotlinx.android.synthetic.main.item_book.view.*
 class LibraryAdapter : ListAdapter<Librariable, LibraryAdapter.ViewHolder>(DiffCallback()) {
 
     companion object {
-        private const val ITEM_VIEW_TYPE_BOOK = 0
-        private const val ITEM_VIEW_TYPE_WEEK_SECTION = 1
+        private const val ITEM_VIEW_TYPE_BOOK = R.layout.item_book
+        private const val ITEM_VIEW_TYPE_SECTION = R.layout.item_section
     }
 
     class DiffCallback : DiffUtil.ItemCallback<Librariable>() {
@@ -57,13 +57,7 @@ class LibraryAdapter : ListAdapter<Librariable, LibraryAdapter.ViewHolder>(DiffC
     }
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ViewHolder {
-        val layoutResId = if (viewType == ITEM_VIEW_TYPE_BOOK) {
-            R.layout.item_book
-        } else {
-            R.layout.item_section
-        }
-
-        val view = LayoutInflater.from(parent.context).inflate(layoutResId, parent, false)
+        val view = LayoutInflater.from(parent.context).inflate(viewType, parent, false)
         return ViewHolder(view)
     }
 
@@ -75,11 +69,9 @@ class LibraryAdapter : ListAdapter<Librariable, LibraryAdapter.ViewHolder>(DiffC
         }
     }
 
-    override fun getItemViewType(position: Int): Int {
-        return if (getItem(position) is Book) {
-            ITEM_VIEW_TYPE_BOOK
-        } else {
-            ITEM_VIEW_TYPE_WEEK_SECTION
-        }
+    override fun getItemViewType(position: Int) = if (getItem(position) is Book) {
+        ITEM_VIEW_TYPE_BOOK
+    } else {
+        ITEM_VIEW_TYPE_SECTION
     }
 }

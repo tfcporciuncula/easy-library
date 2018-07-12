@@ -47,8 +47,8 @@ class LibraryActivity : BaseActivity() {
 
     private fun setupList() {
         recyclerView.adapter = viewModel.adapter
-        viewModel.librariables.observe(this, Observer { librariables ->
-            librariables?.let(viewModel.adapter::submitList)
+        viewModel.librariables.observe(this, Observer {
+            it?.let(viewModel.adapter::submitList)
         })
     }
 
