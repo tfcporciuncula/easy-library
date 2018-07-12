@@ -5,7 +5,7 @@
 Ever needed a simplified version of Blinkist's library view that allows you to browse your books in a convenient way? This is it! Except the list of books is made up and all the published dates are wrong.
 
 ## Screenshots
-![loading](screenshots/loading-small.png) ![failed](screenshots/failed-small.png) ![scrolled](screenshots/scrolled-small.png)
+![loading](screenshots/loading-small.png) ![failed](screenshots/failed-small.png) ![scrolled](screenshots/sort-small.png)
 
 ## Technologies
 
