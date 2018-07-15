@@ -1,5 +1,6 @@
 package com.blinkist.easylibrary
 
+import android.app.Activity
 import android.app.Application
 import com.blinkist.easylibrary.di.ApplicationComponent
 import com.blinkist.easylibrary.di.ApplicationModule
@@ -15,8 +16,7 @@ import java.util.concurrent.TimeUnit
 class EasyLibraryApplication : Application() {
 
     val component: ApplicationComponent by lazy {
-        DaggerApplicationComponent
-            .builder()
+        DaggerApplicationComponent.builder()
             .applicationModule(ApplicationModule(this))
             .build()
     }
