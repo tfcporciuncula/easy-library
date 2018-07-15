@@ -53,7 +53,7 @@ class LibraryViewModelTest {
         val librariables = listOf(newWeekSection()) + books
         given(bookGrouper.groupBooksByWeek(books, sortByDescending = true)).willReturn(librariables)
 
-        viewModel.librariables.observeForever {
+        viewModel.books().observeForever {
             assertEquals(librariables, it)
         }
     }

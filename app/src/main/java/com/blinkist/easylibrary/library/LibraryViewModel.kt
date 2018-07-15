@@ -1,5 +1,6 @@
 package com.blinkist.easylibrary.library
 
+import android.arch.lifecycle.LiveData
 import android.arch.lifecycle.MediatorLiveData
 import android.arch.lifecycle.ViewModel
 import com.blinkist.easylibrary.data.BookDao
@@ -13,18 +14,19 @@ class LibraryViewModel(
     val adapter: LibraryAdapter
 ) : ViewModel() {
 
+    private val books = bookDao.books()
+    private val librariables = MediatorLiveData<List<Librariable>>()
+
     var sortByDescending = true
         private set
-
-    val librariables = MediatorLiveData<List<Librariable>>()
-
-    private val books = bookDao.books()
 
     init {
         librariables.addSource(books) {
             it?.let { librariables.value = bookGrouper.groupBooksByWeek(it, sortByDescending) }
         }
     }
+
+    fun books(): LiveData<List<Librariable>> = librariables
 
     fun updateBooks(): Completable = libraryService.books()
         .doOnSuccess {
