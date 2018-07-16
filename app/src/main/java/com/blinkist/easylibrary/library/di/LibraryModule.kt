@@ -15,22 +15,27 @@ import java.text.SimpleDateFormat
 import java.util.*
 
 @Module(includes = [ApplicationModule::class, RetrofitModule::class, DatabaseModule::class])
-class LibraryModule {
+object LibraryModule {
 
+    @JvmStatic
     @Provides
     fun provideCalendar(): Calendar = Calendar.getInstance().apply {
         firstDayOfWeek = Calendar.MONDAY
     }
 
+    @JvmStatic
     @Provides
     fun provideDateFormat(): DateFormat = SimpleDateFormat.getDateInstance(SimpleDateFormat.LONG)
 
+    @JvmStatic
     @Provides
     fun provideBookGrouper(calendar: Calendar, dateFormat: DateFormat) = BookGrouper(calendar, dateFormat)
 
+    @JvmStatic
     @Provides
     fun provideLibraryAdapter() = LibraryAdapter()
 
+    @JvmStatic
     @Provides
     fun provideViewModelFactory(
         libraryService: LibraryService,

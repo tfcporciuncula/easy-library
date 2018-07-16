@@ -15,22 +15,27 @@ import retrofit2.converter.moshi.MoshiConverterFactory
 import javax.inject.Singleton
 
 @Module
-class RetrofitModule {
+object RetrofitModule {
 
+    @JvmStatic
     @Provides
     fun provideBaseUrl(): String = RESTMockServer.getUrl()
 
+    @JvmStatic
     @Provides
     fun provideHttpClient(): OkHttpClient = OkHttpClient.Builder().build()
 
+    @JvmStatic
     @Provides
     fun provideConverterFactory(): Converter.Factory {
         return MoshiConverterFactory.create(Moshi.Builder().add(KotlinJsonAdapterFactory()).build())
     }
 
+    @JvmStatic
     @Provides
     fun provideCallAdapterFactory(): CallAdapter.Factory = RxJava2CallAdapterFactory.create()
 
+    @JvmStatic
     @Provides
     @Singleton
     fun provideBooksService(
