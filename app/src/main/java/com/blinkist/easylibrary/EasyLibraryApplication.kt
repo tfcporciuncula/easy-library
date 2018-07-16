@@ -1,6 +1,5 @@
 package com.blinkist.easylibrary
 
-import android.app.Activity
 import android.app.Application
 import com.blinkist.easylibrary.di.ApplicationComponent
 import com.blinkist.easylibrary.di.ApplicationModule
@@ -47,3 +46,5 @@ class EasyLibraryApplication : Application() {
             .thenReturnFile(200, "books.json")
     }
 }
+
+val Application.component get() = (this as EasyLibraryApplication).component
