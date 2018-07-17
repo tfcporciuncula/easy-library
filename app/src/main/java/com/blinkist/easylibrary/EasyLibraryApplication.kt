@@ -12,9 +12,9 @@ import io.appflate.restmock.utils.RequestMatchers.pathContains
 import timber.log.Timber
 import java.util.concurrent.TimeUnit
 
-class EasyLibraryApplication : Application() {
+open class EasyLibraryApplication : Application() {
 
-    val component: ApplicationComponent by lazy {
+    open val component: ApplicationComponent by lazy {
         DaggerApplicationComponent.builder()
             .applicationModule(ApplicationModule(this))
             .build()
@@ -31,7 +31,7 @@ class EasyLibraryApplication : Application() {
         if (BuildConfig.DEBUG) Timber.plant(Timber.DebugTree())
     }
 
-    private fun setupMockApi() {
+    protected open fun setupMockApi() {
         RESTMockServerStarter.startSync(AndroidAssetsFileParser(this), AndroidLogger());
         RESTMockServer.whenGET(pathContains("books"))
             .delay(TimeUnit.SECONDS, 2)

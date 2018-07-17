@@ -6,6 +6,8 @@ apply plugin: 'kotlin-android-extensions'
 
 apply plugin: 'kotlin-kapt'
 
+apply plugin: "kotlin-allopen"
+
 android {
     compileSdkVersion 27
     defaultConfig {
@@ -14,7 +16,7 @@ android {
         targetSdkVersion 27
         versionCode 1
         versionName '1.0'
-        testInstrumentationRunner 'android.support.test.runner.AndroidJUnitRunner'
+        testInstrumentationRunner 'com.blinkist.easylibrary.TestInstrumentationRunner'
     }
     buildTypes {
         release {
@@ -31,6 +33,10 @@ android {
             java.srcDir sharedTestDir
         }
     }
+}
+
+allOpen {
+    annotation("dagger.Module")
 }
 
 dependencies {
@@ -78,7 +84,8 @@ dependencies {
     testImplementation 'android.arch.core:core-testing:1.1.1'
 
     // Instrumentation testing
-    androidTestImplementation 'com.android.support.test:runner:1.0.2'
     androidTestImplementation 'com.android.support.test.espresso:espresso-core:3.0.2'
+    androidTestImplementation 'com.android.support.test:runner:1.0.2'
+    androidTestImplementation 'com.android.support.test:rules:1.0.2'
     androidTestImplementation 'android.arch.core:core-testing:1.1.1'
 }

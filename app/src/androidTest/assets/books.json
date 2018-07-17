@@ -1,0 +1,130 @@
+[
+  {
+    "id": 10,
+    "title": "Clean Code",
+    "authors": "Robert C. Martin",
+    "publishedDate": "2018-04-02",
+    "thumbnail": "http://books.google.com/books/content?id=_i6bDeoCQzsC&printsec=frontcover&img=1&zoom=2",
+    "url": "https://play.google.com/store/books/details?id=_i6bDeoCQzsC"
+  },
+  {
+    "id": 20,
+    "title": "Effective Java",
+    "authors": "Joshua Bloch",
+    "publishedDate": "2018-04-03",
+    "thumbnail": "http://books.google.com/books/content?id=BIpDDwAAQBAJ&printsec=frontcover&img=1&zoom=2",
+    "url": "https://play.google.com/store/books/details?id=BIpDDwAAQBAJ"
+  },
+  {
+    "id": 30,
+    "title": "Java Puzzlers",
+    "authors": "Joshua Bloch and Neal Gafter",
+    "publishedDate": "2018-04-07",
+    "thumbnail": "http://books.google.com/books/content?id=RM9sLE0ntQ0C&printsec=frontcover&img=1&zoom=2",
+    "url": "https://play.google.com/store/books/details?id=RM9sLE0ntQ0C"
+  },
+  {
+    "id": 40,
+    "title": "Kotlin in Action",
+    "authors": "Dmitry Jemerov and Svetlana Isakova",
+    "publishedDate": "2018-04-08",
+    "thumbnail": "http://books.google.com/books/content?id=qtcIkAEACAAJ&printsec=frontcover&img=1&zoom=1",
+    "url": "https://play.google.com/store/books/details?id=qtcIkAEACAAJ"
+  },
+  {
+    "id": 50,
+    "title": "Reactive Programming with RxJava",
+    "authors": "Tomasz Nurkiewicz and Ben Christensen",
+    "publishedDate": "2018-04-12",
+    "thumbnail": "http://books.google.com/books/content?id=y4Y1DQAAQBAJ&printsec=frontcover&img=1&zoom=2",
+    "url": "https://play.google.com/store/books/details?id=y4Y1DQAAQBAJ"
+  },
+  {
+    "id": 60,
+    "title": "Code Complete",
+    "authors": "Steve McConnell",
+    "publishedDate": "2018-04-16",
+    "thumbnail": "http://books.google.com/books/content?id=LpVCAwAAQBAJ&printsec=frontcover&img=1&zoom=2",
+    "url": "https://play.google.com/store/books/details?id=LpVCAwAAQBAJ"
+  },
+  {
+    "id": 70,
+    "title": "The Mythical Man-Month",
+    "authors": "Frederick P. Brooks Jr.",
+    "publishedDate": "2018-04-17",
+    "thumbnail": "http://books.google.com/books/content?id=Yq35BY5Fk3gC&printsec=frontcover&img=1&zoom=2",
+    "url": "https://play.google.com/store/books/details?id=Yq35BY5Fk3gC"
+  },
+  {
+    "id": 80,
+    "title": "Don't Make Me Think",
+    "authors": "Steve Krug",
+    "publishedDate": "2018-04-18",
+    "thumbnail": "http://books.google.com/books/content?id=QlduAgAAQBAJ&printsec=frontcover&img=1&zoom=2",
+    "url": "https://play.google.com/store/books/details?id=QlduAgAAQBAJ"
+  },
+  {
+    "id": 90,
+    "title": "Peopleware",
+    "authors": "Tom DeMarco and Tim Lister",
+    "publishedDate": "2018-04-19",
+    "thumbnail": "http://books.google.com/books/content?id=TVQUAAAAQBAJ&printsec=frontcover&img=1&zoom=2",
+    "url": "https://play.google.com/store/books/details?id=TVQUAAAAQBAJ"
+  },
+  {
+    "id": 100,
+    "title": "Test-driven Development",
+    "authors": "Kent Beck",
+    "publishedDate": "2018-04-20",
+    "thumbnail": "http://books.google.com/books/content?id=CUlsAQAAQBAJ&printsec=frontcover&img=1&zoom=2",
+    "url": "https://play.google.com/store/books/details?id=CUlsAQAAQBAJ"
+  },
+  {
+    "id": 110,
+    "title": "The Pragmatic Programmer",
+    "authors": "Andrew Hunt and David Thomas",
+    "publishedDate": "2018-04-21",
+    "thumbnail": "http://books.google.com/books/content?id=5wBQEp6ruIAC&printsec=frontcover&img=1&zoom=2",
+    "url": "https://play.google.com/store/books/details?id=5wBQEp6ruIAC"
+  },
+  {
+    "id": 120,
+    "title": "Refactoring",
+    "authors": "Martin Fowler, Kent Beck, John Brant, William Opdyke, Don Roberts",
+    "publishedDate": "2018-04-22",
+    "thumbnail": "http://books.google.com/books/content?id=HmrDHwgkbPsC&printsec=frontcover&img=1&zoom=2",
+    "url": "https://play.google.com/store/books/details?id=HmrDHwgkbPsC"
+  },
+  {
+    "id": 130,
+    "title": "Design Patterns",
+    "authors": "Erich Gamma, Richard Helm, Ralph Johnson, John Vlissides",
+    "publishedDate": "2016-04-23",
+    "thumbnail": "http://books.google.com/books/content?id=6oHuKQe3TjQC&printsec=frontcover&img=1&zoom=2",
+    "url": "https://play.google.com/store/books/details?id=6oHuKQe3TjQC"
+  },
+  {
+    "id": 140,
+    "title": "The Clean Coder",
+    "authors": "Robert C. Martin",
+    "publishedDate": "2017-04-24",
+    "thumbnail": "http://books.google.com/books/content?id=ik0qCTVzl44C&printsec=frontcover&img=1&zoom=2",
+    "url": "https://play.google.com/store/books/details?id=ik0qCTVzl44C"
+  },
+  {
+    "id": 150,
+    "title": "Clean Architecture",
+    "authors": "Robert C. Martin",
+    "publishedDate": "2017-04-25",
+    "thumbnail": "http://books.google.com/books/content?id=uGE1DwAAQBAJ&printsec=frontcover&img=1&zoom=1",
+    "url": "https://play.google.com/store/books/details?id=uGE1DwAAQBAJ"
+  },
+  {
+    "id": 160,
+    "title": "Kotlin for Android Developers",
+    "authors": "Antonio Leiva",
+    "publishedDate": "2017-05-26",
+    "thumbnail": "http://books.google.com/books/content?id=cdT1jwEACAAJ&printsec=frontcover&img=1&zoom=1",
+    "url": "https://play.google.com/store/books/details?id=cdT1jwEACAAJ"
+  }
+]

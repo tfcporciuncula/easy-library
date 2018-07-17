@@ -8,13 +8,13 @@ import dagger.Provides
 import javax.inject.Singleton
 
 @Module(includes = [ApplicationModule::class])
-object DatabaseModule {
+class DatabaseModule {
 
-    @JvmStatic @Provides @Singleton
+    @Provides @Singleton
     fun provideDatabase(context: Context): EasyLibraryDatabase {
         return Room.databaseBuilder(context, EasyLibraryDatabase::class.java, "easy-library").build()
     }
 
-    @JvmStatic @Provides
+    @Provides
     fun provideBookDao(database: EasyLibraryDatabase) = database.bookDao()
 }

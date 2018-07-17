@@ -1,0 +1,13 @@
+package com.blinkist.easylibrary
+
+import android.app.Application
+import android.content.Context
+import android.support.test.runner.AndroidJUnitRunner
+import kotlin.reflect.jvm.jvmName
+
+class TestInstrumentationRunner : AndroidJUnitRunner() {
+
+    override fun newApplication(cl: ClassLoader, className: String, context: Context): Application {
+        return super.newApplication(cl, TestApplication::class.java.getName(), context)
+    }
+}
