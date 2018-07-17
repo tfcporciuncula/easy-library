@@ -5,7 +5,7 @@ import com.blinkist.easylibrary.library.BookGrouper
 import com.blinkist.easylibrary.library.LibraryActivity
 import com.blinkist.easylibrary.library.LibraryAdapter
 import com.blinkist.easylibrary.library.LibraryViewModelFactory
-import com.blinkist.easylibrary.service.LibraryService
+import com.blinkist.easylibrary.service.BooksService
 import dagger.Lazy
 import dagger.Module
 import dagger.Provides
@@ -39,9 +39,9 @@ object LibraryModule {
 
     @JvmStatic @Provides
     fun provideViewModelFactory(
-        libraryService: Lazy<LibraryService>,
+        booksService: Lazy<BooksService>,
         bookDao: Lazy<BookDao>,
         bookGrouper: Lazy<BookGrouper>,
         adapter: Lazy<LibraryAdapter>
-    ) = LibraryViewModelFactory(libraryService, bookDao, bookGrouper, adapter)
+    ) = LibraryViewModelFactory(booksService, bookDao, bookGrouper, adapter)
 }

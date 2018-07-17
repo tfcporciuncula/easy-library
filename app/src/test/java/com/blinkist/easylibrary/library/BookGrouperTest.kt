@@ -3,8 +3,7 @@ package com.blinkist.easylibrary.library
 import com.blinkist.easylibrary.model.Book
 import com.blinkist.easylibrary.model.ModelFactory.newBook
 import com.blinkist.easylibrary.model.WeekSection
-import junit.framework.Assert.assertEquals
-import junit.framework.Assert.assertTrue
+import com.google.common.truth.Truth.assertThat
 import org.junit.Test
 import java.text.SimpleDateFormat
 import java.util.*
@@ -29,9 +28,9 @@ class BookGrouperTest {
 
         val groupedBooks = bookGrouper.groupBooksByWeek(books, sortByDescending = true)
 
-        assertTrue(groupedBooks[0] is WeekSection)
-        assertEquals(books[0], groupedBooks[1] as Book)
-        assertEquals(books[1], groupedBooks[2] as Book)
+        assertThat(groupedBooks[0]).isInstanceOf(WeekSection::class.java)
+        assertThat(groupedBooks[1]).isEqualTo(books[0])
+        assertThat(groupedBooks[2]).isEqualTo(books[1])
     }
 
     @Test
@@ -43,10 +42,10 @@ class BookGrouperTest {
 
         val groupedBooks = bookGrouper.groupBooksByWeek(books, sortByDescending = true)
 
-        assertTrue(groupedBooks[0] is WeekSection)
-        assertEquals(books[0], groupedBooks[1] as Book)
-        assertTrue(groupedBooks[2] is WeekSection)
-        assertEquals(books[1], groupedBooks[3] as Book)
+        assertThat(groupedBooks[0]).isInstanceOf(WeekSection::class.java)
+        assertThat(groupedBooks[1]).isEqualTo(books[0])
+        assertThat(groupedBooks[2]).isInstanceOf(WeekSection::class.java)
+        assertThat(groupedBooks[3]).isEqualTo(books[1])
     }
 
     @Test
@@ -59,7 +58,7 @@ class BookGrouperTest {
         val descendingBooks = bookGrouper.groupBooksByWeek(books, sortByDescending = true)
         val ascendingBooks = bookGrouper.groupBooksByWeek(books, sortByDescending = false)
 
-        assertEquals(books, ascendingBooks.filter { it is Book })
-        assertEquals(books.reversed(), descendingBooks.filter { it is Book })
+        assertThat(ascendingBooks.filter { it is Book }).isEqualTo(books)
+        assertThat(descendingBooks.filter { it is Book }).isEqualTo(books.reversed())
     }
 }

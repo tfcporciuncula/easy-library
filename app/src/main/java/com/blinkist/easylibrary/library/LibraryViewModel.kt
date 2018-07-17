@@ -4,11 +4,11 @@ import android.arch.lifecycle.LiveData
 import android.arch.lifecycle.MediatorLiveData
 import android.arch.lifecycle.ViewModel
 import com.blinkist.easylibrary.data.BookDao
-import com.blinkist.easylibrary.service.LibraryService
+import com.blinkist.easylibrary.service.BooksService
 import io.reactivex.Completable
 
 class LibraryViewModel(
-    private val libraryService: LibraryService,
+    private val booksService: BooksService,
     private val bookDao: BookDao,
     private val bookGrouper: BookGrouper,
     val adapter: LibraryAdapter
@@ -28,7 +28,7 @@ class LibraryViewModel(
 
     fun books(): LiveData<List<Librariable>> = librariables
 
-    fun updateBooks(): Completable = libraryService.books()
+    fun updateBooks(): Completable = booksService.books()
         .doOnSuccess {
             bookDao.clear()
             bookDao.insert(it)

@@ -1,27 +1,18 @@
 package com.blinkist.easylibrary.service
 
-import android.support.test.InstrumentationRegistry
 import android.support.test.runner.AndroidJUnit4
+import com.blinkist.easylibrary.di.RetrofitTestModule
 import com.blinkist.easylibrary.model.Book
-import com.squareup.moshi.KotlinJsonAdapterFactory
-import com.squareup.moshi.Moshi
+import com.google.common.truth.Truth.assertThat
 import io.appflate.restmock.RESTMockServer
-import io.appflate.restmock.RESTMockServerStarter
-import io.appflate.restmock.android.AndroidAssetsFileParser
-import io.appflate.restmock.android.AndroidLogger
 import io.appflate.restmock.utils.RequestMatchers
-import okhttp3.OkHttpClient
-import org.junit.Assert.assertEquals
 import org.junit.Before
 import org.junit.Test
 import org.junit.runner.RunWith
-import retrofit2.Retrofit
-import retrofit2.adapter.rxjava2.RxJava2CallAdapterFactory
-import retrofit2.converter.moshi.MoshiConverterFactory
 import java.text.SimpleDateFormat
 
 @RunWith(AndroidJUnit4::class)
-class LibraryServiceTest {
+class BooksServiceTest {
 
     private val books = """
         [
@@ -44,25 +35,16 @@ class LibraryServiceTest {
         ]
         """
 
-    private val libraryService
-        get() = Retrofit.Builder()
-            .baseUrl(RESTMockServer.getUrl())
-            .client(OkHttpClient.Builder().build())
-            .addConverterFactory(MoshiConverterFactory.create(Moshi.Builder().add(KotlinJsonAdapterFactory()).build()))
-            .addCallAdapterFactory(RxJava2CallAdapterFactory.create())
-            .build()
-            .create(LibraryService::class.java)
+    private val booksService get() = RetrofitTestModule().buildLibraryService()
 
-    @Before
-    fun setup() {
-        RESTMockServerStarter.startSync(AndroidAssetsFileParser(InstrumentationRegistry.getContext()), AndroidLogger())
+    @Before fun setup() {
+        RESTMockServer.reset()
         RESTMockServer.whenGET(RequestMatchers.pathContains("books"))
             .thenReturnString(200, books)
     }
 
-    @Test
-    fun testMapping() {
-        libraryService.books().test()
+    @Test fun testMapping() {
+        booksService.books().test()
             .assertValues(
                 listOf(
                     Book(
@@ -85,12 +67,11 @@ class LibraryServiceTest {
             )
     }
 
-    @Test
-    fun testPublishedDateTime() {
-        val (book1, book2) = libraryService.books().test().values().first()
+    @Test fun testPublishedDateTime() {
+        val (book1, book2) = booksService.books().test().values().first()
 
         val dateFormat = SimpleDateFormat("yyyy-MM-dd")
-        assertEquals(book1.publishedDateTime, dateFormat.parse(book1.publishedDate).time)
-        assertEquals(book2.publishedDateTime, dateFormat.parse(book2.publishedDate).time)
+        assertThat(book1.publishedDateTime).isEqualTo(dateFormat.parse(book1.publishedDate).time)
+        assertThat(book2.publishedDateTime).isEqualTo(dateFormat.parse(book2.publishedDate).time)
     }
 }

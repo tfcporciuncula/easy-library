@@ -20,16 +20,14 @@ class LibraryActivityErrorTest {
 
     @get:Rule var activityRule = ActivityTestRule<LibraryActivity>(LibraryActivity::class.java, false, false)
 
-    @Before
-    fun setup() {
+    @Before fun setup() {
         RESTMockServer.reset()
         RESTMockServer.whenGET(pathContains("books"))
             .thenReturnFile(500, "error")
         activityRule.launchActivity(null)
     }
 
-    @Test
-    fun shouldShowSnackbarWhenLibraryServiceFails() {
+    @Test fun shouldShowSnackbarWhenLibraryServiceFails() {
         onView(isAssignableFrom(Snackbar.SnackbarLayout::class.java)).check(matches(isDisplayed()))
     }
 }
@@ -39,16 +37,14 @@ class LibraryActivitySuccessTest {
 
     @get:Rule var activityRule = ActivityTestRule<LibraryActivity>(LibraryActivity::class.java, false, false)
 
-    @Before
-    fun setup() {
+    @Before fun setup() {
         RESTMockServer.reset()
         RESTMockServer.whenGET(pathContains("books"))
             .thenReturnFile(200, "books.json")
         activityRule.launchActivity(null)
     }
 
-    @Test
-    fun shouldNotShowSnackbarWhenThereIsNoError() {
+    @Test fun shouldNotShowSnackbarWhenThereIsNoError() {
         onView(isAssignableFrom(Snackbar.SnackbarLayout::class.java)).check(doesNotExist())
     }
 }
