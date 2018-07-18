@@ -3,9 +3,10 @@ package com.blinkist.easylibrary.model
 import android.arch.persistence.room.ColumnInfo
 import android.arch.persistence.room.Entity
 import android.arch.persistence.room.PrimaryKey
+import com.blinkist.easylibrary.di.RetrofitModule
 import com.blinkist.easylibrary.library.Librariable
-import java.text.SimpleDateFormat
-import java.util.*
+import java.text.DateFormat
+import javax.inject.Inject
 
 @Entity(tableName = "books")
 data class Book(
@@ -17,13 +18,49 @@ data class Book(
     val publishedDate: String,
 
     @ColumnInfo(name = "published_date_time")
-    val publishedDateTime: Long = publishedDate.time,
+    val publishedDateTime: Long,
 
+    @ColumnInfo(name = "title")
     val title: String,
+
+    @ColumnInfo(name = "authors")
     val authors: String,
+
+    @ColumnInfo(name = "thumbnail")
     val thumbnail: String,
+
+    @ColumnInfo(name = "url")
     val url: String
 ) : Librariable
 
-private val String.time
-    get() = SimpleDateFormat("yyyy-MM-dd", Locale.getDefault()).parse(this).time
+data class BookRaw(
+    val id: Long?,
+    val publishedDate: String?,
+    val title: String?,
+    val authors: String?,
+    val thumbnail: String?,
+    val url: String?
+)
+
+class BookMapper @Inject constructor(@RetrofitModule.BookServiceDateFormat private val dateFormat: DateFormat) {
+
+    fun fromRaw(bookRaw: BookRaw): Book {
+        return Book(
+            id = bookRaw.id ?: throw IllegalArgumentException("Book has null id"),
+
+            publishedDate = bookRaw.publishedDate ?: throw IllegalArgumentException("Book has null publishedDate"),
+
+            publishedDateTime = dateFormat.parse(bookRaw.publishedDate).time,
+
+            title = bookRaw.title ?: throw IllegalArgumentException("Book has null title"),
+
+            authors = bookRaw.authors ?: throw IllegalArgumentException("Book has null authors"),
+
+            thumbnail = bookRaw.thumbnail ?: throw IllegalArgumentException("Book has null thumbnail"),
+
+            url = bookRaw.url ?: throw IllegalArgumentException("Book has null url")
+        )
+    }
+
+    fun fromRaw(booksRaw: List<BookRaw>): List<Book> = booksRaw.map(::fromRaw)
+}

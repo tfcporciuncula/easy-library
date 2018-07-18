@@ -12,6 +12,9 @@ import retrofit2.Converter
 import retrofit2.Retrofit
 import retrofit2.adapter.rxjava2.RxJava2CallAdapterFactory
 import retrofit2.converter.moshi.MoshiConverterFactory
+import java.text.DateFormat
+import java.text.SimpleDateFormat
+import java.util.*
 import javax.inject.Qualifier
 import javax.inject.Singleton
 
@@ -20,6 +23,9 @@ class RetrofitModule {
 
     @Qualifier
     private annotation class Internal
+
+    @Qualifier
+    annotation class BookServiceDateFormat
 
     @Provides @Internal
     fun provideBaseUrl(): String = RESTMockServer.getUrl()
@@ -48,4 +54,7 @@ class RetrofitModule {
         .addCallAdapterFactory(callAdapterFactory)
         .build()
         .create(BooksService::class.java)
+
+    @Provides @BookServiceDateFormat
+    fun provideBooksServiceDateFormat(): DateFormat = SimpleDateFormat("yyyy-MM-dd", Locale.getDefault())
 }
