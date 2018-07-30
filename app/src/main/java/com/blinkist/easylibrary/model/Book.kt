@@ -3,7 +3,7 @@ package com.blinkist.easylibrary.model
 import android.arch.persistence.room.ColumnInfo
 import android.arch.persistence.room.Entity
 import android.arch.persistence.room.PrimaryKey
-import com.blinkist.easylibrary.di.RetrofitModule
+import com.blinkist.easylibrary.di.ServiceModule
 import com.blinkist.easylibrary.library.Librariable
 import java.text.DateFormat
 import javax.inject.Inject
@@ -42,9 +42,11 @@ data class BookRaw(
     val url: String?
 )
 
-class BookMapper @Inject constructor(@RetrofitModule.BookServiceDateFormat private val dateFormat: DateFormat) {
+class BookMapper @Inject constructor(@ServiceModule.BookServiceDateFormat private val dateFormat: DateFormat) {
 
-    fun fromRaw(bookRaw: BookRaw): Book {
+    fun fromRaw(booksRaw: List<BookRaw>): List<Book> = booksRaw.map(::fromRaw)
+
+    private fun fromRaw(bookRaw: BookRaw): Book {
         return Book(
             id = bookRaw.id ?: throw IllegalArgumentException("Book has null id"),
 
@@ -61,6 +63,4 @@ class BookMapper @Inject constructor(@RetrofitModule.BookServiceDateFormat priva
             url = bookRaw.url ?: throw IllegalArgumentException("Book has null url")
         )
     }
-
-    fun fromRaw(booksRaw: List<BookRaw>): List<Book> = booksRaw.map(::fromRaw)
 }

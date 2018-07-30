@@ -1,18 +1,17 @@
 package com.blinkist.easylibrary.service
 
 import android.support.test.runner.AndroidJUnit4
-import com.blinkist.easylibrary.di.RetrofitTestModule
-import com.blinkist.easylibrary.model.Book
-import com.google.common.truth.Truth.assertThat
+import com.blinkist.easylibrary.base.BaseInstrumentationTest
+import com.blinkist.easylibrary.model.BookRaw
 import io.appflate.restmock.RESTMockServer
 import io.appflate.restmock.utils.RequestMatchers
 import org.junit.Before
 import org.junit.Test
 import org.junit.runner.RunWith
-import java.text.SimpleDateFormat
+import javax.inject.Inject
 
 @RunWith(AndroidJUnit4::class)
-class BooksServiceTest {
+class BooksServiceTest : BaseInstrumentationTest() {
 
     private val books = """
         [
@@ -35,10 +34,12 @@ class BooksServiceTest {
         ]
         """
 
-    private val booksService get() = RetrofitTestModule().buildLibraryService()
+    @Inject lateinit var booksService: BooksService
 
-    @Before fun setup() {
-        RESTMockServer.reset()
+    @Before override fun setup() {
+        super.setup()
+        component.inject(this)
+
         RESTMockServer.whenGET(RequestMatchers.pathContains("books"))
             .thenReturnString(200, books)
     }
@@ -47,7 +48,7 @@ class BooksServiceTest {
         booksService.books().test()
             .assertValues(
                 listOf(
-                    Book(
+                    BookRaw(
                         id = 1,
                         title = "book1",
                         authors = "author1",
@@ -55,7 +56,7 @@ class BooksServiceTest {
                         thumbnail = "thumbnail1",
                         url = "url1"
                     ),
-                    Book(
+                    BookRaw(
                         id = 2,
                         title = "book2",
                         authors = "author2",
@@ -65,13 +66,5 @@ class BooksServiceTest {
                     )
                 )
             )
-    }
-
-    @Test fun testPublishedDateTime() {
-        val (book1, book2) = booksService.books().test().values().first()
-
-        val dateFormat = SimpleDateFormat("yyyy-MM-dd")
-        assertThat(book1.publishedDateTime).isEqualTo(dateFormat.parse(book1.publishedDate).time)
-        assertThat(book2.publishedDateTime).isEqualTo(dateFormat.parse(book2.publishedDate).time)
     }
 }

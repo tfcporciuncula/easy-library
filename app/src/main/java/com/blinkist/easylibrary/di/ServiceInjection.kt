@@ -18,30 +18,27 @@ import java.util.*
 import javax.inject.Qualifier
 import javax.inject.Singleton
 
-@Module
-class RetrofitModule {
+@Module(includes = [ServiceModule::class])
+object RetrofitModule {
 
     @Qualifier
     private annotation class Internal
 
-    @Qualifier
-    annotation class BookServiceDateFormat
-
-    @Provides @Internal
+    @JvmStatic @Provides @Internal
     fun provideBaseUrl(): String = RESTMockServer.getUrl()
 
-    @Provides @Internal
+    @JvmStatic @Provides @Internal
     fun provideHttpClient(): OkHttpClient = OkHttpClient.Builder().build()
 
-    @Provides @Internal
+    @JvmStatic @Provides @Internal
     fun provideConverterFactory(): Converter.Factory {
         return MoshiConverterFactory.create(Moshi.Builder().add(KotlinJsonAdapterFactory()).build())
     }
 
-    @Provides @Internal
+    @JvmStatic @Provides @Internal
     fun provideCallAdapterFactory(): CallAdapter.Factory = RxJava2CallAdapterFactory.create()
 
-    @Provides @Singleton
+    @JvmStatic @Provides @Singleton
     fun provideBooksService(
         @Internal baseUrl: String,
         @Internal httpClient: OkHttpClient,
@@ -54,7 +51,14 @@ class RetrofitModule {
         .addCallAdapterFactory(callAdapterFactory)
         .build()
         .create(BooksService::class.java)
+}
 
-    @Provides @BookServiceDateFormat
+@Module
+object ServiceModule {
+
+    @Qualifier
+    annotation class BookServiceDateFormat
+
+    @JvmStatic @Provides @BookServiceDateFormat
     fun provideBooksServiceDateFormat(): DateFormat = SimpleDateFormat("yyyy-MM-dd", Locale.getDefault())
 }

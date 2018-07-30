@@ -9,7 +9,6 @@ import android.view.MenuItem
 import com.blinkist.easylibrary.R
 import com.blinkist.easylibrary.base.BaseActivity
 import com.blinkist.easylibrary.component
-import com.blinkist.easylibrary.library.di.LibraryModule
 import io.reactivex.android.schedulers.AndroidSchedulers
 import io.reactivex.schedulers.Schedulers
 import kotlinx.android.synthetic.main.activity_library.*
@@ -27,7 +26,7 @@ class LibraryActivity : BaseActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_library)
-        application.component.plus(LibraryModule).inject(this)
+        application.component.plusLibraryComponent().inject(this)
 
         if (savedInstanceState == null) updateBooks()
 

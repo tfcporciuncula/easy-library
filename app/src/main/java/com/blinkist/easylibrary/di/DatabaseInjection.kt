@@ -7,14 +7,18 @@ import dagger.Module
 import dagger.Provides
 import javax.inject.Singleton
 
-@Module(includes = [ApplicationModule::class])
-class DatabaseModule {
+@Module(includes = [DaoModule::class])
+object DatabaseModule {
 
-    @Provides @Singleton
+    @JvmStatic @Provides @Singleton
     fun provideDatabase(context: Context): EasyLibraryDatabase {
         return Room.databaseBuilder(context, EasyLibraryDatabase::class.java, "easy-library").build()
     }
+}
 
-    @Provides
+@Module
+object DaoModule {
+
+    @JvmStatic @Provides
     fun provideBookDao(database: EasyLibraryDatabase) = database.bookDao()
 }

@@ -13,7 +13,7 @@ import javax.inject.Singleton
 @Component(modules = [ApplicationModule::class, RetrofitModule::class, DatabaseModule::class])
 interface ApplicationComponent {
 
-    fun plus(module: LibraryModule): LibraryComponent
+    fun plusLibraryComponent(): LibraryComponent
 }
 
 @Module
