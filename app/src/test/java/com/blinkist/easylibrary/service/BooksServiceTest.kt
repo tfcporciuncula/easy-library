@@ -1,17 +1,21 @@
 package com.blinkist.easylibrary.service
 
-import android.support.test.runner.AndroidJUnit4
-import com.blinkist.easylibrary.base.BaseInstrumentationTest
 import com.blinkist.easylibrary.model.BookRaw
+import com.squareup.moshi.KotlinJsonAdapterFactory
+import com.squareup.moshi.Moshi
+import io.appflate.restmock.JVMFileParser
 import io.appflate.restmock.RESTMockServer
+import io.appflate.restmock.RESTMockServerStarter
+import io.appflate.restmock.logging.NOOpLogger
 import io.appflate.restmock.utils.RequestMatchers
+import okhttp3.OkHttpClient
 import org.junit.Before
 import org.junit.Test
-import org.junit.runner.RunWith
-import javax.inject.Inject
+import retrofit2.Retrofit
+import retrofit2.adapter.rxjava2.RxJava2CallAdapterFactory
+import retrofit2.converter.moshi.MoshiConverterFactory
 
-@RunWith(AndroidJUnit4::class)
-class BooksServiceTest : BaseInstrumentationTest() {
+class BooksServiceTest {
 
     private val books = """
         [
@@ -34,12 +38,17 @@ class BooksServiceTest : BaseInstrumentationTest() {
         ]
         """
 
-    @Inject lateinit var booksService: BooksService
+    private val booksService
+        get() = Retrofit.Builder()
+            .baseUrl(RESTMockServer.getUrl())
+            .client(OkHttpClient.Builder().build())
+            .addConverterFactory(MoshiConverterFactory.create(Moshi.Builder().add(KotlinJsonAdapterFactory()).build()))
+            .addCallAdapterFactory(RxJava2CallAdapterFactory.create())
+            .build()
+            .create(BooksService::class.java)
 
-    @Before override fun setup() {
-        super.setup()
-        component.inject(this)
-
+    @Before fun setup() {
+        RESTMockServerStarter.startSync(JVMFileParser(), NOOpLogger())
         RESTMockServer.whenGET(RequestMatchers.pathContains("books"))
             .thenReturnString(200, books)
     }
