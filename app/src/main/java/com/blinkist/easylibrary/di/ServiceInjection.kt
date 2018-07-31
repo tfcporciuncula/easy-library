@@ -1,8 +1,6 @@
 package com.blinkist.easylibrary.di
 
 import com.blinkist.easylibrary.service.BooksService
-import com.squareup.moshi.KotlinJsonAdapterFactory
-import com.squareup.moshi.Moshi
 import dagger.Module
 import dagger.Provides
 import io.appflate.restmock.RESTMockServer
@@ -31,9 +29,7 @@ object RetrofitModule {
     fun provideHttpClient(): OkHttpClient = OkHttpClient.Builder().build()
 
     @JvmStatic @Provides @Internal
-    fun provideConverterFactory(): Converter.Factory {
-        return MoshiConverterFactory.create(Moshi.Builder().add(KotlinJsonAdapterFactory()).build())
-    }
+    fun provideConverterFactory(): Converter.Factory = MoshiConverterFactory.create()
 
     @JvmStatic @Provides @Internal
     fun provideCallAdapterFactory(): CallAdapter.Factory = RxJava2CallAdapterFactory.create()

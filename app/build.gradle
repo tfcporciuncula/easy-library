@@ -6,8 +6,6 @@ apply plugin: 'kotlin-android-extensions'
 
 apply plugin: 'kotlin-kapt'
 
-apply plugin: "kotlin-allopen"
-
 android {
     compileSdkVersion 27
     defaultConfig {
@@ -33,10 +31,6 @@ android {
             java.srcDir sharedTestDir
         }
     }
-}
-
-allOpen {
-    annotation("dagger.Module")
 }
 
 dependencies {
@@ -65,7 +59,8 @@ dependencies {
     implementation 'com.squareup.retrofit2:retrofit:2.4.0'
     implementation 'com.squareup.retrofit2:adapter-rxjava2:2.4.0'
     implementation 'com.squareup.retrofit2:converter-moshi:2.4.0'
-    implementation 'com.squareup.moshi:moshi-kotlin:1.5.0'
+    implementation 'com.squareup.moshi:moshi:1.6.0'
+    kapt 'com.squareup.moshi:moshi-kotlin-codegen:1.6.0'
 
     // Glide
     implementation 'com.github.bumptech.glide:glide:4.7.1'

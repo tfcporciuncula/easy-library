@@ -5,6 +5,7 @@ import android.arch.persistence.room.Entity
 import android.arch.persistence.room.PrimaryKey
 import com.blinkist.easylibrary.di.ServiceModule
 import com.blinkist.easylibrary.library.Librariable
+import com.squareup.moshi.JsonClass
 import java.text.DateFormat
 import javax.inject.Inject
 
@@ -33,6 +34,7 @@ data class Book(
     val url: String
 ) : Librariable
 
+@JsonClass(generateAdapter = true)
 data class BookRaw(
     val id: Long?,
     val publishedDate: String?,

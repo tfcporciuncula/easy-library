@@ -1,8 +1,6 @@
 package com.blinkist.easylibrary.service
 
 import com.blinkist.easylibrary.model.BookRaw
-import com.squareup.moshi.KotlinJsonAdapterFactory
-import com.squareup.moshi.Moshi
 import io.appflate.restmock.JVMFileParser
 import io.appflate.restmock.RESTMockServer
 import io.appflate.restmock.RESTMockServerStarter
@@ -42,7 +40,7 @@ class BooksServiceTest {
         get() = Retrofit.Builder()
             .baseUrl(RESTMockServer.getUrl())
             .client(OkHttpClient.Builder().build())
-            .addConverterFactory(MoshiConverterFactory.create(Moshi.Builder().add(KotlinJsonAdapterFactory()).build()))
+            .addConverterFactory(MoshiConverterFactory.create())
             .addCallAdapterFactory(RxJava2CallAdapterFactory.create())
             .build()
             .create(BooksService::class.java)
