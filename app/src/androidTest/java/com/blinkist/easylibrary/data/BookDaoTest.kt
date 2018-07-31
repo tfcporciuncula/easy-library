@@ -1,8 +1,9 @@
 package com.blinkist.easylibrary.data
 
 import android.arch.core.executor.testing.InstantTaskExecutorRule
+import android.arch.persistence.room.Room
+import android.support.test.InstrumentationRegistry
 import android.support.test.runner.AndroidJUnit4
-import com.blinkist.easylibrary.base.BaseInstrumentationTest
 import com.blinkist.easylibrary.model.Book
 import com.blinkist.easylibrary.model.ModelFactory.newBook
 import com.google.common.truth.Truth.assertThat
@@ -11,17 +12,21 @@ import org.junit.Before
 import org.junit.Rule
 import org.junit.Test
 import org.junit.runner.RunWith
-import javax.inject.Inject
 
 @RunWith(AndroidJUnit4::class)
-class BookDaoTest : BaseInstrumentationTest() {
+class BookDaoTest {
 
     @get:Rule val instantTaskExecutorRule = InstantTaskExecutorRule()
 
-    @Inject lateinit var database: EasyLibraryDatabase
-    @Inject lateinit var bookDao: BookDao
+    private lateinit var database: EasyLibraryDatabase
+    private lateinit var bookDao: BookDao
 
-    @Before override fun setup() = component.inject(this)
+    @Before fun setup() {
+        database = Room.inMemoryDatabaseBuilder(InstrumentationRegistry.getContext(), EasyLibraryDatabase::class.java)
+            .allowMainThreadQueries()
+            .build()
+        bookDao = database.bookDao()
+    }
 
     @After fun tearDown() = database.close()
 

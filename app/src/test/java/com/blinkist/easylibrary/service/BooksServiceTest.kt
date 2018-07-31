@@ -53,7 +53,7 @@ class BooksServiceTest {
 
     @Test fun testMapping() {
         booksService.books().test()
-            .assertValues(
+            .assertResult(
                 listOf(
                     BookRaw(
                         id = 1,
