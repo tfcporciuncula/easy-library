@@ -14,7 +14,6 @@ import io.reactivex.Single
 import org.junit.Rule
 import org.junit.Test
 import org.junit.runner.RunWith
-import org.mockito.ArgumentMatchers.anyList
 import org.mockito.BDDMockito.given
 import org.mockito.BDDMockito.verify
 import org.mockito.Mock
@@ -25,15 +24,15 @@ class LibraryViewModelTest {
 
     @get:Rule val instantTaskExecutorRule = InstantTaskExecutorRule()
 
-    @Mock lateinit var booksService: BooksService
+    @Mock private lateinit var booksService: BooksService
 
-    @Mock lateinit var bookMapper: BookMapper
+    @Mock private lateinit var bookMapper: BookMapper
 
-    @Mock lateinit var bookDao: BookDao
+    @Mock private lateinit var bookDao: BookDao
 
-    @Mock lateinit var bookGrouper: BookGrouper
+    @Mock private lateinit var bookGrouper: BookGrouper
 
-    @Mock lateinit var libraryAdapter: LibraryAdapter
+    @Mock private lateinit var libraryAdapter: LibraryAdapter
 
     private val viewModel
         get() = LibraryViewModel(
@@ -44,7 +43,7 @@ class LibraryViewModelTest {
             libraryAdapter
         )
 
-    @Test fun testLibrariables() {
+    @Test fun testBooks() {
         val books = listOf(newBook(id = 11), newBook(id = 22))
         given(bookDao.books()).willReturn(
             MutableLiveData<List<Book>>().apply { value = books }
@@ -59,14 +58,15 @@ class LibraryViewModelTest {
     }
 
     @Test fun testUpdateBooks() {
-        val books = listOf(newBookRaw(id = 12), newBookRaw(id = 34))
-
-        given(booksService.books()).willReturn(Single.just(books))
+        val booksRaw = listOf(newBookRaw(id = 12), newBookRaw(id = 34))
+        given(booksService.books()).willReturn(Single.just(booksRaw))
+        val books = listOf(newBook(id = 1), newBook(id = 2))
+        given(bookMapper.fromRaw(booksRaw)).willReturn(books)
 
         viewModel.updateBooks().test().assertComplete()
         verify(booksService).books()
         verify(bookDao).clear()
-        verify(bookDao).insert(anyList())
+        verify(bookDao).insert(books)
     }
 
     @Test fun testRearrangeBooks() {
@@ -75,14 +75,14 @@ class LibraryViewModelTest {
             MutableLiveData<List<Book>>().apply { value = books }
         )
 
-        val viewModel = this.viewModel
+        with(viewModel) {
+            rearrangeBooks(sortByDescending = false)
+            assertThat(sortByDescending).isFalse()
+            verify(bookGrouper).groupBooksByWeek(books, sortByDescending = false)
 
-        viewModel.rearrangeBooks(sortByDescending = false)
-        assertThat(viewModel.sortByDescending).isFalse()
-        verify(bookGrouper).groupBooksByWeek(books, sortByDescending = false)
-
-        viewModel.rearrangeBooks(sortByDescending = true)
-        assertThat(viewModel.sortByDescending).isTrue()
-        verify(bookGrouper).groupBooksByWeek(books, sortByDescending = true)
+            rearrangeBooks(sortByDescending = true)
+            assertThat(sortByDescending).isTrue()
+            verify(bookGrouper).groupBooksByWeek(books, sortByDescending = true)
+        }
     }
 }
