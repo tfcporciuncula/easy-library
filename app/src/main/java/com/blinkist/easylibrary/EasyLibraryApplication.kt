@@ -31,7 +31,7 @@ open class EasyLibraryApplication : Application() {
         if (BuildConfig.DEBUG) Timber.plant(Timber.DebugTree())
     }
 
-    protected open fun setupMockApi() {
+    private fun setupMockApi() {
         RESTMockServerStarter.startSync(AndroidAssetsFileParser(this), AndroidLogger());
         RESTMockServer.whenGET(pathContains("books"))
             .delay(TimeUnit.SECONDS, 2)

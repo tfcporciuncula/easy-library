@@ -1,12 +1,9 @@
 package com.blinkist.easylibrary
 
-import android.support.test.InstrumentationRegistry
 import com.blinkist.easylibrary.di.ApplicationModule
 import com.blinkist.easylibrary.di.DaggerTestComponent
 import com.blinkist.easylibrary.di.TestComponent
-import io.appflate.restmock.RESTMockServerStarter
-import io.appflate.restmock.android.AndroidAssetsFileParser
-import io.appflate.restmock.android.AndroidLogger
+import io.appflate.restmock.RESTMockServer
 
 class TestApplication : EasyLibraryApplication() {
 
@@ -15,7 +12,8 @@ class TestApplication : EasyLibraryApplication() {
             .applicationModule(ApplicationModule(this))
             .build()
 
-    override fun setupMockApi() {
-        RESTMockServerStarter.startSync(AndroidAssetsFileParser(InstrumentationRegistry.getContext()), AndroidLogger())
+    override fun onCreate() {
+        super.onCreate()
+        RESTMockServer.shutdown()
     }
 }

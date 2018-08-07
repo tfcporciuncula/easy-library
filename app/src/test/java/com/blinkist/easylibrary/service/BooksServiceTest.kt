@@ -5,8 +5,9 @@ import io.appflate.restmock.JVMFileParser
 import io.appflate.restmock.RESTMockServer
 import io.appflate.restmock.RESTMockServerStarter
 import io.appflate.restmock.logging.NOOpLogger
-import io.appflate.restmock.utils.RequestMatchers
+import io.appflate.restmock.utils.RequestMatchers.pathContains
 import okhttp3.OkHttpClient
+import org.junit.After
 import org.junit.Before
 import org.junit.Test
 import retrofit2.Retrofit
@@ -47,9 +48,10 @@ class BooksServiceTest {
 
     @Before fun setup() {
         RESTMockServerStarter.startSync(JVMFileParser(), NOOpLogger())
-        RESTMockServer.whenGET(RequestMatchers.pathContains("books"))
-            .thenReturnString(200, books)
+        RESTMockServer.whenGET(pathContains("books")).thenReturnString(200, books)
     }
+
+    @After fun tearDown() = RESTMockServer.shutdown()
 
     @Test fun testMapping() {
         booksService.books().test()
