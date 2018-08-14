@@ -8,7 +8,7 @@ import android.view.Menu
 import android.view.MenuItem
 import com.blinkist.easylibrary.R
 import com.blinkist.easylibrary.base.BaseActivity
-import com.blinkist.easylibrary.component
+import com.blinkist.easylibrary.di.component
 import io.reactivex.android.schedulers.AndroidSchedulers
 import io.reactivex.schedulers.Schedulers
 import kotlinx.android.synthetic.main.activity_library.*

@@ -4,6 +4,7 @@ import android.app.Application
 import com.blinkist.easylibrary.di.ApplicationComponent
 import com.blinkist.easylibrary.di.ApplicationModule
 import com.blinkist.easylibrary.di.DaggerApplicationComponent
+import com.blinkist.easylibrary.di.DaggerComponentProvider
 import io.appflate.restmock.RESTMockServer
 import io.appflate.restmock.RESTMockServerStarter
 import io.appflate.restmock.android.AndroidAssetsFileParser
@@ -12,9 +13,9 @@ import io.appflate.restmock.utils.RequestMatchers.pathContains
 import timber.log.Timber
 import java.util.concurrent.TimeUnit
 
-open class EasyLibraryApplication : Application() {
+class EasyLibraryApplication : Application(), DaggerComponentProvider {
 
-    open val component: ApplicationComponent by lazy {
+    override val component: ApplicationComponent by lazy {
         DaggerApplicationComponent.builder()
             .applicationModule(ApplicationModule(this))
             .build()
@@ -46,5 +47,3 @@ open class EasyLibraryApplication : Application() {
             .thenReturnFile(200, "books.json")
     }
 }
-
-val Application.component get() = (this as EasyLibraryApplication).component
