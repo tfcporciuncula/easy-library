@@ -5,5 +5,5 @@ import android.support.test.rule.ActivityTestRule
 
 class LazyActivityTestRule<T : Activity>(activityClass: Class<T>) : ActivityTestRule<T>(activityClass, false, false) {
 
-    fun launchActivity(): T = super.launchActivity(null)
+    fun launchActivity(): T = launchActivity(null)
 }

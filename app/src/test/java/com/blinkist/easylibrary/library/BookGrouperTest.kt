@@ -19,8 +19,7 @@ class BookGrouperTest {
 
     private val bookGrouper get() = BookGrouper(calendar, dateFormat)
 
-    @Test
-    fun testBooksFromTheSameWeek() {
+    @Test fun testBooksFromTheSameWeek() {
         val books = listOf(
             newBook(publishedDate = "2018-04-28"),
             newBook(publishedDate = "2018-04-27")
@@ -33,8 +32,7 @@ class BookGrouperTest {
         assertThat(groupedBooks[2]).isEqualTo(books[1])
     }
 
-    @Test
-    fun testBooksFromDifferentWeek() {
+    @Test fun testBooksFromDifferentWeek() {
         val books = listOf(
             newBook(publishedDate = "2018-04-28"),
             newBook(publishedDate = "2017-04-27")
@@ -48,8 +46,7 @@ class BookGrouperTest {
         assertThat(groupedBooks[3]).isEqualTo(books[1])
     }
 
-    @Test
-    fun testChangingBooksSortOrder() {
+    @Test fun testChangingBooksSortOrder() {
         val books = listOf(
             newBook(publishedDate = "2018-04-03"),
             newBook(publishedDate = "2018-04-04")
