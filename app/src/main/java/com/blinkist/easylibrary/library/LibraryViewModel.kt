@@ -7,8 +7,9 @@ import com.blinkist.easylibrary.data.BookDao
 import com.blinkist.easylibrary.model.BookMapper
 import com.blinkist.easylibrary.service.BooksService
 import io.reactivex.Completable
+import javax.inject.Inject
 
-class LibraryViewModel(
+class LibraryViewModel @Inject constructor(
     private val booksService: BooksService,
     private val bookMapper: BookMapper,
     private val bookDao: BookDao,
