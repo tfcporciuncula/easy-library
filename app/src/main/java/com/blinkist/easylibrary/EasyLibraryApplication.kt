@@ -2,7 +2,6 @@ package com.blinkist.easylibrary
 
 import android.app.Application
 import com.blinkist.easylibrary.di.ApplicationComponent
-import com.blinkist.easylibrary.di.ApplicationModule
 import com.blinkist.easylibrary.di.DaggerApplicationComponent
 import com.blinkist.easylibrary.di.DaggerComponentProvider
 import io.appflate.restmock.RESTMockServer
@@ -17,7 +16,7 @@ class EasyLibraryApplication : Application(), DaggerComponentProvider {
 
     override val component: ApplicationComponent by lazy {
         DaggerApplicationComponent.builder()
-            .applicationModule(ApplicationModule(this))
+            .applicationContext(applicationContext)
             .build()
     }
 

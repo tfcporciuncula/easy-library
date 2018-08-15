@@ -4,5 +4,9 @@ import dagger.Component
 import javax.inject.Singleton
 
 @Singleton
-@Component(modules = [ApplicationModule::class, RetrofitTestModule::class, DatabaseTestModule::class])
-interface TestComponent : ApplicationComponent
+@Component(modules = [RetrofitTestModule::class, DatabaseTestModule::class])
+interface TestComponent : ApplicationComponent {
+
+    @Component.Builder
+    interface Builder : ApplicationComponent.Builder
+}
