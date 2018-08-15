@@ -1,10 +1,10 @@
 package com.blinkist.easylibrary.di
 
-import android.app.Application
+import android.app.Activity
 
 interface DaggerComponentProvider {
 
     val component: ApplicationComponent
 }
 
-val Application.component get() = (this as DaggerComponentProvider).component
+val Activity.injector get() = (application as DaggerComponentProvider).component

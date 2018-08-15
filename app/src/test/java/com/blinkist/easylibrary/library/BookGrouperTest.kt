@@ -5,19 +5,10 @@ import com.blinkist.easylibrary.model.ModelFactory.newBook
 import com.blinkist.easylibrary.model.WeekSection
 import com.google.common.truth.Truth.assertThat
 import org.junit.Test
-import java.text.SimpleDateFormat
-import java.util.*
 
 class BookGrouperTest {
 
-    private val calendar
-        get() = Calendar.getInstance().apply {
-            firstDayOfWeek = Calendar.MONDAY
-        }
-
-    private val dateFormat get() = SimpleDateFormat.getDateInstance(SimpleDateFormat.LONG)
-
-    private val bookGrouper get() = BookGrouper(calendar, dateFormat)
+    private val bookGrouper get() = BookGrouper()
 
     @Test fun testBooksFromTheSameWeek() {
         val books = listOf(

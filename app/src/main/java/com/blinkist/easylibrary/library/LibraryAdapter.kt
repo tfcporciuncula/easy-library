@@ -13,8 +13,11 @@ import com.blinkist.easylibrary.model.WeekSection
 import com.bumptech.glide.Glide
 import com.bumptech.glide.load.resource.drawable.DrawableTransitionOptions.withCrossFade
 import kotlinx.android.synthetic.main.item_book.view.*
+import java.text.SimpleDateFormat
+import javax.inject.Inject
 
-class LibraryAdapter : ListAdapter<Librariable, LibraryAdapter.ViewHolder>(DiffCallback()) {
+class LibraryAdapter @Inject constructor() :
+    ListAdapter<Librariable, LibraryAdapter.ViewHolder>(DiffCallback()) {
 
     companion object {
         private const val ITEM_VIEW_TYPE_BOOK = R.layout.item_book
@@ -49,8 +52,12 @@ class LibraryAdapter : ListAdapter<Librariable, LibraryAdapter.ViewHolder>(DiffC
         }
 
         fun bindWeekSection(weekSection: WeekSection) {
+            val dateFormat = SimpleDateFormat.getDateInstance(SimpleDateFormat.LONG)
+            val formattedInitialDate = dateFormat.format(weekSection.initialDate)
+            val formattedFinalDate = dateFormat.format(weekSection.finalDate)
+
             val title = itemView.context.getString(
-                R.string.week_section_title, weekSection.initialDate, weekSection.finalDate
+                R.string.week_section_title, formattedInitialDate, formattedFinalDate
             )
             (itemView as TextView).text = title
         }

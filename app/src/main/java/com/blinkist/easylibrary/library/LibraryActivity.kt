@@ -8,25 +8,21 @@ import android.view.Menu
 import android.view.MenuItem
 import com.blinkist.easylibrary.R
 import com.blinkist.easylibrary.base.BaseActivity
-import com.blinkist.easylibrary.di.component
+import com.blinkist.easylibrary.di.injector
 import io.reactivex.android.schedulers.AndroidSchedulers
 import io.reactivex.schedulers.Schedulers
 import kotlinx.android.synthetic.main.activity_library.*
 import timber.log.Timber
-import javax.inject.Inject
 
 class LibraryActivity : BaseActivity() {
 
-    @Inject lateinit var viewModelFactory: LibraryViewModelFactory
-
     private val viewModel by lazy {
-        ViewModelProviders.of(this, viewModelFactory).get(LibraryViewModel::class.java)
+        ViewModelProviders.of(this, injector.libraryViewModelFactory()).get(LibraryViewModel::class.java)
     }
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_library)
-        application.component.plusLibraryComponent().inject(this)
 
         if (savedInstanceState == null) updateBooks()
 

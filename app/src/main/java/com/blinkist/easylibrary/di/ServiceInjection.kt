@@ -19,32 +19,12 @@ import javax.inject.Singleton
 @Module(includes = [ServiceModule::class])
 object RetrofitModule {
 
-    @Qualifier
-    private annotation class Internal
-
-    @JvmStatic @Provides @Internal
-    fun provideBaseUrl(): String = RESTMockServer.getUrl()
-
-    @JvmStatic @Provides @Internal
-    fun provideHttpClient(): OkHttpClient = OkHttpClient.Builder().build()
-
-    @JvmStatic @Provides @Internal
-    fun provideConverterFactory(): Converter.Factory = MoshiConverterFactory.create()
-
-    @JvmStatic @Provides @Internal
-    fun provideCallAdapterFactory(): CallAdapter.Factory = RxJava2CallAdapterFactory.create()
-
     @JvmStatic @Provides @Singleton
-    fun provideBooksService(
-        @Internal baseUrl: String,
-        @Internal httpClient: OkHttpClient,
-        @Internal converterFactory: Converter.Factory,
-        @Internal callAdapterFactory: CallAdapter.Factory
-    ): BooksService = Retrofit.Builder()
-        .baseUrl(baseUrl)
-        .client(httpClient)
-        .addConverterFactory(converterFactory)
-        .addCallAdapterFactory(callAdapterFactory)
+    fun provideBooksService(): BooksService = Retrofit.Builder()
+        .baseUrl(RESTMockServer.getUrl())
+        .client(OkHttpClient.Builder().build())
+        .addConverterFactory(MoshiConverterFactory.create())
+        .addCallAdapterFactory(RxJava2CallAdapterFactory.create())
         .build()
         .create(BooksService::class.java)
 }

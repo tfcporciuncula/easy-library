@@ -6,8 +6,9 @@ import com.blinkist.easylibrary.data.BookDao
 import com.blinkist.easylibrary.model.BookMapper
 import com.blinkist.easylibrary.service.BooksService
 import dagger.Lazy
+import javax.inject.Inject
 
-class LibraryViewModelFactory(
+class LibraryViewModelFactory @Inject constructor(
     private val booksService: Lazy<BooksService>,
     private val bookMapper: Lazy<BookMapper>,
     private val bookDao: Lazy<BookDao>,

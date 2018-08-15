@@ -40,7 +40,7 @@ object ModelFactory {
     )
 
     fun newWeekSection(
-        initialDate: String = "init",
-        finalDate: String = "final"
+        initialDate: Date = Date(),
+        finalDate: Date = Date()
     ) = WeekSection(initialDate, finalDate)
 }
