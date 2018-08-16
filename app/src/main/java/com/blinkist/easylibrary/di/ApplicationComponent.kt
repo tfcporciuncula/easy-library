@@ -1,7 +1,7 @@
 package com.blinkist.easylibrary.di
 
 import android.content.Context
-import com.blinkist.easylibrary.library.LibraryViewModelFactory
+import com.blinkist.easylibrary.library.LibraryViewModel
 import dagger.BindsInstance
 import dagger.Component
 import javax.inject.Singleton
@@ -16,5 +16,5 @@ interface ApplicationComponent {
         fun build(): ApplicationComponent
     }
 
-    fun libraryViewModelFactory(): LibraryViewModelFactory
+    fun libraryViewModelFactory(): ViewModelFactory<LibraryViewModel>
 }
