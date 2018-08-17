@@ -2,6 +2,7 @@ package com.blinkist.easylibrary.library
 
 import com.blinkist.easylibrary.model.Book
 import com.blinkist.easylibrary.model.WeekSection
+import java.text.SimpleDateFormat
 import java.util.*
 import javax.inject.Inject
 
@@ -10,6 +11,8 @@ class BookGrouper @Inject constructor() {
     private val calendar = Calendar.getInstance().apply {
         firstDayOfWeek = Calendar.MONDAY
     }
+
+    private val dateFormat = SimpleDateFormat.getDateInstance(SimpleDateFormat.LONG)
 
     fun groupBooksByWeek(books: List<Book>, sortByDescending: Boolean): List<Librariable> {
         if (books.isEmpty()) return emptyList()
@@ -52,7 +55,7 @@ class BookGrouper @Inject constructor() {
         calendar.set(Calendar.DAY_OF_WEEK, Calendar.SUNDAY)
         val finalDate = calendar.time
 
-        return WeekSection(initialDate, finalDate)
+        return WeekSection(dateFormat.format(initialDate), dateFormat.format(finalDate))
     }
 
     private fun Book.belongsToSameWeekAs(date: Long): Boolean {
