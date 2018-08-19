@@ -3,11 +3,7 @@ package com.blinkist.easylibrary.library
 import android.arch.core.executor.testing.InstantTaskExecutorRule
 import android.arch.lifecycle.MutableLiveData
 import com.blinkist.easylibrary.data.BookDao
-import com.blinkist.easylibrary.model.Book
-import com.blinkist.easylibrary.model.BookMapper
-import com.blinkist.easylibrary.model.ModelFactory.newBook
-import com.blinkist.easylibrary.model.ModelFactory.newBookRaw
-import com.blinkist.easylibrary.model.ModelFactory.newWeekSection
+import com.blinkist.easylibrary.model.*
 import com.blinkist.easylibrary.service.BooksService
 import com.google.common.truth.Truth.assertThat
 import io.reactivex.Single

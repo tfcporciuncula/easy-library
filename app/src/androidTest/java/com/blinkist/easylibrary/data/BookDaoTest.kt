@@ -5,7 +5,7 @@ import android.arch.persistence.room.Room
 import android.support.test.InstrumentationRegistry
 import android.support.test.runner.AndroidJUnit4
 import com.blinkist.easylibrary.model.Book
-import com.blinkist.easylibrary.model.ModelFactory.newBook
+import com.blinkist.easylibrary.model.newBook
 import com.google.common.truth.Truth.assertThat
 import org.junit.After
 import org.junit.Before

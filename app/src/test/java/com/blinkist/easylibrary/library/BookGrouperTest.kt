@@ -1,8 +1,8 @@
 package com.blinkist.easylibrary.library
 
 import com.blinkist.easylibrary.model.Book
-import com.blinkist.easylibrary.model.ModelFactory.newBook
 import com.blinkist.easylibrary.model.WeekSection
+import com.blinkist.easylibrary.model.newBook
 import com.google.common.truth.Truth.assertThat
 import org.junit.Test
 
