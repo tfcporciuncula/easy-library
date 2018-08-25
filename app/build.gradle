@@ -31,6 +31,9 @@ android {
             java.srcDir sharedTestDir
         }
     }
+    dataBinding {
+        enabled = true
+    }
 }
 
 dependencies {
