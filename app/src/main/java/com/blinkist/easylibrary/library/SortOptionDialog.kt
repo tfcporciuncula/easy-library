@@ -4,9 +4,9 @@ import android.app.Dialog
 import android.arch.lifecycle.ViewModelProviders
 import android.os.Bundle
 import android.support.design.widget.BottomSheetDialogFragment
-import android.view.View
 import com.blinkist.easylibrary.R
-import kotlinx.android.synthetic.main.bottom_sheet_sort_options.view.*
+import com.blinkist.easylibrary.base.inflateBinding
+import com.blinkist.easylibrary.databinding.BottomSheetSortOptionsBinding
 
 class SortOptionDialog : BottomSheetDialogFragment() {
 
@@ -22,36 +22,16 @@ class SortOptionDialog : BottomSheetDialogFragment() {
 
     override fun onCreateDialog(savedInstanceState: Bundle?): Dialog {
         val dialog = super.onCreateDialog(savedInstanceState)
-        val view = View.inflate(context, R.layout.bottom_sheet_sort_options, null)
-        dialog.setContentView(view)
+        val binding = inflateBinding<BottomSheetSortOptionsBinding>(R.layout.bottom_sheet_sort_options)
 
-        setupUi(view)
+        binding.viewModel = viewModel
+        binding.ascendingTextView.setOnClickListener { onAscendingClick() }
+        binding.descendingTextView.setOnClickListener { onDescendingClick() }
 
-        return dialog
+        return dialog.apply { setContentView(binding.root) }
     }
 
-    private fun setupUi(view: View) {
-        if (viewModel.sortByDescending) {
-            view.descendingCheckIcon.visibility = View.VISIBLE
-        } else {
-            view.ascendingCheckIcon.visibility = View.VISIBLE
-        }
+    private fun onAscendingClick() = viewModel.rearrangeBooks(sortByDescending = false).also { dismiss() }
 
-        view.ascendingTextView.setOnClickListener { onAscendingClick() }
-        view.descendingTextView.setOnClickListener { onDescendingClick() }
-    }
-
-    private fun onAscendingClick() {
-        if (viewModel.sortByDescending) {
-            viewModel.rearrangeBooks(sortByDescending = false)
-        }
-        dismiss()
-    }
-
-    private fun onDescendingClick() {
-        if (!viewModel.sortByDescending) {
-            viewModel.rearrangeBooks(sortByDescending = true)
-        }
-        dismiss()
-    }
+    private fun onDescendingClick() = viewModel.rearrangeBooks(sortByDescending = true).also { dismiss() }
 }

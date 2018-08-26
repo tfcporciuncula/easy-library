@@ -3,6 +3,8 @@ package com.blinkist.easylibrary.base
 import android.databinding.BindingAdapter
 import android.databinding.DataBindingUtil
 import android.databinding.ViewDataBinding
+import android.support.annotation.LayoutRes
+import android.support.v4.app.Fragment
 import android.support.v7.recyclerview.extensions.ListAdapter
 import android.support.v7.util.DiffUtil
 import android.support.v7.widget.RecyclerView
@@ -39,4 +41,8 @@ fun loadImage(view: ImageView, imageUrl: String) {
         .load(imageUrl)
         .transition(withCrossFade())
         .into(view)
+}
+
+inline fun <reified T : ViewDataBinding> Fragment.inflateBinding(@LayoutRes layoutId: Int): T {
+    return DataBindingUtil.inflate(LayoutInflater.from(requireContext()), layoutId, null, false)
 }

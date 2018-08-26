@@ -24,8 +24,8 @@ class LibraryViewModel @Inject constructor(
         private set
 
     init {
-        librariables.addSource(books) {
-            it?.let { librariables.value = bookGrouper.groupBooksByWeek(it, sortByDescending) }
+        librariables.addSource(books) { result ->
+            result?.let { librariables.value = bookGrouper.groupBooksByWeek(it, sortByDescending) }
         }
     }
 
@@ -37,10 +37,14 @@ class LibraryViewModel @Inject constructor(
             bookDao.clear()
             bookDao.insert(it)
         }
-        .toCompletable()
+        .ignoreElement()
 
-    fun rearrangeBooks(sortByDescending: Boolean) = books.value?.let {
-        this.sortByDescending = sortByDescending
-        librariables.value = bookGrouper.groupBooksByWeek(it, sortByDescending)
+    fun rearrangeBooks(sortByDescending: Boolean) {
+        if (this.sortByDescending == sortByDescending) return
+
+        books.value?.let {
+            this.sortByDescending = sortByDescending
+            librariables.value = bookGrouper.groupBooksByWeek(it, sortByDescending)
+        }
     }
 }
