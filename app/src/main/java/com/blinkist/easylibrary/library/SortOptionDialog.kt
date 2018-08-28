@@ -24,11 +24,15 @@ class SortOptionDialog : BottomSheetDialogFragment() {
         val dialog = super.onCreateDialog(savedInstanceState)
         val binding = inflateBinding<BottomSheetSortOptionsBinding>(R.layout.bottom_sheet_sort_options)
 
+        setupUi(binding)
+
+        return dialog.apply { setContentView(binding.root) }
+    }
+
+    private fun setupUi(binding: BottomSheetSortOptionsBinding) {
         binding.viewModel = viewModel
         binding.ascendingTextView.setOnClickListener { onAscendingClick() }
         binding.descendingTextView.setOnClickListener { onDescendingClick() }
-
-        return dialog.apply { setContentView(binding.root) }
     }
 
     private fun onAscendingClick() = viewModel.rearrangeBooks(sortByDescending = false).also { dismiss() }

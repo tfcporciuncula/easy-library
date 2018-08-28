@@ -2,16 +2,17 @@ package com.blinkist.easylibrary.library
 
 import android.arch.lifecycle.Observer
 import android.arch.lifecycle.ViewModelProviders
+import android.databinding.DataBindingUtil
 import android.os.Bundle
 import android.support.design.widget.Snackbar
 import android.view.Menu
 import android.view.MenuItem
 import com.blinkist.easylibrary.R
 import com.blinkist.easylibrary.base.BaseActivity
+import com.blinkist.easylibrary.databinding.ActivityLibraryBinding
 import com.blinkist.easylibrary.di.injector
 import io.reactivex.android.schedulers.AndroidSchedulers
 import io.reactivex.schedulers.Schedulers
-import kotlinx.android.synthetic.main.activity_library.*
 import timber.log.Timber
 
 class LibraryActivity : BaseActivity() {
@@ -20,14 +21,15 @@ class LibraryActivity : BaseActivity() {
         ViewModelProviders.of(this, injector.libraryViewModelFactory()).get(LibraryViewModel::class.java)
     }
 
+    private val binding by lazy {
+        DataBindingUtil.setContentView<ActivityLibraryBinding>(this, R.layout.activity_library)
+    }
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        setContentView(R.layout.activity_library)
+        setupUi()
 
         if (savedInstanceState == null) updateBooks()
-
-        setupSwipeRefreshLayout()
-        setupList()
     }
 
     override fun onCreateOptionsMenu(menu: Menu): Boolean {
@@ -42,12 +44,9 @@ class LibraryActivity : BaseActivity() {
         return super.onOptionsItemSelected(item)
     }
 
-    private fun setupSwipeRefreshLayout() {
-        swipeRefreshLayout.setOnRefreshListener { updateBooks() }
-    }
-
-    private fun setupList() {
-        recyclerView.adapter = viewModel.adapter
+    private fun setupUi() {
+        binding.swipeRefreshLayout.setOnRefreshListener { updateBooks() }
+        binding.viewModel = viewModel
         viewModel.books().observe(this, Observer {
             it?.let(viewModel.adapter::submitList)
         })
@@ -71,14 +70,14 @@ class LibraryActivity : BaseActivity() {
     }
 
     private fun showProgressBar() {
-        swipeRefreshLayout.isRefreshing = true
+        binding.swipeRefreshLayout.isRefreshing = true
     }
 
     private fun hideProgressBar() {
-        swipeRefreshLayout.isRefreshing = false
+        binding.swipeRefreshLayout.isRefreshing = false
     }
 
     private fun showNetworkError() {
-        Snackbar.make(rootView, R.string.network_error_message, Snackbar.LENGTH_LONG).show()
+        Snackbar.make(binding.root, R.string.network_error_message, Snackbar.LENGTH_LONG).show()
     }
 }
