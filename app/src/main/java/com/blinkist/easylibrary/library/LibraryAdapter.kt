@@ -2,7 +2,7 @@ package com.blinkist.easylibrary.library
 
 import android.support.v7.util.DiffUtil
 import com.blinkist.easylibrary.R
-import com.blinkist.easylibrary.base.DataBindingAdapter
+import com.blinkist.easylibrary.databinding.DataBindingAdapter
 import com.blinkist.easylibrary.model.Book
 import javax.inject.Inject
 

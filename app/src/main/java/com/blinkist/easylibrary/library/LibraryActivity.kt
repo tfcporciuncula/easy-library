@@ -1,35 +1,28 @@
 package com.blinkist.easylibrary.library
 
-import android.arch.lifecycle.Observer
 import android.arch.lifecycle.ViewModelProviders
 import android.databinding.DataBindingUtil
 import android.os.Bundle
 import android.support.design.widget.Snackbar
+import android.support.v7.app.AppCompatActivity
 import android.view.Menu
 import android.view.MenuItem
 import com.blinkist.easylibrary.R
-import com.blinkist.easylibrary.base.BaseActivity
+import com.blinkist.easylibrary.livedata.observe
 import com.blinkist.easylibrary.databinding.ActivityLibraryBinding
 import com.blinkist.easylibrary.di.injector
-import io.reactivex.android.schedulers.AndroidSchedulers
-import io.reactivex.schedulers.Schedulers
-import timber.log.Timber
 
-class LibraryActivity : BaseActivity() {
+class LibraryActivity : AppCompatActivity() {
 
     private val viewModel by lazy {
         ViewModelProviders.of(this, injector.libraryViewModelFactory()).get(LibraryViewModel::class.java)
     }
 
-    private val binding by lazy {
-        DataBindingUtil.setContentView<ActivityLibraryBinding>(this, R.layout.activity_library)
-    }
-
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        setupUi()
+        val binding = DataBindingUtil.setContentView<ActivityLibraryBinding>(this, R.layout.activity_library)
 
-        if (savedInstanceState == null) updateBooks()
+        setupUi(binding, savedInstanceState)
     }
 
     override fun onCreateOptionsMenu(menu: Menu): Boolean {
@@ -44,40 +37,21 @@ class LibraryActivity : BaseActivity() {
         return super.onOptionsItemSelected(item)
     }
 
-    private fun setupUi() {
-        binding.swipeRefreshLayout.setOnRefreshListener { updateBooks() }
+    private fun setupUi(binding: ActivityLibraryBinding, savedInstanceState: Bundle?) {
+        if (savedInstanceState == null) viewModel.updateBooks()
+
+        binding.setLifecycleOwner(this)
         binding.viewModel = viewModel
-        viewModel.books().observe(this, Observer {
-            it?.let(viewModel.adapter::submitList)
-        })
-    }
 
-    private fun updateBooks() {
-        viewModel.updateBooks()
-            .subscribeOn(Schedulers.io())
-            .observeOn(AndroidSchedulers.mainThread())
-            .doOnSubscribe {
-                manageDisposable(it)
-                showProgressBar()
+        viewModel.state().observe(this) { state ->
+            state.error?.let {
+                it.doIfNotHandled { showNetworkError(binding) }
             }
-            .subscribe({
-                hideProgressBar()
-            }, {
-                Timber.e(it)
-                hideProgressBar()
-                showNetworkError()
-            })
+            viewModel.adapter.submitList(state.books)
+        }
     }
 
-    private fun showProgressBar() {
-        binding.swipeRefreshLayout.isRefreshing = true
-    }
-
-    private fun hideProgressBar() {
-        binding.swipeRefreshLayout.isRefreshing = false
-    }
-
-    private fun showNetworkError() {
+    private fun showNetworkError(binding: ActivityLibraryBinding) {
         Snackbar.make(binding.root, R.string.network_error_message, Snackbar.LENGTH_LONG).show()
     }
 }
