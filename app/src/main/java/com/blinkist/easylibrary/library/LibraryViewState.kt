@@ -16,7 +16,7 @@ fun SafeMediatorLiveData<LibraryViewState>.update(
     isLoading: Boolean = value.isLoading,
     error: LibraryError? = value.error
 ) {
-    value = value.copy(books, isLoading, error)
+    value = value.copy(books = books, isLoading = isLoading, error = error)
 }
 
 fun SafeMediatorLiveData<LibraryViewState>.postUpdate(
@@ -24,5 +24,5 @@ fun SafeMediatorLiveData<LibraryViewState>.postUpdate(
     isLoading: Boolean = value.isLoading,
     error: LibraryError? = value.error
 ) {
-    postValue(value.copy(books, isLoading, error))
+    postValue(value.copy(books = books, isLoading = isLoading, error = error))
 }

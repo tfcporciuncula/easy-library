@@ -2,8 +2,8 @@ package com.blinkist.easylibrary.library
 
 import android.arch.lifecycle.LiveData
 import android.arch.lifecycle.ViewModel
-import com.blinkist.easylibrary.livedata.SafeMediatorLiveData
 import com.blinkist.easylibrary.data.BookDao
+import com.blinkist.easylibrary.livedata.SafeMediatorLiveData
 import com.blinkist.easylibrary.model.BookMapper
 import com.blinkist.easylibrary.service.BooksService
 import io.reactivex.disposables.Disposables
@@ -61,7 +61,7 @@ class LibraryViewModel @Inject constructor(
 
         books.value?.let {
             this.sortByDescending = sortByDescending
-            state.value = state.value.copy(books = bookGrouper.groupBooksByWeek(it, sortByDescending))
+            state.update(books = bookGrouper.groupBooksByWeek(it, sortByDescending))
         }
     }
 }

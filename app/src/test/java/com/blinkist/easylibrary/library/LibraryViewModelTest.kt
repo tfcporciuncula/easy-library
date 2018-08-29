@@ -48,8 +48,8 @@ class LibraryViewModelTest {
         val librariables = listOf(newWeekSection()) + books
         given(bookGrouper.groupBooksByWeek(books, sortByDescending = true)).willReturn(librariables)
 
-        viewModel.books().observeForever {
-            assertThat(librariables).isEqualTo(it)
+        viewModel.state().observeForever {
+            assertThat(librariables).isEqualTo(it?.books)
         }
     }
 
@@ -59,7 +59,7 @@ class LibraryViewModelTest {
         val books = listOf(newBook(id = 1), newBook(id = 2))
         given(bookMapper.fromRaw(booksRaw)).willReturn(books)
 
-        viewModel.updateBooks().test().assertComplete()
+        viewModel.updateBooks()
         verify(booksService).books()
         verify(bookDao).clear()
         verify(bookDao).insert(books)
