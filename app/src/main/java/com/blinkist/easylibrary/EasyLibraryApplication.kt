@@ -36,7 +36,7 @@ class EasyLibraryApplication : Application(), DaggerComponentProvider {
         RESTMockServer.whenGET(pathContains("books"))
             .delay(TimeUnit.SECONDS, 2)
             .thenReturnFile(200, "books.json")
-            .delay(TimeUnit.SECONDS, 10)
+            .delay(TimeUnit.SECONDS, 2)
             .thenReturnFile(200, "onemorebook.json")
             .delay(TimeUnit.SECONDS, 2)
             .thenReturnFile(200, "books.json")
