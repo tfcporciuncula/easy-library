@@ -3,7 +3,7 @@ package com.blinkist.easylibrary.livedata
 import android.arch.lifecycle.MediatorLiveData
 
 /**
- * A safer [MediatorLiveData] that doesn't work with nullables.
+ * A safer [MediatorLiveData] that doesn't accept nor exposes nullables.
  */
 class SafeMediatorLiveData<T : Any>(initialValue: T) : MediatorLiveData<T>() {
 
