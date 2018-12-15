@@ -1,9 +1,9 @@
 package com.blinkist.easylibrary.data
 
-import android.arch.core.executor.testing.InstantTaskExecutorRule
-import android.arch.persistence.room.Room
-import android.support.test.InstrumentationRegistry
-import android.support.test.runner.AndroidJUnit4
+import androidx.arch.core.executor.testing.InstantTaskExecutorRule
+import androidx.room.Room
+import androidx.test.InstrumentationRegistry
+import androidx.test.runner.AndroidJUnit4
 import com.blinkist.easylibrary.model.Book
 import com.blinkist.easylibrary.model.newBook
 import com.google.common.truth.Truth.assertThat

@@ -1,6 +1,6 @@
 package com.blinkist.easylibrary.library
 
-import android.support.v7.util.DiffUtil
+import androidx.recyclerview.widget.DiffUtil
 import com.blinkist.easylibrary.R
 import com.blinkist.easylibrary.databinding.DataBindingAdapter
 import com.blinkist.easylibrary.model.Book

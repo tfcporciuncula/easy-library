@@ -1,9 +1,9 @@
 package com.blinkist.easylibrary.library
 
 import android.app.Dialog
-import android.arch.lifecycle.ViewModelProviders
+import androidx.lifecycle.ViewModelProviders
 import android.os.Bundle
-import android.support.design.widget.BottomSheetDialogFragment
+import com.google.android.material.bottomsheet.BottomSheetDialogFragment
 import com.blinkist.easylibrary.R
 import com.blinkist.easylibrary.databinding.inflateBinding
 import com.blinkist.easylibrary.databinding.BottomSheetSortOptionsBinding

@@ -1,6 +1,6 @@
 package com.blinkist.easylibrary.livedata
 
-import android.arch.lifecycle.LiveData
+import androidx.lifecycle.LiveData
 
 /**
  * Wrapper for events emitted by a [LiveData].

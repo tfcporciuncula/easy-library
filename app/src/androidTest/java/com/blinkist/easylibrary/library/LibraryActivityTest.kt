@@ -1,14 +1,14 @@
 package com.blinkist.easylibrary.library
 
-import android.support.design.widget.Snackbar
-import android.support.test.InstrumentationRegistry
-import android.support.test.espresso.Espresso.onView
-import android.support.test.espresso.assertion.ViewAssertions.doesNotExist
-import android.support.test.espresso.assertion.ViewAssertions.matches
-import android.support.test.espresso.matcher.ViewMatchers.isAssignableFrom
-import android.support.test.espresso.matcher.ViewMatchers.isDisplayed
-import android.support.test.runner.AndroidJUnit4
+import androidx.test.espresso.Espresso.onView
+import androidx.test.espresso.assertion.ViewAssertions.doesNotExist
+import androidx.test.espresso.assertion.ViewAssertions.matches
+import androidx.test.espresso.matcher.ViewMatchers.isAssignableFrom
+import androidx.test.espresso.matcher.ViewMatchers.isDisplayed
+import androidx.test.ext.junit.runners.AndroidJUnit4
+import androidx.test.platform.app.InstrumentationRegistry
 import com.blinkist.easylibrary.test.LazyActivityTestRule
+import com.google.android.material.snackbar.Snackbar
 import io.appflate.restmock.RESTMockServer
 import io.appflate.restmock.RESTMockServerStarter
 import io.appflate.restmock.android.AndroidAssetsFileParser
@@ -26,7 +26,10 @@ class LibraryActivityTest {
     @get:Rule var activityRule = LazyActivityTestRule(LibraryActivity::class.java)
 
     @Before fun setup() {
-        RESTMockServerStarter.startSync(AndroidAssetsFileParser(InstrumentationRegistry.getContext()), AndroidLogger())
+        RESTMockServerStarter.startSync(
+            AndroidAssetsFileParser(InstrumentationRegistry.getInstrumentation().context),
+            AndroidLogger()
+        )
     }
 
     @After fun tearDown() = RESTMockServer.shutdown()

@@ -1,6 +1,6 @@
 package com.blinkist.easylibrary.livedata
 
-import android.arch.lifecycle.MediatorLiveData
+import androidx.lifecycle.MediatorLiveData
 
 /**
  * A safer [MediatorLiveData] that doesn't accept nor exposes nullables.

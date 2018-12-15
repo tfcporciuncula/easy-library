@@ -1,11 +1,11 @@
 package com.blinkist.easylibrary.databinding
 
-import android.databinding.DataBindingUtil
-import android.databinding.ViewDataBinding
-import android.support.v7.recyclerview.extensions.ListAdapter
-import android.support.v7.util.DiffUtil
 import android.view.LayoutInflater
 import android.view.ViewGroup
+import androidx.databinding.DataBindingUtil
+import androidx.databinding.ViewDataBinding
+import androidx.recyclerview.widget.DiffUtil
+import androidx.recyclerview.widget.ListAdapter
 
 abstract class DataBindingAdapter<T>(diffCallback: DiffUtil.ItemCallback<T>) :
     ListAdapter<T, DataBindingViewHolder<T>>(diffCallback) {

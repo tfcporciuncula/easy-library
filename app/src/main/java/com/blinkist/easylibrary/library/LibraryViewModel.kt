@@ -1,7 +1,7 @@
 package com.blinkist.easylibrary.library
 
-import android.arch.lifecycle.LiveData
-import android.arch.lifecycle.ViewModel
+import androidx.lifecycle.LiveData
+import androidx.lifecycle.ViewModel
 import com.blinkist.easylibrary.data.BookDao
 import com.blinkist.easylibrary.livedata.SafeMediatorLiveData
 import com.blinkist.easylibrary.model.BookMapper

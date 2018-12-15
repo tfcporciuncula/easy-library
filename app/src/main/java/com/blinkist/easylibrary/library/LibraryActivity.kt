@@ -1,16 +1,16 @@
 package com.blinkist.easylibrary.library
 
-import android.arch.lifecycle.ViewModelProviders
-import android.databinding.DataBindingUtil
 import android.os.Bundle
-import android.support.design.widget.Snackbar
-import android.support.v7.app.AppCompatActivity
 import android.view.Menu
 import android.view.MenuItem
+import androidx.appcompat.app.AppCompatActivity
+import androidx.databinding.DataBindingUtil
+import androidx.lifecycle.ViewModelProviders
 import com.blinkist.easylibrary.R
-import com.blinkist.easylibrary.livedata.observe
 import com.blinkist.easylibrary.databinding.ActivityLibraryBinding
 import com.blinkist.easylibrary.di.injector
+import com.blinkist.easylibrary.livedata.observe
+import com.google.android.material.snackbar.Snackbar
 
 class LibraryActivity : AppCompatActivity() {
 

@@ -1,7 +1,7 @@
 package com.blinkist.easylibrary.library
 
-import android.arch.core.executor.testing.InstantTaskExecutorRule
-import android.arch.lifecycle.MutableLiveData
+import androidx.arch.core.executor.testing.InstantTaskExecutorRule
+import androidx.lifecycle.MutableLiveData
 import com.blinkist.easylibrary.data.BookDao
 import com.blinkist.easylibrary.model.*
 import com.blinkist.easylibrary.service.BooksService

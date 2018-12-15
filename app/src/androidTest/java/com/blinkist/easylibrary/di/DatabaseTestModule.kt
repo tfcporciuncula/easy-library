@@ -1,6 +1,6 @@
 package com.blinkist.easylibrary.di
 
-import android.arch.persistence.room.Room
+import androidx.room.Room
 import android.content.Context
 import com.blinkist.easylibrary.data.EasyLibraryDatabase
 import dagger.Module
