@@ -7,7 +7,7 @@ import dagger.Component
 import javax.inject.Singleton
 
 @Singleton
-@Component(modules = [RetrofitModule::class, DatabaseModule::class])
+@Component(modules = [RetrofitModule::class, DatabaseModule::class, SharedPreferencesModule::class])
 interface ApplicationComponent {
 
     @Component.Builder
@@ -16,5 +16,5 @@ interface ApplicationComponent {
         fun build(): ApplicationComponent
     }
 
-    fun libraryViewModelFactory(): ViewModelFactory<LibraryViewModel>
+    val libraryViewModel: LibraryViewModel
 }

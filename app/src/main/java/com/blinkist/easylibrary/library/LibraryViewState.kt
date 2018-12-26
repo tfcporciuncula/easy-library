@@ -4,15 +4,15 @@ import com.blinkist.easylibrary.livedata.EmptyLiveDataEvent
 import com.blinkist.easylibrary.livedata.SafeMediatorLiveData
 
 data class LibraryViewState(
-    val books: List<Librariable> = emptyList(),
+    val books: List<LibraryItem> = emptyList(),
     val isLoading: Boolean = false,
     val error: LibraryError? = null
 )
 
-class LibraryError : EmptyLiveDataEvent()
+object LibraryError : EmptyLiveDataEvent()
 
 fun SafeMediatorLiveData<LibraryViewState>.update(
-    books: List<Librariable> = value.books,
+    books: List<LibraryItem> = value.books,
     isLoading: Boolean = value.isLoading,
     error: LibraryError? = value.error
 ) {
@@ -20,7 +20,7 @@ fun SafeMediatorLiveData<LibraryViewState>.update(
 }
 
 fun SafeMediatorLiveData<LibraryViewState>.postUpdate(
-    books: List<Librariable> = value.books,
+    books: List<LibraryItem> = value.books,
     isLoading: Boolean = value.isLoading,
     error: LibraryError? = value.error
 ) {

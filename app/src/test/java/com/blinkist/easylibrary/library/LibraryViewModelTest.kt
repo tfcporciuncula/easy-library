@@ -30,12 +30,15 @@ class LibraryViewModelTest {
 
     @Mock private lateinit var libraryAdapter: LibraryAdapter
 
+    @Mock private lateinit var sortByDescendingPreference: SortByDescendingPreference
+
     private val viewModel
         get() = LibraryViewModel(
             booksService,
             bookMapper,
             bookDao,
             bookGrouper,
+            sortByDescendingPreference,
             libraryAdapter
         )
 

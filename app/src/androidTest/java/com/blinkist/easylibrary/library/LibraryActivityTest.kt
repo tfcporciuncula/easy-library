@@ -6,8 +6,8 @@ import androidx.test.espresso.assertion.ViewAssertions.matches
 import androidx.test.espresso.matcher.ViewMatchers.isAssignableFrom
 import androidx.test.espresso.matcher.ViewMatchers.isDisplayed
 import androidx.test.ext.junit.runners.AndroidJUnit4
-import androidx.test.platform.app.InstrumentationRegistry
 import com.blinkist.easylibrary.test.LazyActivityTestRule
+import com.blinkist.easylibrary.test.instrumentationContext
 import com.google.android.material.snackbar.Snackbar
 import io.appflate.restmock.RESTMockServer
 import io.appflate.restmock.RESTMockServerStarter
@@ -26,15 +26,12 @@ class LibraryActivityTest {
     @get:Rule var activityRule = LazyActivityTestRule(LibraryActivity::class.java)
 
     @Before fun setup() {
-        RESTMockServerStarter.startSync(
-            AndroidAssetsFileParser(InstrumentationRegistry.getInstrumentation().context),
-            AndroidLogger()
-        )
+        RESTMockServerStarter.startSync(AndroidAssetsFileParser(instrumentationContext), AndroidLogger())
     }
 
     @After fun tearDown() = RESTMockServer.shutdown()
 
-    @Test fun shouldShowSnackbarWhenLibraryServiceFails() {
+    @Test fun shouldShowSnackbarWhenServiceFails() {
         RESTMockServer.whenGET(pathContains("books")).thenReturnFile(500, "error")
         activityRule.launchActivity()
 

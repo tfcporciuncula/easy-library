@@ -2,10 +2,12 @@ package com.blinkist.easylibrary.library
 
 import com.blinkist.easylibrary.model.Book
 import com.blinkist.easylibrary.model.WeekSection
+import dagger.Reusable
 import java.text.SimpleDateFormat
 import java.util.*
 import javax.inject.Inject
 
+@Reusable
 class BookGrouper @Inject constructor() {
 
     private val calendar = Calendar.getInstance().apply {
@@ -14,11 +16,11 @@ class BookGrouper @Inject constructor() {
 
     private val dateFormat = SimpleDateFormat.getDateInstance(SimpleDateFormat.LONG)
 
-    fun groupBooksByWeek(books: List<Book>, sortByDescending: Boolean): List<Librariable> {
+    fun groupBooksByWeek(books: List<Book>, sortByDescending: Boolean): List<LibraryItem> {
         if (books.isEmpty()) return emptyList()
 
         val sortedBooks = sortBooks(sortByDescending, books)
-        val groupedBooks = mutableListOf<Librariable>()
+        val groupedBooks = mutableListOf<LibraryItem>()
 
         var currentDate = sortedBooks.first().publishedDateTime
         var currentWeekSection = buildWeekSection(currentDate)

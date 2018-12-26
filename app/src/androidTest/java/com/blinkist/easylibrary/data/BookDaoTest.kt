@@ -2,10 +2,10 @@ package com.blinkist.easylibrary.data
 
 import androidx.arch.core.executor.testing.InstantTaskExecutorRule
 import androidx.room.Room
-import androidx.test.InstrumentationRegistry
-import androidx.test.runner.AndroidJUnit4
+import androidx.test.ext.junit.runners.AndroidJUnit4
 import com.blinkist.easylibrary.model.Book
 import com.blinkist.easylibrary.model.newBook
+import com.blinkist.easylibrary.test.instrumentationContext
 import com.google.common.truth.Truth.assertThat
 import org.junit.After
 import org.junit.Before
@@ -22,7 +22,7 @@ class BookDaoTest {
     private lateinit var bookDao: BookDao
 
     @Before fun setup() {
-        database = Room.inMemoryDatabaseBuilder(InstrumentationRegistry.getContext(), EasyLibraryDatabase::class.java)
+        database = Room.inMemoryDatabaseBuilder(instrumentationContext, EasyLibraryDatabase::class.java)
             .allowMainThreadQueries()
             .build()
         bookDao = database.bookDao()
@@ -42,7 +42,7 @@ class BookDaoTest {
         val book = newBook(id = 20)
 
         bookDao.insert(listOf(book))
-        val updatedBook = book.copy(title = "updatedBook1")
+        val updatedBook = book.copy(title = "updated book")
         bookDao.insert(listOf(updatedBook))
 
         bookDao.books().observeForever { assertThat(it).isEqualTo(listOf(updatedBook)) }

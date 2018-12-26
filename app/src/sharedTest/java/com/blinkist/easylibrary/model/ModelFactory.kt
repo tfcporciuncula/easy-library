@@ -10,14 +10,7 @@ fun newBookRaw(
     authors: String = "authors",
     thumbnail: String = "thumbnail",
     url: String = "url"
-) = BookRaw(
-    id = id,
-    publishedDate = publishedDate,
-    title = title,
-    authors = authors,
-    thumbnail = thumbnail,
-    url = url
-)
+) = BookRaw(id, publishedDate, title, authors, thumbnail, url)
 
 fun newBook(
     id: Long = 2020,
@@ -27,15 +20,7 @@ fun newBook(
     authors: String = "authors",
     thumbnail: String = "thumbnail",
     url: String = "url"
-) = Book(
-    id = id,
-    publishedDate = publishedDate,
-    publishedDateTime = publishedDateTime,
-    title = title,
-    authors = authors,
-    thumbnail = thumbnail,
-    url = url
-)
+) = Book(id, publishedDate, publishedDateTime, title, authors, thumbnail, url)
 
 fun newWeekSection(
     initialDate: String = "init",
