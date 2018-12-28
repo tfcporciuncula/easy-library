@@ -12,61 +12,59 @@ import timber.log.Timber
 import javax.inject.Inject
 
 class LibraryViewModel @Inject constructor(
-    private val booksService: BooksService,
-    private val bookMapper: BookMapper,
-    private val bookDao: BookDao,
-    private val bookGrouper: BookGrouper,
-    private val sortByDescendingPreference: SortByDescendingPreference,
-    val adapter: LibraryAdapter
+  private val booksService: BooksService,
+  private val bookMapper: BookMapper,
+  private val bookDao: BookDao,
+  private val bookGrouper: BookGrouper,
+  private val sortByDescendingPreference: SortByDescendingPreference,
+  val adapter: LibraryAdapter
 ) : ViewModel() {
 
-    private val state = SafeMediatorLiveData(initialValue = LibraryViewState())
+  private val state = SafeMediatorLiveData(initialValue = LibraryViewState())
 
-    private val books = bookDao.books()
+  private val books = bookDao.books()
 
-    private var disposables = CompositeDisposable()
+  private var disposables = CompositeDisposable()
 
-    var sortByDescending = sortByDescendingPreference.get()
-        private set(value) {
-            sortByDescendingPreference.set(value)
-            field = value
-        }
-
-    init {
-        state.addSource(books) { result ->
-            result?.let {
-                state.update(books = bookGrouper.groupBooksByWeek(it, sortByDescending))
-            }
-        }
+  var sortByDescending = sortByDescendingPreference.get()
+    private set(value) {
+      sortByDescendingPreference.set(value)
+      field = value
     }
 
-    override fun onCleared() = disposables.dispose()
-
-    fun state(): LiveData<LibraryViewState> = state
-
-    fun updateBooks() = booksService.books()
-        .map(bookMapper::fromRaw)
-        .doOnSubscribe {
-            state.update(isLoading = true)
-        }
-        .doOnSuccess {
-            bookDao.clear()
-            bookDao.insert(it)
-        }
-        .subscribe({
-            state.postUpdate(isLoading = false)
-        }, {
-            Timber.e(it)
-            state.postUpdate(isLoading = false, error = LibraryError)
-        })
-        .addTo(disposables)
-
-    fun rearrangeBooks(sortByDescending: Boolean) {
-        if (this.sortByDescending == sortByDescending) return
-
-        books.value?.let {
-            this.sortByDescending = sortByDescending
-            state.update(books = bookGrouper.groupBooksByWeek(it, sortByDescending))
-        }
+  init {
+    state.addSource(books) { result ->
+      result?.let { state.update(books = bookGrouper.groupBooksByWeek(it, sortByDescending)) }
     }
+  }
+
+  override fun onCleared() = disposables.dispose()
+
+  fun state(): LiveData<LibraryViewState> = state
+
+  fun updateBooks() = booksService.books()
+    .map(bookMapper::fromRaw)
+    .doOnSubscribe {
+      state.update(isLoading = true)
+    }
+    .doOnSuccess {
+      bookDao.clear()
+      bookDao.insert(it)
+    }
+    .subscribe({
+      state.postUpdate(isLoading = false)
+    }, {
+      Timber.e(it)
+      state.postUpdate(isLoading = false, error = LibraryError)
+    })
+    .addTo(disposables)
+
+  fun rearrangeBooks(sortByDescending: Boolean) {
+    if (this.sortByDescending == sortByDescending) return
+
+    books.value?.let {
+      this.sortByDescending = sortByDescending
+      state.update(books = bookGrouper.groupBooksByWeek(it, sortByDescending))
+    }
+  }
 }

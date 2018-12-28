@@ -18,70 +18,70 @@ import org.mockito.junit.MockitoJUnitRunner
 @RunWith(MockitoJUnitRunner::class)
 class LibraryViewModelTest {
 
-    @get:Rule val instantTaskExecutorRule = InstantTaskExecutorRule()
+  @get:Rule val instantTaskExecutorRule = InstantTaskExecutorRule()
 
-    @Mock private lateinit var booksService: BooksService
+  @Mock private lateinit var booksService: BooksService
 
-    @Mock private lateinit var bookMapper: BookMapper
+  @Mock private lateinit var bookMapper: BookMapper
 
-    @Mock private lateinit var bookDao: BookDao
+  @Mock private lateinit var bookDao: BookDao
 
-    @Mock private lateinit var bookGrouper: BookGrouper
+  @Mock private lateinit var bookGrouper: BookGrouper
 
-    @Mock private lateinit var libraryAdapter: LibraryAdapter
+  @Mock private lateinit var libraryAdapter: LibraryAdapter
 
-    @Mock private lateinit var sortByDescendingPreference: SortByDescendingPreference
+  @Mock private lateinit var sortByDescendingPreference: SortByDescendingPreference
 
-    private val viewModel
-        get() = LibraryViewModel(
-            booksService,
-            bookMapper,
-            bookDao,
-            bookGrouper,
-            sortByDescendingPreference,
-            libraryAdapter
-        )
+  private val viewModel
+    get() = LibraryViewModel(
+      booksService,
+      bookMapper,
+      bookDao,
+      bookGrouper,
+      sortByDescendingPreference,
+      libraryAdapter
+    )
 
-    @Test fun testBooks() {
-        val books = listOf(newBook(id = 11), newBook(id = 22))
-        given(bookDao.books()).willReturn(
-            MutableLiveData<List<Book>>().apply { value = books }
-        )
+  @Test fun testBooks() {
+    val books = listOf(newBook(id = 11), newBook(id = 22))
+    given(bookDao.books()).willReturn(
+      MutableLiveData<List<Book>>().apply { value = books }
+    )
 
-        val librariables = listOf(newWeekSection()) + books
-        given(bookGrouper.groupBooksByWeek(books, sortByDescending = true)).willReturn(librariables)
+    val librariables = listOf(newWeekSection()) + books
+    given(bookGrouper.groupBooksByWeek(books, sortByDescending = true)).willReturn(librariables)
 
-        viewModel.state().observeForever {
-            assertThat(librariables).isEqualTo(it?.books)
-        }
+    viewModel.state().observeForever {
+      assertThat(librariables).isEqualTo(it?.books)
     }
+  }
 
-    @Test fun testUpdateBooks() {
-        val booksRaw = listOf(newBookRaw(id = 12), newBookRaw(id = 34))
-        given(booksService.books()).willReturn(Single.just(booksRaw))
-        val books = listOf(newBook(id = 1), newBook(id = 2))
-        given(bookMapper.fromRaw(booksRaw)).willReturn(books)
+  @Test fun testUpdateBooks() {
+    val booksRaw = listOf(newBookRaw(id = 12), newBookRaw(id = 34))
+    given(booksService.books()).willReturn(Single.just(booksRaw))
+    val books = listOf(newBook(id = 1), newBook(id = 2))
+    given(bookMapper.fromRaw(booksRaw)).willReturn(books)
 
-        viewModel.updateBooks()
-        verify(booksService).books()
-        verify(bookDao).clear()
-        verify(bookDao).insert(books)
+    viewModel.updateBooks()
+    verify(booksService).books()
+    verify(bookDao).clear()
+    verify(bookDao).insert(books)
+  }
+
+  @Test fun testRearrangeBooks() {
+    val books = listOf(newBook(id = 10), newBook(id = 20))
+    given(bookDao.books()).willReturn(
+      MutableLiveData<List<Book>>().apply { value = books }
+    )
+
+    with(viewModel) {
+      rearrangeBooks(sortByDescending = false)
+      assertThat(sortByDescending).isFalse()
+      verify(bookGrouper).groupBooksByWeek(books, sortByDescending = false)
+
+      rearrangeBooks(sortByDescending = true)
+      assertThat(sortByDescending).isTrue()
+      verify(bookGrouper).groupBooksByWeek(books, sortByDescending = true)
     }
-
-    @Test fun testRearrangeBooks() {
-        val books = listOf(newBook(id = 10), newBook(id = 20))
-        given(bookDao.books()).willReturn(
-            MutableLiveData<List<Book>>().apply { value = books }
-        )
-
-        with(viewModel) {
-            rearrangeBooks(sortByDescending = false)
-            assertThat(sortByDescending).isFalse()
-            verify(bookGrouper).groupBooksByWeek(books, sortByDescending = false)
-
-            rearrangeBooks(sortByDescending = true)
-            assertThat(sortByDescending).isTrue()
-            verify(bookGrouper).groupBooksByWeek(books, sortByDescending = true)
-        }
-    }
+  }
 }

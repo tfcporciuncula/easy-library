@@ -7,8 +7,8 @@ import com.bumptech.glide.load.resource.drawable.DrawableTransitionOptions
 
 @BindingAdapter("imageUrl")
 fun loadImage(view: ImageView, imageUrl: String) {
-    Glide.with(view)
-        .load(imageUrl)
-        .transition(DrawableTransitionOptions.withCrossFade())
-        .into(view)
+  Glide.with(view)
+    .load(imageUrl)
+    .transition(DrawableTransitionOptions.withCrossFade())
+    .into(view)
 }

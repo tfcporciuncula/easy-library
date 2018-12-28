@@ -1,5 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
-<layout xmlns:android="http://schemas.android.com/apk/res/android">
+<layout
+    xmlns:android="http://schemas.android.com/apk/res/android">
 
     <data>
         <variable name="item" type="com.blinkist.easylibrary.model.WeekSection" />
@@ -8,10 +9,10 @@
     <TextView
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginBottom="@dimen/half_standard_margin"
-        android:layout_marginEnd="@dimen/standard_margin"
         android:layout_marginStart="@dimen/standard_margin"
         android:layout_marginTop="@dimen/half_standard_margin"
+        android:layout_marginEnd="@dimen/standard_margin"
+        android:layout_marginBottom="@dimen/half_standard_margin"
         android:ellipsize="end"
         android:maxLines="1"
         android:text="@{String.format(@string/week_section_title, item.initialDate, item.finalDate)}"

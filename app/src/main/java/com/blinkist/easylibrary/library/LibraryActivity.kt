@@ -14,43 +14,43 @@ import com.google.android.material.snackbar.Snackbar
 
 class LibraryActivity : AppCompatActivity() {
 
-    override fun onCreate(savedInstanceState: Bundle?) {
-        super.onCreate(savedInstanceState)
-        setupUi(
-            binding = DataBindingUtil.setContentView(this, R.layout.activity_library),
-            isInitialLaunch = savedInstanceState == null
-        )
+  override fun onCreate(savedInstanceState: Bundle?) {
+    super.onCreate(savedInstanceState)
+    setupUi(
+      binding = DataBindingUtil.setContentView(this, R.layout.activity_library),
+      isInitialLaunch = savedInstanceState == null
+    )
+  }
+
+  private fun setupUi(binding: ActivityLibraryBinding, isInitialLaunch: Boolean) {
+    val viewModel = getViewModel { injector.libraryViewModel }
+    binding.viewModel = viewModel
+    binding.setLifecycleOwner(this)
+
+    if (isInitialLaunch) viewModel.updateBooks()
+
+    viewModel.state().observe(this) { state ->
+      state.error?.let {
+        it.doIfNotHandled { showNetworkError(binding) }
+      }
+      viewModel.adapter.submitList(state.books)
     }
+  }
 
-    private fun setupUi(binding: ActivityLibraryBinding, isInitialLaunch: Boolean) {
-        val viewModel = getViewModel { injector.libraryViewModel }
-        binding.viewModel = viewModel
-        binding.setLifecycleOwner(this)
+  private fun showNetworkError(binding: ActivityLibraryBinding) {
+    Snackbar.make(binding.root, R.string.network_error_message, Snackbar.LENGTH_LONG).show()
+  }
 
-        if (isInitialLaunch) viewModel.updateBooks()
+  override fun onCreateOptionsMenu(menu: Menu): Boolean {
+    menuInflater.inflate(R.menu.menu, menu)
+    return true
+  }
 
-        viewModel.state().observe(this) { state ->
-            state.error?.let {
-                it.doIfNotHandled { showNetworkError(binding) }
-            }
-            viewModel.adapter.submitList(state.books)
-        }
+  override fun onOptionsItemSelected(item: MenuItem) = when (item.itemId) {
+    R.id.menu_sort -> {
+      SortOptionDialog.newInstance().show(supportFragmentManager, SortOptionDialog.TAG)
+      true
     }
-
-    private fun showNetworkError(binding: ActivityLibraryBinding) {
-        Snackbar.make(binding.root, R.string.network_error_message, Snackbar.LENGTH_LONG).show()
-    }
-
-    override fun onCreateOptionsMenu(menu: Menu): Boolean {
-        menuInflater.inflate(R.menu.menu, menu)
-        return true
-    }
-
-    override fun onOptionsItemSelected(item: MenuItem) = when (item.itemId) {
-        R.id.menu_sort -> {
-            SortOptionDialog.newInstance().show(supportFragmentManager, SortOptionDialog.TAG)
-            true
-        }
-        else -> super.onOptionsItemSelected(item)
-    }
+    else -> super.onOptionsItemSelected(item)
+  }
 }

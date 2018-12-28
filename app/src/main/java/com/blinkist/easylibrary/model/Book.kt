@@ -13,58 +13,56 @@ import javax.inject.Inject
 @Entity(tableName = "books")
 data class Book(
 
-    @PrimaryKey
-    val id: Long,
+  @PrimaryKey
+  val id: Long,
 
-    @ColumnInfo(name = "published_date")
-    val publishedDate: String,
+  @ColumnInfo(name = "published_date")
+  val publishedDate: String,
 
-    @ColumnInfo(name = "published_date_time")
-    val publishedDateTime: Long,
+  @ColumnInfo(name = "published_date_time")
+  val publishedDateTime: Long,
 
-    @ColumnInfo(name = "title")
-    val title: String,
+  @ColumnInfo(name = "title")
+  val title: String,
 
-    @ColumnInfo(name = "authors")
-    val authors: String,
+  @ColumnInfo(name = "authors")
+  val authors: String,
 
-    @ColumnInfo(name = "thumbnail")
-    val thumbnail: String,
+  @ColumnInfo(name = "thumbnail")
+  val thumbnail: String,
 
-    @ColumnInfo(name = "url")
-    val url: String
+  @ColumnInfo(name = "url")
+  val url: String
 ) : LibraryItem.Book()
 
 @JsonClass(generateAdapter = true)
 data class BookRaw(
-    val id: Long?,
-    val publishedDate: String?,
-    val title: String?,
-    val authors: String?,
-    val thumbnail: String?,
-    val url: String?
+  val id: Long?,
+  val publishedDate: String?,
+  val title: String?,
+  val authors: String?,
+  val thumbnail: String?,
+  val url: String?
 )
 
 @Reusable
 class BookMapper @Inject constructor(@ServiceModule.BookServiceDateFormat private val dateFormat: DateFormat) {
 
-    fun fromRaw(booksRaw: List<BookRaw>): List<Book> = booksRaw.map(::fromRaw)
+  fun fromRaw(booksRaw: List<BookRaw>): List<Book> = booksRaw.map(::fromRaw)
 
-    private fun fromRaw(bookRaw: BookRaw): Book {
-        return Book(
-            id = bookRaw.id ?: throw IllegalArgumentException("Book has null id"),
+  private fun fromRaw(bookRaw: BookRaw) = Book(
+    id = bookRaw.id ?: throw IllegalArgumentException("Book has null id"),
 
-            publishedDate = bookRaw.publishedDate ?: throw IllegalArgumentException("Book has null publishedDate"),
+    publishedDate = bookRaw.publishedDate ?: throw IllegalArgumentException("Book has null publishedDate"),
 
-            publishedDateTime = dateFormat.parse(bookRaw.publishedDate).time,
+    publishedDateTime = dateFormat.parse(bookRaw.publishedDate).time,
 
-            title = bookRaw.title ?: throw IllegalArgumentException("Book has null title"),
+    title = bookRaw.title ?: throw IllegalArgumentException("Book has null title"),
 
-            authors = bookRaw.authors ?: throw IllegalArgumentException("Book has null authors"),
+    authors = bookRaw.authors ?: throw IllegalArgumentException("Book has null authors"),
 
-            thumbnail = bookRaw.thumbnail ?: throw IllegalArgumentException("Book has null thumbnail"),
+    thumbnail = bookRaw.thumbnail ?: throw IllegalArgumentException("Book has null thumbnail"),
 
-            url = bookRaw.url ?: throw IllegalArgumentException("Book has null url")
-        )
-    }
+    url = bookRaw.url ?: throw IllegalArgumentException("Book has null url")
+  )
 }

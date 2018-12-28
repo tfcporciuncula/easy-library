@@ -15,50 +15,50 @@ import org.mockito.junit.MockitoJUnitRunner
 @RunWith(MockitoJUnitRunner::class)
 class SortByDescendingPreferenceTest {
 
-    private val key = "key"
+  private val key = "key"
 
-    @Mock private lateinit var context: Context
-    @Mock private lateinit var sharedPreferences: SharedPreferences
-    @Mock private lateinit var editor: SharedPreferences.Editor
+  @Mock private lateinit var context: Context
+  @Mock private lateinit var sharedPreferences: SharedPreferences
+  @Mock private lateinit var editor: SharedPreferences.Editor
 
-    @InjectMocks private lateinit var sortByDescendingPreference: SortByDescendingPreference
+  @InjectMocks private lateinit var sortByDescendingPreference: SortByDescendingPreference
 
-    @Before fun setup() {
-        given(context.getString(R.string.sort_order_key)).willReturn(key)
-        given(sharedPreferences.edit()).willReturn(editor)
-        given(editor.putBoolean(anyString(), anyBoolean())).willReturn(editor)
-    }
+  @Before fun setup() {
+    given(context.getString(R.string.sort_order_key)).willReturn(key)
+    given(sharedPreferences.edit()).willReturn(editor)
+    given(editor.putBoolean(anyString(), anyBoolean())).willReturn(editor)
+  }
 
-    @Test fun testKeyAndDefaultValue() {
-        given(sharedPreferences.getBoolean(key, true)).willReturn(true)
-        sortByDescendingPreference.get()
-    }
+  @Test fun testKeyAndDefaultValue() {
+    given(sharedPreferences.getBoolean(key, true)).willReturn(true)
+    sortByDescendingPreference.get()
+  }
 
-    @Test fun testGettingTrue() {
-        given(sharedPreferences.getBoolean(anyString(), anyBoolean())).willReturn(true)
+  @Test fun testGettingTrue() {
+    given(sharedPreferences.getBoolean(anyString(), anyBoolean())).willReturn(true)
 
-        assertThat(sortByDescendingPreference.get()).isTrue()
-    }
+    assertThat(sortByDescendingPreference.get()).isTrue()
+  }
 
-    @Test fun testGettingFalse() {
-        given(sharedPreferences.getBoolean(anyString(), anyBoolean())).willReturn(false)
+  @Test fun testGettingFalse() {
+    given(sharedPreferences.getBoolean(anyString(), anyBoolean())).willReturn(false)
 
-        assertThat(sortByDescendingPreference.get()).isFalse()
-    }
+    assertThat(sortByDescendingPreference.get()).isFalse()
+  }
 
-    @Test fun testSettingTrue() {
-        sortByDescendingPreference.set(true)
+  @Test fun testSettingTrue() {
+    sortByDescendingPreference.set(true)
 
-        then(sharedPreferences).should().edit()
-        then(editor).should().putBoolean(key, true)
-        then(editor).should().apply()
-    }
+    then(sharedPreferences).should().edit()
+    then(editor).should().putBoolean(key, true)
+    then(editor).should().apply()
+  }
 
-    @Test fun testSettingFalse() {
-        sortByDescendingPreference.set(false)
+  @Test fun testSettingFalse() {
+    sortByDescendingPreference.set(false)
 
-        then(sharedPreferences).should().edit()
-        then(editor).should().putBoolean(key, false)
-        then(editor).should().apply()
-    }
+    then(sharedPreferences).should().edit()
+    then(editor).should().putBoolean(key, false)
+    then(editor).should().apply()
+  }
 }

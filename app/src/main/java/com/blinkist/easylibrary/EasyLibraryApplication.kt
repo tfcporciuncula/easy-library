@@ -14,35 +14,35 @@ import java.util.concurrent.TimeUnit
 
 class EasyLibraryApplication : Application(), DaggerComponentProvider {
 
-    override val component: ApplicationComponent by lazy {
-        DaggerApplicationComponent.builder()
-            .applicationContext(applicationContext)
-            .build()
-    }
+  override val component: ApplicationComponent by lazy {
+    DaggerApplicationComponent.builder()
+      .applicationContext(applicationContext)
+      .build()
+  }
 
-    override fun onCreate() {
-        super.onCreate()
+  override fun onCreate() {
+    super.onCreate()
 
-        setupTimber()
-        setupMockApi()
-    }
+    setupTimber()
+    setupMockApi()
+  }
 
-    private fun setupTimber() {
-        if (BuildConfig.DEBUG) Timber.plant(Timber.DebugTree())
-    }
+  private fun setupTimber() {
+    if (BuildConfig.DEBUG) Timber.plant(Timber.DebugTree())
+  }
 
-    private fun setupMockApi() {
-        RESTMockServerStarter.startSync(AndroidAssetsFileParser(this), AndroidLogger());
-        RESTMockServer.whenGET(pathContains("books"))
-            .delay(TimeUnit.SECONDS, 2)
-            .thenReturnFile(200, "books.json")
-            .delay(TimeUnit.SECONDS, 2)
-            .thenReturnFile(200, "onemorebook.json")
-            .delay(TimeUnit.SECONDS, 2)
-            .thenReturnFile(200, "books.json")
-            .delay(TimeUnit.SECONDS, 2)
-            .thenReturnString("this will trigger an error")
-            .delay(TimeUnit.SECONDS, 2)
-            .thenReturnFile(200, "books.json")
-    }
+  private fun setupMockApi() {
+    RESTMockServerStarter.startSync(AndroidAssetsFileParser(this), AndroidLogger());
+    RESTMockServer.whenGET(pathContains("books"))
+      .delay(TimeUnit.SECONDS, 2)
+      .thenReturnFile(200, "books.json")
+      .delay(TimeUnit.SECONDS, 2)
+      .thenReturnFile(200, "onemorebook.json")
+      .delay(TimeUnit.SECONDS, 2)
+      .thenReturnFile(200, "books.json")
+      .delay(TimeUnit.SECONDS, 2)
+      .thenReturnString("this will trigger an error")
+      .delay(TimeUnit.SECONDS, 2)
+      .thenReturnFile(200, "books.json")
+  }
 }

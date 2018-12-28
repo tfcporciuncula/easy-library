@@ -1,5 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
-<layout xmlns:android="http://schemas.android.com/apk/res/android"
+<layout
+    xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools">
 
@@ -23,8 +24,8 @@
                 android:layout_height="match_parent"
                 android:adapter="@{viewModel.adapter}"
                 android:clipToPadding="false"
-                android:paddingBottom="@dimen/half_standard_margin"
                 android:paddingTop="@dimen/half_standard_margin"
+                android:paddingBottom="@dimen/half_standard_margin"
                 app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
                 tools:itemCount="4"
                 tools:listitem="@layout/item_book" />

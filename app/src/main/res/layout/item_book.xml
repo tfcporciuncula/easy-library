@@ -1,5 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
-<layout xmlns:android="http://schemas.android.com/apk/res/android"
+<layout
+    xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools">
 
@@ -10,10 +11,10 @@
     <androidx.cardview.widget.CardView
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_marginBottom="@dimen/half_standard_margin"
-        android:layout_marginEnd="@dimen/standard_margin"
         android:layout_marginStart="@dimen/standard_margin"
         android:layout_marginTop="@dimen/half_standard_margin"
+        android:layout_marginEnd="@dimen/standard_margin"
+        android:layout_marginBottom="@dimen/half_standard_margin"
         android:clickable="true"
         android:focusable="true"
         android:foreground="?attr/selectableItemBackground"
@@ -36,9 +37,9 @@
                 android:id="@+id/titleTextView"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_marginEnd="@dimen/half_standard_margin"
                 android:layout_marginStart="@dimen/standard_margin"
                 android:layout_marginTop="@dimen/standard_margin"
+                android:layout_marginEnd="@dimen/half_standard_margin"
                 android:layout_toEndOf="@id/coverImageView"
                 android:ellipsize="end"
                 android:maxLines="2"
@@ -52,8 +53,8 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_below="@id/titleTextView"
-                android:layout_marginEnd="@dimen/half_standard_margin"
                 android:layout_marginStart="@dimen/standard_margin"
+                android:layout_marginEnd="@dimen/half_standard_margin"
                 android:layout_toEndOf="@id/coverImageView"
                 android:ellipsize="end"
                 android:maxLines="2"
@@ -66,9 +67,9 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_below="@id/authorsTextView"
-                android:layout_marginBottom="@dimen/standard_margin"
                 android:layout_marginStart="@dimen/standard_margin"
                 android:layout_marginTop="@dimen/half_standard_margin"
+                android:layout_marginBottom="@dimen/standard_margin"
                 android:layout_toEndOf="@id/coverImageView"
                 android:text="@{item.publishedDate}"
                 android:textSize="@dimen/book_published_date_text_size"

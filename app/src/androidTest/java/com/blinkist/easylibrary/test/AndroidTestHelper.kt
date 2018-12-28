@@ -6,7 +6,7 @@ import androidx.test.rule.ActivityTestRule
 
 class LazyActivityTestRule<T : Activity>(activityClass: Class<T>) : ActivityTestRule<T>(activityClass, false, false) {
 
-    fun launchActivity(): T = launchActivity(null)
+  fun launchActivity(): T = launchActivity(null)
 }
 
 val instrumentationContext get() = InstrumentationRegistry.getInstrumentation().context

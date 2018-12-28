@@ -16,44 +16,44 @@ import org.junit.runner.RunWith
 @RunWith(AndroidJUnit4::class)
 class BookDaoTest {
 
-    @get:Rule val instantTaskExecutorRule = InstantTaskExecutorRule()
+  @get:Rule val instantTaskExecutorRule = InstantTaskExecutorRule()
 
-    private lateinit var database: EasyLibraryDatabase
-    private lateinit var bookDao: BookDao
+  private lateinit var database: EasyLibraryDatabase
+  private lateinit var bookDao: BookDao
 
-    @Before fun setup() {
-        database = Room.inMemoryDatabaseBuilder(instrumentationContext, EasyLibraryDatabase::class.java)
-            .allowMainThreadQueries()
-            .build()
-        bookDao = database.bookDao()
-    }
+  @Before fun setup() {
+    database = Room.inMemoryDatabaseBuilder(instrumentationContext, EasyLibraryDatabase::class.java)
+      .allowMainThreadQueries()
+      .build()
+    bookDao = database.bookDao()
+  }
 
-    @After fun tearDown() = database.close()
+  @After fun tearDown() = database.close()
 
-    @Test fun testInsert() {
-        val books = listOf(newBook(id = 1), newBook(id = 2))
+  @Test fun testInsert() {
+    val books = listOf(newBook(id = 1), newBook(id = 2))
 
-        bookDao.insert(books)
+    bookDao.insert(books)
 
-        bookDao.books().observeForever { assertThat(it).isEqualTo(books) }
-    }
+    bookDao.books().observeForever { assertThat(it).isEqualTo(books) }
+  }
 
-    @Test fun testReplace() {
-        val book = newBook(id = 20)
+  @Test fun testReplace() {
+    val book = newBook(id = 20)
 
-        bookDao.insert(listOf(book))
-        val updatedBook = book.copy(title = "updated book")
-        bookDao.insert(listOf(updatedBook))
+    bookDao.insert(listOf(book))
+    val updatedBook = book.copy(title = "updated book")
+    bookDao.insert(listOf(updatedBook))
 
-        bookDao.books().observeForever { assertThat(it).isEqualTo(listOf(updatedBook)) }
-    }
+    bookDao.books().observeForever { assertThat(it).isEqualTo(listOf(updatedBook)) }
+  }
 
-    @Test fun testClear() {
-        val books = listOf(newBook(id = 123), newBook(id = 456))
+  @Test fun testClear() {
+    val books = listOf(newBook(id = 123), newBook(id = 456))
 
-        bookDao.insert(books)
-        bookDao.clear()
+    bookDao.insert(books)
+    bookDao.clear()
 
-        bookDao.books().observeForever { assertThat(it).isEqualTo(emptyList<Book>()) }
-    }
+    bookDao.books().observeForever { assertThat(it).isEqualTo(emptyList<Book>()) }
+  }
 }

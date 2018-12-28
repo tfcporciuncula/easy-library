@@ -9,14 +9,14 @@ import androidx.lifecycle.LiveData
  */
 open class LiveDataEvent<out T>(private val content: T) {
 
-    private var hasNotBeenHandled = true
+  private var hasNotBeenHandled = true
 
-    fun doIfNotHandled(block: (T) -> Unit) {
-        if (hasNotBeenHandled) {
-            hasNotBeenHandled = false
-            block(content)
-        }
+  fun doIfNotHandled(block: (T) -> Unit) {
+    if (hasNotBeenHandled) {
+      hasNotBeenHandled = false
+      block(content)
     }
+  }
 }
 
 abstract class EmptyLiveDataEvent : LiveDataEvent<Unit>(Unit)

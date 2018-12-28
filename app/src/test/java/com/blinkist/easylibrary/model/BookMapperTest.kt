@@ -13,31 +13,31 @@ import java.util.*
 @RunWith(MockitoJUnitRunner::class)
 class BookMapperTest {
 
-    @Mock private lateinit var dateFormat: DateFormat
+  @Mock private lateinit var dateFormat: DateFormat
 
-    @InjectMocks private lateinit var bookMapper: BookMapper
+  @InjectMocks private lateinit var bookMapper: BookMapper
 
-    @Test fun testMapping() {
-        val bookRaw = BookRaw(
-            id = 10,
-            publishedDate = "10/10/2010",
-            title = "title",
-            authors = "authors",
-            thumbnail = "thumbnail",
-            url = "url"
-        )
+  @Test fun testMapping() {
+    val bookRaw = BookRaw(
+      id = 10,
+      publishedDate = "10/10/2010",
+      title = "title",
+      authors = "authors",
+      thumbnail = "thumbnail",
+      url = "url"
+    )
 
-        val time = 101010L
-        given(dateFormat.parse(bookRaw.publishedDate)).willReturn(Date(time))
+    val time = 101010L
+    given(dateFormat.parse(bookRaw.publishedDate)).willReturn(Date(time))
 
-        val book = bookMapper.fromRaw(listOf(bookRaw)).first()
+    val book = bookMapper.fromRaw(listOf(bookRaw)).first()
 
-        assertThat(book.id).isEqualTo(bookRaw.id)
-        assertThat(book.publishedDate).isEqualTo(bookRaw.publishedDate)
-        assertThat(book.publishedDateTime).isEqualTo(time)
-        assertThat(book.title).isEqualTo(bookRaw.title)
-        assertThat(book.authors).isEqualTo(bookRaw.authors)
-        assertThat(book.thumbnail).isEqualTo(bookRaw.thumbnail)
-        assertThat(book.url).isEqualTo(bookRaw.url)
-    }
+    assertThat(book.id).isEqualTo(bookRaw.id)
+    assertThat(book.publishedDate).isEqualTo(bookRaw.publishedDate)
+    assertThat(book.publishedDateTime).isEqualTo(time)
+    assertThat(book.title).isEqualTo(bookRaw.title)
+    assertThat(book.authors).isEqualTo(bookRaw.authors)
+    assertThat(book.thumbnail).isEqualTo(bookRaw.thumbnail)
+    assertThat(book.url).isEqualTo(bookRaw.url)
+  }
 }

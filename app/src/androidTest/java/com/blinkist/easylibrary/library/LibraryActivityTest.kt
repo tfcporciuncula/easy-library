@@ -23,25 +23,25 @@ import org.junit.runner.RunWith
 @RunWith(AndroidJUnit4::class)
 class LibraryActivityTest {
 
-    @get:Rule var activityRule = LazyActivityTestRule(LibraryActivity::class.java)
+  @get:Rule var activityRule = LazyActivityTestRule(LibraryActivity::class.java)
 
-    @Before fun setup() {
-        RESTMockServerStarter.startSync(AndroidAssetsFileParser(instrumentationContext), AndroidLogger())
-    }
+  @Before fun setup() {
+    RESTMockServerStarter.startSync(AndroidAssetsFileParser(instrumentationContext), AndroidLogger())
+  }
 
-    @After fun tearDown() = RESTMockServer.shutdown()
+  @After fun tearDown() = RESTMockServer.shutdown()
 
-    @Test fun shouldShowSnackbarWhenServiceFails() {
-        RESTMockServer.whenGET(pathContains("books")).thenReturnFile(500, "error")
-        activityRule.launchActivity()
+  @Test fun shouldShowSnackbarWhenServiceFails() {
+    RESTMockServer.whenGET(pathContains("books")).thenReturnFile(500, "error")
+    activityRule.launchActivity()
 
-        onView(isAssignableFrom(Snackbar.SnackbarLayout::class.java)).check(matches(isDisplayed()))
-    }
+    onView(isAssignableFrom(Snackbar.SnackbarLayout::class.java)).check(matches(isDisplayed()))
+  }
 
-    @Test fun shouldNotShowSnackbarWhenThereIsNoError() {
-        RESTMockServer.whenGET(pathContains("books")).thenReturnFile(200, "books.json")
-        activityRule.launchActivity()
+  @Test fun shouldNotShowSnackbarWhenThereIsNoError() {
+    RESTMockServer.whenGET(pathContains("books")).thenReturnFile(200, "books.json")
+    activityRule.launchActivity()
 
-        onView(isAssignableFrom(Snackbar.SnackbarLayout::class.java)).check(doesNotExist())
-    }
+    onView(isAssignableFrom(Snackbar.SnackbarLayout::class.java)).check(doesNotExist())
+  }
 }

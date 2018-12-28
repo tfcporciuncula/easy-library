@@ -7,9 +7,9 @@ import androidx.lifecycle.MediatorLiveData
  */
 class SafeMediatorLiveData<T : Any>(initialValue: T) : MediatorLiveData<T>() {
 
-    init {
-        value = initialValue
-    }
+  init {
+    value = initialValue
+  }
 
-    override fun getValue(): T = super.getValue()!!
+  override fun getValue(): T = super.getValue()!!
 }

@@ -6,6 +6,6 @@ import retrofit2.http.GET
 
 interface BooksService {
 
-    @GET("books")
-    fun books(): Single<List<BookRaw>>
+  @GET("books")
+  fun books(): Single<List<BookRaw>>
 }

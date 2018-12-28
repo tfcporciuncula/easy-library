@@ -1,5 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
-<layout xmlns:android="http://schemas.android.com/apk/res/android"
+<layout
+    xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools">
 
     <data>
@@ -39,11 +40,11 @@
         <ImageView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_alignParentEnd="true"
             android:layout_alignTop="@id/ascendingTextView"
-            android:layout_marginEnd="@dimen/standard_margin"
+            android:layout_alignParentEnd="true"
             android:layout_marginStart="@dimen/standard_margin"
             android:layout_marginTop="@dimen/standard_margin"
+            android:layout_marginEnd="@dimen/standard_margin"
             android:adjustViewBounds="true"
             android:contentDescription="@string/sort_option_check_icon_content_description"
             android:scaleType="fitCenter"
@@ -55,11 +56,11 @@
         <ImageView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_alignParentEnd="true"
             android:layout_alignTop="@id/descendingTextView"
-            android:layout_marginEnd="@dimen/standard_margin"
+            android:layout_alignParentEnd="true"
             android:layout_marginStart="@dimen/standard_margin"
             android:layout_marginTop="@dimen/standard_margin"
+            android:layout_marginEnd="@dimen/standard_margin"
             android:adjustViewBounds="true"
             android:contentDescription="@string/sort_option_check_icon_content_description"
             android:scaleType="fitCenter"
