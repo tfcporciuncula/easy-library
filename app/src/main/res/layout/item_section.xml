@@ -15,7 +15,7 @@
         android:layout_marginBottom="@dimen/half_standard_margin"
         android:ellipsize="end"
         android:maxLines="1"
-        android:text="@{String.format(@string/week_section_title, item.initialDate, item.finalDate)}"
+        android:text="@{@string/week_section_title(item.initialDate, item.finalDate)}"
         android:textSize="@dimen/section_title_text_size"
         android:textStyle="bold" />
 

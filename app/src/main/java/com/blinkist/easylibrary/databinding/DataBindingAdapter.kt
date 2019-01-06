@@ -17,4 +17,6 @@ abstract class DataBindingAdapter<T>(diffCallback: DiffUtil.ItemCallback<T>) :
   }
 
   override fun onBindViewHolder(holder: DataBindingViewHolder<T>, position: Int) = holder.bind(getItem(position))
+
+  abstract override fun getItemViewType(position: Int): Int
 }
