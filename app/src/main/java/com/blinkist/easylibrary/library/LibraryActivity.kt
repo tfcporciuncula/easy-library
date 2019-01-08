@@ -3,6 +3,7 @@ package com.blinkist.easylibrary.library
 import android.os.Bundle
 import android.view.Menu
 import android.view.MenuItem
+import androidx.annotation.StringRes
 import androidx.appcompat.app.AppCompatActivity
 import androidx.databinding.DataBindingUtil
 import com.blinkist.easylibrary.R
@@ -14,32 +15,43 @@ import com.google.android.material.snackbar.Snackbar
 
 class LibraryActivity : AppCompatActivity() {
 
-  override fun onCreate(savedInstanceState: Bundle?) {
-    super.onCreate(savedInstanceState)
-    setupUi(
-      binding = DataBindingUtil.setContentView(this, R.layout.activity_library),
-      isInitialLaunch = savedInstanceState == null
-    )
+  private val binding by lazy {
+    DataBindingUtil.setContentView<ActivityLibraryBinding>(this, R.layout.activity_library)
   }
 
-  private fun setupUi(binding: ActivityLibraryBinding, isInitialLaunch: Boolean) {
-    val viewModel = getViewModel { injector.libraryViewModel }
-    binding.viewModel = viewModel
+  private val viewModel by lazy {
+    getViewModel { injector.libraryViewModel }
+  }
+
+  override fun onCreate(savedInstanceState: Bundle?) {
+    super.onCreate(savedInstanceState)
+    setupUi(isInitialLaunch = savedInstanceState == null)
+  }
+
+  private fun setupUi(isInitialLaunch: Boolean) {
     binding.setLifecycleOwner(this)
+    binding.viewModel = viewModel
+    viewModel.state().observe(this, ::handleState)
 
     if (isInitialLaunch) viewModel.updateBooks()
+  }
 
-    viewModel.state().observe(this) { state ->
-      state.error?.let {
-        it.doIfNotHandled { showNetworkError(binding) }
-      }
-      viewModel.adapter.submitList(state.books)
+  private fun handleState(state: LibraryViewState) {
+    viewModel.adapter.submitList(state.books)
+
+    state.error?.let { error ->
+      error.doIfNotHandled { show(error) }
     }
   }
 
-  private fun showNetworkError(binding: ActivityLibraryBinding) {
-    Snackbar.make(binding.root, R.string.network_error_message, Snackbar.LENGTH_LONG).show()
+  private fun show(error: LibraryError) {
+    when (error) {
+      is LibraryError.Network -> showSnackbar(R.string.network_error_message)
+      is LibraryError.Unexpected -> showSnackbar(R.string.unexpected_error_message)
+    }
   }
+
+  private fun showSnackbar(@StringRes resId: Int) = Snackbar.make(binding.root, resId, Snackbar.LENGTH_LONG).show()
 
   override fun onCreateOptionsMenu(menu: Menu): Boolean {
     menuInflater.inflate(R.menu.menu, menu)

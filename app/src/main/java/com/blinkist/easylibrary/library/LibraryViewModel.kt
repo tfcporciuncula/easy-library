@@ -10,6 +10,7 @@ import io.reactivex.android.schedulers.AndroidSchedulers
 import io.reactivex.disposables.CompositeDisposable
 import io.reactivex.rxkotlin.addTo
 import timber.log.Timber
+import java.io.IOException
 import javax.inject.Inject
 
 class LibraryViewModel @Inject constructor(
@@ -57,7 +58,10 @@ class LibraryViewModel @Inject constructor(
       state.update(isLoading = false)
     }, {
       Timber.e(it)
-      state.update(isLoading = false, error = LibraryError())
+      state.update(
+        isLoading = false,
+        error = if (it is IOException) LibraryError.Network() else LibraryError.Unexpected()
+      )
     })
     .addTo(disposables)
 
