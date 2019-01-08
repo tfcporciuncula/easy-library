@@ -4,6 +4,7 @@ import android.app.Application
 import com.blinkist.easylibrary.di.ApplicationComponent
 import com.blinkist.easylibrary.di.DaggerApplicationComponent
 import com.blinkist.easylibrary.di.DaggerComponentProvider
+import com.blinkist.easylibrary.ktx.unsynchronizedLazy
 import io.appflate.restmock.RESTMockServer
 import io.appflate.restmock.RESTMockServerStarter
 import io.appflate.restmock.android.AndroidAssetsFileParser
@@ -14,7 +15,7 @@ import java.util.concurrent.TimeUnit
 
 class EasyLibraryApplication : Application(), DaggerComponentProvider {
 
-  override val component: ApplicationComponent by lazy {
+  override val component: ApplicationComponent by unsynchronizedLazy {
     DaggerApplicationComponent.builder()
       .applicationContext(applicationContext)
       .build()

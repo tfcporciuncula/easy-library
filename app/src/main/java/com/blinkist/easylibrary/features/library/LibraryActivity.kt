@@ -10,16 +10,17 @@ import com.blinkist.easylibrary.R
 import com.blinkist.easylibrary.databinding.ActivityLibraryBinding
 import com.blinkist.easylibrary.di.getViewModel
 import com.blinkist.easylibrary.di.injector
+import com.blinkist.easylibrary.ktx.unsynchronizedLazy
 import com.blinkist.easylibrary.livedata.observe
 import com.google.android.material.snackbar.Snackbar
 
 class LibraryActivity : AppCompatActivity() {
 
-  private val binding by lazy {
+  private val binding by unsynchronizedLazy {
     DataBindingUtil.setContentView<ActivityLibraryBinding>(this, R.layout.activity_library)
   }
 
-  private val viewModel by lazy {
+  private val viewModel by unsynchronizedLazy {
     getViewModel { injector.libraryViewModel }
   }
 

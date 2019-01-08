@@ -6,6 +6,7 @@ import androidx.lifecycle.ViewModelProviders
 import com.blinkist.easylibrary.R
 import com.blinkist.easylibrary.databinding.BottomSheetSortOptionsBinding
 import com.blinkist.easylibrary.databinding.inflateBinding
+import com.blinkist.easylibrary.ktx.unsynchronizedLazy
 import com.google.android.material.bottomsheet.BottomSheetDialogFragment
 
 class SortOptionDialog : BottomSheetDialogFragment() {
@@ -16,7 +17,7 @@ class SortOptionDialog : BottomSheetDialogFragment() {
     fun newInstance() = SortOptionDialog()
   }
 
-  private val viewModel by lazy {
+  private val viewModel by unsynchronizedLazy {
     ViewModelProviders.of(requireActivity()).get(LibraryViewModel::class.java)
   }
 
