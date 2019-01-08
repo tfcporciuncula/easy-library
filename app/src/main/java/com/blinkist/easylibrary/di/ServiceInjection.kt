@@ -30,8 +30,8 @@ object RetrofitModule {
 object ServiceModule {
 
   @Qualifier
-  annotation class BookServiceDateFormat
+  annotation class ServiceDateFormat
 
-  @JvmStatic @Provides @BookServiceDateFormat
+  @JvmStatic @Provides @ServiceDateFormat
   fun provideBooksServiceDateFormat(): DateFormat = SimpleDateFormat("yyyy-MM-dd", Locale.getDefault())
 }

@@ -9,7 +9,7 @@ data class LibraryViewState(
   val error: LibraryError? = null
 )
 
-object LibraryError : EmptyLiveDataEvent()
+class LibraryError : EmptyLiveDataEvent()
 
 fun SafeMediatorLiveData<LibraryViewState>.update(
   books: List<LibraryItem> = value.books,
@@ -17,12 +17,4 @@ fun SafeMediatorLiveData<LibraryViewState>.update(
   error: LibraryError? = value.error
 ) {
   value = value.copy(books = books, isLoading = isLoading, error = error)
-}
-
-fun SafeMediatorLiveData<LibraryViewState>.postUpdate(
-  books: List<LibraryItem> = value.books,
-  isLoading: Boolean = value.isLoading,
-  error: LibraryError? = value.error
-) {
-  postValue(value.copy(books = books, isLoading = isLoading, error = error))
 }

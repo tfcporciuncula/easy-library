@@ -6,6 +6,7 @@ import com.blinkist.easylibrary.data.BookDao
 import com.blinkist.easylibrary.livedata.SafeMediatorLiveData
 import com.blinkist.easylibrary.model.BookMapper
 import com.blinkist.easylibrary.service.BooksService
+import io.reactivex.android.schedulers.AndroidSchedulers
 import io.reactivex.disposables.CompositeDisposable
 import io.reactivex.rxkotlin.addTo
 import timber.log.Timber
@@ -26,10 +27,10 @@ class LibraryViewModel @Inject constructor(
 
   private var disposables = CompositeDisposable()
 
-  var sortByDescending = sortByDescendingPreference.get()
+  var sortByDescending
+    get() = sortByDescendingPreference.get()
     private set(value) {
       sortByDescendingPreference.set(value)
-      field = value
     }
 
   init {
@@ -51,11 +52,12 @@ class LibraryViewModel @Inject constructor(
       bookDao.clear()
       bookDao.insert(it)
     }
+    .observeOn(AndroidSchedulers.mainThread())
     .subscribe({
-      state.postUpdate(isLoading = false)
+      state.update(isLoading = false)
     }, {
       Timber.e(it)
-      state.postUpdate(isLoading = false, error = LibraryError)
+      state.update(isLoading = false, error = LibraryError())
     })
     .addTo(disposables)
 

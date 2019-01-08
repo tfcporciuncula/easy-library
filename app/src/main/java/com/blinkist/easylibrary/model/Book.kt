@@ -12,7 +12,6 @@ import javax.inject.Inject
 
 @Entity(tableName = "books")
 data class Book(
-
   @PrimaryKey
   val id: Long,
 
@@ -46,7 +45,7 @@ data class BookRaw(
 )
 
 @Reusable
-class BookMapper @Inject constructor(@ServiceModule.BookServiceDateFormat private val dateFormat: DateFormat) {
+class BookMapper @Inject constructor(@ServiceModule.ServiceDateFormat private val dateFormat: DateFormat) {
 
   fun fromRaw(booksRaw: List<BookRaw>): List<Book> = booksRaw.map(::fromRaw)
 
