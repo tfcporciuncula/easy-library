@@ -1,4 +1,4 @@
-package com.blinkist.easylibrary.library
+package com.blinkist.easylibrary.features.library
 
 sealed class LibraryItem {
 

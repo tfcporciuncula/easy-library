@@ -1,4 +1,4 @@
-package com.blinkist.easylibrary.library
+package com.blinkist.easylibrary.features.library
 
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.ViewModel

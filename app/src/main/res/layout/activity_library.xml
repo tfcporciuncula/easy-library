@@ -5,7 +5,7 @@
     xmlns:tools="http://schemas.android.com/tools">
 
     <data>
-        <variable name="viewModel" type="com.blinkist.easylibrary.library.LibraryViewModel" />
+        <variable name="viewModel" type="com.blinkist.easylibrary.features.library.LibraryViewModel" />
     </data>
 
     <androidx.coordinatorlayout.widget.CoordinatorLayout

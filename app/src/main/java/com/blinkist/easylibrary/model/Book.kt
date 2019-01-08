@@ -4,7 +4,7 @@ import androidx.room.ColumnInfo
 import androidx.room.Entity
 import androidx.room.PrimaryKey
 import com.blinkist.easylibrary.di.ServiceModule
-import com.blinkist.easylibrary.library.LibraryItem
+import com.blinkist.easylibrary.features.library.LibraryItem
 import com.squareup.moshi.JsonClass
 import dagger.Reusable
 import java.text.DateFormat

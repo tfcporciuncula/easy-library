@@ -1,6 +1,6 @@
 package com.blinkist.easylibrary.model
 
-import com.blinkist.easylibrary.library.LibraryItem
+import com.blinkist.easylibrary.features.library.LibraryItem
 
 data class WeekSection(
   val initialDate: String,
