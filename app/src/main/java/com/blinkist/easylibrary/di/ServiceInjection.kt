@@ -1,12 +1,11 @@
 package com.blinkist.easylibrary.di
 
 import com.blinkist.easylibrary.service.BooksService
+import com.jakewharton.retrofit2.adapter.kotlin.coroutines.CoroutineCallAdapterFactory
 import dagger.Module
 import dagger.Provides
 import io.appflate.restmock.RESTMockServer
-import io.reactivex.schedulers.Schedulers
 import retrofit2.Retrofit
-import retrofit2.adapter.rxjava2.RxJava2CallAdapterFactory
 import retrofit2.converter.moshi.MoshiConverterFactory
 import java.text.DateFormat
 import java.text.SimpleDateFormat
@@ -21,7 +20,7 @@ object RetrofitModule {
   fun provideBooksService(): BooksService = Retrofit.Builder()
     .baseUrl(RESTMockServer.getUrl())
     .addConverterFactory(MoshiConverterFactory.create())
-    .addCallAdapterFactory(RxJava2CallAdapterFactory.createWithScheduler(Schedulers.io()))
+    .addCallAdapterFactory(CoroutineCallAdapterFactory())
     .build()
     .create(BooksService::class.java)
 }

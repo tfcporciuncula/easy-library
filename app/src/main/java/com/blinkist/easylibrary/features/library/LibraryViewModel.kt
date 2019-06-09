@@ -2,13 +2,13 @@ package com.blinkist.easylibrary.features.library
 
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.ViewModel
+import androidx.lifecycle.viewModelScope
 import com.blinkist.easylibrary.data.BookDao
 import com.blinkist.easylibrary.livedata.SafeMediatorLiveData
 import com.blinkist.easylibrary.model.BookMapper
 import com.blinkist.easylibrary.service.BooksService
-import io.reactivex.android.schedulers.AndroidSchedulers
-import io.reactivex.disposables.CompositeDisposable
-import io.reactivex.rxkotlin.addTo
+import kotlinx.coroutines.CancellationException
+import kotlinx.coroutines.launch
 import timber.log.Timber
 import java.io.IOException
 import javax.inject.Inject
@@ -26,8 +26,6 @@ class LibraryViewModel @Inject constructor(
 
   private val books = bookDao.books()
 
-  private var disposables = CompositeDisposable()
-
   var sortByDescending
     get() = sortByDescendingPreference.get()
     private set(value) {
@@ -35,35 +33,29 @@ class LibraryViewModel @Inject constructor(
     }
 
   init {
-    state.addSource(books) { result ->
-      result?.let { state.update(books = bookGrouper.groupBooksByWeek(it, sortByDescending)) }
+    state.addSource(books) {
+      state.update(books = bookGrouper.groupBooksByWeek(it, sortByDescending))
     }
   }
 
-  override fun onCleared() = disposables.dispose()
-
   fun state(): LiveData<LibraryViewState> = state
 
-  fun updateBooks() = booksService.books()
-    .map(bookMapper::fromRaw)
-    .doOnSubscribe {
+  fun updateBooks() = viewModelScope.launch {
+    runCatching {
       state.update(isLoading = true)
-    }
-    .doOnSuccess {
-      bookDao.clear()
-      bookDao.insert(it)
-    }
-    .observeOn(AndroidSchedulers.mainThread())
-    .subscribe({
+      bookDao.clearAndInsert(bookMapper.fromRaw(booksService.books()))
       state.update(isLoading = false)
-    }, {
-      Timber.e(it)
-      state.update(
-        isLoading = false,
-        error = if (it is IOException) LibraryError.Network() else LibraryError.Unexpected()
-      )
-    })
-    .addTo(disposables)
+    }.onFailure(::handleFailure)
+  }
+
+  private fun handleFailure(throwable: Throwable) {
+    if (throwable is CancellationException) return
+    if (throwable !is IOException) Timber.e(throwable)
+    state.update(
+      isLoading = false,
+      error = if (throwable is IOException) LibraryError.Network() else LibraryError.Unexpected()
+    )
+  }
 
   fun rearrangeBooks(sortByDescending: Boolean) {
     if (this.sortByDescending == sortByDescending) return

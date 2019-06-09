@@ -1,10 +1,7 @@
 package com.blinkist.easylibrary.data
 
 import androidx.lifecycle.LiveData
-import androidx.room.Dao
-import androidx.room.Insert
-import androidx.room.OnConflictStrategy
-import androidx.room.Query
+import androidx.room.*
 import com.blinkist.easylibrary.model.Book
 
 @Dao
@@ -14,8 +11,13 @@ interface BookDao {
   fun books(): LiveData<List<Book>>
 
   @Insert(onConflict = OnConflictStrategy.REPLACE)
-  fun insert(books: List<Book>)
+  suspend fun insert(books: List<Book>)
 
   @Query("DELETE FROM books")
-  fun clear()
+  suspend fun clear()
+
+  @Transaction suspend fun clearAndInsert(books: List<Book>) {
+    clear()
+    insert(books)
+  }
 }
