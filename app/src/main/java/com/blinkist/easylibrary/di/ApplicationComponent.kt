@@ -10,10 +10,9 @@ import javax.inject.Singleton
 @Component(modules = [RetrofitModule::class, DatabaseModule::class, SharedPreferencesModule::class])
 interface ApplicationComponent {
 
-  @Component.Builder
-  interface Builder {
-    @BindsInstance fun applicationContext(applicationContext: Context): Builder
-    fun build(): ApplicationComponent
+  @Component.Factory
+  interface Factory {
+    fun create(@BindsInstance applicationContext: Context): ApplicationComponent
   }
 
   val libraryViewModel: LibraryViewModel

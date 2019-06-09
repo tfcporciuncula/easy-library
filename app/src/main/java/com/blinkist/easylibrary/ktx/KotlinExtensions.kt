@@ -1,3 +1,3 @@
 package com.blinkist.easylibrary.ktx
 
-fun <T> unsynchronizedLazy(initializer: () -> T) = lazy(LazyThreadSafetyMode.NONE, initializer)
+fun <T> unsyncLazy(initializer: () -> T) = lazy(LazyThreadSafetyMode.NONE, initializer)

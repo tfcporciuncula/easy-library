@@ -6,23 +6,21 @@ import android.view.MenuItem
 import androidx.annotation.StringRes
 import androidx.appcompat.app.AppCompatActivity
 import androidx.databinding.DataBindingUtil
+import androidx.lifecycle.Observer
 import com.blinkist.easylibrary.R
 import com.blinkist.easylibrary.databinding.ActivityLibraryBinding
-import com.blinkist.easylibrary.di.getViewModel
 import com.blinkist.easylibrary.di.injector
-import com.blinkist.easylibrary.ktx.unsynchronizedLazy
-import com.blinkist.easylibrary.livedata.observe
+import com.blinkist.easylibrary.di.viewModels
+import com.blinkist.easylibrary.ktx.unsyncLazy
 import com.google.android.material.snackbar.Snackbar
 
 class LibraryActivity : AppCompatActivity() {
 
-  private val binding by unsynchronizedLazy {
+  private val binding by unsyncLazy {
     DataBindingUtil.setContentView<ActivityLibraryBinding>(this, R.layout.activity_library)
   }
 
-  private val viewModel by unsynchronizedLazy {
-    getViewModel { injector.libraryViewModel }
-  }
+  private val viewModel by viewModels { injector.libraryViewModel }
 
   override fun onCreate(savedInstanceState: Bundle?) {
     super.onCreate(savedInstanceState)
@@ -30,9 +28,9 @@ class LibraryActivity : AppCompatActivity() {
   }
 
   private fun setupUi(isInitialLaunch: Boolean) {
-    binding.setLifecycleOwner(this)
+    binding.lifecycleOwner = this
     binding.viewModel = viewModel
-    viewModel.state().observe(this, ::handleState)
+    viewModel.state().observe(this, Observer { handleState(it) })
 
     if (isInitialLaunch) viewModel.updateBooks()
   }
@@ -52,7 +50,8 @@ class LibraryActivity : AppCompatActivity() {
     }
   }
 
-  private fun showSnackbar(@StringRes resId: Int) = Snackbar.make(binding.root, resId, Snackbar.LENGTH_LONG).show()
+  private fun showSnackbar(@StringRes resId: Int) =
+    Snackbar.make(binding.root, resId, Snackbar.LENGTH_LONG).show()
 
   override fun onCreateOptionsMenu(menu: Menu): Boolean {
     menuInflater.inflate(R.menu.menu, menu)
