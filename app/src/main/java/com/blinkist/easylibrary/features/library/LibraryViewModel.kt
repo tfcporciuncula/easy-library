@@ -4,11 +4,10 @@ import androidx.lifecycle.LiveData
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.blinkist.easylibrary.data.BookDao
+import com.blinkist.easylibrary.ktx.launchCatching
 import com.blinkist.easylibrary.livedata.SafeMediatorLiveData
 import com.blinkist.easylibrary.model.BookMapper
 import com.blinkist.easylibrary.service.BooksService
-import kotlinx.coroutines.CancellationException
-import kotlinx.coroutines.launch
 import timber.log.Timber
 import java.io.IOException
 import javax.inject.Inject
@@ -42,16 +41,16 @@ class LibraryViewModel @Inject constructor(
 
   fun state(): LiveData<LibraryViewState> = state
 
-  fun updateBooks() = viewModelScope.launch {
-    runCatching {
+  fun updateBooks() = viewModelScope.launchCatching(
+    block = {
       state.update(isLoading = true)
       bookDao.clearAndInsert(bookMapper.fromRaw(booksService.books()))
       state.update(isLoading = false)
-    }.onFailure(::handleFailure)
-  }
+    },
+    onFailure = ::handleFailure
+  )
 
   private fun handleFailure(throwable: Throwable) {
-    if (throwable is CancellationException) return
     if (throwable !is IOException) Timber.e(throwable)
     state.update(
       isLoading = false,
