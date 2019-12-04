@@ -2,11 +2,10 @@ package com.blinkist.easylibrary.features.library
 
 import android.app.Dialog
 import android.os.Bundle
-import androidx.lifecycle.ViewModelProviders
+import androidx.fragment.app.activityViewModels
 import com.blinkist.easylibrary.R
 import com.blinkist.easylibrary.databinding.BottomSheetSortOptionsBinding
 import com.blinkist.easylibrary.databinding.inflateBinding
-import com.blinkist.easylibrary.ktx.unsyncLazy
 import com.google.android.material.bottomsheet.BottomSheetDialogFragment
 
 class SortOptionDialog : BottomSheetDialogFragment() {
@@ -17,9 +16,7 @@ class SortOptionDialog : BottomSheetDialogFragment() {
     fun newInstance() = SortOptionDialog()
   }
 
-  private val viewModel by unsyncLazy {
-    ViewModelProviders.of(requireActivity()).get(LibraryViewModel::class.java)
-  }
+  private val viewModel by activityViewModels<LibraryViewModel>()
 
   override fun onCreateDialog(savedInstanceState: Bundle?): Dialog {
     val dialog = super.onCreateDialog(savedInstanceState)
