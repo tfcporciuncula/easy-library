@@ -33,15 +33,15 @@ class EasyLibraryApplication : Application(), DaggerComponentProvider {
   private fun setupMockApi() {
     RESTMockServerStarter.startSync(AndroidAssetsFileParser(this), AndroidLogger());
     RESTMockServer.whenGET(pathContains("books"))
-      .delay(TimeUnit.SECONDS, 2)
+      .delayBody(TimeUnit.SECONDS, 2)
       .thenReturnFile(200, "books.json")
-      .delay(TimeUnit.SECONDS, 2)
+      .delayBody(TimeUnit.SECONDS, 2)
       .thenReturnFile(200, "onemorebook.json")
-      .delay(TimeUnit.SECONDS, 2)
+      .delayBody(TimeUnit.SECONDS, 2)
       .thenReturnFile(200, "books.json")
-      .delay(TimeUnit.SECONDS, 2)
+      .delayBody(TimeUnit.SECONDS, 2)
       .thenReturnString("this will trigger an error")
-      .delay(TimeUnit.SECONDS, 2)
+      .delayBody(TimeUnit.SECONDS, 2)
       .thenReturnFile(200, "books.json")
   }
 }
