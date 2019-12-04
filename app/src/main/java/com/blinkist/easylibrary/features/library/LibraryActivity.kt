@@ -10,7 +10,7 @@ import androidx.lifecycle.Observer
 import com.blinkist.easylibrary.R
 import com.blinkist.easylibrary.databinding.ActivityLibraryBinding
 import com.blinkist.easylibrary.di.injector
-import com.blinkist.easylibrary.di.viewModels
+import com.blinkist.easylibrary.di.lazyViewModel
 import com.blinkist.easylibrary.ktx.unsyncLazy
 import com.google.android.material.snackbar.Snackbar
 
@@ -20,7 +20,7 @@ class LibraryActivity : AppCompatActivity() {
     DataBindingUtil.setContentView<ActivityLibraryBinding>(this, R.layout.activity_library)
   }
 
-  private val viewModel by viewModels { injector.libraryViewModel }
+  private val viewModel by lazyViewModel { injector.libraryViewModel }
 
   override fun onCreate(savedInstanceState: Bundle?) {
     super.onCreate(savedInstanceState)

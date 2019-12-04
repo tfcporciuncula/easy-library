@@ -6,7 +6,7 @@ import androidx.lifecycle.ViewModel
 import androidx.lifecycle.ViewModelProvider
 
 @Suppress("UNCHECKED_CAST")
-inline fun <reified T : ViewModel> FragmentActivity.viewModels(
+inline fun <reified T : ViewModel> FragmentActivity.lazyViewModel(
   crossinline provider: () -> T
 ) = viewModels<T> {
   object : ViewModelProvider.Factory {
