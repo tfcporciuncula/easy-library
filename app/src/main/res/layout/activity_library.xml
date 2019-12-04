@@ -6,7 +6,7 @@
   >
 
   <data>
-    <variable name="viewModel" type="com.blinkist.easylibrary.features.library.LibraryViewModel"/>
+    <variable name="viewModel" type="com.blinkist.easylibrary.features.library.LibraryViewModel" />
   </data>
 
   <androidx.coordinatorlayout.widget.CoordinatorLayout
