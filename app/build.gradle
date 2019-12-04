@@ -11,6 +11,12 @@ android {
     versionCode 1
     versionName '1.0'
     testInstrumentationRunner 'com.blinkist.easylibrary.TestInstrumentationRunner'
+
+    javaCompileOptions {
+      annotationProcessorOptions {
+        arguments = ["room.schemaLocation": "$projectDir/schemas".toString()]
+      }
+    }
   }
   buildTypes {
     release {
@@ -41,8 +47,6 @@ android {
 }
 
 dependencies {
-  implementation fileTree(dir: 'libs', include: ['*.jar'])
-
   // Kotlin and Android dependencies
   implementation "org.jetbrains.kotlin:kotlin-stdlib-jdk7:$kotlin_version"
   implementation 'androidx.appcompat:appcompat:1.2.0-alpha01'
