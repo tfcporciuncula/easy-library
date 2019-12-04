@@ -10,7 +10,7 @@ import javax.inject.Singleton
 @Module(includes = [DaoModule::class])
 object DatabaseModule {
 
-  @JvmStatic @Provides @Singleton
+  @Provides @Singleton
   fun provideDatabase(context: Context): EasyLibraryDatabase {
     return Room.databaseBuilder(context, EasyLibraryDatabase::class.java, "easy-library").build()
   }
@@ -19,6 +19,5 @@ object DatabaseModule {
 @Module
 object DaoModule {
 
-  @JvmStatic @Provides
-  fun provideBookDao(database: EasyLibraryDatabase) = database.bookDao()
+  @Provides fun provideBookDao(database: EasyLibraryDatabase) = database.bookDao()
 }

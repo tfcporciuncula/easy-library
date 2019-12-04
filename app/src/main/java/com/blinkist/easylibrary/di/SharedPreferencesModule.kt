@@ -9,8 +9,7 @@ import dagger.Provides
 @Module
 object SharedPreferencesModule {
 
-  @JvmStatic @Provides
-  fun provideLibrarySharedPreferences(
+  @Provides fun provideLibrarySharedPreferences(
     context: Context
   ): SharedPreferences = context.getSharedPreferences(
     context.getString(R.string.library_preferences_name),

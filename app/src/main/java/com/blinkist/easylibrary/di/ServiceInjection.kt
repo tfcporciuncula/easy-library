@@ -15,7 +15,7 @@ import javax.inject.Singleton
 @Module(includes = [ServiceModule::class])
 object RetrofitModule {
 
-  @JvmStatic @Provides @Singleton
+  @Provides @Singleton
   fun provideBooksService(): BooksService = Retrofit.Builder()
     .baseUrl(RESTMockServer.getUrl())
     .addConverterFactory(MoshiConverterFactory.create())
@@ -29,6 +29,6 @@ object ServiceModule {
   @Qualifier
   annotation class ServiceDateFormat
 
-  @JvmStatic @Provides @ServiceDateFormat
+  @Provides @ServiceDateFormat
   fun provideBooksServiceDateFormat(): DateFormat = SimpleDateFormat("yyyy-MM-dd", Locale.getDefault())
 }
