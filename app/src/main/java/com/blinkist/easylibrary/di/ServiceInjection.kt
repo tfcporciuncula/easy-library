@@ -1,7 +1,6 @@
 package com.blinkist.easylibrary.di
 
 import com.blinkist.easylibrary.service.BooksService
-import com.jakewharton.retrofit2.adapter.kotlin.coroutines.CoroutineCallAdapterFactory
 import dagger.Module
 import dagger.Provides
 import io.appflate.restmock.RESTMockServer
@@ -20,7 +19,6 @@ object RetrofitModule {
   fun provideBooksService(): BooksService = Retrofit.Builder()
     .baseUrl(RESTMockServer.getUrl())
     .addConverterFactory(MoshiConverterFactory.create())
-    .addCallAdapterFactory(CoroutineCallAdapterFactory())
     .build()
     .create(BooksService::class.java)
 }
