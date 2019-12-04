@@ -53,6 +53,7 @@ dependencies {
 
   // Architecture components
   implementation 'androidx.lifecycle:lifecycle-extensions:2.2.0-rc03'
+  implementation 'androidx.lifecycle:lifecycle-livedata-ktx:2.2.0-rc03'
   implementation 'androidx.room:room-runtime:2.2.2'
   implementation 'androidx.room:room-ktx:2.2.2'
   kapt 'androidx.room:room-compiler:2.2.2'

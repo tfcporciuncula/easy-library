@@ -6,7 +6,7 @@ import android.view.MenuItem
 import androidx.annotation.StringRes
 import androidx.appcompat.app.AppCompatActivity
 import androidx.databinding.DataBindingUtil
-import androidx.lifecycle.Observer
+import androidx.lifecycle.observe
 import com.blinkist.easylibrary.R
 import com.blinkist.easylibrary.databinding.ActivityLibraryBinding
 import com.blinkist.easylibrary.di.injector
@@ -30,7 +30,7 @@ class LibraryActivity : AppCompatActivity() {
   private fun setupUi(isInitialLaunch: Boolean) {
     binding.lifecycleOwner = this
     binding.viewModel = viewModel
-    viewModel.state().observe(this, Observer { handleState(it) })
+    viewModel.state().observe(this, ::handleState)
 
     if (isInitialLaunch) viewModel.updateBooks()
   }
