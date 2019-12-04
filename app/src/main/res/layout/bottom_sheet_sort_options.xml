@@ -1,73 +1,79 @@
 <?xml version="1.0" encoding="utf-8"?>
 <layout
-    xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:tools="http://schemas.android.com/tools">
+  xmlns:android="http://schemas.android.com/apk/res/android"
+  xmlns:tools="http://schemas.android.com/tools"
+  >
 
-    <data>
-        <import type="android.view.View" />
-        <variable name="viewModel" type="com.blinkist.easylibrary.features.library.LibraryViewModel" />
-    </data>
+  <data>
+    <import type="android.view.View" />
+    <variable name="viewModel" type="com.blinkist.easylibrary.features.library.LibraryViewModel"/>
+  </data>
 
-    <RelativeLayout
-        android:layout_width="match_parent"
-        android:layout_height="match_parent">
+  <RelativeLayout
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    >
 
-        <TextView
-            android:id="@+id/ascendingTextView"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:clickable="true"
-            android:ellipsize="end"
-            android:focusable="true"
-            android:foreground="?attr/selectableItemBackground"
-            android:maxLines="1"
-            android:padding="@dimen/standard_margin"
-            android:text="@string/sort_option_ascending" />
+    <TextView
+      android:id="@+id/ascendingTextView"
+      android:layout_width="match_parent"
+      android:layout_height="wrap_content"
+      android:clickable="true"
+      android:ellipsize="end"
+      android:focusable="true"
+      android:foreground="?attr/selectableItemBackground"
+      android:maxLines="1"
+      android:padding="@dimen/standard_margin"
+      android:text="@string/sort_option_ascending"
+      />
 
-        <TextView
-            android:id="@+id/descendingTextView"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_below="@id/ascendingTextView"
-            android:clickable="true"
-            android:ellipsize="end"
-            android:focusable="true"
-            android:foreground="?attr/selectableItemBackground"
-            android:maxLines="1"
-            android:padding="@dimen/standard_margin"
-            android:text="@string/sort_option_descending" />
+    <TextView
+      android:id="@+id/descendingTextView"
+      android:layout_width="match_parent"
+      android:layout_height="wrap_content"
+      android:layout_below="@id/ascendingTextView"
+      android:clickable="true"
+      android:ellipsize="end"
+      android:focusable="true"
+      android:foreground="?attr/selectableItemBackground"
+      android:maxLines="1"
+      android:padding="@dimen/standard_margin"
+      android:text="@string/sort_option_descending"
+      />
 
-        <ImageView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_alignTop="@id/ascendingTextView"
-            android:layout_alignParentEnd="true"
-            android:layout_marginStart="@dimen/standard_margin"
-            android:layout_marginTop="@dimen/standard_margin"
-            android:layout_marginEnd="@dimen/standard_margin"
-            android:adjustViewBounds="true"
-            android:contentDescription="@string/sort_option_check_icon_content_description"
-            android:scaleType="fitCenter"
-            android:src="@drawable/ic_check"
-            android:tint="@color/colorAccent"
-            android:visibility="@{viewModel.sortByDescending ? View.GONE : View.VISIBLE}"
-            tools:visibility="visible" />
+    <ImageView
+      android:layout_width="wrap_content"
+      android:layout_height="wrap_content"
+      android:layout_alignTop="@id/ascendingTextView"
+      android:layout_alignParentEnd="true"
+      android:layout_marginStart="@dimen/standard_margin"
+      android:layout_marginTop="@dimen/standard_margin"
+      android:layout_marginEnd="@dimen/standard_margin"
+      android:adjustViewBounds="true"
+      android:contentDescription="@string/sort_option_check_icon_content_description"
+      android:scaleType="fitCenter"
+      android:src="@drawable/ic_check"
+      android:tint="@color/colorAccent"
+      android:visibility="@{viewModel.sortByDescending ? View.GONE : View.VISIBLE}"
+      tools:visibility="visible"
+      />
 
-        <ImageView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_alignTop="@id/descendingTextView"
-            android:layout_alignParentEnd="true"
-            android:layout_marginStart="@dimen/standard_margin"
-            android:layout_marginTop="@dimen/standard_margin"
-            android:layout_marginEnd="@dimen/standard_margin"
-            android:adjustViewBounds="true"
-            android:contentDescription="@string/sort_option_check_icon_content_description"
-            android:scaleType="fitCenter"
-            android:src="@drawable/ic_check"
-            android:tint="@color/colorAccent"
-            android:visibility="@{viewModel.sortByDescending ? View.VISIBLE : View.GONE}" />
+    <ImageView
+      android:layout_width="wrap_content"
+      android:layout_height="wrap_content"
+      android:layout_alignTop="@id/descendingTextView"
+      android:layout_alignParentEnd="true"
+      android:layout_marginStart="@dimen/standard_margin"
+      android:layout_marginTop="@dimen/standard_margin"
+      android:layout_marginEnd="@dimen/standard_margin"
+      android:adjustViewBounds="true"
+      android:contentDescription="@string/sort_option_check_icon_content_description"
+      android:scaleType="fitCenter"
+      android:src="@drawable/ic_check"
+      android:tint="@color/colorAccent"
+      android:visibility="@{viewModel.sortByDescending ? View.VISIBLE : View.GONE}"
+      />
 
-    </RelativeLayout>
+  </RelativeLayout>
 
 </layout>

@@ -1,37 +1,41 @@
 <?xml version="1.0" encoding="utf-8"?>
 <layout
-    xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:app="http://schemas.android.com/apk/res-auto"
-    xmlns:tools="http://schemas.android.com/tools">
+  xmlns:android="http://schemas.android.com/apk/res/android"
+  xmlns:app="http://schemas.android.com/apk/res-auto"
+  xmlns:tools="http://schemas.android.com/tools"
+  >
 
-    <data>
-        <variable name="viewModel" type="com.blinkist.easylibrary.features.library.LibraryViewModel" />
-    </data>
+  <data>
+    <variable name="viewModel" type="com.blinkist.easylibrary.features.library.LibraryViewModel"/>
+  </data>
 
-    <androidx.coordinatorlayout.widget.CoordinatorLayout
+  <androidx.coordinatorlayout.widget.CoordinatorLayout
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    >
+
+    <androidx.swiperefreshlayout.widget.SwipeRefreshLayout
+      android:layout_width="match_parent"
+      android:layout_height="match_parent"
+      app:onRefresh="@{() -> viewModel.updateBooks()}"
+      app:refreshing="@{viewModel.state.isLoading}"
+      >
+
+      <androidx.recyclerview.widget.RecyclerView
+        android:id="@+id/recyclerView"
         android:layout_width="match_parent"
-        android:layout_height="match_parent">
+        android:layout_height="match_parent"
+        android:adapter="@{viewModel.adapter}"
+        android:clipToPadding="false"
+        android:paddingTop="@dimen/half_standard_margin"
+        android:paddingBottom="@dimen/half_standard_margin"
+        app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
+        tools:itemCount="4"
+        tools:listitem="@layout/item_book"
+        />
 
-        <androidx.swiperefreshlayout.widget.SwipeRefreshLayout
-            android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            app:onRefresh="@{() -> viewModel.updateBooks()}"
-            app:refreshing="@{viewModel.state.isLoading}">
+    </androidx.swiperefreshlayout.widget.SwipeRefreshLayout>
 
-            <androidx.recyclerview.widget.RecyclerView
-                android:id="@+id/recyclerView"
-                android:layout_width="match_parent"
-                android:layout_height="match_parent"
-                android:adapter="@{viewModel.adapter}"
-                android:clipToPadding="false"
-                android:paddingTop="@dimen/half_standard_margin"
-                android:paddingBottom="@dimen/half_standard_margin"
-                app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
-                tools:itemCount="4"
-                tools:listitem="@layout/item_book" />
-
-        </androidx.swiperefreshlayout.widget.SwipeRefreshLayout>
-
-    </androidx.coordinatorlayout.widget.CoordinatorLayout>
+  </androidx.coordinatorlayout.widget.CoordinatorLayout>
 
 </layout>
