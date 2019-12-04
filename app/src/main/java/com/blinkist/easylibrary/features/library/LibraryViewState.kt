@@ -1,8 +1,6 @@
 package com.blinkist.easylibrary.features.library
 
-import com.blinkist.easylibrary.livedata.EmptyEvent
 import com.blinkist.easylibrary.livedata.EmptyLiveDataEvent
-import com.blinkist.easylibrary.livedata.Event
 import com.blinkist.easylibrary.livedata.SafeMediatorLiveData
 
 data class LibraryViewState(
@@ -11,9 +9,9 @@ data class LibraryViewState(
   val error: LibraryError? = null
 )
 
-interface LibraryError: EmptyEvent {
-  class Network : LibraryError, EmptyLiveDataEvent()
-  class Unexpected : LibraryError, EmptyLiveDataEvent()
+sealed class LibraryError : EmptyLiveDataEvent() {
+  class Network : LibraryError()
+  class Unexpected : LibraryError()
 }
 
 fun SafeMediatorLiveData<LibraryViewState>.update(

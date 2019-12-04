@@ -7,11 +7,11 @@ import androidx.lifecycle.LiveData
  *
  * Inspired by https://medium.com/androiddevelopers/livedata-with-snackbar-navigation-and-other-events-the-singleliveevent-case-ac2622673150
  */
-open class LiveDataEvent<T>(private val content: T) : Event<T> {
+open class LiveDataEvent<T>(private val content: T) {
 
   private var hasNotBeenHandled = true
 
-  override fun doIfNotHandled(block: (T) -> Unit) {
+  fun doIfNotHandled(block: (T) -> Unit) {
     if (hasNotBeenHandled) {
       hasNotBeenHandled = false
       block(content)
@@ -20,10 +20,3 @@ open class LiveDataEvent<T>(private val content: T) : Event<T> {
 }
 
 abstract class EmptyLiveDataEvent : LiveDataEvent<Unit>(Unit)
-
-interface Event<T> {
-
-  fun doIfNotHandled(block: (T) -> Unit)
-}
-
-interface EmptyEvent : Event<Unit>
