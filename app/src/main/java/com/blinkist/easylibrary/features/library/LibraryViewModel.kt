@@ -36,6 +36,8 @@ class LibraryViewModel @Inject constructor(
     state.addSource(books) {
       state.update(books = bookGrouper.groupBooksByWeek(it, sortByDescending))
     }
+
+    updateBooks()
   }
 
   fun state(): LiveData<LibraryViewState> = state

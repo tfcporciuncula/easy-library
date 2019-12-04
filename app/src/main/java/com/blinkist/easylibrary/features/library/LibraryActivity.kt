@@ -24,15 +24,13 @@ class LibraryActivity : AppCompatActivity() {
 
   override fun onCreate(savedInstanceState: Bundle?) {
     super.onCreate(savedInstanceState)
-    setupUi(isInitialLaunch = savedInstanceState == null)
+    setupUi()
   }
 
-  private fun setupUi(isInitialLaunch: Boolean) {
+  private fun setupUi() {
     binding.lifecycleOwner = this
     binding.viewModel = viewModel
     viewModel.state().observe(this, ::handleState)
-
-    if (isInitialLaunch) viewModel.updateBooks()
   }
 
   private fun handleState(state: LibraryViewState) {
