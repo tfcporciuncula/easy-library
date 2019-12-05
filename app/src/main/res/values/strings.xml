@@ -1,22 +1,22 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
 
-    <string name="app_name">Easy Library</string>
+  <string name="app_name">Easy Library</string>
 
-    <!-- Library Activity -->
-    <string name="sort_menu_item_title">Change sort order</string>
-    <string name="week_section_title">%s to %s</string>
-    <string name="library_item_image_description">Book cover</string>
-    <string name="network_error_message">We couldn\'t fetch your books…</string>
-    <string name="unexpected_error_message">Something went wrong…</string>
+  <!-- Library Activity -->
+  <string name="sort_menu_item_title">Change sort order</string>
+  <string name="week_section_title">%s to %s</string>
+  <string name="library_item_image_description">Book cover</string>
+  <string name="network_error_message">We couldn\'t fetch your books…</string>
+  <string name="unexpected_error_message">Something went wrong…</string>
 
-    <!-- Sort Option Dialog -->
-    <string name="sort_option_ascending">Ascending</string>
-    <string name="sort_option_descending">Descending</string>
-    <string name="sort_option_check_icon_content_description">Checked</string>
+  <!-- Sort Option Dialog -->
+  <string name="sort_option_ascending">Ascending</string>
+  <string name="sort_option_descending">Descending</string>
+  <string name="sort_option_check_icon_content_description">Checked</string>
 
-    <!-- Shared Preferences -->
-    <string name="library_preferences_name" translatable="false">com.blinkist.easylibrary.LIBRARY_PREFERENCES</string>
-    <string name="sort_order_key" translatable="false">com.blinkist.easylibrary.KEY_SORT_ORDER</string>
+  <!-- Shared Preferences -->
+  <string name="library_preferences_name" translatable="false">com.blinkist.easylibrary.LIBRARY_PREFERENCES</string>
+  <string name="sort_order_key" translatable="false">com.blinkist.easylibrary.KEY_SORT_ORDER</string>
 
 </resources>
