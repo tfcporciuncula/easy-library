@@ -54,7 +54,7 @@ class BookMapper @Inject constructor(@ServiceModule.ServiceDateFormat private va
 
     publishedDate = bookRaw.publishedDate ?: throw IllegalArgumentException("Book has null publishedDate"),
 
-    publishedDateTime = dateFormat.parse(bookRaw.publishedDate).time,
+    publishedDateTime = dateFormat.parse(bookRaw.publishedDate)?.time ?: throw IllegalArgumentException("Book has invalid publishedDate"),
 
     title = bookRaw.title ?: throw IllegalArgumentException("Book has null title"),
 
