@@ -54,11 +54,16 @@ class LibraryViewModel @Inject constructor(
     if (throwable !is IOException) Timber.e(throwable)
     state.update(
       isLoading = false,
-      error = if (throwable is IOException) LibraryError.Network() else LibraryError.Unexpected()
+      errorEvent = if (throwable is IOException) ErrorEvent.Network() else ErrorEvent.Unexpected()
     )
   }
 
-  fun rearrangeBooks(sortByDescending: Boolean) {
+  fun onArrangeByDescendingClicked() = rearrangeBooks(sortByDescending = true)
+
+  fun onArrangeByAscendingClicked() = rearrangeBooks(sortByDescending = false)
+
+  private fun rearrangeBooks(sortByDescending: Boolean) {
+    state.update(sortDialogClickedEvent = SortDialogClickedEvent())
     if (this.sortByDescending == sortByDescending) return
 
     books.value?.let {

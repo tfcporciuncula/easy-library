@@ -6,18 +6,22 @@ import com.blinkist.easylibrary.livedata.SafeMediatorLiveData
 data class LibraryViewState(
   val books: List<LibraryItem> = emptyList(),
   val isLoading: Boolean = false,
-  val error: LibraryError? = null
+  val errorEvent: ErrorEvent? = null,
+  val sortDialogClickedEvent: SortDialogClickedEvent? = null
 )
 
-sealed class LibraryError : EmptyLiveDataEvent() {
-  class Network : LibraryError()
-  class Unexpected : LibraryError()
+sealed class ErrorEvent : EmptyLiveDataEvent() {
+  class Network : ErrorEvent()
+  class Unexpected : ErrorEvent()
 }
+
+class SortDialogClickedEvent : EmptyLiveDataEvent()
 
 fun SafeMediatorLiveData<LibraryViewState>.update(
   books: List<LibraryItem> = value.books,
   isLoading: Boolean = value.isLoading,
-  error: LibraryError? = value.error
+  errorEvent: ErrorEvent? = value.errorEvent,
+  sortDialogClickedEvent: SortDialogClickedEvent? = value.sortDialogClickedEvent
 ) {
-  value = value.copy(books = books, isLoading = isLoading, error = error)
+  value = value.copy(books, isLoading, errorEvent, sortDialogClickedEvent)
 }

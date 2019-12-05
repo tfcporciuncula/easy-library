@@ -2,6 +2,7 @@ package com.blinkist.easylibrary.features.library
 
 import android.app.Dialog
 import android.os.Bundle
+import androidx.fragment.app.FragmentManager
 import androidx.fragment.app.activityViewModels
 import com.blinkist.easylibrary.R
 import com.blinkist.easylibrary.databinding.BottomSheetSortOptionsBinding
@@ -11,7 +12,7 @@ import com.google.android.material.bottomsheet.BottomSheetDialogFragment
 class SortOptionDialog : BottomSheetDialogFragment() {
 
   companion object {
-    val TAG: String = SortOptionDialog::class.java.name
+    private val TAG: String = SortOptionDialog::class.java.name
 
     fun newInstance() = SortOptionDialog()
   }
@@ -20,27 +21,13 @@ class SortOptionDialog : BottomSheetDialogFragment() {
 
   override fun onCreateDialog(savedInstanceState: Bundle?): Dialog {
     val dialog = super.onCreateDialog(savedInstanceState)
-    val binding = inflateBinding<BottomSheetSortOptionsBinding>(R.layout.bottom_sheet_sort_options)
-    dialog.setContentView(binding.root)
 
-    setupUi(binding)
+    val binding = inflateBinding<BottomSheetSortOptionsBinding>(R.layout.bottom_sheet_sort_options)
+    binding.viewModel = viewModel
+    dialog.setContentView(binding.root)
 
     return dialog
   }
 
-  private fun setupUi(binding: BottomSheetSortOptionsBinding) {
-    binding.viewModel = viewModel
-    binding.ascendingTextView.setOnClickListener { onAscendingClick() }
-    binding.descendingTextView.setOnClickListener { onDescendingClick() }
-  }
-
-  private fun onAscendingClick() {
-    viewModel.rearrangeBooks(sortByDescending = false)
-    dismiss()
-  }
-
-  private fun onDescendingClick() {
-    viewModel.rearrangeBooks(sortByDescending = true)
-    dismiss()
-  }
+  fun show(manager: FragmentManager) = super.show(manager, TAG)
 }

@@ -22,6 +22,8 @@ class LibraryActivity : AppCompatActivity() {
 
   private val viewModel by lazyViewModel { injector.libraryViewModel }
 
+  private val sortOptionDialog by unsyncLazy { SortOptionDialog.newInstance() }
+
   override fun onCreate(savedInstanceState: Bundle?) {
     super.onCreate(savedInstanceState)
     setupUi()
@@ -36,15 +38,18 @@ class LibraryActivity : AppCompatActivity() {
   private fun handleState(state: LibraryViewState) {
     viewModel.adapter.submitList(state.books)
 
-    state.error?.let { error ->
-      error.doIfNotHandled { show(error) }
+    state.errorEvent?.let { event ->
+      event.doIfNotHandled { showErrorMessage(event) }
+    }
+    state.sortDialogClickedEvent?.let { event ->
+      event.doIfNotHandled { sortOptionDialog.dismiss() }
     }
   }
 
-  private fun show(error: LibraryError) {
-    when (error) {
-      is LibraryError.Network -> showSnackbar(R.string.network_error_message)
-      is LibraryError.Unexpected -> showSnackbar(R.string.unexpected_error_message)
+  private fun showErrorMessage(errorEvent: ErrorEvent) {
+    when (errorEvent) {
+      is ErrorEvent.Network -> showSnackbar(R.string.network_error_message)
+      is ErrorEvent.Unexpected -> showSnackbar(R.string.unexpected_error_message)
     }
   }
 
@@ -58,7 +63,7 @@ class LibraryActivity : AppCompatActivity() {
 
   override fun onOptionsItemSelected(item: MenuItem) = when (item.itemId) {
     R.id.menu_sort -> {
-      SortOptionDialog.newInstance().show(supportFragmentManager, SortOptionDialog.TAG)
+      sortOptionDialog.show(supportFragmentManager)
       true
     }
     else -> super.onOptionsItemSelected(item)
