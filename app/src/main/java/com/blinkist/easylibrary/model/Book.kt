@@ -34,16 +34,6 @@ data class Book(
   val url: String
 ) : LibraryItem.Book()
 
-@JsonClass(generateAdapter = true)
-data class RemoteBook(
-  val id: Long?,
-  val publishedDate: String?,
-  val title: String?,
-  val authors: String?,
-  val thumbnail: String?,
-  val url: String?
-)
-
 @Reusable
 class BookMapper @Inject constructor(@ServiceModule.ServiceDateFormat private val dateFormat: DateFormat) {
 
