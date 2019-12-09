@@ -12,4 +12,8 @@ class SafeMediatorLiveData<T : Any>(initialValue: T) : MediatorLiveData<T>() {
   }
 
   override fun getValue(): T = super.getValue()!!
+
+  inline fun update(block: T.() -> T) {
+    value = block(value)
+  }
 }

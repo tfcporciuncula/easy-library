@@ -4,6 +4,8 @@ import androidx.lifecycle.LiveData
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.blinkist.easylibrary.data.BookDao
+import com.blinkist.easylibrary.features.library.LibraryViewState.ErrorEvent
+import com.blinkist.easylibrary.features.library.LibraryViewState.SortDialogClickedEvent
 import com.blinkist.easylibrary.ktx.launchCatching
 import com.blinkist.easylibrary.livedata.SafeMediatorLiveData
 import com.blinkist.easylibrary.model.BookMapper
@@ -33,7 +35,7 @@ class LibraryViewModel @Inject constructor(
 
   init {
     state.addSource(books) {
-      state.update(books = bookGrouper.groupBooksByWeek(it, sortByDescending))
+      state.update { copy(books = bookGrouper.groupBooksByWeek(it, sortByDescending)) }
     }
 
     updateBooks()
@@ -43,19 +45,21 @@ class LibraryViewModel @Inject constructor(
 
   fun updateBooks() = viewModelScope.launchCatching(
     block = {
-      state.update(isLoading = true)
+      state.update { copy(isLoading = true) }
       bookDao.clearAndInsert(bookMapper.fromRaw(booksService.books()))
-      state.update(isLoading = false)
+      state.update { copy(isLoading = false) }
     },
     onFailure = ::handleFailure
   )
 
   private fun handleFailure(throwable: Throwable) {
     if (throwable !is IOException) Timber.e(throwable)
-    state.update(
-      isLoading = false,
-      errorEvent = if (throwable is IOException) ErrorEvent.Network() else ErrorEvent.Unexpected()
-    )
+    state.update {
+      copy(
+        isLoading = false,
+        errorEvent = if (throwable is IOException) ErrorEvent.Network() else ErrorEvent.Unexpected()
+      )
+    }
   }
 
   fun onArrangeByDescendingClicked() = rearrangeBooks(sortByDescending = true)
@@ -63,12 +67,12 @@ class LibraryViewModel @Inject constructor(
   fun onArrangeByAscendingClicked() = rearrangeBooks(sortByDescending = false)
 
   private fun rearrangeBooks(sortByDescending: Boolean) {
-    state.update(sortDialogClickedEvent = SortDialogClickedEvent())
+    state.update { copy(sortDialogClickedEvent = SortDialogClickedEvent()) }
     if (this.sortByDescending == sortByDescending) return
 
     books.value?.let {
       this.sortByDescending = sortByDescending
-      state.update(books = bookGrouper.groupBooksByWeek(it, sortByDescending))
+      state.update { copy(books = bookGrouper.groupBooksByWeek(it, sortByDescending)) }
     }
   }
 }

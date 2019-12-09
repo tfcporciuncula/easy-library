@@ -11,6 +11,7 @@ import com.blinkist.easylibrary.R
 import com.blinkist.easylibrary.databinding.ActivityLibraryBinding
 import com.blinkist.easylibrary.di.injector
 import com.blinkist.easylibrary.di.lazyViewModel
+import com.blinkist.easylibrary.features.library.LibraryViewState.ErrorEvent
 import com.blinkist.easylibrary.ktx.unsyncLazy
 import com.google.android.material.snackbar.Snackbar
 
