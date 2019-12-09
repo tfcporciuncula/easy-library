@@ -35,7 +35,7 @@ data class Book(
 ) : LibraryItem.Book()
 
 @JsonClass(generateAdapter = true)
-data class BookRaw(
+data class RemoteBook(
   val id: Long?,
   val publishedDate: String?,
   val title: String?,
@@ -47,21 +47,21 @@ data class BookRaw(
 @Reusable
 class BookMapper @Inject constructor(@ServiceModule.ServiceDateFormat private val dateFormat: DateFormat) {
 
-  fun fromRaw(booksRaw: List<BookRaw>): List<Book> = booksRaw.map(::fromRaw)
+  fun fromRaw(remoteBooks: List<RemoteBook>): List<Book> = remoteBooks.map(::fromRaw)
 
-  private fun fromRaw(bookRaw: BookRaw) = Book(
-    id = bookRaw.id ?: throw IllegalArgumentException("Book has null id"),
+  private fun fromRaw(remoteBook: RemoteBook) = Book(
+    id = remoteBook.id ?: throw IllegalArgumentException("Book has null id"),
 
-    publishedDate = bookRaw.publishedDate ?: throw IllegalArgumentException("Book has null publishedDate"),
+    publishedDate = remoteBook.publishedDate ?: throw IllegalArgumentException("Book has null publishedDate"),
 
-    publishedDateTime = dateFormat.parse(bookRaw.publishedDate)?.time ?: throw IllegalArgumentException("Book has invalid publishedDate"),
+    publishedDateTime = dateFormat.parse(remoteBook.publishedDate)?.time ?: throw IllegalArgumentException("Book has invalid publishedDate"),
 
-    title = bookRaw.title ?: throw IllegalArgumentException("Book has null title"),
+    title = remoteBook.title ?: throw IllegalArgumentException("Book has null title"),
 
-    authors = bookRaw.authors ?: throw IllegalArgumentException("Book has null authors"),
+    authors = remoteBook.authors ?: throw IllegalArgumentException("Book has null authors"),
 
-    thumbnail = bookRaw.thumbnail ?: throw IllegalArgumentException("Book has null thumbnail"),
+    thumbnail = remoteBook.thumbnail ?: throw IllegalArgumentException("Book has null thumbnail"),
 
-    url = bookRaw.url ?: throw IllegalArgumentException("Book has null url")
+    url = remoteBook.url ?: throw IllegalArgumentException("Book has null url")
   )
 }

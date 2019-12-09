@@ -18,7 +18,7 @@ class BookMapperTest {
   @InjectMocks private lateinit var bookMapper: BookMapper
 
   @Test fun testMapping() {
-    val bookRaw = BookRaw(
+    val bookRaw = RemoteBook(
       id = 10,
       publishedDate = "10/10/2010",
       title = "title",

@@ -10,7 +10,7 @@ fun newBookRaw(
   authors: String = "authors",
   thumbnail: String = "thumbnail",
   url: String = "url"
-) = BookRaw(id, publishedDate, title, authors, thumbnail, url)
+) = RemoteBook(id, publishedDate, title, authors, thumbnail, url)
 
 fun newBook(
   id: Long = 2020,

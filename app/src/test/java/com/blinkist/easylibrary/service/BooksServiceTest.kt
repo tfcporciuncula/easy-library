@@ -1,6 +1,6 @@
 package com.blinkist.easylibrary.service
 
-import com.blinkist.easylibrary.model.BookRaw
+import com.blinkist.easylibrary.model.RemoteBook
 import io.appflate.restmock.JVMFileParser
 import io.appflate.restmock.RESTMockServer
 import io.appflate.restmock.RESTMockServerStarter
@@ -56,7 +56,7 @@ class BooksServiceTest {
   @Test fun testMapping() {
     booksService.books().test().assertResult(
       listOf(
-        BookRaw(
+        RemoteBook(
           id = 1,
           title = "book1",
           authors = "author1",
@@ -64,7 +64,7 @@ class BooksServiceTest {
           thumbnail = "thumbnail1",
           url = "url1"
         ),
-        BookRaw(
+        RemoteBook(
           id = 2,
           title = "book2",
           authors = "author2",
