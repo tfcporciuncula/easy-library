@@ -1,6 +1,6 @@
 package com.blinkist.easylibrary.features.library
 
-import com.blinkist.easylibrary.model.Book
+import com.blinkist.easylibrary.model.LocalBook
 import com.blinkist.easylibrary.model.WeekSection
 import com.blinkist.easylibrary.model.newBook
 import com.google.common.truth.Truth.assertThat
@@ -46,7 +46,7 @@ class BookGrouperTest {
     val descendingBooks = bookGrouper.groupBooksByWeek(books, sortByDescending = true)
     val ascendingBooks = bookGrouper.groupBooksByWeek(books, sortByDescending = false)
 
-    assertThat(ascendingBooks.filter { it is Book }).isEqualTo(books)
-    assertThat(descendingBooks.filter { it is Book }).isEqualTo(books.reversed())
+    assertThat(ascendingBooks.filter { it is LocalBook }).isEqualTo(books)
+    assertThat(descendingBooks.filter { it is LocalBook }).isEqualTo(books.reversed())
   }
 }

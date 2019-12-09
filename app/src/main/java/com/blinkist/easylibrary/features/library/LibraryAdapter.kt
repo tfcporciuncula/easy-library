@@ -3,7 +3,7 @@ package com.blinkist.easylibrary.features.library
 import androidx.recyclerview.widget.DiffUtil
 import com.blinkist.easylibrary.R
 import com.blinkist.easylibrary.databinding.DataBindingAdapter
-import com.blinkist.easylibrary.model.Book
+import com.blinkist.easylibrary.model.LocalBook
 import javax.inject.Inject
 
 class LibraryAdapter @Inject constructor() : DataBindingAdapter<LibraryItem>(DiffCallback()) {
@@ -11,7 +11,7 @@ class LibraryAdapter @Inject constructor() : DataBindingAdapter<LibraryItem>(Dif
   class DiffCallback : DiffUtil.ItemCallback<LibraryItem>() {
 
     override fun areItemsTheSame(oldItem: LibraryItem, newItem: LibraryItem) = when {
-      oldItem is Book && newItem is Book -> oldItem.id == newItem.id
+      oldItem is LocalBook && newItem is LocalBook -> oldItem.id == newItem.id
       else -> oldItem == newItem
     }
 

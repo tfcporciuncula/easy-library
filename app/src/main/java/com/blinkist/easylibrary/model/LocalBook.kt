@@ -5,13 +5,12 @@ import androidx.room.Entity
 import androidx.room.PrimaryKey
 import com.blinkist.easylibrary.di.ServiceModule
 import com.blinkist.easylibrary.features.library.LibraryItem
-import com.squareup.moshi.JsonClass
 import dagger.Reusable
 import java.text.DateFormat
 import javax.inject.Inject
 
 @Entity(tableName = "books")
-data class Book(
+data class LocalBook(
   @PrimaryKey
   val id: Long,
 
@@ -37,9 +36,9 @@ data class Book(
 @Reusable
 class BookMapper @Inject constructor(@ServiceModule.ServiceDateFormat private val dateFormat: DateFormat) {
 
-  fun fromRaw(remoteBooks: List<RemoteBook>): List<Book> = remoteBooks.map(::fromRaw)
+  fun fromRaw(remoteBooks: List<RemoteBook>): List<LocalBook> = remoteBooks.map(::fromRaw)
 
-  private fun fromRaw(remoteBook: RemoteBook) = Book(
+  private fun fromRaw(remoteBook: RemoteBook) = LocalBook(
     id = remoteBook.id ?: throw IllegalArgumentException("Book has null id"),
 
     publishedDate = remoteBook.publishedDate ?: throw IllegalArgumentException("Book has null publishedDate"),

@@ -1,6 +1,6 @@
 package com.blinkist.easylibrary.features.library
 
-import com.blinkist.easylibrary.model.Book
+import com.blinkist.easylibrary.model.LocalBook
 import com.blinkist.easylibrary.model.WeekSection
 import dagger.Reusable
 import java.text.SimpleDateFormat
@@ -16,10 +16,10 @@ class BookGrouper @Inject constructor() {
 
   private val dateFormat = SimpleDateFormat.getDateInstance(SimpleDateFormat.LONG)
 
-  fun groupBooksByWeek(books: List<Book>, sortByDescending: Boolean): List<LibraryItem> {
-    if (books.isEmpty()) return emptyList()
+  fun groupBooksByWeek(localBooks: List<LocalBook>, sortByDescending: Boolean): List<LibraryItem> {
+    if (localBooks.isEmpty()) return emptyList()
 
-    val sortedBooks = sortBooks(sortByDescending, books)
+    val sortedBooks = sortBooks(sortByDescending, localBooks)
     val groupedBooks = mutableListOf<LibraryItem>()
 
     var currentDate = sortedBooks.first().publishedDateTime
@@ -40,11 +40,11 @@ class BookGrouper @Inject constructor() {
     return groupedBooks
   }
 
-  private fun sortBooks(sortByDescending: Boolean, books: List<Book>): List<Book> {
+  private fun sortBooks(sortByDescending: Boolean, localBooks: List<LocalBook>): List<LocalBook> {
     return if (sortByDescending) {
-      books.sortedByDescending { it.publishedDateTime }
+      localBooks.sortedByDescending { it.publishedDateTime }
     } else {
-      books.sortedBy { it.publishedDateTime }
+      localBooks.sortedBy { it.publishedDateTime }
     }
   }
 
@@ -60,7 +60,7 @@ class BookGrouper @Inject constructor() {
     return WeekSection(dateFormat.format(initialDate), dateFormat.format(finalDate))
   }
 
-  private fun Book.belongsToSameWeekAs(date: Long): Boolean {
+  private fun LocalBook.belongsToSameWeekAs(date: Long): Boolean {
     calendar.time = Date(publishedDateTime)
     val bookYear = calendar.get(Calendar.YEAR)
     val bookWeekOfYear = calendar.get(Calendar.WEEK_OF_YEAR)

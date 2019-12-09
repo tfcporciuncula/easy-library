@@ -20,7 +20,7 @@ fun newBook(
   authors: String = "authors",
   thumbnail: String = "thumbnail",
   url: String = "url"
-) = Book(id, publishedDate, publishedDateTime, title, authors, thumbnail, url)
+) = LocalBook(id, publishedDate, publishedDateTime, title, authors, thumbnail, url)
 
 fun newWeekSection(
   initialDate: String = "init",

@@ -45,7 +45,7 @@ class LibraryViewModelTest {
   @Test fun testBooks() {
     val books = listOf(newBook(id = 11), newBook(id = 22))
     given(bookDao.books()).willReturn(
-      MutableLiveData<List<Book>>().apply { value = books }
+      MutableLiveData<List<LocalBook>>().apply { value = books }
     )
 
     val librariables = listOf(newWeekSection()) + books
@@ -71,7 +71,7 @@ class LibraryViewModelTest {
   @Test fun testRearrangeBooks() {
     val books = listOf(newBook(id = 10), newBook(id = 20))
     given(bookDao.books()).willReturn(
-      MutableLiveData<List<Book>>().apply { value = books }
+      MutableLiveData<List<LocalBook>>().apply { value = books }
     )
 
     with(viewModel) {
