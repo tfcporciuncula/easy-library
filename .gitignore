@@ -35,4 +35,5 @@ captures/
 *.iml
 .idea/*
 
-
+# macOS
+.DS_Store

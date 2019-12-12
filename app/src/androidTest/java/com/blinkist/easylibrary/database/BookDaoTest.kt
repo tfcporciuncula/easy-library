@@ -1,9 +1,9 @@
-package com.blinkist.easylibrary.data
+package com.blinkist.easylibrary.database
 
 import androidx.arch.core.executor.testing.InstantTaskExecutorRule
 import androidx.room.Room
 import androidx.test.ext.junit.runners.AndroidJUnit4
-import com.blinkist.easylibrary.model.LocalBook
+import com.blinkist.easylibrary.model.local.LocalBook
 import com.blinkist.easylibrary.model.newBook
 import com.blinkist.easylibrary.test.instrumentationContext
 import com.google.common.truth.Truth.assertThat

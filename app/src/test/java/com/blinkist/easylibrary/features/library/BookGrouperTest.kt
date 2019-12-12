@@ -1,7 +1,7 @@
 package com.blinkist.easylibrary.features.library
 
-import com.blinkist.easylibrary.model.LocalBook
-import com.blinkist.easylibrary.model.WeekSection
+import com.blinkist.easylibrary.model.local.LocalBook
+import com.blinkist.easylibrary.model.presentation.WeekSection
 import com.blinkist.easylibrary.model.newBook
 import com.google.common.truth.Truth.assertThat
 import org.junit.Test

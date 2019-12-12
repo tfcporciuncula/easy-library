@@ -2,8 +2,10 @@ package com.blinkist.easylibrary.features.library
 
 import androidx.arch.core.executor.testing.InstantTaskExecutorRule
 import androidx.lifecycle.MutableLiveData
-import com.blinkist.easylibrary.data.BookDao
+import com.blinkist.easylibrary.database.BookDao
 import com.blinkist.easylibrary.model.*
+import com.blinkist.easylibrary.model.local.BookMapper
+import com.blinkist.easylibrary.model.local.LocalBook
 import com.blinkist.easylibrary.service.BooksService
 import com.google.common.truth.Truth.assertThat
 import io.reactivex.Single
@@ -52,7 +54,7 @@ class LibraryViewModelTest {
     given(bookGrouper.groupBooksByWeek(books, sortByDescending = true)).willReturn(librariables)
 
     viewModel.state().observeForever {
-      assertThat(librariables).isEqualTo(it?.books)
+      assertThat(librariables).isEqualTo(it?.libraryItems)
     }
   }
 

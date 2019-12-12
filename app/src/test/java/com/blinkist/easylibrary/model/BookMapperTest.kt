@@ -1,5 +1,7 @@
 package com.blinkist.easylibrary.model
 
+import com.blinkist.easylibrary.model.local.BookMapper
+import com.blinkist.easylibrary.model.remote.RemoteBook
 import com.google.common.truth.Truth.assertThat
 import org.junit.Test
 import org.junit.runner.RunWith

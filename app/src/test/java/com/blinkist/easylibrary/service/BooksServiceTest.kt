@@ -1,6 +1,6 @@
 package com.blinkist.easylibrary.service
 
-import com.blinkist.easylibrary.model.RemoteBook
+import com.blinkist.easylibrary.model.remote.RemoteBook
 import io.appflate.restmock.JVMFileParser
 import io.appflate.restmock.RESTMockServer
 import io.appflate.restmock.RESTMockServerStarter

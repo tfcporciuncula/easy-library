@@ -5,13 +5,9 @@ import com.blinkist.easylibrary.di.ApplicationComponent
 import com.blinkist.easylibrary.di.DaggerApplicationComponent
 import com.blinkist.easylibrary.di.DaggerComponentProvider
 import com.blinkist.easylibrary.ktx.unsyncLazy
-import io.appflate.restmock.RESTMockServer
-import io.appflate.restmock.RESTMockServerStarter
-import io.appflate.restmock.android.AndroidAssetsFileParser
-import io.appflate.restmock.android.AndroidLogger
-import io.appflate.restmock.utils.RequestMatchers.pathContains
+import com.blinkist.easylibrary.service.MockServer
+import com.jakewharton.threetenabp.AndroidThreeTen
 import timber.log.Timber
-import java.util.concurrent.TimeUnit
 
 class EasyLibraryApplication : Application(), DaggerComponentProvider {
 
@@ -22,26 +18,20 @@ class EasyLibraryApplication : Application(), DaggerComponentProvider {
   override fun onCreate() {
     super.onCreate()
 
-    setupTimber()
-    setupMockApi()
+    initMockServer()
+    initTimber()
+    initThreeTen()
   }
 
-  private fun setupTimber() {
+  private fun initMockServer() {
+    MockServer.setupMockServer(this)
+  }
+
+  private fun initTimber() {
     if (BuildConfig.DEBUG) Timber.plant(Timber.DebugTree())
   }
 
-  private fun setupMockApi() {
-    RESTMockServerStarter.startSync(AndroidAssetsFileParser(this), AndroidLogger());
-    RESTMockServer.whenGET(pathContains("books"))
-      .delayBody(TimeUnit.SECONDS, 2)
-      .thenReturnFile(200, "books.json")
-      .delayBody(TimeUnit.SECONDS, 2)
-      .thenReturnFile(200, "onemorebook.json")
-      .delayBody(TimeUnit.SECONDS, 2)
-      .thenReturnFile(200, "books.json")
-      .delayBody(TimeUnit.SECONDS, 2)
-      .thenReturnString("this will trigger an error")
-      .delayBody(TimeUnit.SECONDS, 2)
-      .thenReturnFile(200, "books.json")
+  private fun initThreeTen() {
+    AndroidThreeTen.init(this)
   }
 }

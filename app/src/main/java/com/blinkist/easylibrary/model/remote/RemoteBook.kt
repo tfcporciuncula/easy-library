@@ -1,4 +1,4 @@
-package com.blinkist.easylibrary.model
+package com.blinkist.easylibrary.model.remote
 
 import com.squareup.moshi.JsonClass
 

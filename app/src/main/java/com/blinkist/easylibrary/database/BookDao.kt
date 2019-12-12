@@ -1,14 +1,14 @@
-package com.blinkist.easylibrary.data
+package com.blinkist.easylibrary.database
 
-import androidx.lifecycle.LiveData
 import androidx.room.*
-import com.blinkist.easylibrary.model.LocalBook
+import com.blinkist.easylibrary.model.local.LocalBook
+import kotlinx.coroutines.flow.Flow
 
 @Dao
 interface BookDao {
 
   @Query("SELECT * FROM books")
-  fun books(): LiveData<List<LocalBook>>
+  fun books(): Flow<List<LocalBook>>
 
   @Insert(onConflict = OnConflictStrategy.REPLACE)
   suspend fun insert(localBooks: List<LocalBook>)

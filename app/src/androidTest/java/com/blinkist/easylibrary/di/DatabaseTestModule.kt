@@ -2,7 +2,7 @@ package com.blinkist.easylibrary.di
 
 import android.content.Context
 import androidx.room.Room
-import com.blinkist.easylibrary.data.EasyLibraryDatabase
+import com.blinkist.easylibrary.database.EasyLibraryDatabase
 import dagger.Module
 import dagger.Provides
 import javax.inject.Singleton

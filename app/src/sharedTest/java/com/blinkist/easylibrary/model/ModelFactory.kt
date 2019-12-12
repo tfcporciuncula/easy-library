@@ -1,5 +1,8 @@
 package com.blinkist.easylibrary.model
 
+import com.blinkist.easylibrary.model.local.LocalBook
+import com.blinkist.easylibrary.model.presentation.WeekSection
+import com.blinkist.easylibrary.model.remote.RemoteBook
 import java.text.SimpleDateFormat
 import java.util.*
 
@@ -10,7 +13,14 @@ fun newBookRaw(
   authors: String = "authors",
   thumbnail: String = "thumbnail",
   url: String = "url"
-) = RemoteBook(id, publishedDate, title, authors, thumbnail, url)
+) = RemoteBook(
+  id,
+  publishedDate,
+  title,
+  authors,
+  thumbnail,
+  url
+)
 
 fun newBook(
   id: Long = 2020,
@@ -20,7 +30,15 @@ fun newBook(
   authors: String = "authors",
   thumbnail: String = "thumbnail",
   url: String = "url"
-) = LocalBook(id, publishedDate, publishedDateTime, title, authors, thumbnail, url)
+) = LocalBook(
+  id,
+  publishedDate,
+  publishedDateTime,
+  title,
+  authors,
+  thumbnail,
+  url
+)
 
 fun newWeekSection(
   initialDate: String = "init",

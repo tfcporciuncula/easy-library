@@ -6,6 +6,5 @@ import androidx.databinding.DataBindingUtil
 import androidx.databinding.ViewDataBinding
 import androidx.fragment.app.Fragment
 
-inline fun <reified T : ViewDataBinding> Fragment.inflateBinding(@LayoutRes layoutId: Int): T {
-  return DataBindingUtil.inflate(LayoutInflater.from(requireContext()), layoutId, null, false)
-}
+inline fun <reified T : ViewDataBinding> Fragment.inflateBinding(@LayoutRes layoutId: Int): T =
+  DataBindingUtil.inflate(LayoutInflater.from(requireContext()), layoutId, null, false)

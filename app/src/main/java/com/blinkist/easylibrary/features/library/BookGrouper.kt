@@ -1,13 +1,11 @@
 package com.blinkist.easylibrary.features.library
 
-import com.blinkist.easylibrary.model.LocalBook
-import com.blinkist.easylibrary.model.WeekSection
-import dagger.Reusable
+import com.blinkist.easylibrary.model.presentation.Book
+import com.blinkist.easylibrary.model.presentation.WeekSection
 import java.text.SimpleDateFormat
 import java.util.*
 import javax.inject.Inject
 
-@Reusable
 class BookGrouper @Inject constructor() {
 
   private val calendar = Calendar.getInstance().apply {
@@ -16,10 +14,10 @@ class BookGrouper @Inject constructor() {
 
   private val dateFormat = SimpleDateFormat.getDateInstance(SimpleDateFormat.LONG)
 
-  fun groupBooksByWeek(localBooks: List<LocalBook>, sortByDescending: Boolean): List<LibraryItem> {
-    if (localBooks.isEmpty()) return emptyList()
+  fun groupBooksByWeek(books: List<Book>, sortByDescending: Boolean): List<LibraryItem> {
+    if (books.isEmpty()) return emptyList()
 
-    val sortedBooks = sortBooks(sortByDescending, localBooks)
+    val sortedBooks = sortBooks(sortByDescending, books)
     val groupedBooks = mutableListOf<LibraryItem>()
 
     var currentDate = sortedBooks.first().publishedDateTime
@@ -40,11 +38,11 @@ class BookGrouper @Inject constructor() {
     return groupedBooks
   }
 
-  private fun sortBooks(sortByDescending: Boolean, localBooks: List<LocalBook>): List<LocalBook> {
+  private fun sortBooks(sortByDescending: Boolean, books: List<Book>): List<Book> {
     return if (sortByDescending) {
-      localBooks.sortedByDescending { it.publishedDateTime }
+      books.sortedByDescending { it.publishedDateTime }
     } else {
-      localBooks.sortedBy { it.publishedDateTime }
+      books.sortedBy { it.publishedDateTime }
     }
   }
 
@@ -57,10 +55,13 @@ class BookGrouper @Inject constructor() {
     calendar.set(Calendar.DAY_OF_WEEK, Calendar.SUNDAY)
     val finalDate = calendar.time
 
-    return WeekSection(dateFormat.format(initialDate), dateFormat.format(finalDate))
+    return WeekSection(
+      dateFormat.format(initialDate),
+      dateFormat.format(finalDate)
+    )
   }
 
-  private fun LocalBook.belongsToSameWeekAs(date: Long): Boolean {
+  private fun Book.belongsToSameWeekAs(date: Long): Boolean {
     calendar.time = Date(publishedDateTime)
     val bookYear = calendar.get(Calendar.YEAR)
     val bookWeekOfYear = calendar.get(Calendar.WEEK_OF_YEAR)

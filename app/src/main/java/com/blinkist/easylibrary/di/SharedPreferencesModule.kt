@@ -1,18 +1,24 @@
 package com.blinkist.easylibrary.di
 
 import android.content.Context
-import android.content.SharedPreferences
-import com.blinkist.easylibrary.R
+import androidx.preference.PreferenceManager
+import com.tfcporciuncula.flow.FlowSharedPreferences
 import dagger.Module
 import dagger.Provides
+import javax.inject.Qualifier
+import javax.inject.Singleton
 
 @Module
 object SharedPreferencesModule {
 
-  @Provides fun provideLibrarySharedPreferences(
+  @Provides @Singleton
+  fun provideFlowSharedPreferences(
     context: Context
-  ): SharedPreferences = context.getSharedPreferences(
-    context.getString(R.string.library_preferences_name),
-    Context.MODE_PRIVATE
-  )
+  ) = FlowSharedPreferences(PreferenceManager.getDefaultSharedPreferences(context))
+
+  @Qualifier annotation class SortByDescending
+
+  @Provides @SortByDescending
+  fun provideSortByDescendingPreference(flowSharedPreferences: FlowSharedPreferences) =
+    flowSharedPreferences.getBoolean("com.blinkist.easylibrary.KEY_SORT_ORDER", defaultValue = false)
 }

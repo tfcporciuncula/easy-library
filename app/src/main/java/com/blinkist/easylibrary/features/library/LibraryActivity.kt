@@ -3,7 +3,6 @@ package com.blinkist.easylibrary.features.library
 import android.os.Bundle
 import android.view.Menu
 import android.view.MenuItem
-import androidx.annotation.StringRes
 import androidx.appcompat.app.AppCompatActivity
 import androidx.databinding.DataBindingUtil
 import androidx.lifecycle.observe
@@ -12,8 +11,8 @@ import com.blinkist.easylibrary.databinding.ActivityLibraryBinding
 import com.blinkist.easylibrary.di.injector
 import com.blinkist.easylibrary.di.lazyViewModel
 import com.blinkist.easylibrary.features.library.LibraryViewState.ErrorEvent
+import com.blinkist.easylibrary.ktx.showSnackbar
 import com.blinkist.easylibrary.ktx.unsyncLazy
-import com.google.android.material.snackbar.Snackbar
 
 class LibraryActivity : AppCompatActivity() {
 
@@ -21,9 +20,9 @@ class LibraryActivity : AppCompatActivity() {
     DataBindingUtil.setContentView<ActivityLibraryBinding>(this, R.layout.activity_library)
   }
 
-  private val viewModel by lazyViewModel { injector.libraryViewModel }
-
   private val sortOptionDialog by unsyncLazy { SortOptionDialog.newInstance() }
+
+  private val viewModel by lazyViewModel { injector.libraryViewModel }
 
   override fun onCreate(savedInstanceState: Bundle?) {
     super.onCreate(savedInstanceState)
@@ -37,7 +36,7 @@ class LibraryActivity : AppCompatActivity() {
   }
 
   private fun handleState(state: LibraryViewState) {
-    viewModel.adapter.submitList(state.books)
+    viewModel.adapter.submitList(state.libraryItems)
 
     state.errorEvent?.let { event ->
       event.doIfNotHandled { showErrorMessage(event) }
@@ -49,13 +48,10 @@ class LibraryActivity : AppCompatActivity() {
 
   private fun showErrorMessage(errorEvent: ErrorEvent) {
     when (errorEvent) {
-      is ErrorEvent.Network -> showSnackbar(R.string.network_error_message)
-      is ErrorEvent.Unexpected -> showSnackbar(R.string.unexpected_error_message)
+      is ErrorEvent.Network -> binding.root.showSnackbar(R.string.network_error_message)
+      is ErrorEvent.Unexpected -> binding.root.showSnackbar(R.string.unexpected_error_message)
     }
   }
-
-  private fun showSnackbar(@StringRes resId: Int) =
-    Snackbar.make(binding.root, resId, Snackbar.LENGTH_LONG).show()
 
   override fun onCreateOptionsMenu(menu: Menu): Boolean {
     menuInflater.inflate(R.menu.menu, menu)

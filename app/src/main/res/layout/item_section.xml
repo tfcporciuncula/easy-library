@@ -3,7 +3,7 @@
   xmlns:android="http://schemas.android.com/apk/res/android">
 
   <data>
-    <variable name="item" type="com.blinkist.easylibrary.model.WeekSection" />
+    <variable name="item" type="com.blinkist.easylibrary.model.presentation.WeekSection" />
   </data>
 
   <TextView

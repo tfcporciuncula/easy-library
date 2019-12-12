@@ -6,7 +6,7 @@
   >
 
   <data>
-    <variable name="item" type="com.blinkist.easylibrary.model.LocalBook" />
+    <variable name="item" type="com.blinkist.easylibrary.model.presentation.Book" />
   </data>
 
   <androidx.cardview.widget.CardView

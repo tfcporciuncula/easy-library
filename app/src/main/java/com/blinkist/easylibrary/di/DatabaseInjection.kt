@@ -2,7 +2,7 @@ package com.blinkist.easylibrary.di
 
 import android.content.Context
 import androidx.room.Room
-import com.blinkist.easylibrary.data.EasyLibraryDatabase
+import com.blinkist.easylibrary.database.EasyLibraryDatabase
 import dagger.Module
 import dagger.Provides
 import javax.inject.Singleton
@@ -11,9 +11,8 @@ import javax.inject.Singleton
 object DatabaseModule {
 
   @Provides @Singleton
-  fun provideDatabase(context: Context): EasyLibraryDatabase {
-    return Room.databaseBuilder(context, EasyLibraryDatabase::class.java, "easy-library").build()
-  }
+  fun provideDatabase(context: Context) =
+    Room.databaseBuilder(context, EasyLibraryDatabase::class.java, "easy-library").build()
 }
 
 @Module

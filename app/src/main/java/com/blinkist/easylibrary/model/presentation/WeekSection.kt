@@ -1,4 +1,4 @@
-package com.blinkist.easylibrary.model
+package com.blinkist.easylibrary.model.presentation
 
 import com.blinkist.easylibrary.features.library.LibraryItem
 
