@@ -5,15 +5,11 @@ import android.widget.ImageView
 import androidx.core.view.isVisible
 import androidx.databinding.BindingAdapter
 import androidx.swiperefreshlayout.widget.SwipeRefreshLayout
-import com.bumptech.glide.Glide
-import com.bumptech.glide.load.resource.drawable.DrawableTransitionOptions
+import coil.api.load
 
 @BindingAdapter("imageUrl")
 fun loadImage(view: ImageView, imageUrl: String) {
-  Glide.with(view)
-    .load(imageUrl)
-    .transition(DrawableTransitionOptions.withCrossFade())
-    .into(view)
+  view.load(imageUrl) { crossfade(true) }
 }
 
 @BindingAdapter("onRefresh")
