@@ -7,7 +7,5 @@ import com.blinkist.easylibrary.di.DaggerTestComponent
 class TestApplication : Application(), DaggerComponentProvider {
 
   override val component
-    get() = DaggerTestComponent.builder()
-      .applicationContext(applicationContext)
-      .build()
+    get() = DaggerTestComponent.factory().create(applicationContext)
 }

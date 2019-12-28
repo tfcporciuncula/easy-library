@@ -10,7 +10,7 @@ import javax.inject.Singleton
 @Module(includes = [DaoModule::class])
 object DatabaseTestModule {
 
-  @JvmStatic @Provides @Singleton
+  @Provides @Singleton
   fun provideDatabase(context: Context): EasyLibraryDatabase {
     return Room.inMemoryDatabaseBuilder(context, EasyLibraryDatabase::class.java)
       .allowMainThreadQueries()

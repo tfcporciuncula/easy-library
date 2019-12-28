@@ -7,6 +7,6 @@ import javax.inject.Singleton
 @Component(modules = [RetrofitTestModule::class, DatabaseTestModule::class, SharedPreferencesModule::class])
 interface TestComponent : ApplicationComponent {
 
-  @Component.Builder
-  interface Builder : ApplicationComponent.Builder
+  @Component.Factory
+  interface Factory : ApplicationComponent.Factory
 }
