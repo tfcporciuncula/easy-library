@@ -10,7 +10,7 @@ import java.util.concurrent.TimeUnit
 
 object MockServer {
 
-  fun setupMockServer(context: Context) {
+  fun setupAndStart(context: Context) {
     RESTMockServerStarter.startSync(AndroidAssetsFileParser(context), AndroidLogger());
     RESTMockServer.whenGET(RequestMatchers.pathContains("books"))
       .delayBody(TimeUnit.SECONDS, 2)

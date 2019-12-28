@@ -9,8 +9,9 @@ import androidx.recyclerview.widget.ListAdapter
 import androidx.recyclerview.widget.RecyclerView
 import com.blinkist.easylibrary.BR
 
-abstract class DataBindingAdapter<T>(diffCallback: DiffUtil.ItemCallback<T>) :
-  ListAdapter<T, DataBindingAdapter.ViewHolder<T>>(diffCallback) {
+abstract class DataBindingAdapter<T>(
+  diffCallback: DiffUtil.ItemCallback<T>
+) : ListAdapter<T, DataBindingAdapter.ViewHolder<T>>(diffCallback) {
 
   class ViewHolder<T>(private val binding: ViewDataBinding) : RecyclerView.ViewHolder(binding.root) {
 

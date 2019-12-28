@@ -24,7 +24,7 @@ class EasyLibraryApplication : Application(), DaggerComponentProvider {
   }
 
   private fun initMockServer() {
-    MockServer.setupMockServer(this)
+    MockServer.setupAndStart(this)
   }
 
   private fun initTimber() {
