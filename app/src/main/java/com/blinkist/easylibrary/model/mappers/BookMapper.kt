@@ -34,7 +34,7 @@ class BookMapper @Inject constructor(
       publishedDateTime = local.publishedDateTime,
       title = local.title,
       authors = local.authors,
-      thumbnail = local.thumbnail,
+      imageUrl = local.thumbnail,
       url = local.url
     )
 }

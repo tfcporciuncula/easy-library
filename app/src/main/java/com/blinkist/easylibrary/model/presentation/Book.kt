@@ -8,6 +8,6 @@ data class Book(
   val publishedDateTime: Long,
   val title: String,
   val authors: String,
-  val thumbnail: String,
+  val imageUrl: String,
   val url: String
 ) : LibraryItem.Book()

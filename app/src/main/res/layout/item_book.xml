@@ -33,7 +33,7 @@
         android:layout_height="@dimen/book_cover_image_height"
         android:contentDescription="@string/library_item_image_description"
         android:scaleType="centerCrop"
-        app:imageUrl="@{item.thumbnail}"
+        app:imageUrl="@{item.imageUrl}"
         tools:src="@drawable/ic_launcher_background"
         />
 
