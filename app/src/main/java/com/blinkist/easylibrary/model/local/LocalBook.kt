@@ -3,6 +3,7 @@ package com.blinkist.easylibrary.model.local
 import androidx.room.ColumnInfo
 import androidx.room.Entity
 import androidx.room.PrimaryKey
+import org.threeten.bp.LocalDate
 
 @Entity(tableName = "books")
 data class LocalBook(
@@ -10,10 +11,7 @@ data class LocalBook(
   val id: Long,
 
   @ColumnInfo(name = "published_date")
-  val publishedDate: String,
-
-  @ColumnInfo(name = "published_date_time")
-  val publishedDateTime: Long,
+  val publishedDate: LocalDate,
 
   @ColumnInfo(name = "title")
   val title: String,

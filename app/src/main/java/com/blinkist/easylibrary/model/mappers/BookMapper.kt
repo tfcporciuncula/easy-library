@@ -1,15 +1,13 @@
 package com.blinkist.easylibrary.model.mappers
 
-import com.blinkist.easylibrary.di.ServiceModule
 import com.blinkist.easylibrary.model.local.LocalBook
 import com.blinkist.easylibrary.model.presentation.Book
 import com.blinkist.easylibrary.model.remote.RemoteBook
-import java.text.DateFormat
+import org.threeten.bp.ZoneId
+import org.threeten.bp.format.DateTimeFormatter
 import javax.inject.Inject
 
-class BookMapper @Inject constructor(
-  @ServiceModule.ServiceDateFormat private val dateFormat: DateFormat
-) {
+class BookMapper @Inject constructor() {
 
   fun remoteToLocal(remotes: List<RemoteBook>) = remotes.map { remoteToLocal(it) }
 
@@ -17,8 +15,6 @@ class BookMapper @Inject constructor(
     LocalBook(
       id = remote.id                       ?: throw IllegalArgumentException("Book has null id"),
       publishedDate = remote.publishedDate ?: throw IllegalArgumentException("Book has null publishedDate"),
-      publishedDateTime = dateFormat.parse(remote.publishedDate)?.time
-                                           ?: throw IllegalArgumentException("Book has invalid publishedDate"),
       title = remote.title                 ?: throw IllegalArgumentException("Book has null title"),
       authors = remote.authors             ?: throw IllegalArgumentException("Book has null authors"),
       thumbnail = remote.thumbnail         ?: throw IllegalArgumentException("Book has null thumbnail"),
@@ -30,8 +26,8 @@ class BookMapper @Inject constructor(
   private fun localToPresentation(local: LocalBook) =
     Book(
       id = local.id,
-      publishedDate = local.publishedDate,
-      publishedDateTime = local.publishedDateTime,
+      publishedDate = local.publishedDate.format((DateTimeFormatter.ISO_LOCAL_DATE)),
+      publishedDateTime = local.publishedDate.atStartOfDay(ZoneId.systemDefault()).toInstant().toEpochMilli(),
       title = local.title,
       authors = local.authors,
       imageUrl = local.thumbnail,
