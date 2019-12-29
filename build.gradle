@@ -1,19 +1,21 @@
 buildscript {
-  ext.kotlin_version = '1.3.61'
+  apply from: rootProject.file('dependencies.gradle')
+
   repositories {
     google()
     jcenter()
   }
+
   dependencies {
-    classpath 'com.android.tools.build:gradle:3.5.3'
-    classpath "org.jetbrains.kotlin:kotlin-gradle-plugin:$kotlin_version"
+    classpath "com.android.tools.build:gradle:${versions.agp}"
+    classpath "org.jetbrains.kotlin:kotlin-gradle-plugin:$versions.kotlin"
   }
 }
 
 allprojects {
   repositories {
     google()
-    jcenter()
+    mavenCentral()
     maven { url 'https://jitpack.io' }
   }
 }
