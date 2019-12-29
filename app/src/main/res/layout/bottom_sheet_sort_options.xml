@@ -5,6 +5,7 @@
   >
 
   <data>
+    <import type="com.blinkist.easylibrary.features.library.LibrarySortOrder" />
     <variable name="viewModel" type="com.blinkist.easylibrary.features.library.LibraryViewModel" />
   </data>
 
@@ -55,7 +56,7 @@
       android:scaleType="fitCenter"
       android:src="@drawable/ic_check"
       android:tint="@color/colorAccent"
-      app:isVisible="@{!viewModel.sortByDescending}"
+      app:isVisible="@{viewModel.currentSortOrder == LibrarySortOrder.ASCENDING}"
       />
 
     <ImageView
@@ -71,7 +72,7 @@
       android:scaleType="fitCenter"
       android:src="@drawable/ic_check"
       android:tint="@color/colorAccent"
-      app:isVisible="@{viewModel.sortByDescending}"
+      app:isVisible="@{viewModel.currentSortOrder == LibrarySortOrder.DESCENDING}"
       />
 
   </RelativeLayout>

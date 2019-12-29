@@ -2,6 +2,7 @@ package com.blinkist.easylibrary.di
 
 import android.content.Context
 import androidx.preference.PreferenceManager
+import com.blinkist.easylibrary.features.library.LibrarySortOrder
 import com.tfcporciuncula.flow.FlowSharedPreferences
 import dagger.Module
 import dagger.Provides
@@ -16,9 +17,9 @@ object SharedPreferencesModule {
     context: Context
   ) = FlowSharedPreferences(PreferenceManager.getDefaultSharedPreferences(context))
 
-  @Qualifier annotation class SortByDescending
+  @Qualifier annotation class LibrarySortOrderPreference
 
-  @Provides @SortByDescending
-  fun provideSortByDescendingPreference(flowSharedPreferences: FlowSharedPreferences) =
-    flowSharedPreferences.getBoolean("com.blinkist.easylibrary.KEY_SORT_ORDER", defaultValue = false)
+  @Provides @LibrarySortOrderPreference
+  fun provideLibrarySortOrderPreference(flowSharedPreferences: FlowSharedPreferences) =
+    flowSharedPreferences.getEnum("com.blinkist.easylibrary.KEY_SORT_ORDER", defaultValue = LibrarySortOrder.DESCENDING)
 }

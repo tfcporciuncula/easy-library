@@ -14,10 +14,10 @@ class BookGrouper @Inject constructor() {
 
   private val dateFormat = SimpleDateFormat.getDateInstance(SimpleDateFormat.LONG)
 
-  fun groupBooksByWeek(books: List<Book>, sortByDescending: Boolean): List<LibraryItem> {
+  fun groupBooksByWeek(books: List<Book>, sortOrder: LibrarySortOrder): List<LibraryItem> {
     if (books.isEmpty()) return emptyList()
 
-    val sortedBooks = sortBooks(sortByDescending, books)
+    val sortedBooks = sortBooks(sortOrder, books)
     val groupedBooks = mutableListOf<LibraryItem>()
 
     var currentDate = sortedBooks.first().publishedDateTime
@@ -38,12 +38,9 @@ class BookGrouper @Inject constructor() {
     return groupedBooks
   }
 
-  private fun sortBooks(sortByDescending: Boolean, books: List<Book>): List<Book> {
-    return if (sortByDescending) {
-      books.sortedByDescending { it.publishedDateTime }
-    } else {
-      books.sortedBy { it.publishedDateTime }
-    }
+  private fun sortBooks(sortOrder: LibrarySortOrder, books: List<Book>) = when (sortOrder) {
+    LibrarySortOrder.ASCENDING -> books.sortedBy { it.publishedDateTime }
+    LibrarySortOrder.DESCENDING -> books.sortedByDescending { it.publishedDateTime }
   }
 
   private fun buildWeekSection(date: Long): WeekSection {

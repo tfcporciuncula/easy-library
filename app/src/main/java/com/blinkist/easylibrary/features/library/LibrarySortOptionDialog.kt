@@ -9,12 +9,12 @@ import com.blinkist.easylibrary.databinding.BottomSheetSortOptionsBinding
 import com.blinkist.easylibrary.databinding.inflateBinding
 import com.google.android.material.bottomsheet.BottomSheetDialogFragment
 
-class SortOptionDialog : BottomSheetDialogFragment() {
+class LibrarySortOptionDialog : BottomSheetDialogFragment() {
 
   companion object {
-    private val TAG: String = SortOptionDialog::class.java.name
+    private val TAG: String = LibrarySortOptionDialog::class.java.name
 
-    fun newInstance() = SortOptionDialog()
+    fun newInstance() = LibrarySortOptionDialog()
   }
 
   private val viewModel by activityViewModels<LibraryViewModel>()

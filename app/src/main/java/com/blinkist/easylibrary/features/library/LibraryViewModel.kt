@@ -3,7 +3,7 @@ package com.blinkist.easylibrary.features.library
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
-import com.blinkist.easylibrary.di.SharedPreferencesModule.SortByDescending
+import com.blinkist.easylibrary.di.SharedPreferencesModule.LibrarySortOrderPreference
 import com.blinkist.easylibrary.features.library.LibraryViewState.ErrorEvent
 import com.blinkist.easylibrary.features.library.LibraryViewState.SortDialogClickedEvent
 import com.blinkist.easylibrary.ktx.launchCatching
@@ -18,19 +18,19 @@ import javax.inject.Inject
 class LibraryViewModel @Inject constructor(
   private val bookRepository: BookRepository,
   private val bookGrouper: BookGrouper,
-  @SortByDescending private val sortByDescendingPreference: Preference<Boolean>,
+  @LibrarySortOrderPreference private val sortOrderPreference: Preference<LibrarySortOrder>,
   val adapter: LibraryAdapter
 ) : ViewModel() {
 
   private val state = SafeMediatorLiveData(initialValue = LibraryViewState())
 
-  val sortByDescending get() = sortByDescendingPreference.get()
+  val currentSortOrder get() = sortOrderPreference.get()
 
   init {
     bookRepository
       .books()
-      .combine(sortByDescendingPreference.asFlow()) { books, sortByDescending ->
-        state.update { copy(libraryItems = bookGrouper.groupBooksByWeek(books, sortByDescending)) }
+      .combine(sortOrderPreference.asFlow()) { books, sortOrder ->
+        state.update { copy(libraryItems = bookGrouper.groupBooksByWeek(books, sortOrder)) }
       }
       .launchIn(viewModelScope)
 
@@ -58,12 +58,12 @@ class LibraryViewModel @Inject constructor(
     }
   }
 
-  fun onArrangeByDescendingClicked() = onArrangeBooksClicked(sortByDescending = true)
+  fun onArrangeByAscendingClicked() = onArrangeBooksClicked(LibrarySortOrder.ASCENDING)
 
-  fun onArrangeByAscendingClicked() = onArrangeBooksClicked(sortByDescending = false)
+  fun onArrangeByDescendingClicked() = onArrangeBooksClicked(LibrarySortOrder.DESCENDING)
 
-  private fun onArrangeBooksClicked(sortByDescending: Boolean) {
-    sortByDescendingPreference.set(sortByDescending)
+  private fun onArrangeBooksClicked(sortOrder: LibrarySortOrder) {
+    sortOrderPreference.set(sortOrder)
     state.update { copy(sortDialogClickedEvent = SortDialogClickedEvent()) }
   }
 }
