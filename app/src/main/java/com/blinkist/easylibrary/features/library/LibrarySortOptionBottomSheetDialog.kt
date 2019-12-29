@@ -5,16 +5,16 @@ import android.os.Bundle
 import androidx.fragment.app.FragmentManager
 import androidx.fragment.app.activityViewModels
 import com.blinkist.easylibrary.R
-import com.blinkist.easylibrary.databinding.BottomSheetSortOptionsBinding
+import com.blinkist.easylibrary.databinding.DialogLibrarySortOptionBinding
 import com.blinkist.easylibrary.databinding.inflateBinding
 import com.google.android.material.bottomsheet.BottomSheetDialogFragment
 
-class LibrarySortOptionDialog : BottomSheetDialogFragment() {
+private val TAG: String = LibrarySortOptionBottomSheetDialog::class.java.name
+
+class LibrarySortOptionBottomSheetDialog : BottomSheetDialogFragment() {
 
   companion object {
-    private val TAG: String = LibrarySortOptionDialog::class.java.name
-
-    fun newInstance() = LibrarySortOptionDialog()
+    fun newInstance() = LibrarySortOptionBottomSheetDialog()
   }
 
   private val viewModel by activityViewModels<LibraryViewModel>()
@@ -22,7 +22,7 @@ class LibrarySortOptionDialog : BottomSheetDialogFragment() {
   override fun onCreateDialog(savedInstanceState: Bundle?): Dialog {
     val dialog = super.onCreateDialog(savedInstanceState)
 
-    val binding = inflateBinding<BottomSheetSortOptionsBinding>(R.layout.bottom_sheet_sort_options)
+    val binding = inflateBinding<DialogLibrarySortOptionBinding>(R.layout.dialog_library_sort_option)
     binding.lifecycleOwner = this
     binding.viewModel = viewModel
     dialog.setContentView(binding.root)
