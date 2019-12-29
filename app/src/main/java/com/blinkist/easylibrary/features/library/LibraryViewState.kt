@@ -5,6 +5,7 @@ import com.blinkist.easylibrary.livedata.EmptyLiveDataEvent
 data class LibraryViewState(
   val libraryItems: List<LibraryItem> = emptyList(),
   val isLoading: Boolean = false,
+  val currentSortOrder: LibrarySortOrder = LibrarySortOrder.DEFAULT,
   val errorEvent: ErrorEvent? = null,
   val sortDialogClickedEvent: SortDialogClickedEvent? = null
 ) {

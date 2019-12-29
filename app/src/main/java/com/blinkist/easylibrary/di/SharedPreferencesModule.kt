@@ -21,5 +21,5 @@ object SharedPreferencesModule {
 
   @Provides @LibrarySortOrderPreference
   fun provideLibrarySortOrderPreference(flowSharedPreferences: FlowSharedPreferences) =
-    flowSharedPreferences.getEnum("com.blinkist.easylibrary.KEY_SORT_ORDER", defaultValue = LibrarySortOrder.DESCENDING)
+    flowSharedPreferences.getEnum("com.blinkist.easylibrary.KEY_SORT_ORDER", defaultValue = LibrarySortOrder.DEFAULT)
 }

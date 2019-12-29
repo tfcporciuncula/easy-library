@@ -25,13 +25,13 @@ class LibraryViewModel @Inject constructor(
 
   private val state = NonNullMutableLiveData(initialValue = LibraryViewState())
 
-  val currentSortOrder get() = sortOrderPreference.get()
-
   init {
     bookRepository
       .books()
       .combine(sortOrderPreference.asFlow()) { books, sortOrder ->
-        state.update { copy(libraryItems = bookGrouper.groupBooksByWeek(books, sortOrder)) }
+        state.update {
+          copy(libraryItems = bookGrouper.groupBooksByWeek(books, sortOrder), currentSortOrder = sortOrder)
+        }
       }
       .launchIn(viewModelScope)
 

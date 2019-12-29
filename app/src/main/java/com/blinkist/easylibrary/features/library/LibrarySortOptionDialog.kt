@@ -23,6 +23,7 @@ class LibrarySortOptionDialog : BottomSheetDialogFragment() {
     val dialog = super.onCreateDialog(savedInstanceState)
 
     val binding = inflateBinding<BottomSheetSortOptionsBinding>(R.layout.bottom_sheet_sort_options)
+    binding.lifecycleOwner = this
     binding.viewModel = viewModel
     dialog.setContentView(binding.root)
 

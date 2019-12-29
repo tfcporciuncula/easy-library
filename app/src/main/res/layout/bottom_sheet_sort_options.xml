@@ -56,7 +56,7 @@
       android:scaleType="fitCenter"
       android:src="@drawable/ic_check"
       android:tint="@color/colorAccent"
-      app:isVisible="@{viewModel.currentSortOrder == LibrarySortOrder.ASCENDING}"
+      app:isVisible="@{viewModel.state.currentSortOrder == LibrarySortOrder.ASCENDING}"
       />
 
     <ImageView
@@ -72,7 +72,7 @@
       android:scaleType="fitCenter"
       android:src="@drawable/ic_check"
       android:tint="@color/colorAccent"
-      app:isVisible="@{viewModel.currentSortOrder == LibrarySortOrder.DESCENDING}"
+      app:isVisible="@{viewModel.state.currentSortOrder == LibrarySortOrder.DESCENDING}"
       />
 
   </RelativeLayout>
