@@ -1,4 +1,4 @@
-package com.blinkist.easylibrary.features.library
+package com.blinkist.easylibrary.model.repositories
 
 import com.blinkist.easylibrary.database.BookDao
 import com.blinkist.easylibrary.model.mappers.BookMapper
