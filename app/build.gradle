@@ -54,66 +54,68 @@ android {
 }
 
 dependencies {
-  // Kotlin and Android dependencies
-  implementation "org.jetbrains.kotlin:kotlin-stdlib-jdk7:${versions.kotlin}"
-  implementation 'androidx.appcompat:appcompat:1.2.0-alpha01'
-  implementation 'androidx.activity:activity-ktx:1.1.0-rc03'
-  implementation 'androidx.fragment:fragment-ktx:1.2.0-rc04'
-  implementation 'com.google.android.material:material:1.2.0-alpha03'
-  implementation 'androidx.cardview:cardview:1.0.0'
-  implementation 'androidx.swiperefreshlayout:swiperefreshlayout:1.0.0'
-  implementation 'androidx.preference:preference:1.1.0'
+  // kotlin
+  implementation deps.kotlin.stdlib.jdk7
+  implementation deps.kotlin.coroutines.core
+  implementation deps.kotlin.coroutines.android
+  testImplementation deps.kotlin.coroutines.test
 
-  // Architecture components
-  implementation 'androidx.lifecycle:lifecycle-extensions:2.2.0-rc03'
-  implementation 'androidx.lifecycle:lifecycle-livedata-ktx:2.2.0-rc03'
-  implementation 'androidx.room:room-runtime:2.2.3'
-  implementation 'androidx.room:room-ktx:2.2.3'
-  kapt 'androidx.room:room-compiler:2.2.3'
+  // android
+  implementation deps.androidx.appCompat
+  implementation deps.androidx.annotation
+  implementation deps.androidx.activityKtx
+  implementation deps.androidx.fragmentKtx
+  implementation deps.androidx.coreKtx
+  implementation deps.androidx.preference
 
-  // Dagger
-  implementation 'com.google.dagger:dagger:2.25.4'
-  kapt 'com.google.dagger:dagger-compiler:2.25.4'
+  // architecture components
+  implementation deps.androidx.lifecycle.extensions
+  implementation deps.androidx.lifecycle.ktx
+  implementation deps.androidx.lifecycle.liveDataKtx
+  implementation deps.androidx.lifecycle.viewModelKtx
+  implementation deps.androidx.room.runtime
+  implementation deps.androidx.room.ktx
+  kapt deps.androidx.room.compiler
 
-  // Coroutines
-  implementation 'org.jetbrains.kotlinx:kotlinx-coroutines-core:1.3.3'
-  implementation 'org.jetbrains.kotlinx:kotlinx-coroutines-android:1.3.3'
+  // design
+  implementation deps.material
+  implementation deps.androidx.constraintLayout
+  implementation deps.androidx.cardView
+  implementation deps.androidx.swiperefreshlayout
 
-  // Retrofit
-  implementation 'com.squareup.okhttp3:okhttp:4.2.2'
-  implementation 'com.squareup.retrofit2:retrofit:2.7.0'
-  implementation 'com.squareup.retrofit2:converter-moshi:2.7.0'
-  implementation 'com.squareup.moshi:moshi:1.9.2'
-  kapt 'com.squareup.moshi:moshi-kotlin-codegen:1.9.2'
+  // dagger
+  implementation deps.dagger.library
+  kapt deps.dagger.compiler
 
-  // Coil
-  implementation 'io.coil-kt:coil:0.8.0'
+  // http
+  implementation deps.okhttp
+  implementation deps.retrofit.library
+  implementation deps.retrofit.moshiConverter
+  implementation deps.moshi.library
+  kapt deps.moshi.kotlinCodegen
+  implementation(deps.restMock) { exclude group: 'androidx.test' }
 
-  // Flow preferences
-  implementation 'com.github.tfcporciuncula:flow-preferences:1.0.0'
+  // coil
+  implementation deps.coil
 
-  // JSR-310
-  implementation 'com.jakewharton.threetenabp:threetenabp:1.2.1'
+  // misc
+  implementation deps.flowPreferences
+  implementation deps.threeTen
+  implementation deps.timber
 
-  // Timber
-  implementation 'com.jakewharton.timber:timber:4.7.1'
+  // unit testing
+  testImplementation deps.junit
+  testImplementation deps.androidx.lifecycle.test
+  testImplementation deps.mockito
+  testImplementation deps.truth
 
-  // RESTMock
-  implementation('com.github.andrzejchm.RESTMock:android:0.4.1') {
-    exclude group: 'androidx.test'
-  }
-
-  // Unit testing
-  testImplementation 'junit:junit:4.12'
-  testImplementation 'org.mockito:mockito-core:3.1.0'
-  testImplementation 'androidx.arch.core:core-testing:2.1.0'
-  testImplementation 'com.google.truth:truth:1.0'
-
-  // Instrumentation testing
-  androidTestImplementation 'androidx.test.espresso:espresso-core:3.2.0'
-  androidTestImplementation 'androidx.test.ext:junit:1.1.1'
-  androidTestImplementation 'androidx.test:rules:1.2.0'
-  androidTestImplementation 'androidx.arch.core:core-testing:2.1.0'
-  androidTestImplementation 'com.google.truth:truth:1.0'
-  kaptAndroidTest 'com.google.dagger:dagger-compiler:2.25.4'
+  // instrumentation testing
+  androidTestImplementation deps.androidx.test.core
+  androidTestImplementation deps.androidx.test.runner
+  androidTestImplementation deps.androidx.test.rules
+  androidTestImplementation deps.androidx.test.junit
+  androidTestImplementation deps.androidx.test.espresso
+  androidTestImplementation deps.androidx.lifecycle.test
+  androidTestImplementation deps.truth
+  kaptAndroidTest deps.dagger.compiler
 }
