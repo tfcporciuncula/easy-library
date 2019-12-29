@@ -2,9 +2,12 @@ package com.blinkist.easylibrary.features.library
 
 import com.blinkist.easylibrary.model.presentation.Book
 import com.blinkist.easylibrary.model.presentation.WeekSection
+import org.threeten.bp.ZoneId
 import java.text.SimpleDateFormat
 import java.util.*
 import javax.inject.Inject
+
+private val Book.dateTime get() = publishedDate.atStartOfDay(ZoneId.systemDefault()).toInstant().toEpochMilli()
 
 class BookGrouper @Inject constructor() {
 
@@ -20,7 +23,7 @@ class BookGrouper @Inject constructor() {
     val sortedBooks = sortBooks(sortOrder, books)
     val groupedBooks = mutableListOf<LibraryItem>()
 
-    var currentDate = sortedBooks.first().publishedDateTime
+    var currentDate = sortedBooks.first().dateTime
     var currentWeekSection = buildWeekSection(currentDate)
     groupedBooks.add(currentWeekSection)
 
@@ -28,7 +31,7 @@ class BookGrouper @Inject constructor() {
       if (it.belongsToSameWeekAs(currentDate)) {
         groupedBooks.add(it)
       } else {
-        currentDate = it.publishedDateTime
+        currentDate = it.dateTime
         currentWeekSection = buildWeekSection(currentDate)
         groupedBooks.add(currentWeekSection)
         groupedBooks.add(it)
@@ -39,8 +42,8 @@ class BookGrouper @Inject constructor() {
   }
 
   private fun sortBooks(sortOrder: LibrarySortOrder, books: List<Book>) = when (sortOrder) {
-    LibrarySortOrder.ASCENDING -> books.sortedBy { it.publishedDateTime }
-    LibrarySortOrder.DESCENDING -> books.sortedByDescending { it.publishedDateTime }
+    LibrarySortOrder.ASCENDING -> books.sortedBy { it.dateTime }
+    LibrarySortOrder.DESCENDING -> books.sortedByDescending { it.dateTime }
   }
 
   private fun buildWeekSection(date: Long): WeekSection {
@@ -59,7 +62,7 @@ class BookGrouper @Inject constructor() {
   }
 
   private fun Book.belongsToSameWeekAs(date: Long): Boolean {
-    calendar.time = Date(publishedDateTime)
+    calendar.time = Date(dateTime)
     val bookYear = calendar.get(Calendar.YEAR)
     val bookWeekOfYear = calendar.get(Calendar.WEEK_OF_YEAR)
 

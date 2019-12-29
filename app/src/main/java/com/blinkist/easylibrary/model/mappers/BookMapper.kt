@@ -3,7 +3,6 @@ package com.blinkist.easylibrary.model.mappers
 import com.blinkist.easylibrary.model.local.LocalBook
 import com.blinkist.easylibrary.model.presentation.Book
 import com.blinkist.easylibrary.model.remote.RemoteBook
-import org.threeten.bp.ZoneId
 import org.threeten.bp.format.DateTimeFormatter
 import javax.inject.Inject
 
@@ -26,8 +25,8 @@ class BookMapper @Inject constructor() {
   private fun localToPresentation(local: LocalBook) =
     Book(
       id = local.id,
-      publishedDate = local.publishedDate.format((DateTimeFormatter.ISO_LOCAL_DATE)),
-      publishedDateTime = local.publishedDate.atStartOfDay(ZoneId.systemDefault()).toInstant().toEpochMilli(),
+      publishedDate = local.publishedDate,
+      publishedDateText = local.publishedDate.format((DateTimeFormatter.ISO_LOCAL_DATE)),
       title = local.title,
       authors = local.authors,
       imageUrl = local.thumbnail,

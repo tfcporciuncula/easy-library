@@ -77,7 +77,7 @@
         android:layout_marginTop="@dimen/half_standard_margin"
         android:layout_marginBottom="@dimen/standard_margin"
         android:layout_toEndOf="@id/coverImageView"
-        android:text="@{item.publishedDate}"
+        android:text="@{item.publishedDateText}"
         android:textSize="@dimen/book_published_date_text_size"
         android:textStyle="italic"
         tools:text="2008-08-01"
