@@ -27,7 +27,7 @@ class BookMapper @Inject constructor(
 
   fun localToPresentation(locals: List<LocalBook>) = locals.map { localToPresentation(it) }
 
-  fun localToPresentation(local: LocalBook) =
+  private fun localToPresentation(local: LocalBook) =
     Book(
       id = local.id,
       publishedDate = local.publishedDate,

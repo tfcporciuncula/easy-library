@@ -4,7 +4,13 @@ import dagger.Component
 import javax.inject.Singleton
 
 @Singleton
-@Component(modules = [RetrofitTestModule::class, DatabaseTestModule::class, SharedPreferencesModule::class])
+@Component(
+  modules = [
+    RetrofitTestModule::class,
+    DatabaseTestModule::class,
+    SharedPreferencesModule::class
+  ]
+)
 interface TestComponent : ApplicationComponent {
 
   @Component.Factory

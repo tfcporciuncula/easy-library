@@ -7,7 +7,7 @@ import com.blinkist.easylibrary.di.SharedPreferencesModule.LibrarySortOrderPrefe
 import com.blinkist.easylibrary.features.library.LibraryViewState.ErrorEvent
 import com.blinkist.easylibrary.features.library.LibraryViewState.SortDialogClickedEvent
 import com.blinkist.easylibrary.ktx.launchCatching
-import com.blinkist.easylibrary.livedata.SafeMediatorLiveData
+import com.blinkist.easylibrary.livedata.NonNullMutableLiveData
 import com.tfcporciuncula.flow.Preference
 import kotlinx.coroutines.flow.combine
 import kotlinx.coroutines.flow.launchIn
@@ -22,7 +22,7 @@ class LibraryViewModel @Inject constructor(
   val adapter: LibraryAdapter
 ) : ViewModel() {
 
-  private val state = SafeMediatorLiveData(initialValue = LibraryViewState())
+  private val state = NonNullMutableLiveData(initialValue = LibraryViewState())
 
   val currentSortOrder get() = sortOrderPreference.get()
 

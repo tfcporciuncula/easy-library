@@ -7,7 +7,13 @@ import dagger.Component
 import javax.inject.Singleton
 
 @Singleton
-@Component(modules = [RetrofitModule::class, DatabaseModule::class, SharedPreferencesModule::class])
+@Component(
+  modules = [
+    RetrofitModule::class,
+    DatabaseModule::class,
+    SharedPreferencesModule::class
+  ]
+)
 interface ApplicationComponent {
 
   @Component.Factory
