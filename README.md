@@ -20,18 +20,16 @@ I chose my favorite technologies to work with when it comes to Android developme
 - [Kotlin](https://kotlinlang.org/)
 - [Architecture Components](https://developer.android.com/topic/libraries/architecture/)
 - [Dagger](https://google.github.io/dagger/)
-- [RxJava](https://github.com/ReactiveX/RxJava)
+- ~[RxJava](https://github.com/ReactiveX/RxJava)~ [Coroutines](https://github.com/Kotlin/kotlinx.coroutines)
 - [Retrofit](http://square.github.io/retrofit/)
-- [Glide](https://github.com/bumptech/glide)
-- [Timber](https://github.com/JakeWharton/timber)
+- ~[Glide](https://github.com/bumptech/glide)~ [Coil](https://github.com/coil-kt/coil)
+- [Data Binding](https://developer.android.com/topic/libraries/data-binding)
 
 And I added [RESTMock](https://github.com/andrzejchm/RESTMock) for the mock API.
 
 ## Architecture
 
-It's a simple MVVM with the new [ViewModel](https://developer.android.com/topic/libraries/architecture/viewmodel) and no [Data Binding](https://developer.android.com/topic/libraries/data-binding).
-
-There's no state in the view (except for some disposables) or any other dependency besides the ViewModel. Android's standard way of injecting the ViewModel into the Activity is already pretty good, so I'm sticking to it instead of using Dagger. However, the ViewModel has its own dependencies, and Dagger provides those. The nice thing about providing the ViewModel dependencies through Dagger (besides all the good things dependency injection brings) is that once we want to test the ViewModel, we can simply switch the dependencies for mocks and test the ViewModel in isolation.
+It's a simple MVVM using [`ViewModel`](https://developer.android.com/topic/libraries/architecture/viewmodel) and [`LiveData`](https://developer.android.com/topic/libraries/architecture/livedata). Everything is glued together with Dagger, so any dependency can easily be swapped for testing.
 
 ## Data Flow
 
@@ -47,7 +45,7 @@ All my decisions towards how to handle the data were made based on my needs and 
 
 I wrote the data code with the goal of achieving every single item from this list - that and building a testable architecture were the two guiding principles for most of the code in the app.
 
-The data is coming from RESTMock, and the [current configuration](https://github.com/tfcporciuncula/easy-library/blob/master/app/src/main/java/com/blinkist/easylibrary/EasyLibraryApplication.kt#L35-L48) makes each request take 2 seconds to respond. The sequence of responses are configured in a way one can test different aspects of the app in a single run with only few data syncs:
+The data is coming from RESTMock, and the [current configuration](https://github.com/tfcporciuncula/easy-library/blob/f9f018cd6a930d9ae3f733618441f3970c2315a8/app/src/main/java/com/blinkist/easylibrary/service/MockServer.kt#L15-L25) makes each request take 2 seconds to respond. The sequence of responses are configured in a way one can test different aspects of the app in a single run with only few data syncs:
 
 - The first request returns a simple list with 16 books
 - The second request returns the same list with one more book
