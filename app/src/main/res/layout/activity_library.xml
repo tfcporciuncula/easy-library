@@ -25,7 +25,6 @@
         android:id="@+id/recyclerView"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:adapter="@{viewModel.adapter}"
         android:clipToPadding="false"
         android:paddingTop="@dimen/half_standard_margin"
         android:paddingBottom="@dimen/half_standard_margin"

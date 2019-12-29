@@ -4,9 +4,10 @@ import androidx.recyclerview.widget.DiffUtil
 import com.blinkist.easylibrary.R
 import com.blinkist.easylibrary.databinding.DataBindingAdapter
 import com.blinkist.easylibrary.model.presentation.Book
-import javax.inject.Inject
 
-class LibraryAdapter @Inject constructor() : DataBindingAdapter<LibraryItem>(DiffCallback()) {
+class LibraryAdapter(
+  private val onItemClicked: (Book) -> Unit
+) : DataBindingAdapter<LibraryItem>(DiffCallback()) {
 
   class DiffCallback : DiffUtil.ItemCallback<LibraryItem>() {
 
@@ -21,5 +22,13 @@ class LibraryAdapter @Inject constructor() : DataBindingAdapter<LibraryItem>(Dif
   override fun getItemViewType(position: Int) = when (getItem(position)) {
     is LibraryItem.Book -> R.layout.item_book
     is LibraryItem.Section -> R.layout.item_section
+  }
+
+  override fun onBindViewHolder(holder: ViewHolder<LibraryItem>, position: Int) {
+    super.onBindViewHolder(holder, position)
+
+    (getItem(position) as? Book)?.let { book ->
+      holder.itemView.setOnClickListener { onItemClicked(book) }
+    }
   }
 }

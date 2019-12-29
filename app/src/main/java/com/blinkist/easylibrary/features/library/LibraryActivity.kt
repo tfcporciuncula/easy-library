@@ -32,17 +32,23 @@ class LibraryActivity : AppCompatActivity() {
   private fun setupUi() {
     binding.lifecycleOwner = this
     binding.viewModel = viewModel
-    viewModel.state().observe(this, ::handleState)
+
+    observeViewState()
   }
 
-  private fun handleState(state: LibraryViewState) {
-    viewModel.adapter.submitList(state.libraryItems)
+  private fun observeViewState() {
+    val adapter = LibraryAdapter(onItemClicked = viewModel::onItemClicked)
+    binding.recyclerView.adapter = adapter
 
-    state.errorEvent?.let { event ->
-      event.doIfNotHandled { showErrorMessage(event) }
-    }
-    state.sortDialogClickedEvent?.let { event ->
-      event.doIfNotHandled { sortOptionDialog.dismiss() }
+    viewModel.state().observe(this) { state ->
+      adapter.submitList(state.libraryItems)
+
+      state.errorEvent?.let { event ->
+        event.doIfNotHandled { showErrorMessage(event) }
+      }
+      state.sortDialogClickedEvent?.let { event ->
+        event.doIfNotHandled { sortOptionDialog.dismiss() }
+      }
     }
   }
 

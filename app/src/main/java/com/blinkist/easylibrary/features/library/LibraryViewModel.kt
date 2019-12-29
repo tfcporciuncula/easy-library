@@ -8,6 +8,7 @@ import com.blinkist.easylibrary.features.library.LibraryViewState.ErrorEvent
 import com.blinkist.easylibrary.features.library.LibraryViewState.SortDialogClickedEvent
 import com.blinkist.easylibrary.ktx.launchCatching
 import com.blinkist.easylibrary.livedata.NonNullMutableLiveData
+import com.blinkist.easylibrary.model.presentation.Book
 import com.blinkist.easylibrary.model.repositories.BookRepository
 import com.tfcporciuncula.flow.Preference
 import kotlinx.coroutines.flow.combine
@@ -19,8 +20,7 @@ import javax.inject.Inject
 class LibraryViewModel @Inject constructor(
   private val bookRepository: BookRepository,
   private val bookGrouper: BookGrouper,
-  @LibrarySortOrderPreference private val sortOrderPreference: Preference<LibrarySortOrder>,
-  val adapter: LibraryAdapter
+  @LibrarySortOrderPreference private val sortOrderPreference: Preference<LibrarySortOrder>
 ) : ViewModel() {
 
   private val state = NonNullMutableLiveData(initialValue = LibraryViewState())
@@ -39,6 +39,10 @@ class LibraryViewModel @Inject constructor(
   }
 
   fun state(): LiveData<LibraryViewState> = state
+
+  fun onItemClicked(book: Book) {
+    Timber.d("${book.title} was clicked!")
+  }
 
   fun updateBooks() = viewModelScope.launchCatching(
     block = {
