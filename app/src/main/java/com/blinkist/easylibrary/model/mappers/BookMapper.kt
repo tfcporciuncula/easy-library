@@ -12,12 +12,12 @@ class BookMapper @Inject constructor() {
 
   private fun remoteToLocal(remote: RemoteBook) =
     LocalBook(
-      id = remote.id                       ?: throw IllegalArgumentException("Book has null id"),
-      publishedDate = remote.publishedDate ?: throw IllegalArgumentException("Book has null publishedDate"),
-      title = remote.title                 ?: throw IllegalArgumentException("Book has null title"),
-      authors = remote.authors             ?: throw IllegalArgumentException("Book has null authors"),
-      thumbnail = remote.thumbnail         ?: throw IllegalArgumentException("Book has null thumbnail"),
-      url = remote.url                     ?: throw IllegalArgumentException("Book has null url")
+      id = remote.id,
+      publishedDate = remote.publishedDate,
+      title = remote.title,
+      authors = remote.authors,
+      thumbnail = remote.thumbnail,
+      url = remote.url
     )
 
   fun localToPresentation(locals: List<LocalBook>) = locals.map { localToPresentation(it) }
