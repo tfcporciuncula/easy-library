@@ -10,7 +10,6 @@ import com.blinkist.easylibrary.R
 import com.blinkist.easylibrary.databinding.ActivityLibraryBinding
 import com.blinkist.easylibrary.di.injector
 import com.blinkist.easylibrary.di.lazyViewModel
-import com.blinkist.easylibrary.features.library.LibraryViewState.ErrorEvent
 import com.blinkist.easylibrary.ktx.showSnackbar
 import com.blinkist.easylibrary.ktx.unsyncLazy
 
@@ -43,19 +42,12 @@ class LibraryActivity : AppCompatActivity() {
     viewModel.state().observe(this) { state ->
       adapter.submitList(state.libraryItems)
 
-      state.errorEvent?.let { event ->
-        event.doIfNotHandled { showErrorMessage(event) }
+      state.snackbarEvent?.let { event ->
+        event.doIfNotHandled { binding.root.showSnackbar(it) }
       }
       state.sortDialogClickedEvent?.let { event ->
         event.doIfNotHandled { sortOptionDialog.dismiss() }
       }
-    }
-  }
-
-  private fun showErrorMessage(errorEvent: ErrorEvent) {
-    when (errorEvent) {
-      is ErrorEvent.Network -> binding.root.showSnackbar(R.string.network_error_message)
-      is ErrorEvent.Unexpected -> binding.root.showSnackbar(R.string.unexpected_error_message)
     }
   }
 

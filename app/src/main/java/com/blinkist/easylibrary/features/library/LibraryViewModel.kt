@@ -3,8 +3,9 @@ package com.blinkist.easylibrary.features.library
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
+import com.blinkist.easylibrary.R
 import com.blinkist.easylibrary.di.SharedPreferencesModule.LibrarySortOrderPreference
-import com.blinkist.easylibrary.features.library.LibraryViewState.ErrorEvent
+import com.blinkist.easylibrary.features.library.LibraryViewState.SnackbarEvent
 import com.blinkist.easylibrary.features.library.LibraryViewState.SortDialogClickedEvent
 import com.blinkist.easylibrary.ktx.launchCatching
 import com.blinkist.easylibrary.livedata.NonNullMutableLiveData
@@ -54,11 +55,15 @@ class LibraryViewModel @Inject constructor(
   )
 
   private fun handleFailure(throwable: Throwable) {
-    if (throwable !is IOException) Timber.e(throwable)
+    val isNetworkFailure = throwable is IOException
+    if (!isNetworkFailure) Timber.e(throwable)
+
     state.update {
       copy(
         isLoading = false,
-        errorEvent = if (throwable is IOException) ErrorEvent.Network() else ErrorEvent.Unexpected()
+        snackbarEvent = SnackbarEvent(
+          messageResId = if (isNetworkFailure) R.string.network_error_message else R.string.unexpected_error_message
+        )
       )
     }
   }
