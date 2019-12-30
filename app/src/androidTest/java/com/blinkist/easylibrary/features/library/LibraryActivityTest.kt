@@ -1,47 +1,104 @@
 package com.blinkist.easylibrary.features.library
 
-import androidx.test.espresso.Espresso.onView
-import androidx.test.espresso.assertion.ViewAssertions.doesNotExist
-import androidx.test.espresso.assertion.ViewAssertions.matches
-import androidx.test.espresso.matcher.ViewMatchers.isAssignableFrom
-import androidx.test.espresso.matcher.ViewMatchers.isDisplayed
-import androidx.test.ext.junit.runners.AndroidJUnit4
+import com.blinkist.easylibrary.test.BaseRestMockTest
 import com.blinkist.easylibrary.test.LazyActivityTestRule
-import com.blinkist.easylibrary.test.instrumentationContext
-import com.google.android.material.snackbar.Snackbar
-import io.appflate.restmock.RESTMockServer
-import io.appflate.restmock.RESTMockServerStarter
-import io.appflate.restmock.android.AndroidAssetsFileParser
-import io.appflate.restmock.android.AndroidLogger
-import io.appflate.restmock.utils.RequestMatchers.pathContains
-import org.junit.After
-import org.junit.Before
 import org.junit.Rule
 import org.junit.Test
-import org.junit.runner.RunWith
 
-@RunWith(AndroidJUnit4::class)
-class LibraryActivityTest {
+class LibraryActivityTest : BaseRestMockTest() {
 
   @get:Rule var activityRule = LazyActivityTestRule(LibraryActivity::class.java)
 
-  @Before fun setup() {
-    RESTMockServerStarter.startSync(AndroidAssetsFileParser(instrumentationContext), AndroidLogger())
+  private lateinit var libraryActivity: LibraryPageObject
+
+  override fun setup() {
+    super.setup()
+    libraryActivity = LibraryPageObject(activityRule)
   }
 
-  @After fun tearDown() = RESTMockServer.shutdown()
-
-  @Test fun shouldShowSnackbarWhenServiceFails() {
-    RESTMockServer.whenGET(pathContains("books")).thenReturnFile(500, "error")
-    activityRule.launchActivity()
-
-    onView(isAssignableFrom(Snackbar.SnackbarLayout::class.java)).check(matches(isDisplayed()))
+  @Test fun shouldShowSnackbarWhenServiceFailsOnLaunch() = with(libraryActivity) {
+    givenServiceFails()
+    launch()
+    assertSnackbarIsVisible()
   }
 
-  @Test fun shouldNotShowSnackbarWhenThereIsNoError() {
-    RESTMockServer.whenGET(pathContains("books")).thenReturnFile(200, "books.json")
-    activityRule.launchActivity()
+  @Test fun shouldNotShowSnackbarWhenThereIsNoErrorOnLaunch() = with(libraryActivity) {
+    givenServiceReturnsDefaultBooks()
+    launch()
+    assertSnackbarIsNotPresent()
+  }
 
-    onView(isAssignableFrom(Snackbar.SnackbarLayout::class.java)).check(doesNotExist())
+  @Test fun shouldReloadDataOnPullToRefresh() = with(libraryActivity) {
+    givenServiceReturnsDefaultBooksAndOneMoreBookOnRefresh()
+    launch()
+    assertListItemCount(defaultBooksAmount)
+    pullToRefresh()
+    assertListItemCount(defaultBooksAmount + 1)
+  }
+
+  @Test fun shouldShowSnackbarAndKeepBooksWhenServiceFailsOnRefresh() = with(libraryActivity) {
+    givenServiceReturnsDefaultBooksAndFailsOnRefresh()
+    launch()
+    assertListItemCount(defaultBooksAmount)
+    pullToRefresh()
+    assertListItemCount(defaultBooksAmount)
+    assertSnackbarIsVisible()
+  }
+
+  @Test fun shouldShowSortBottomSheetDialogWhenSortMenuIsClicked() = with(libraryActivity) {
+    givenServiceReturnsDefaultBooks()
+    launch()
+    clickOnSortMenu()
+    assertSortOptionsAreVisible()
+  }
+
+  @Test fun shouldDismissDialogWhenClickingOnIt() = with(libraryActivity) {
+    givenServiceReturnsDefaultBooks()
+    launch()
+    clickOnSortMenu()
+    clickOnDescending()
+    assertSortOptionDialogIsNotPresent()
+    clickOnSortMenu()
+    clickOnAscending()
+    assertSortOptionDialogIsNotPresent()
+  }
+
+  @Test fun shouldHaveDescendingOrderSelectedAsDefault() = with(libraryActivity) {
+    givenServiceReturnsDefaultBooks()
+    launch()
+    assertFirstBookIsMostRecent()
+    clickOnSortMenu()
+    assertDescendingSortOptionIsSelected()
+  }
+
+  @Test fun shouldSelectLatestClickedSortOption() = with(libraryActivity) {
+    givenServiceReturnsDefaultBooks()
+    launch()
+    clickOnSortMenu()
+    clickOnAscending()
+    clickOnSortMenu()
+    assertAscendingSortOptionIsSelected()
+    clickOnDescending()
+    clickOnSortMenu()
+    assertDescendingSortOptionIsSelected()
+  }
+
+  @Test fun shouldReorderListWhenSortOrderChanges() = with(libraryActivity) {
+    givenServiceReturnsDefaultBooks()
+    launch()
+    clickOnSortMenu()
+    clickOnAscending()
+    scrollToTop()
+    assertFirstBookIsLeastRecent()
+  }
+
+  @Test fun shouldDismissDialogAndNotReorderListWhenSameSortOrderIsSelected() = with(libraryActivity) {
+    givenServiceReturnsDefaultBooks()
+    launch()
+    clickOnSortMenu()
+    assertDescendingSortOptionIsSelected()
+    clickOnDescending()
+    assertFirstBookIsMostRecent()
+    assertSortOptionDialogIsNotPresent()
   }
 }

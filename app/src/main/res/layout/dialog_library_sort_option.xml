@@ -44,6 +44,7 @@
       />
 
     <ImageView
+      android:id="@+id/ascendingCheckImageView"
       android:layout_width="wrap_content"
       android:layout_height="wrap_content"
       android:layout_alignTop="@id/ascendingTextView"
@@ -60,6 +61,7 @@
       />
 
     <ImageView
+      android:id="@+id/descendingCheckImageView"
       android:layout_width="wrap_content"
       android:layout_height="wrap_content"
       android:layout_alignTop="@id/descendingTextView"

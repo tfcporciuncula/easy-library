@@ -10,4 +10,4 @@ class LazyActivityTestRule<T : Activity>(activityClass: Class<T>) : ActivityTest
   fun launchActivity(): T = launchActivity(null)
 }
 
-val instrumentationContext: Context get() = InstrumentationRegistry.getInstrumentation().context
+inline val instrumentationContext: Context get() = InstrumentationRegistry.getInstrumentation().context

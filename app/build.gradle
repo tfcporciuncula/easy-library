@@ -13,12 +13,17 @@ android {
     versionCode 1
     versionName '1.0'
     testInstrumentationRunner 'com.blinkist.easylibrary.TestInstrumentationRunner'
+    testInstrumentationRunnerArguments clearPackageData: 'true'
 
     javaCompileOptions {
       annotationProcessorOptions {
         arguments = ["room.schemaLocation": "$projectDir/schemas".toString()]
       }
     }
+  }
+
+  testOptions {
+    execution 'ANDROIDX_TEST_ORCHESTRATOR'
   }
 
   buildTypes {
@@ -114,8 +119,9 @@ dependencies {
   androidTestImplementation deps.androidx.test.runner
   androidTestImplementation deps.androidx.test.rules
   androidTestImplementation deps.androidx.test.junit
-  androidTestImplementation deps.androidx.test.espresso
-  androidTestImplementation deps.androidx.lifecycle.test
+  androidTestImplementation deps.androidx.test.espresso.core
+  androidTestImplementation deps.androidx.test.espresso.contrib
   androidTestImplementation deps.truth
+  androidTestUtil deps.androidx.test.orchestrator
   kaptAndroidTest deps.dagger.compiler
 }
