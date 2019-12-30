@@ -3,9 +3,9 @@
 
   <dimen name="half_standard_margin">8dp</dimen>
   <dimen name="standard_margin">16dp</dimen>
+  <dimen name="cardCornerRadius">0dp</dimen>
 
   <dimen name="section_title_text_size">20sp</dimen>
-  <dimen name="book_card_corner_radius">0dp</dimen>
   <dimen name="book_cover_image_width">112dp</dimen>
   <dimen name="book_cover_image_height">136dp</dimen>
   <dimen name="book_title_text_size">16sp</dimen>

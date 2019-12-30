@@ -9,7 +9,7 @@
     <variable name="item" type="com.blinkist.easylibrary.model.presentation.Book" />
   </data>
 
-  <androidx.cardview.widget.CardView
+  <com.google.android.material.card.MaterialCardView
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
     android:layout_marginStart="@dimen/standard_margin"
@@ -18,8 +18,6 @@
     android:layout_marginBottom="@dimen/half_standard_margin"
     android:clickable="true"
     android:focusable="true"
-    android:foreground="?attr/selectableItemBackground"
-    app:cardCornerRadius="@dimen/book_card_corner_radius"
     >
 
     <RelativeLayout
@@ -85,6 +83,6 @@
 
     </RelativeLayout>
 
-  </androidx.cardview.widget.CardView>
+  </com.google.android.material.card.MaterialCardView>
 
 </layout>

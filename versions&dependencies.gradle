@@ -10,12 +10,12 @@ ext.versions = [
     'androidx'       : [
         'activityKtx'       : '1.1.0-rc03',
         'appCompat'         : '1.2.0-alpha01',
-        'cardView'          : '1.0.0',
         'constraintLayout'  : '2.0.0-beta4',
         'coreKtx'           : '1.2.0-rc01',
         'fragmentKtx'       : '1.2.0-rc04',
         'lifecycle'         : '2.2.0-rc03',
         'preference'        : '1.1.0',
+        'recyclerview'      : '1.2.0-alpha01',
         'room'              : '2.2.3',
         'swiperefreshlayout': '1.1.0-alpha03',
         'test'              : [
@@ -48,7 +48,6 @@ ext.deps = [
     'androidx'       : [
         'activityKtx'       : "androidx.activity:activity-ktx:${versions.androidx.activityKtx}",
         'appCompat'         : "androidx.appcompat:appcompat:${versions.androidx.appCompat}",
-        'cardView'          : "androidx.cardview:cardview:${versions.androidx.cardView}",
         'constraintLayout'  : "androidx.constraintlayout:constraintlayout:${versions.androidx.constraintLayout}",
         'coreKtx'           : "androidx.core:core-ktx:${versions.androidx.coreKtx}",
         'fragmentKtx'       : "androidx.fragment:fragment-ktx:${versions.androidx.fragmentKtx}",
@@ -60,6 +59,7 @@ ext.deps = [
             'test'        : "androidx.arch.core:core-testing:2.1.0" // TODO: follow up here
         ],
         'preference'        : "androidx.preference:preference:${versions.androidx.preference}",
+        'recyclerview'      : "androidx.recyclerview:recyclerview:${versions.androidx.recyclerview}",
         'room'              : [
             'runtime' : "androidx.room:room-runtime:${versions.androidx.room}",
             'ktx'     : "androidx.room:room-ktx:${versions.androidx.room}",

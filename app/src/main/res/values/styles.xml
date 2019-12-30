@@ -5,6 +5,12 @@
     <item name="colorPrimary">@color/colorPrimary</item>
     <item name="colorPrimaryDark">@color/colorPrimaryDark</item>
     <item name="colorAccent">@color/colorAccent</item>
+
+    <item name="materialCardViewStyle">@style/CardViewStyle</item>
+  </style>
+
+  <style name="CardViewStyle" parent="Widget.MaterialComponents.CardView">
+    <item name="cardCornerRadius">@dimen/cardCornerRadius</item>
   </style>
 
 </resources>

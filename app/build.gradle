@@ -87,7 +87,7 @@ dependencies {
   // design
   implementation deps.material
   implementation deps.androidx.constraintLayout
-  implementation deps.androidx.cardView
+  implementation deps.androidx.recyclerview
   implementation deps.androidx.swiperefreshlayout
 
   // dagger
