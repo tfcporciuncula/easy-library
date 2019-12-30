@@ -9,7 +9,6 @@ ext.versions = [
     'agp'            : '3.5.3',
     'androidx'       : [
         'activityKtx'       : '1.1.0-rc03',
-        'annotation'        : '1.1.0',
         'appCompat'         : '1.2.0-alpha01',
         'cardView'          : '1.0.0',
         'constraintLayout'  : '2.0.0-beta4',
@@ -48,7 +47,6 @@ ext.versions = [
 ext.deps = [
     'androidx'       : [
         'activityKtx'       : "androidx.activity:activity-ktx:${versions.androidx.activityKtx}",
-        'annotation'        : "androidx.annotation:annotation:${versions.androidx.annotation}",
         'appCompat'         : "androidx.appcompat:appcompat:${versions.androidx.appCompat}",
         'cardView'          : "androidx.cardview:cardview:${versions.androidx.cardView}",
         'constraintLayout'  : "androidx.constraintlayout:constraintlayout:${versions.androidx.constraintLayout}",

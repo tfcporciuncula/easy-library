@@ -67,7 +67,6 @@ dependencies {
 
   // android
   implementation deps.androidx.appCompat
-  implementation deps.androidx.annotation
   implementation deps.androidx.activityKtx
   implementation deps.androidx.fragmentKtx
   implementation deps.androidx.coreKtx
