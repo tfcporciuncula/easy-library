@@ -13,9 +13,8 @@ import javax.inject.Singleton
 object SharedPreferencesModule {
 
   @Provides @Singleton
-  fun provideFlowSharedPreferences(
-    context: Context
-  ) = FlowSharedPreferences(PreferenceManager.getDefaultSharedPreferences(context))
+  fun provideFlowSharedPreferences(context: Context) =
+    FlowSharedPreferences(PreferenceManager.getDefaultSharedPreferences(context))
 
   @Qualifier annotation class LibrarySortOrderPreference
 

@@ -1,89 +1,80 @@
 package com.blinkist.easylibrary.features.library
 
 import androidx.arch.core.executor.testing.InstantTaskExecutorRule
-import androidx.lifecycle.MutableLiveData
-import com.blinkist.easylibrary.database.BookDao
-import com.blinkist.easylibrary.model.*
-import com.blinkist.easylibrary.model.local.BookMapper
-import com.blinkist.easylibrary.model.local.LocalBook
-import com.blinkist.easylibrary.service.BooksService
+import com.blinkist.easylibrary.model.newBook
+import com.blinkist.easylibrary.model.newWeekSection
+import com.blinkist.easylibrary.model.repositories.BookRepository
+import com.blinkist.easylibrary.test.CoroutinesRule
 import com.google.common.truth.Truth.assertThat
-import io.reactivex.Single
+import com.tfcporciuncula.flow.Preference
+import kotlinx.coroutines.flow.flowOf
+import kotlinx.coroutines.runBlocking
+import org.junit.Before
 import org.junit.Rule
 import org.junit.Test
 import org.junit.runner.RunWith
 import org.mockito.BDDMockito.given
-import org.mockito.BDDMockito.verify
 import org.mockito.Mock
 import org.mockito.junit.MockitoJUnitRunner
+import java.io.IOException
 
 @RunWith(MockitoJUnitRunner::class)
 class LibraryViewModelTest {
 
-  @get:Rule val instantTaskExecutorRule = InstantTaskExecutorRule()
+  @get:Rule val liveDataRule = InstantTaskExecutorRule()
+  @get:Rule val coroutinesRule = CoroutinesRule()
 
-  @Mock private lateinit var booksService: BooksService
-
-  @Mock private lateinit var bookMapper: BookMapper
-
-  @Mock private lateinit var bookDao: BookDao
-
+  @Mock private lateinit var bookRepository: BookRepository
   @Mock private lateinit var bookGrouper: BookGrouper
+  @Mock private lateinit var sortOrderPreference: Preference<LibrarySortOrder>
 
-  @Mock private lateinit var libraryAdapter: LibraryAdapter
+  private lateinit var viewModel: LibraryViewModel
+  private val viewModelState get() = viewModel.state().value!!
 
-  @Mock private lateinit var sortByDescendingPreference: SortByDescendingPreference
-
-  private val viewModel
-    get() = LibraryViewModel(
-      booksService,
-      bookMapper,
-      bookDao,
-      bookGrouper,
-      sortByDescendingPreference,
-      libraryAdapter
-    )
-
-  @Test fun testBooks() {
-    val books = listOf(newBook(id = 11), newBook(id = 22))
-    given(bookDao.books()).willReturn(
-      MutableLiveData<List<LocalBook>>().apply { value = books }
-    )
-
-    val librariables = listOf(newWeekSection()) + books
-    given(bookGrouper.groupBooksByWeek(books, sortByDescending = true)).willReturn(librariables)
-
-    viewModel.state().observeForever {
-      assertThat(librariables).isEqualTo(it?.libraryItems)
-    }
+  @Before fun setup() {
+    given(bookRepository.books()).willReturn(flowOf(emptyList()))
+    given(sortOrderPreference.asFlow()).willReturn(flowOf(LibrarySortOrder.DEFAULT))
   }
 
-  @Test fun testUpdateBooks() {
-    val booksRaw = listOf(newBookRaw(id = 12), newBookRaw(id = 34))
-    given(booksService.books()).willReturn(Single.just(booksRaw))
-    val books = listOf(newBook(id = 1), newBook(id = 2))
-    given(bookMapper.fromRaw(booksRaw)).willReturn(books)
+  @Test fun `should have fetched library items in the state`() {
+    val books = listOf(newBook(id = 11), newBook(id = 22))
+    given(bookRepository.books()).willReturn(flowOf(books))
+
+    val libraryItems = listOf(newWeekSection()) + books
+    given(bookGrouper.groupBooksByWeek(books, LibrarySortOrder.DEFAULT)).willReturn(libraryItems)
+
+    initViewModel()
+
+    assertThat(viewModelState.libraryItems).isEqualTo(libraryItems)
+  }
+
+  @Test fun `should emit snackbar event if repository call fails`() {
+    initViewModel()
+
+    runBlocking { given(bookRepository.updateBooks()).will { throw IOException() } }
 
     viewModel.updateBooks()
-    verify(booksService).books()
-    verify(bookDao).clear()
-    verify(bookDao).insert(books)
+
+    assertThat(viewModelState.snackbarEvent).isNotNull()
   }
 
-  @Test fun testRearrangeBooks() {
-    val books = listOf(newBook(id = 10), newBook(id = 20))
-    given(bookDao.books()).willReturn(
-      MutableLiveData<List<LocalBook>>().apply { value = books }
-    )
+  @Test fun `should update current sort order in the state when it changes`() {
+    initViewModel()
 
-    with(viewModel) {
-      rearrangeBooks(sortByDescending = false)
-      assertThat(sortByDescending).isFalse()
-      verify(bookGrouper).groupBooksByWeek(books, sortByDescending = false)
+    viewModel.onArrangeByAscendingClicked()
 
-      rearrangeBooks(sortByDescending = true)
-      assertThat(sortByDescending).isTrue()
-      verify(bookGrouper).groupBooksByWeek(books, sortByDescending = true)
-    }
+    assertThat(viewModelState.currentSortOrder).isEqualTo(LibrarySortOrder.ASCENDING)
+  }
+
+  @Test fun `should emit dialog clicked event when sort order changes`() {
+    initViewModel()
+
+    viewModel.onArrangeByAscendingClicked()
+
+    assertThat(viewModelState.sortDialogClickedEvent).isNotNull()
+  }
+
+  private fun initViewModel() {
+    viewModel = LibraryViewModel(bookRepository, bookGrouper, sortOrderPreference)
   }
 }
