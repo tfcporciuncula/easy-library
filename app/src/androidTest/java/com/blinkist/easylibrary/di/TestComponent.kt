@@ -1,5 +1,6 @@
 package com.blinkist.easylibrary.di
 
+import com.blinkist.easylibrary.database.EasyLibraryDatabase
 import dagger.Component
 import javax.inject.Singleton
 
@@ -15,4 +16,6 @@ interface TestComponent : ApplicationComponent {
 
   @Component.Factory
   interface Factory : ApplicationComponent.Factory
+
+  val inMemoryDatabase: EasyLibraryDatabase
 }

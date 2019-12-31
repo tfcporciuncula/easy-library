@@ -8,12 +8,12 @@ import kotlinx.coroutines.test.setMain
 import org.junit.rules.TestWatcher
 import org.junit.runner.Description
 
-class CoroutinesTestRule<T : CoroutineDispatcher>(
+class CoroutinesRule<T : CoroutineDispatcher>(
   val dispatcher: T
 ) : TestWatcher() {
 
   companion object {
-    operator fun invoke() = CoroutinesTestRule(Dispatchers.Unconfined)
+    operator fun invoke() = CoroutinesRule(Dispatchers.Unconfined)
   }
 
   override fun starting(description: Description?) {

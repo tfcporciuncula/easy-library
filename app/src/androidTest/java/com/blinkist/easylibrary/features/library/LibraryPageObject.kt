@@ -21,8 +21,8 @@ class LibraryPageObject(private val activityRule: LazyActivityTestRule<LibraryAc
   private val recyclerView get() = onView(withId(R.id.recyclerView))
   private val snackbar get() = onView(isAssignableFrom(Snackbar.SnackbarLayout::class.java))
   private val sortMenu get() = onView(withId(R.id.menu_sort))
-  private val ascendingOption get() = onView(withText("Ascending"))
-  private val descendingOption get() = onView(withText("Descending"))
+  private val ascendingOption get() = onView(withId(R.id.ascendingTextView))
+  private val descendingOption get() = onView(withId(R.id.descendingTextView))
   private val ascendingCheck get() = onView(withId(R.id.ascendingCheckImageView))
   private val descendingCheck get() = onView(withId(R.id.descendingCheckImageView))
 

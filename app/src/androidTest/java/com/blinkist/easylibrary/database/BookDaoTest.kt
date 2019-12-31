@@ -1,32 +1,19 @@
 package com.blinkist.easylibrary.database
 
-import androidx.room.Room
 import androidx.test.ext.junit.runners.AndroidJUnit4
 import com.blinkist.easylibrary.model.local.LocalBook
 import com.blinkist.easylibrary.model.newLocalBook
-import com.blinkist.easylibrary.test.instrumentationContext
+import com.blinkist.easylibrary.test.testInjector
 import com.google.common.truth.Truth.assertThat
 import kotlinx.coroutines.flow.first
 import kotlinx.coroutines.runBlocking
-import org.junit.After
-import org.junit.Before
 import org.junit.Test
 import org.junit.runner.RunWith
 
 @RunWith(AndroidJUnit4::class)
 class BookDaoTest {
 
-  private lateinit var database: EasyLibraryDatabase
-  private lateinit var bookDao: BookDao
-
-  @Before fun setup() {
-    database = Room.inMemoryDatabaseBuilder(instrumentationContext, EasyLibraryDatabase::class.java)
-      .allowMainThreadQueries()
-      .build()
-    bookDao = database.bookDao()
-  }
-
-  @After fun tearDown() = database.close()
+  private val bookDao = testInjector.inMemoryDatabase.bookDao()
 
   @Test fun testInsert() {
     val books = listOf(newLocalBook(id = 1), newLocalBook(id = 2))

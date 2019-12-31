@@ -1,18 +1,22 @@
 package com.blinkist.easylibrary.features.library
 
-import com.blinkist.easylibrary.test.BaseRestMockTest
+import androidx.test.ext.junit.runners.AndroidJUnit4
 import com.blinkist.easylibrary.test.LazyActivityTestRule
+import com.blinkist.easylibrary.test.RestMockRule
+import org.junit.Before
 import org.junit.Rule
 import org.junit.Test
+import org.junit.runner.RunWith
 
-class LibraryActivityTest : BaseRestMockTest() {
+@RunWith(AndroidJUnit4::class)
+class LibraryActivityTest {
 
+  @get:Rule var restMockRule = RestMockRule()
   @get:Rule var activityRule = LazyActivityTestRule(LibraryActivity::class.java)
 
   private lateinit var libraryActivity: LibraryPageObject
 
-  override fun setup() {
-    super.setup()
+  @Before fun setup() {
     libraryActivity = LibraryPageObject(activityRule)
   }
 
