@@ -8,16 +8,16 @@ import androidx.swiperefreshlayout.widget.SwipeRefreshLayout
 import coil.api.load
 
 @BindingAdapter("imageUrl")
-fun loadImage(view: ImageView, imageUrl: String) {
-  view.load(imageUrl) { crossfade(true) }
+fun ImageView.loadImage(imageUrl: String) {
+  load(imageUrl) { crossfade(true) }
 }
 
 @BindingAdapter("onRefresh")
-fun setOnRefreshListener(view: SwipeRefreshLayout, listener: () -> Unit) {
-  view.setOnRefreshListener { listener() }
+fun SwipeRefreshLayout.setOnRefreshListener(listener: () -> Unit) {
+  setOnRefreshListener { listener() }
 }
 
 @BindingAdapter("isVisible")
-fun setVisibility(view: View, isVisible: Boolean) {
-  view.isVisible = isVisible
+fun View.setVisibility(isVisible: Boolean) {
+  this.isVisible = isVisible
 }
