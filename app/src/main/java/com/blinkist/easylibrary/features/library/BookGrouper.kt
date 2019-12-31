@@ -7,6 +7,7 @@ import java.text.SimpleDateFormat
 import java.util.*
 import javax.inject.Inject
 
+// TODO: rewrite logic with three ten
 private val Book.dateTime get() = publishedDate.atStartOfDay(ZoneId.systemDefault()).toInstant().toEpochMilli()
 
 class BookGrouper @Inject constructor() {
