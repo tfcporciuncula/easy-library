@@ -14,6 +14,7 @@ import org.junit.Rule
 import org.junit.Test
 import org.junit.runner.RunWith
 import org.mockito.BDDMockito.given
+import org.mockito.BDDMockito.verify
 import org.mockito.Mock
 import org.mockito.junit.MockitoJUnitRunner
 import java.io.IOException
@@ -58,15 +59,23 @@ class LibraryViewModelTest {
     assertThat(viewModelState.snackbarEvent).isNotNull()
   }
 
-  @Test fun `should update current sort order in the state when it changes`() {
+  @Test fun `should update sort order when ascending sort option is clicked`() {
     initViewModel()
 
     viewModel.onArrangeByAscendingClicked()
 
-    assertThat(viewModelState.currentSortOrder).isEqualTo(LibrarySortOrder.ASCENDING)
+    verify(sortOrderPreference).set(LibrarySortOrder.ASCENDING)
   }
 
-  @Test fun `should emit dialog clicked event when sort order changes`() {
+  @Test fun `should update sort order when descending sort option is clicked`() {
+    initViewModel()
+
+    viewModel.onArrangeByDescendingClicked()
+
+    verify(sortOrderPreference).set(LibrarySortOrder.DESCENDING)
+  }
+
+  @Test fun `should emit dialog clicked event when sort option is clicked`() {
     initViewModel()
 
     viewModel.onArrangeByAscendingClicked()
