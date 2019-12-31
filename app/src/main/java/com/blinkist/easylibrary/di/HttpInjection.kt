@@ -25,7 +25,7 @@ object RetrofitModule {
 @Module
 object MoshiModule {
 
-  @Provides fun provideMoshi() = Moshi.Builder()
+  @Provides fun provideMoshi(): Moshi = Moshi.Builder()
     .add(OffsetDateTimeAdapter())
     .add(LocalDateAdapter())
     .build()

@@ -1,45 +1,61 @@
 package com.blinkist.easylibrary.model
 
-import com.blinkist.easylibrary.model.local.BookMapper
+import com.blinkist.easylibrary.model.local.LocalBook
+import com.blinkist.easylibrary.model.mappers.BookMapper
 import com.blinkist.easylibrary.model.remote.RemoteBook
 import com.google.common.truth.Truth.assertThat
+import org.junit.Before
 import org.junit.Test
 import org.junit.runner.RunWith
-import org.mockito.BDDMockito.given
-import org.mockito.InjectMocks
-import org.mockito.Mock
 import org.mockito.junit.MockitoJUnitRunner
-import java.text.DateFormat
-import java.util.*
+import org.threeten.bp.LocalDate
 
 @RunWith(MockitoJUnitRunner::class)
 class BookMapperTest {
 
-  @Mock private lateinit var dateFormat: DateFormat
+  private lateinit var bookMapper: BookMapper
 
-  @InjectMocks private lateinit var bookMapper: BookMapper
+  @Before fun setup() {
+    bookMapper = BookMapper()
+  }
 
-  @Test fun testMapping() {
-    val bookRaw = RemoteBook(
+  @Test fun `test remote to local mapping`() {
+    val remoteBook = RemoteBook(
       id = 10,
-      publishedDate = "10/10/2010",
+      publishedDate = LocalDate.parse("2010-10-10"),
       title = "title",
       authors = "authors",
       thumbnail = "thumbnail",
       url = "url"
     )
 
-    val time = 101010L
-    given(dateFormat.parse(bookRaw.publishedDate)).willReturn(Date(time))
+    val localBook = bookMapper.remoteToLocal(listOf(remoteBook)).first()
 
-    val book = bookMapper.fromRaw(listOf(bookRaw)).first()
+    assertThat(localBook.id).isEqualTo(remoteBook.id)
+    assertThat(localBook.publishedDate).isEqualTo(remoteBook.publishedDate)
+    assertThat(localBook.title).isEqualTo(remoteBook.title)
+    assertThat(localBook.authors).isEqualTo(remoteBook.authors)
+    assertThat(localBook.thumbnail).isEqualTo(remoteBook.thumbnail)
+    assertThat(localBook.url).isEqualTo(remoteBook.url)
+  }
 
-    assertThat(book.id).isEqualTo(bookRaw.id)
-    assertThat(book.publishedDate).isEqualTo(bookRaw.publishedDate)
-    assertThat(book.publishedDateTime).isEqualTo(time)
-    assertThat(book.title).isEqualTo(bookRaw.title)
-    assertThat(book.authors).isEqualTo(bookRaw.authors)
-    assertThat(book.thumbnail).isEqualTo(bookRaw.thumbnail)
-    assertThat(book.url).isEqualTo(bookRaw.url)
+  @Test fun `test local to presentation mapping`() {
+    val localBook = LocalBook(
+      id = 10,
+      publishedDate = LocalDate.parse("2010-10-10"),
+      title = "title",
+      authors = "authors",
+      thumbnail = "thumbnail",
+      url = "url"
+    )
+
+    val book = bookMapper.localToPresentation(listOf(localBook)).first()
+
+    assertThat(book.id).isEqualTo(localBook.id)
+    assertThat(book.publishedDate).isEqualTo(localBook.publishedDate)
+    assertThat(book.title).isEqualTo(localBook.title)
+    assertThat(book.authors).isEqualTo(localBook.authors)
+    assertThat(book.imageUrl).isEqualTo(localBook.thumbnail)
+    assertThat(book.url).isEqualTo(localBook.url)
   }
 }

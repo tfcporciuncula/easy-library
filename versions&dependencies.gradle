@@ -40,7 +40,8 @@ ext.versions = [
     'restMock'       : '0.4.1',
     'retrofit'       : '2.7.0',
     'timber'         : '4.7.1',
-    'threeTen'       : '1.2.1',
+    'threeTenBp'     : '1.4.0',
+    'threeTenAbp'    : '1.2.1',
     'truth'          : '1.0'
 ]
 
@@ -108,6 +109,7 @@ ext.deps = [
         'moshiConverter': "com.squareup.retrofit2:converter-moshi:${versions.retrofit}"
     ],
     'timber'         : "com.jakewharton.timber:timber:${versions.timber}",
-    'threeTen'       : "com.jakewharton.threetenabp:threetenabp:${versions.threeTen}",
+    'threeTenBp'     : "org.threeten:threetenbp:${versions.threeTenBp}",
+    'threeTenAbp'    : "com.jakewharton.threetenabp:threetenabp:${versions.threeTenAbp}",
     'truth'          : "com.google.truth:truth:${versions.truth}"
 ]

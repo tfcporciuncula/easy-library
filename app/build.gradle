@@ -107,7 +107,7 @@ dependencies {
 
   // misc
   implementation deps.flowPreferences
-  implementation deps.threeTen
+  implementation deps.threeTenAbp
   implementation deps.timber
 
   // unit testing
@@ -115,6 +115,7 @@ dependencies {
   testImplementation deps.androidx.lifecycle.test
   testImplementation deps.mockito
   testImplementation deps.truth
+  testImplementation deps.threeTenBp
 
   // instrumentation testing
   androidTestImplementation deps.androidx.test.core
