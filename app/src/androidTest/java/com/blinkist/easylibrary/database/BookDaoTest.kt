@@ -3,7 +3,7 @@ package com.blinkist.easylibrary.database
 import androidx.room.Room
 import androidx.test.ext.junit.runners.AndroidJUnit4
 import com.blinkist.easylibrary.model.local.LocalBook
-import com.blinkist.easylibrary.model.newBook
+import com.blinkist.easylibrary.model.newLocalBook
 import com.blinkist.easylibrary.test.instrumentationContext
 import com.google.common.truth.Truth.assertThat
 import kotlinx.coroutines.flow.first
@@ -29,7 +29,7 @@ class BookDaoTest {
   @After fun tearDown() = database.close()
 
   @Test fun testInsert() {
-    val books = listOf(newBook(id = 1), newBook(id = 2))
+    val books = listOf(newLocalBook(id = 1), newLocalBook(id = 2))
 
     runBlocking {
       bookDao.insert(books)
@@ -39,7 +39,7 @@ class BookDaoTest {
   }
 
   @Test fun testReplace() {
-    val book = newBook(id = 20)
+    val book = newLocalBook(id = 20)
 
     runBlocking {
       bookDao.insert(listOf(book))
@@ -51,7 +51,7 @@ class BookDaoTest {
   }
 
   @Test fun testClear() {
-    val books = listOf(newBook(id = 123), newBook(id = 456))
+    val books = listOf(newLocalBook(id = 123), newLocalBook(id = 456))
 
     runBlocking {
       bookDao.insert(books)
@@ -62,8 +62,8 @@ class BookDaoTest {
   }
 
   @Test fun testClearAndInsert() {
-    val books = listOf(newBook(id = 11), newBook(id = 22))
-    val newBooks = listOf(newBook(id = 34), newBook(id = 56))
+    val books = listOf(newLocalBook(id = 11), newLocalBook(id = 22))
+    val newBooks = listOf(newLocalBook(id = 34), newLocalBook(id = 56))
 
     runBlocking {
       bookDao.insert(books)
