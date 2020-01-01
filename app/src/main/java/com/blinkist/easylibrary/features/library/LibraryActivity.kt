@@ -10,6 +10,7 @@ import com.blinkist.easylibrary.R
 import com.blinkist.easylibrary.databinding.ActivityLibraryBinding
 import com.blinkist.easylibrary.di.injector
 import com.blinkist.easylibrary.di.lazyViewModel
+import com.blinkist.easylibrary.ktx.select
 import com.blinkist.easylibrary.ktx.showSnackbar
 import com.blinkist.easylibrary.ktx.unsyncLazy
 
@@ -38,17 +39,21 @@ class LibraryActivity : AppCompatActivity() {
   private fun observeViewState() {
     val adapter = LibraryAdapter(onItemClicked = viewModel::onItemClicked)
     binding.recyclerView.adapter = adapter
-
-    viewModel.state().observe(this) { state ->
-      adapter.submitList(state.libraryItems)
-
-      state.snackbarEvent?.let { event ->
-        event.doIfNotHandled { binding.root.showSnackbar(it) }
-      }
-      state.sortDialogClickedEvent?.let { event ->
-        event.doIfNotHandled { sortOptionDialog.dismiss() }
-      }
+    viewModel.state().select { libraryItems }.observe(this) {
+      adapter.submitList(it)
     }
+
+    binding.isLoading = viewModel.state().select { isLoading }
+
+    viewModel.state().select({ snackbarEvent }, { sortDialogClickedEvent })
+      .observe(this) { (snackbarEvent, sortDialogClickedEvent) ->
+        snackbarEvent?.let { event ->
+          event.doIfNotHandled { binding.root.showSnackbar(it) }
+        }
+        sortDialogClickedEvent?.let { event ->
+          event.doIfNotHandled { sortOptionDialog.dismiss() }
+        }
+      }
   }
 
   override fun onCreateOptionsMenu(menu: Menu): Boolean {

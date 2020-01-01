@@ -7,6 +7,7 @@
 
   <data>
     <variable name="viewModel" type="com.blinkist.easylibrary.features.library.LibraryViewModel" />
+    <variable name="isLoading" type="androidx.lifecycle.LiveData&lt;Boolean>" />
   </data>
 
   <androidx.coordinatorlayout.widget.CoordinatorLayout
@@ -18,7 +19,7 @@
       android:layout_width="match_parent"
       android:layout_height="match_parent"
       app:onRefresh="@{() -> viewModel.updateBooks()}"
-      app:refreshing="@{viewModel.state.isLoading}"
+      app:refreshing="@{isLoading}"
       >
 
       <androidx.recyclerview.widget.RecyclerView
