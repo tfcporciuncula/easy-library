@@ -14,7 +14,8 @@ private val TAG: String = LibrarySortOptionBottomSheetDialog::class.java.name
 class LibrarySortOptionBottomSheetDialog : BottomSheetDialogFragment() {
 
   companion object {
-    fun newInstance() = LibrarySortOptionBottomSheetDialog()
+    fun getInstance(manager: FragmentManager) =
+      manager.findFragmentByTag(TAG) as LibrarySortOptionBottomSheetDialog? ?: LibrarySortOptionBottomSheetDialog()
   }
 
   private val viewModel by activityViewModels<LibraryViewModel>()

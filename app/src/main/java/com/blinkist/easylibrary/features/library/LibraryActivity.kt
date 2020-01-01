@@ -20,7 +20,7 @@ class LibraryActivity : AppCompatActivity() {
     DataBindingUtil.setContentView<ActivityLibraryBinding>(this, R.layout.activity_library)
   }
 
-  private val sortOptionDialog by unsyncLazy { LibrarySortOptionBottomSheetDialog.newInstance() }
+  private val sortOptionDialog by unsyncLazy { LibrarySortOptionBottomSheetDialog.getInstance(supportFragmentManager) }
 
   private val viewModel by lazyViewModel { injector.libraryViewModel }
 
