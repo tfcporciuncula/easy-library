@@ -6,7 +6,6 @@ import androidx.lifecycle.viewModelScope
 import com.blinkist.easylibrary.R
 import com.blinkist.easylibrary.di.SharedPreferencesModule.LibrarySortOrderPreference
 import com.blinkist.easylibrary.features.library.LibraryViewState.SnackbarEvent
-import com.blinkist.easylibrary.features.library.LibraryViewState.SortDialogClickedEvent
 import com.blinkist.easylibrary.ktx.launchCatching
 import com.blinkist.easylibrary.livedata.NonNullMutableLiveData
 import com.blinkist.easylibrary.model.presentation.Book
@@ -72,8 +71,5 @@ class LibraryViewModel @Inject constructor(
 
   fun onArrangeByDescendingClicked() = onArrangeBooksClicked(LibrarySortOrder.DESCENDING)
 
-  private fun onArrangeBooksClicked(sortOrder: LibrarySortOrder) {
-    sortOrderPreference.set(sortOrder)
-    state.update { copy(sortDialogClickedEvent = SortDialogClickedEvent()) }
-  }
+  private fun onArrangeBooksClicked(sortOrder: LibrarySortOrder) = sortOrderPreference.set(sortOrder)
 }

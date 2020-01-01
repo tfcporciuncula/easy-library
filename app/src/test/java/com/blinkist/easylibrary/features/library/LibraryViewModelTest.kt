@@ -75,14 +75,6 @@ class LibraryViewModelTest {
     verify(sortOrderPreference).set(LibrarySortOrder.DESCENDING)
   }
 
-  @Test fun `should emit dialog clicked event when sort option is clicked`() {
-    initViewModel()
-
-    viewModel.onArrangeByAscendingClicked()
-
-    assertThat(viewModelState.sortDialogClickedEvent).isNotNull()
-  }
-
   private fun initViewModel() {
     viewModel = LibraryViewModel(bookRepository, bookGrouper, sortOrderPreference)
   }
