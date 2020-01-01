@@ -32,19 +32,19 @@ class LibraryActivity : AppCompatActivity() {
   private fun setupUi() {
     binding.lifecycleOwner = this
     binding.viewModel = viewModel
-
-    observeViewState()
-  }
-
-  private fun observeViewState() {
-    val adapter = LibraryAdapter(onItemClicked = viewModel::onItemClicked)
-    binding.recyclerView.adapter = adapter
-    viewModel.state().select { libraryItems }.observe(this) {
-      adapter.submitList(it)
-    }
-
     binding.isLoading = viewModel.state().select { isLoading }
 
+    setupRecyclerView()
+    observeEvents()
+  }
+
+  private fun setupRecyclerView() {
+    val adapter = LibraryAdapter(onItemClicked = viewModel::onItemClicked)
+    binding.recyclerView.adapter = adapter
+    viewModel.state().select { libraryItems }.observe(this, adapter::submitList)
+  }
+
+  private fun observeEvents() {
     viewModel.state().select({ snackbarEvent }, { sortDialogClickedEvent })
       .observe(this) { (snackbarEvent, sortDialogClickedEvent) ->
         snackbarEvent?.let { event ->
