@@ -23,7 +23,7 @@ I chose my favorite technologies to work with when it comes to Android developme
 - ~[RxJava](https://github.com/ReactiveX/RxJava)~ [Coroutines](https://github.com/Kotlin/kotlinx.coroutines)
 - [Retrofit](http://square.github.io/retrofit/)
 - ~[Glide](https://github.com/bumptech/glide)~ [Coil](https://github.com/coil-kt/coil)
-- [Data Binding](https://developer.android.com/topic/libraries/data-binding)
+- ~[Data Binding](https://developer.android.com/topic/libraries/data-binding)~ [View Binding](https://developer.android.com/topic/libraries/view-binding)
 
 And I added [RESTMock](https://github.com/andrzejchm/RESTMock) for the mock API.
 
