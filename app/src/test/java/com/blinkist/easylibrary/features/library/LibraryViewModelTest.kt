@@ -4,7 +4,7 @@ import androidx.arch.core.executor.testing.InstantTaskExecutorRule
 import com.blinkist.easylibrary.model.newBook
 import com.blinkist.easylibrary.model.newWeekSection
 import com.blinkist.easylibrary.model.repositories.BookRepository
-import com.blinkist.easylibrary.test.CoroutinesRule
+import com.blinkist.easylibrary.test.CoroutineRule
 import com.blinkist.easylibrary.test.getOrAwaitValue
 import com.google.common.truth.Truth.assertThat
 import com.tfcporciuncula.flow.Preference
@@ -24,7 +24,7 @@ import java.io.IOException
 class LibraryViewModelTest {
 
   @get:Rule val liveDataRule = InstantTaskExecutorRule()
-  @get:Rule val coroutinesRule = CoroutinesRule()
+  @get:Rule val coroutineRule = CoroutineRule()
 
   @Mock private lateinit var bookRepository: BookRepository
   @Mock private lateinit var bookGrouper: BookGrouper
