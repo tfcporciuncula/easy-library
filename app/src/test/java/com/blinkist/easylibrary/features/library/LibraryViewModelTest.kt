@@ -5,6 +5,7 @@ import com.blinkist.easylibrary.model.newBook
 import com.blinkist.easylibrary.model.newWeekSection
 import com.blinkist.easylibrary.model.repositories.BookRepository
 import com.blinkist.easylibrary.test.CoroutinesRule
+import com.blinkist.easylibrary.test.getOrAwaitValue
 import com.google.common.truth.Truth.assertThat
 import com.tfcporciuncula.flow.Preference
 import kotlinx.coroutines.flow.flowOf
@@ -30,7 +31,7 @@ class LibraryViewModelTest {
   @Mock private lateinit var sortOrderPreference: Preference<LibrarySortOrder>
 
   private lateinit var viewModel: LibraryViewModel
-  private val viewModelState get() = viewModel.state().value!!
+  private val viewModelState get() = viewModel.select { this }.getOrAwaitValue()
 
   @Before fun setup() {
     given(bookRepository.books()).willReturn(flowOf(emptyList()))
@@ -57,6 +58,10 @@ class LibraryViewModelTest {
     viewModel.updateBooks()
 
     assertThat(viewModelState.snackbarEvent).isNotNull()
+  }
+
+  @Test fun `should have isLoading true in the state while updating books`() {
+    // TODO: I think this would be doable with fakes
   }
 
   @Test fun `should update sort order when ascending sort option is clicked`() {

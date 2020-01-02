@@ -1,12 +1,12 @@
 package com.blinkist.easylibrary.features.library
 
-import androidx.lifecycle.LiveData
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.blinkist.easylibrary.R
 import com.blinkist.easylibrary.di.SharedPreferencesModule.LibrarySortOrderPreference
 import com.blinkist.easylibrary.features.library.LibraryViewState.SnackbarEvent
 import com.blinkist.easylibrary.ktx.launchCatching
+import com.blinkist.easylibrary.ktx.select
 import com.blinkist.easylibrary.livedata.NonNullMutableLiveData
 import com.blinkist.easylibrary.model.presentation.Book
 import com.blinkist.easylibrary.model.repositories.BookRepository
@@ -38,11 +38,7 @@ class LibraryViewModel @Inject constructor(
     updateBooks()
   }
 
-  fun state(): LiveData<LibraryViewState> = state
-
-  fun onItemClicked(book: Book) {
-    Timber.d("${book.title} was clicked!")
-  }
+  fun <T> select(property: LibraryViewState.() -> T) = state.select(property)
 
   fun updateBooks() = viewModelScope.launchCatching(
     block = {
@@ -72,4 +68,8 @@ class LibraryViewModel @Inject constructor(
   fun onArrangeByDescendingClicked() = onArrangeBooksClicked(LibrarySortOrder.DESCENDING)
 
   private fun onArrangeBooksClicked(sortOrder: LibrarySortOrder) = sortOrderPreference.set(sortOrder)
+
+  fun onItemClicked(book: Book) {
+    Timber.d("${book.title} was clicked!")
+  }
 }

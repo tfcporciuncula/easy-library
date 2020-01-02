@@ -8,7 +8,6 @@ import androidx.fragment.app.FragmentManager
 import androidx.fragment.app.activityViewModels
 import androidx.lifecycle.observe
 import com.blinkist.easylibrary.databinding.LibrarySortOptionDialogBinding
-import com.blinkist.easylibrary.ktx.select
 import com.google.android.material.bottomsheet.BottomSheetDialogFragment
 
 private val TAG: String = LibrarySortOptionBottomSheetDialog::class.java.name
@@ -36,7 +35,7 @@ class LibrarySortOptionBottomSheetDialog : BottomSheetDialogFragment() {
   private fun setupUi(binding: LibrarySortOptionDialogBinding) {
     binding.ascendingTextView.setOnClickListener { onSortOrderClicked(LibrarySortOrder.ASCENDING) }
     binding.descendingTextView.setOnClickListener { onSortOrderClicked(LibrarySortOrder.DESCENDING) }
-    viewModel.state().select { currentSortOrder }.observe(this) { setSelectedSortOrder(binding, it) }
+    viewModel.select { currentSortOrder }.observe(this) { setSelectedSortOrder(binding, it) }
   }
 
   private fun onSortOrderClicked(sortOrder: LibrarySortOrder) = when (sortOrder) {
