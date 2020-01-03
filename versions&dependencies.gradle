@@ -38,7 +38,7 @@ ext.versions = [
     'moshi'          : '1.9.2',
     'okhttp'         : '4.3.0',
     'restMock'       : '0.4.1',
-    'retrofit'       : '2.7.0',
+    'retrofit'       : '2.7.1',
     'timber'         : '4.7.1',
     'threeTenBp'     : '1.4.0',
     'threeTenAbp'    : '1.2.1',
