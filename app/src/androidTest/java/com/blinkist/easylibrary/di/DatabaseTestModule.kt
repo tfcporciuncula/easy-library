@@ -11,8 +11,8 @@ import javax.inject.Singleton
 object DatabaseTestModule {
 
   @Provides @Singleton
-  fun provideDatabase(context: Context) =
-    Room.inMemoryDatabaseBuilder(context, EasyLibraryDatabase::class.java)
-      .allowMainThreadQueries()
-      .build()
+  fun provideDatabase(context: Context) = Room
+    .inMemoryDatabaseBuilder(context, EasyLibraryDatabase::class.java)
+    .allowMainThreadQueries()
+    .build()
 }

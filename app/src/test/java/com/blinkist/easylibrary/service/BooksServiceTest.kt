@@ -9,7 +9,6 @@ import io.appflate.restmock.RESTMockServerStarter
 import io.appflate.restmock.logging.NOOpLogger
 import io.appflate.restmock.utils.RequestMatchers.pathContains
 import kotlinx.coroutines.runBlocking
-import okhttp3.OkHttpClient
 import org.junit.After
 import org.junit.Before
 import org.junit.Test
@@ -43,7 +42,6 @@ class BooksServiceTest {
   private val booksService
     get() = Retrofit.Builder()
       .baseUrl(RESTMockServer.getUrl())
-      .client(OkHttpClient.Builder().build())
       .addConverterFactory(MoshiConverterFactory.create(MoshiModule.provideMoshi()))
       .build()
       .create(BooksService::class.java)

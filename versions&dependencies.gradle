@@ -49,77 +49,77 @@ ext.versions = [
 
 ext.deps = [
     'androidx'       : [
-        'activityKtx'       : "androidx.activity:activity-ktx:${versions.androidx.activityKtx}",
-        'appCompat'         : "androidx.appcompat:appcompat:${versions.androidx.appCompat}",
-        'constraintLayout'  : "androidx.constraintlayout:constraintlayout:${versions.androidx.constraintLayout}",
-        'coreKtx'           : "androidx.core:core-ktx:${versions.androidx.coreKtx}",
-        'fragmentKtx'       : "androidx.fragment:fragment-ktx:${versions.androidx.fragmentKtx}",
+        'activityKtx'       : "androidx.activity:activity-ktx:$versions.androidx.activityKtx",
+        'appCompat'         : "androidx.appcompat:appcompat:$versions.androidx.appCompat",
+        'constraintLayout'  : "androidx.constraintlayout:constraintlayout:$versions.androidx.constraintLayout",
+        'coreKtx'           : "androidx.core:core-ktx:$versions.androidx.coreKtx",
+        'fragmentKtx'       : "androidx.fragment:fragment-ktx:$versions.androidx.fragmentKtx",
         'lifecycle'         : [
-            'extensions'  : "androidx.lifecycle:lifecycle-extensions:${versions.androidx.lifecycle}",
-            'ktx'         : "androidx.lifecycle:lifecycle-runtime-ktx:${versions.androidx.lifecycle}",
-            'liveDataKtx' : "androidx.lifecycle:lifecycle-livedata-ktx:${versions.androidx.lifecycle}",
-            'viewModelKtx': "androidx.lifecycle:lifecycle-viewmodel-ktx:${versions.androidx.lifecycle}",
+            'extensions'  : "androidx.lifecycle:lifecycle-extensions:$versions.androidx.lifecycle",
+            'ktx'         : "androidx.lifecycle:lifecycle-runtime-ktx:$versions.androidx.lifecycle",
+            'liveDataKtx' : "androidx.lifecycle:lifecycle-livedata-ktx:$versions.androidx.lifecycle",
+            'viewModelKtx': "androidx.lifecycle:lifecycle-viewmodel-ktx:$versions.androidx.lifecycle",
             'test'        : "androidx.arch.core:core-testing:2.1.0" // TODO: follow up here
         ],
-        'preference'        : "androidx.preference:preference:${versions.androidx.preference}",
-        'recyclerview'      : "androidx.recyclerview:recyclerview:${versions.androidx.recyclerview}",
+        'preference'        : "androidx.preference:preference:$versions.androidx.preference",
+        'recyclerview'      : "androidx.recyclerview:recyclerview:$versions.androidx.recyclerview",
         'room'              : [
-            'runtime' : "androidx.room:room-runtime:${versions.androidx.room}",
-            'ktx'     : "androidx.room:room-ktx:${versions.androidx.room}",
-            'compiler': "androidx.room:room-compiler:${versions.androidx.room}"
+            'runtime' : "androidx.room:room-runtime:$versions.androidx.room",
+            'ktx'     : "androidx.room:room-ktx:$versions.androidx.room",
+            'compiler': "androidx.room:room-compiler:$versions.androidx.room"
         ],
-        'swiperefreshlayout': "androidx.swiperefreshlayout:swiperefreshlayout:${versions.androidx.swiperefreshlayout}",
+        'swiperefreshlayout': "androidx.swiperefreshlayout:swiperefreshlayout:$versions.androidx.swiperefreshlayout",
         'test'              : [
-            'core'        : "androidx.test:core:${versions.androidx.test.core}",
-            'orchestrator': "androidx.test:orchestrator:${versions.androidx.test.orchestrator}",
+            'core'        : "androidx.test:core:$versions.androidx.test.core",
+            'orchestrator': "androidx.test:orchestrator:$versions.androidx.test.orchestrator",
             'espresso'    : [
-                'core'   : "androidx.test.espresso:espresso-core:${versions.androidx.test.espresso}",
-                'contrib': "androidx.test.espresso:espresso-contrib:${versions.androidx.test.espresso}"
+                'core'   : "androidx.test.espresso:espresso-core:$versions.androidx.test.espresso",
+                'contrib': "androidx.test.espresso:espresso-contrib:$versions.androidx.test.espresso"
             ],
-            'junit'       : "androidx.test.ext:junit:${versions.androidx.test.junit}",
-            'rules'       : "androidx.test:rules:${versions.androidx.test.rules}",
-            'runner'      : "androidx.test:runner:${versions.androidx.test.runner}",
+            'junit'       : "androidx.test.ext:junit:$versions.androidx.test.junit",
+            'rules'       : "androidx.test:rules:$versions.androidx.test.rules",
+            'runner'      : "androidx.test:runner:$versions.androidx.test.runner",
         ],
     ],
-    'coil'           : "io.coil-kt:coil:${versions.coil}",
+    'coil'           : "io.coil-kt:coil:$versions.coil",
     'dagger'         : [
-        'dagger'  : "com.google.dagger:dagger:${versions.dagger}",
-        'compiler': "com.google.dagger:dagger-compiler:${versions.dagger}"
+        'dagger'  : "com.google.dagger:dagger:$versions.dagger",
+        'compiler': "com.google.dagger:dagger-compiler:$versions.dagger"
     ],
-    'flowPreferences': "com.github.tfcporciuncula:flow-preferences:${versions.flowPreferences}",
-    'junit'          : "junit:junit:${versions.junit}",
+    'flowPreferences': "com.github.tfcporciuncula:flow-preferences:$versions.flowPreferences",
+    'junit'          : "junit:junit:$versions.junit",
     'kotlin'         : [
         'coroutines': [
-            'core'   : "org.jetbrains.kotlinx:kotlinx-coroutines-core:${versions.coroutines}",
-            'android': "org.jetbrains.kotlinx:kotlinx-coroutines-android:${versions.coroutines}",
-            'test'   : "org.jetbrains.kotlinx:kotlinx-coroutines-test:${versions.coroutines}"
+            'core'   : "org.jetbrains.kotlinx:kotlinx-coroutines-core:$versions.coroutines",
+            'android': "org.jetbrains.kotlinx:kotlinx-coroutines-android:$versions.coroutines",
+            'test'   : "org.jetbrains.kotlinx:kotlinx-coroutines-test:$versions.coroutines"
         ],
         'stdlib'    : [
-            'jdk7': "org.jetbrains.kotlin:kotlin-stdlib-jdk7:${versions.kotlin}"
+            'jdk7': "org.jetbrains.kotlin:kotlin-stdlib-jdk7:$versions.kotlin"
         ]
     ],
-    'leakcanary'     : "com.squareup.leakcanary:leakcanary-android:${versions.leakcanary}",
-    'material'       : "com.google.android.material:material:${versions.material}",
+    'leakcanary'     : "com.squareup.leakcanary:leakcanary-android:$versions.leakcanary",
+    'material'       : "com.google.android.material:material:$versions.material",
     'moshi'          : [
-        'moshi'        : "com.squareup.moshi:moshi:${versions.moshi}",
-        'kotlinCodegen': "com.squareup.moshi:moshi-kotlin-codegen:${versions.moshi}"
+        'moshi'        : "com.squareup.moshi:moshi:$versions.moshi",
+        'kotlinCodegen': "com.squareup.moshi:moshi-kotlin-codegen:$versions.moshi"
     ],
-    'mockito'        : "org.mockito:mockito-core:${versions.mockito}",
+    'mockito'        : "org.mockito:mockito-core:$versions.mockito",
     'okhttp'         : [
-        'okhttp'            : "com.squareup.okhttp3:okhttp:${versions.okhttp}",
-        'loggingInterceptor': "com.squareup.okhttp3:logging-interceptor:${versions.okhttp}"
+        'okhttp'            : "com.squareup.okhttp3:okhttp:$versions.okhttp",
+        'loggingInterceptor': "com.squareup.okhttp3:logging-interceptor:$versions.okhttp"
     ],
-    'restMock'       : "com.github.andrzejchm.RESTMock:android:${versions.restMock}",
+    'restMock'       : "com.github.andrzejchm.RESTMock:android:$versions.restMock",
     'retrofit'       : [
-        'library'       : "com.squareup.retrofit2:retrofit:${versions.retrofit}",
-        'moshiConverter': "com.squareup.retrofit2:converter-moshi:${versions.retrofit}"
+        'library'       : "com.squareup.retrofit2:retrofit:$versions.retrofit",
+        'moshiConverter': "com.squareup.retrofit2:converter-moshi:$versions.retrofit"
     ],
     'stetho'         : [
-        'stetho': "com.facebook.stetho:stetho:${versions.stetho}",
-        'okhttp': "com.facebook.stetho:stetho-okhttp3:${versions.stetho}"
+        'stetho': "com.facebook.stetho:stetho:$versions.stetho",
+        'okhttp': "com.facebook.stetho:stetho-okhttp3:$versions.stetho"
     ],
-    'timber'         : "com.jakewharton.timber:timber:${versions.timber}",
-    'threeTenBp'     : "org.threeten:threetenbp:${versions.threeTenBp}",
-    'threeTenAbp'    : "com.jakewharton.threetenabp:threetenabp:${versions.threeTenAbp}",
-    'truth'          : "com.google.truth:truth:${versions.truth}"
+    'timber'         : "com.jakewharton.timber:timber:$versions.timber",
+    'threeTenBp'     : "org.threeten:threetenbp:$versions.threeTenBp",
+    'threeTenAbp'    : "com.jakewharton.threetenabp:threetenabp:$versions.threeTenAbp",
+    'truth'          : "com.google.truth:truth:$versions.truth"
 ]

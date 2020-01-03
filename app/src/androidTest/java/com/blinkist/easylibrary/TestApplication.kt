@@ -11,7 +11,6 @@ class TestApplication : Application(), DaggerComponentProvider {
 
   override fun onCreate() {
     super.onCreate()
-
     initThreeTen()
   }
 
