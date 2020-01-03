@@ -21,6 +21,7 @@ class EasyLibraryApplication : Application(), DaggerComponentProvider {
     initMockServer()
     initTimber()
     initThreeTen()
+    initStetho()
   }
 
   private fun initMockServer() {
@@ -33,5 +34,9 @@ class EasyLibraryApplication : Application(), DaggerComponentProvider {
 
   private fun initThreeTen() {
     AndroidThreeTen.init(this)
+  }
+
+  private fun initStetho() {
+    component.stethoInitializer.init()
   }
 }

@@ -91,14 +91,14 @@ dependencies {
   implementation deps.androidx.swiperefreshlayout
 
   // dagger
-  implementation deps.dagger.library
+  implementation deps.dagger.dagger
   kapt deps.dagger.compiler
 
   // http
-  implementation deps.okhttp
+  implementation deps.okhttp.okhttp
   implementation deps.retrofit.library
   implementation deps.retrofit.moshiConverter
-  implementation deps.moshi.library
+  implementation deps.moshi.moshi
   kapt deps.moshi.kotlinCodegen
   implementation(deps.restMock) { exclude group: 'androidx.test' }
 
@@ -109,6 +109,12 @@ dependencies {
   implementation deps.flowPreferences
   implementation deps.threeTenAbp
   implementation deps.timber
+
+  // debug
+  debugImplementation deps.leakcanary
+  debugImplementation deps.stetho.stetho
+  debugImplementation deps.stetho.okhttp
+  debugImplementation deps.okhttp.loggingInterceptor
 
   // unit testing
   testImplementation deps.junit
