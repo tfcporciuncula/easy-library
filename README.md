@@ -4,6 +4,8 @@ This ended up becoming my lab for learning and testing new Android things. I com
 - [MediatorLiveData to the Rescue](https://proandroiddev.com/mediatorlivedata-to-the-rescue-5d27645b9bc3)
 - [Android Data Binding + ListAdapter](https://proandroiddev.com/android-data-binding-listadapter-9e72ce50e8c7)
 
+[![Build Status](https://github.com/tfcporciuncula/easy-library/workflows/CI/badge.svg)](https://github.com/tfcporciuncula/easy-library/actions?query=workflow%3ACI)
+
 # Easy Library
 
 >Download the APK here: http://bit.do/easylibraryapk
@@ -38,7 +40,7 @@ All my decisions towards how to handle the data were made based on my needs and 
 - I want to be able to interact with the app as soon as possible (UI should be unblocked as soon as local persistence responds)
 - I want to be able to sync the data with the server anytime I want (pull to refresh)
 - The data must be up to date if I just opened the app
-- Orientation changes must not trigger data syncs
+- Orientation changes must not trigger data sync
 - If a sync fails, I want to know about it so I'm aware the data I'm looking at might not be up to date
 - I want to be aware of when the app is fetching data from the server (non-blocking UX loading state - pull to refresh again)
 - If the data updates while I'm interacting with it, my interaction shouldn't be interfered (e.g. losing scroll state or blinking the whole list to add a new item should be avoided)
