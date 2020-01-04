@@ -1,8 +1,10 @@
 ### EDIT:
-This ended up becoming my lab for learning and testing new Android things. I completely changed my original Dagger setup, I added Data Binding and got rid of Kotlin Android Extensions, I wrote more tests, and I basically changed most of what I [originally had](https://github.com/tfcporciuncula/easy-library/tree/2defac20cd0e30bb437b473bad11b7c0c65049e6). From all those experiments, two blogposts were born:
+This ended up becoming my lab for learning and testing new Android things. I completely changed my original Dagger setup, I added Data Binding and got rid of Kotlin Android Extensions (and then added View Binding and got rid of Data Binding), I wrote more tests, and I basically changed most of what I [originally had](https://github.com/tfcporciuncula/easy-library/tree/2defac20cd0e30bb437b473bad11b7c0c65049e6). From all those experiments, two blogposts were born:
 
 - [MediatorLiveData to the Rescue](https://proandroiddev.com/mediatorlivedata-to-the-rescue-5d27645b9bc3)
 - [Android Data Binding + ListAdapter](https://proandroiddev.com/android-data-binding-listadapter-9e72ce50e8c7)
+
+----
 
 [![Build Status](https://github.com/tfcporciuncula/easy-library/workflows/CI/badge.svg)](https://github.com/tfcporciuncula/easy-library/actions?query=workflow%3ACI)
 
