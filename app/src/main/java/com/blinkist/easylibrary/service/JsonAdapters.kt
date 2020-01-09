@@ -13,7 +13,6 @@ class OffsetDateTimeAdapter {
   @FromJson fun fromJson(value: String): OffsetDateTime = OffsetDateTime.parse(value)
 }
 
-
 class LocalDateAdapter {
 
   @ToJson fun toJson(value: LocalDate): String = value.format(DateTimeFormatter.ISO_LOCAL_DATE)

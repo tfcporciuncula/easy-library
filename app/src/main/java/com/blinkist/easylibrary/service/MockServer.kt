@@ -11,7 +11,7 @@ import java.util.concurrent.TimeUnit
 object MockServer {
 
   fun setupAndStart(context: Context) {
-    RESTMockServerStarter.startSync(AndroidAssetsFileParser(context), AndroidLogger());
+    RESTMockServerStarter.startSync(AndroidAssetsFileParser(context), AndroidLogger())
     RESTMockServer.whenGET(RequestMatchers.pathContains("books"))
       .delayBody(TimeUnit.SECONDS, 2)
       .thenReturnFile(200, "books.json")

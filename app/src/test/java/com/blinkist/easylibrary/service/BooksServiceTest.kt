@@ -17,7 +17,8 @@ class BooksServiceTest {
 
   @get:Rule var restMockRule = RestMockRule()
 
-  private val books = """
+  private val books =
+    """
     [
       {
         "id": 1,
@@ -36,7 +37,7 @@ class BooksServiceTest {
         "url": "url2"
       }
     ]
-  """
+    """
 
   private val booksService
     get() = Retrofit.Builder()

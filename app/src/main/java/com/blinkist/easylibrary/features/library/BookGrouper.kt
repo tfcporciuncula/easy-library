@@ -4,7 +4,8 @@ import com.blinkist.easylibrary.model.presentation.Book
 import com.blinkist.easylibrary.model.presentation.WeekSection
 import org.threeten.bp.ZoneId
 import java.text.SimpleDateFormat
-import java.util.*
+import java.util.Calendar
+import java.util.Date
 import javax.inject.Inject
 
 // TODO: rewrite logic with three ten
