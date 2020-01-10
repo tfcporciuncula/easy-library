@@ -7,6 +7,7 @@ This ended up becoming my lab for learning and testing new Android things. I com
 ----
 
 [![Build Status](https://github.com/tfcporciuncula/easy-library/workflows/CI/badge.svg)](https://github.com/tfcporciuncula/easy-library/actions?query=workflow%3ACI)
+[![ktlint](https://img.shields.io/badge/code%20style-%E2%9D%A4-FF4081.svg)](https://ktlint.github.io/)
 
 # Easy Library
 
