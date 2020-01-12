@@ -9,6 +9,7 @@ import com.blinkist.easylibrary.R
 import com.blinkist.easylibrary.databinding.LibraryActivityBinding
 import com.blinkist.easylibrary.di.injector
 import com.blinkist.easylibrary.di.lazyViewModel
+import com.blinkist.easylibrary.ktx.observeEvent
 import com.blinkist.easylibrary.ktx.showSnackbar
 
 class LibraryActivity : AppCompatActivity() {
@@ -29,8 +30,8 @@ class LibraryActivity : AppCompatActivity() {
   }
 
   private fun setupSwipeRefreshLayout(binding: LibraryActivityBinding) {
-    viewModel.select { isLoading }.observe(this, binding.swipeRefreshLayout::setRefreshing)
     binding.swipeRefreshLayout.setOnRefreshListener { viewModel.updateBooks() }
+    viewModel.select { isLoading }.observe(this, binding.swipeRefreshLayout::setRefreshing)
   }
 
   private fun setupRecyclerView(binding: LibraryActivityBinding) {
@@ -40,11 +41,7 @@ class LibraryActivity : AppCompatActivity() {
   }
 
   private fun observeSnackbarEvents(binding: LibraryActivityBinding) {
-    viewModel.select { snackbarEvent }.observe(this) { snackbarEvent ->
-      snackbarEvent?.let { event ->
-        event.doIfNotHandled { binding.root.showSnackbar(it) }
-      }
-    }
+    viewModel.select { snackbarEvent }.observeEvent(this, binding.root::showSnackbar)
   }
 
   override fun onCreateOptionsMenu(menu: Menu): Boolean {
