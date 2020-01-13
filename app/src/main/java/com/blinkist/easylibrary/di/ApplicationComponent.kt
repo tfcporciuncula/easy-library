@@ -1,8 +1,6 @@
 package com.blinkist.easylibrary.di
 
 import android.content.Context
-import com.blinkist.easylibrary.debug.StethoInitializer
-import com.blinkist.easylibrary.features.library.LibraryViewModel
 import dagger.BindsInstance
 import dagger.Component
 import javax.inject.Singleton
@@ -15,13 +13,10 @@ import javax.inject.Singleton
     SharedPreferencesModule::class
   ]
 )
-interface ApplicationComponent {
+interface ApplicationComponent : ApplicationProvisions, ViewModelProvisions {
 
   @Component.Factory
   interface Factory {
     fun create(@BindsInstance applicationContext: Context): ApplicationComponent
   }
-
-  val stethoInitializer: StethoInitializer
-  val libraryViewModel: LibraryViewModel
 }
