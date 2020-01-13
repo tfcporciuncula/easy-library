@@ -6,10 +6,10 @@ import android.view.ViewGroup
 import androidx.recyclerview.widget.DiffUtil
 import androidx.recyclerview.widget.ListAdapter
 import androidx.recyclerview.widget.RecyclerView
-import coil.api.load
 import com.blinkist.easylibrary.R
 import com.blinkist.easylibrary.databinding.BookItemBinding
 import com.blinkist.easylibrary.databinding.SectionItemBinding
+import com.blinkist.easylibrary.ktx.loadWithCrossFade
 import com.blinkist.easylibrary.model.presentation.Book
 import com.blinkist.easylibrary.model.presentation.WeekSection
 
@@ -38,7 +38,7 @@ class LibraryAdapter(
 
     private fun bindBook(book: Book, onBookClicked: (Book) -> Unit) {
       with(BookItemBinding.bind(itemView)) {
-        coverImageView.load(book.imageUrl) { crossfade(true) }
+        coverImageView.loadWithCrossFade(book.imageUrl)
         titleTextView.text = book.title
         authorsTextView.text = book.authors
         publishedDateTextView.text = book.publishedDateText

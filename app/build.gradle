@@ -104,8 +104,8 @@ dependencies {
   implementation deps.moshi.moshi
   kapt deps.moshi.kotlinCodegen
 
-  // coil
-  implementation deps.coil
+  // glide
+  implementation deps.glide
 
   // jsr-310
   implementation deps.threeTenAbp
