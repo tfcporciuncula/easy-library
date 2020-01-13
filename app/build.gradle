@@ -96,19 +96,25 @@ dependencies {
 
   // http
   implementation deps.okhttp.okhttp
-  implementation deps.retrofit.library
+  implementation deps.retrofit.retrofit
   implementation deps.retrofit.moshiConverter
+  implementation(deps.restMock) { exclude group: 'androidx.test' }
+
+  // json
   implementation deps.moshi.moshi
   kapt deps.moshi.kotlinCodegen
-  implementation(deps.restMock) { exclude group: 'androidx.test' }
 
   // coil
   implementation deps.coil
 
-  // misc
-  implementation deps.flowPreferences
+  // jsr-310
   implementation deps.threeTenAbp
+
+  // timber
   implementation deps.timber
+
+  // flow-preferences
+  implementation deps.flowPreferences
 
   // debug
   debugImplementation deps.leakcanary

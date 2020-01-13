@@ -112,7 +112,7 @@ ext.deps = [
     ],
     'restMock'       : "com.github.andrzejchm.RESTMock:android:$versions.restMock",
     'retrofit'       : [
-        'library'       : "com.squareup.retrofit2:retrofit:$versions.retrofit",
+        'retrofit'       : "com.squareup.retrofit2:retrofit:$versions.retrofit",
         'moshiConverter': "com.squareup.retrofit2:converter-moshi:$versions.retrofit"
     ],
     'stetho'         : [
