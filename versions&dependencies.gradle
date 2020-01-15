@@ -43,8 +43,8 @@ ext.versions = [
     'retrofit'       : '2.7.1',
     'stetho'         : '1.5.1',
     'timber'         : '4.7.1',
-    'threeTenBp'     : '1.4.0',
-    'threeTenAbp'    : '1.2.1',
+    'threeTenBp'     : '1.4.1',
+    'threeTenAbp'    : '1.2.2',
     'truth'          : '1.0'
 ]
 
