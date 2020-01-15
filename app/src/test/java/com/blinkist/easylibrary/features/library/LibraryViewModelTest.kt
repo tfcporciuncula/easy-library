@@ -8,8 +8,11 @@ import com.blinkist.easylibrary.test.CoroutineRule
 import com.blinkist.easylibrary.test.getOrAwaitValue
 import com.google.common.truth.Truth.assertThat
 import com.tfcporciuncula.flow.Preference
+import kotlinx.coroutines.delay
+import kotlinx.coroutines.flow.flow
 import kotlinx.coroutines.flow.flowOf
 import kotlinx.coroutines.runBlocking
+import kotlinx.coroutines.test.TestCoroutineDispatcher
 import org.junit.Before
 import org.junit.Rule
 import org.junit.Test
@@ -24,7 +27,9 @@ import java.io.IOException
 class LibraryViewModelTest {
 
   @get:Rule val liveDataRule = InstantTaskExecutorRule()
-  @get:Rule val coroutineRule = CoroutineRule()
+  @get:Rule val coroutineRule = CoroutineRule(TestCoroutineDispatcher())
+
+  private val sortOrderChangeDelay = 100L
 
   @Mock private lateinit var bookRepository: BookRepository
   @Mock private lateinit var bookGrouper: BookGrouper
@@ -38,7 +43,7 @@ class LibraryViewModelTest {
     given(sortOrderPreference.asFlow()).willReturn(flowOf(LibrarySortOrder.DEFAULT))
   }
 
-  @Test fun `should have fetched library items in the state`() {
+  @Test fun `should update state with library items received after initialization`() {
     val books = listOf(newBook(id = 11), newBook(id = 22))
     given(bookRepository.books()).willReturn(flowOf(books))
 
@@ -50,7 +55,7 @@ class LibraryViewModelTest {
     assertThat(viewModelState.libraryItems).isEqualTo(libraryItems)
   }
 
-  @Test fun `should emit snackbar event if repository call fails`() {
+  @Test fun `should emit snackbar event if updating books fails`() {
     initViewModel()
 
     runBlocking { given(bookRepository.updateBooks()).will { throw IOException() } }
@@ -58,6 +63,13 @@ class LibraryViewModelTest {
     viewModel.updateBooks()
 
     assertThat(viewModelState.snackbarEvent).isNotNull()
+  }
+
+  @Test fun `should not emit snackbar event if updating books succeeds`() {
+    initViewModel()
+    viewModel.updateBooks()
+
+    assertThat(viewModelState.snackbarEvent).isNull()
   }
 
   @Test fun `should have isLoading true in the state while updating books`() {
@@ -78,6 +90,39 @@ class LibraryViewModelTest {
     viewModel.onArrangeByDescendingClicked()
 
     verify(sortOrderPreference).set(LibrarySortOrder.DESCENDING)
+  }
+
+  @Test fun `should update library items when sort option changes`() {
+    givenSortOptionWillChange()
+
+    val books = listOf(newBook(id = 11), newBook(id = 22))
+    val booksReversed = books.reversed()
+    given(bookRepository.books()).willReturn(flowOf(books))
+
+    val libraryItems = listOf(newWeekSection()) + books
+    val libraryItemsReversed = listOf(newWeekSection()) + booksReversed
+    given(bookGrouper.groupBooksByWeek(books, LibrarySortOrder.DESCENDING)).willReturn(libraryItems)
+    given(bookGrouper.groupBooksByWeek(books, LibrarySortOrder.ASCENDING)).willReturn(libraryItemsReversed)
+
+    initViewModel()
+
+    assertThat(viewModelState.libraryItems).isEqualTo(libraryItems)
+    waitForSortOrderChange()
+    assertThat(viewModelState.libraryItems).isEqualTo(libraryItemsReversed)
+  }
+
+  private fun givenSortOptionWillChange() {
+    given(sortOrderPreference.asFlow()).willReturn(
+      flow {
+        emit(LibrarySortOrder.DESCENDING)
+        delay(sortOrderChangeDelay)
+        emit(LibrarySortOrder.ASCENDING)
+      }
+    )
+  }
+
+  private fun waitForSortOrderChange() {
+    coroutineRule.dispatcher.advanceTimeBy(sortOrderChangeDelay)
   }
 
   private fun initViewModel() {
