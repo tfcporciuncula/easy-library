@@ -80,6 +80,7 @@ dependencies {
   implementation deps.androidx.lifecycle.ktx
   implementation deps.androidx.lifecycle.liveDataKtx
   implementation deps.androidx.lifecycle.viewModelKtx
+  testImplementation deps.androidx.lifecycle.test
   implementation deps.androidx.room.runtime
   implementation deps.androidx.room.ktx
   kapt deps.androidx.room.compiler
@@ -93,6 +94,7 @@ dependencies {
   // dagger
   implementation deps.dagger.dagger
   kapt deps.dagger.compiler
+  kaptAndroidTest deps.dagger.compiler
 
   // http
   implementation deps.okhttp.okhttp
@@ -109,11 +111,12 @@ dependencies {
 
   // jsr-310
   implementation deps.threeTenAbp
+  testImplementation deps.threeTenBp
 
   // timber
   implementation deps.timber
 
-  // flow-preferences
+  // flow preferences
   implementation deps.flowPreferences
 
   // debug
@@ -124,10 +127,8 @@ dependencies {
 
   // unit testing
   testImplementation deps.junit
-  testImplementation deps.androidx.lifecycle.test
   testImplementation deps.mockito
   testImplementation deps.truth
-  testImplementation deps.threeTenBp
 
   // instrumentation testing
   androidTestImplementation deps.androidx.test.core
@@ -138,5 +139,4 @@ dependencies {
   androidTestImplementation deps.androidx.test.espresso.contrib
   androidTestImplementation deps.truth
   androidTestUtil deps.androidx.test.orchestrator
-  kaptAndroidTest deps.dagger.compiler
 }
