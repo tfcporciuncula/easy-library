@@ -30,7 +30,7 @@ class LibraryActivity : AppCompatActivity() {
   }
 
   private fun setupSwipeRefreshLayout(binding: LibraryActivityBinding) {
-    binding.swipeRefreshLayout.setOnRefreshListener { viewModel.updateBooks() }
+    binding.swipeRefreshLayout.setOnRefreshListener(viewModel::updateBooks)
     viewModel.select { isLoading }.observe(this, binding.swipeRefreshLayout::setRefreshing)
   }
 
