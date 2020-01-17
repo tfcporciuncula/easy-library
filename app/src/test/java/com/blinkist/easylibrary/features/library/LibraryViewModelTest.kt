@@ -72,10 +72,6 @@ class LibraryViewModelTest {
     assertThat(viewModelState.snackbarEvent).isNull()
   }
 
-  @Test fun `should have isLoading true in the state while updating books`() {
-    // TODO: I think this would be doable with fakes
-  }
-
   @Test fun `should update sort order when ascending sort option is clicked`() {
     initViewModel()
 
