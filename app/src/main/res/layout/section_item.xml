@@ -1,6 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <TextView
   xmlns:android="http://schemas.android.com/apk/res/android"
+  xmlns:tools="http://schemas.android.com/tools"
   android:id="@+id/titleTextView"
   android:layout_width="wrap_content"
   android:layout_height="wrap_content"
@@ -10,6 +11,6 @@
   android:layout_marginBottom="@dimen/half_standard_margin"
   android:ellipsize="end"
   android:maxLines="1"
-  android:textSize="@dimen/section_title_text_size"
-  android:textStyle="bold"
+  android:textAppearance="@style/TextAppearance.MaterialComponents.Headline5"
+  tools:text="April 16, 2018 to April 22, 2018"
   />

@@ -36,8 +36,7 @@
       android:layout_toEndOf="@id/coverImageView"
       android:ellipsize="end"
       android:maxLines="2"
-      android:textSize="@dimen/book_title_text_size"
-      android:textStyle="bold"
+      android:textAppearance="@style/TextAppearance.MaterialComponents.Headline6"
       tools:text="Clean Code"
       />
 
@@ -51,7 +50,7 @@
       android:layout_toEndOf="@id/coverImageView"
       android:ellipsize="end"
       android:maxLines="2"
-      android:textSize="@dimen/book_authors_text_size"
+      android:textAppearance="@style/TextAppearance.MaterialComponents.Subtitle1"
       tools:text="Robert C. Martin"
       />
 
@@ -64,8 +63,7 @@
       android:layout_marginTop="@dimen/half_standard_margin"
       android:layout_marginBottom="@dimen/standard_margin"
       android:layout_toEndOf="@id/coverImageView"
-      android:textSize="@dimen/book_published_date_text_size"
-      android:textStyle="italic"
+      android:textAppearance="@style/TextAppearance.MaterialComponents.Caption"
       tools:text="2008-08-01"
       />
 
