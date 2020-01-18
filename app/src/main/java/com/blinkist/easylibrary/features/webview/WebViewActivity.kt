@@ -1,11 +1,18 @@
 package com.blinkist.easylibrary.features.webview
 
 import android.content.Context
+import android.graphics.Bitmap
 import android.os.Bundle
+import android.webkit.WebChromeClient
+import android.webkit.WebResourceError
+import android.webkit.WebResourceRequest
 import android.webkit.WebView
+import android.webkit.WebViewClient
 import androidx.appcompat.app.AppCompatActivity
+import androidx.core.view.isVisible
 import com.blinkist.easylibrary.databinding.WebViewActivityBinding
 import com.blinkist.easylibrary.ktx.newIntent
+import com.blinkist.easylibrary.ktx.unsyncLazy
 
 class WebViewActivity : AppCompatActivity() {
 
@@ -17,16 +24,43 @@ class WebViewActivity : AppCompatActivity() {
     }
   }
 
-  private val url get() = intent.getStringExtra(extraUrl)
+  private val binding by unsyncLazy { WebViewActivityBinding.inflate(layoutInflater) }
 
   override fun onCreate(savedInstanceState: Bundle?) {
     super.onCreate(savedInstanceState)
-    val binding = WebViewActivityBinding.inflate(layoutInflater)
     setContentView(binding.root)
-    setupWebView(binding.webView)
+    setupWebView()
   }
 
-  private fun setupWebView(webView: WebView) {
-    webView.loadUrl(url)
+  private fun setupWebView() = with(binding.webView) {
+    webViewClient = object : WebViewClient() {
+      override fun onPageStarted(view: WebView, url: String, favicon: Bitmap?) {
+        binding.progressBarContainer.isVisible = true
+      }
+
+      override fun onPageFinished(view: WebView, url: String) {
+        binding.progressBarContainer.isVisible = false
+      }
+
+      override fun onReceivedError(view: WebView, request: WebResourceRequest, error: WebResourceError) {
+        // TODO
+      }
+    }
+
+    webChromeClient = object : WebChromeClient() {
+      override fun onProgressChanged(view: WebView, newProgress: Int) {
+        binding.progressBar.progress = newProgress
+      }
+    }
+
+    loadUrl(intent.getStringExtra(extraUrl))
+  }
+
+  override fun onBackPressed() {
+    if (binding.webView.canGoBack()) {
+      binding.webView.goBack()
+    } else {
+      super.onBackPressed()
+    }
   }
 }
