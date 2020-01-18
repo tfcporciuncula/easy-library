@@ -4,6 +4,7 @@ import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.blinkist.easylibrary.R
 import com.blinkist.easylibrary.di.SharedPreferencesModule.LibrarySortOrderPreference
+import com.blinkist.easylibrary.features.library.LibraryViewState.NavigationEvent
 import com.blinkist.easylibrary.features.library.LibraryViewState.SnackbarEvent
 import com.blinkist.easylibrary.ktx.launchCatching
 import com.blinkist.easylibrary.ktx.select
@@ -70,6 +71,6 @@ class LibraryViewModel @Inject constructor(
   private fun onArrangeBooksClicked(sortOrder: LibrarySortOrder) = sortOrderPreference.set(sortOrder)
 
   fun onItemClicked(book: Book) {
-    Timber.d("${book.title} was clicked!")
+    state.update { copy(navigationEvent = NavigationEvent(book.url)) }
   }
 }
