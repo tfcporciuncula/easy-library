@@ -101,6 +101,7 @@ dependencies {
   implementation deps.retrofit.retrofit
   implementation deps.retrofit.moshiConverter
   implementation(deps.restMock) { exclude group: 'androidx.test' }
+  implementation deps.okhttp.mockwebserver
 
   // json
   implementation deps.moshi.moshi
@@ -138,5 +139,7 @@ dependencies {
   androidTestImplementation deps.androidx.test.espresso.core
   androidTestImplementation deps.androidx.test.espresso.contrib
   androidTestImplementation deps.truth
+  androidTestImplementation deps.restMock
+  androidTestImplementation deps.okhttp.mockwebserver
   androidTestUtil deps.androidx.test.orchestrator
 }

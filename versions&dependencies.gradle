@@ -108,11 +108,12 @@ ext.deps = [
     'mockito'        : "org.mockito:mockito-core:$versions.mockito",
     'okhttp'         : [
         'okhttp'            : "com.squareup.okhttp3:okhttp:$versions.okhttp",
-        'loggingInterceptor': "com.squareup.okhttp3:logging-interceptor:$versions.okhttp"
+        'loggingInterceptor': "com.squareup.okhttp3:logging-interceptor:$versions.okhttp",
+        'mockwebserver'     : "com.squareup.okhttp3:mockwebserver:$versions.okhttp"
     ],
     'restMock'       : "com.github.andrzejchm.RESTMock:android:$versions.restMock",
     'retrofit'       : [
-        'retrofit'       : "com.squareup.retrofit2:retrofit:$versions.retrofit",
+        'retrofit'      : "com.squareup.retrofit2:retrofit:$versions.retrofit",
         'moshiConverter': "com.squareup.retrofit2:converter-moshi:$versions.retrofit"
     ],
     'stetho'         : [

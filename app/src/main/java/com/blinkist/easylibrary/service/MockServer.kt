@@ -1,6 +1,7 @@
 package com.blinkist.easylibrary.service
 
 import android.content.Context
+import io.appflate.restmock.RESTMockOptions
 import io.appflate.restmock.RESTMockServer
 import io.appflate.restmock.RESTMockServerStarter
 import io.appflate.restmock.android.AndroidAssetsFileParser
@@ -11,7 +12,9 @@ import java.util.concurrent.TimeUnit
 object MockServer {
 
   fun setupAndStart(context: Context) {
-    RESTMockServerStarter.startSync(AndroidAssetsFileParser(context), AndroidLogger())
+    RESTMockServerStarter.startSync(
+      AndroidAssetsFileParser(context), AndroidLogger(), RESTMockOptions.Builder().useHttps(true).build()
+    )
     RESTMockServer.whenGET(RequestMatchers.pathContains("books"))
       .thenReturnFile(200, "books.json")
       .thenReturnFile(200, "onemorebook.json")

@@ -24,19 +24,13 @@ class EasyLibraryApplication : Application(), DaggerComponentProvider {
     initStetho()
   }
 
-  private fun initMockServer() {
-    MockServer.setupAndStart(this)
-  }
+  private fun initMockServer() = MockServer.setupAndStart(this)
 
   private fun initTimber() {
     if (BuildConfig.DEBUG) Timber.plant(Timber.DebugTree())
   }
 
-  private fun initThreeTen() {
-    AndroidThreeTen.init(this)
-  }
+  private fun initThreeTen() = AndroidThreeTen.init(this)
 
-  private fun initStetho() {
-    component.stethoInitializer.init()
-  }
+  private fun initStetho() = component.stethoInitializer.init()
 }
