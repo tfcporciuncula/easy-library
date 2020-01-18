@@ -13,15 +13,11 @@ object MockServer {
   fun setupAndStart(context: Context) {
     RESTMockServerStarter.startSync(AndroidAssetsFileParser(context), AndroidLogger())
     RESTMockServer.whenGET(RequestMatchers.pathContains("books"))
-      .delayBody(TimeUnit.SECONDS, 2)
       .thenReturnFile(200, "books.json")
-      .delayBody(TimeUnit.SECONDS, 2)
       .thenReturnFile(200, "onemorebook.json")
-      .delayBody(TimeUnit.SECONDS, 2)
+      .thenReturnFile(200, "books.json")
+      .thenReturnEmpty(500)
       .thenReturnFile(200, "books.json")
       .delayBody(TimeUnit.SECONDS, 2)
-      .thenReturnString("this will trigger an error")
-      .delayBody(TimeUnit.SECONDS, 2)
-      .thenReturnFile(200, "books.json")
   }
 }
