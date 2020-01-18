@@ -16,14 +16,17 @@ import com.blinkist.easylibrary.R
 import com.blinkist.easylibrary.test.LazyActivityTestRule
 import com.blinkist.easylibrary.test.RecyclerViewItemCountAssertion.Companion.withItemCount
 import com.blinkist.easylibrary.test.atPosition
+import com.blinkist.easylibrary.test.isRefreshing
 import com.google.android.material.snackbar.Snackbar
 import io.appflate.restmock.RESTMockServer
 import io.appflate.restmock.utils.RequestMatchers.pathContains
+import java.util.concurrent.TimeUnit
 
 class LibraryPageObject(private val activityRule: LazyActivityTestRule<LibraryActivity>) {
 
   private val recyclerView get() = onView(withId(R.id.recyclerView))
   private val snackbar get() = onView(isAssignableFrom(Snackbar.SnackbarLayout::class.java))
+  private val progressBar get() = onView(withId(R.id.swipeRefreshLayout))
   private val sortMenu get() = onView(withId(R.id.menu_sort))
   private val ascendingOption get() = onView(withId(R.id.ascendingTextView))
   private val descendingOption get() = onView(withId(R.id.descendingTextView))
@@ -54,21 +57,21 @@ class LibraryPageObject(private val activityRule: LazyActivityTestRule<LibraryAc
     descendingOption.perform(click())
   }
 
-  fun assertSortOptionsAreVisible() {
+  fun assertSortOptionsDialogIsVisible() {
     ascendingOption.check(matches(isDisplayed()))
     descendingOption.check(matches(isDisplayed()))
   }
 
-  fun assertSortOptionDialogIsNotPresent() {
+  fun assertSortOptionDialogIsNotVisible() {
     ascendingOption.check(doesNotExist())
     descendingOption.check(doesNotExist())
   }
 
-  fun assertAscendingSortOptionIsSelected() {
+  fun assertAscendingIsSelected() {
     ascendingCheck.check(matches(isDisplayed()))
   }
 
-  fun assertDescendingSortOptionIsSelected() {
+  fun assertDescendingIsSelected() {
     descendingCheck.check(matches(isDisplayed()))
   }
 
@@ -76,8 +79,12 @@ class LibraryPageObject(private val activityRule: LazyActivityTestRule<LibraryAc
     snackbar.check(matches(isDisplayed()))
   }
 
-  fun assertSnackbarIsNotPresent() {
+  fun assertSnackbarIsNotVisible() {
     snackbar.check(doesNotExist())
+  }
+
+  fun assertProgressBarIsVisible() {
+    progressBar.check(matches(isRefreshing()))
   }
 
   fun assertListItemCount(expectedCount: Int) {
@@ -93,7 +100,7 @@ class LibraryPageObject(private val activityRule: LazyActivityTestRule<LibraryAc
   }
 
   fun givenServiceFails() {
-    RESTMockServer.whenGET(pathContains("books")).thenReturnFile(500, "error")
+    RESTMockServer.whenGET(pathContains("books")).thenReturnEmpty(500)
   }
 
   fun givenServiceReturnsDefaultBooks() {
@@ -109,6 +116,13 @@ class LibraryPageObject(private val activityRule: LazyActivityTestRule<LibraryAc
   fun givenServiceReturnsDefaultBooksAndFailsOnRefresh() {
     RESTMockServer.whenGET(pathContains("books"))
       .thenReturnFile(200, "books.json")
-      .thenReturnFile(500, "error")
+      .thenReturnEmpty(500)
+  }
+
+  fun givenServiceReturnsDefaultBooksAndDelaysOnRefresh() {
+    RESTMockServer.whenGET(pathContains("books"))
+      .thenReturnFile(200, "books.json")
+      .thenReturnFile(200, "books.json")
+      .delayBody(TimeUnit.SECONDS, 0, 5)
   }
 }

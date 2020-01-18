@@ -23,7 +23,7 @@ class RecyclerViewItemCountAssertion private constructor(private val matcher: Ma
   }
 }
 
-fun atPosition(position: Int, itemMatcher: Matcher<View>) =
+fun atPosition(position: Int, itemMatcher: Matcher<View>): Matcher<View> =
   object : BoundedMatcher<View, RecyclerView>(RecyclerView::class.java) {
     override fun describeTo(description: Description) {
       description.appendText("has item at position $position: ")

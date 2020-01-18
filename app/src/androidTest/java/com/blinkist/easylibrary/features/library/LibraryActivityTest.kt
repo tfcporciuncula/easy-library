@@ -29,7 +29,14 @@ class LibraryActivityTest {
   @Test fun shouldNotShowSnackbarWhenThereIsNoErrorOnLaunch() = with(libraryActivity) {
     givenServiceReturnsDefaultBooks()
     launch()
-    assertSnackbarIsNotPresent()
+    assertSnackbarIsNotVisible()
+  }
+
+  @Test fun shouldShowProgressBarOnPullToRefresh() = with(libraryActivity) {
+    givenServiceReturnsDefaultBooksAndDelaysOnRefresh()
+    launch()
+    pullToRefresh()
+    assertProgressBarIsVisible()
   }
 
   @Test fun shouldReloadDataOnPullToRefresh() = with(libraryActivity) {
@@ -53,7 +60,7 @@ class LibraryActivityTest {
     givenServiceReturnsDefaultBooks()
     launch()
     clickOnSortMenu()
-    assertSortOptionsAreVisible()
+    assertSortOptionsDialogIsVisible()
   }
 
   @Test fun shouldDismissDialogWhenClickingOnIt() = with(libraryActivity) {
@@ -61,10 +68,10 @@ class LibraryActivityTest {
     launch()
     clickOnSortMenu()
     clickOnDescending()
-    assertSortOptionDialogIsNotPresent()
+    assertSortOptionDialogIsNotVisible()
     clickOnSortMenu()
     clickOnAscending()
-    assertSortOptionDialogIsNotPresent()
+    assertSortOptionDialogIsNotVisible()
   }
 
   @Test fun shouldHaveDescendingOrderSelectedAsDefault() = with(libraryActivity) {
@@ -72,7 +79,7 @@ class LibraryActivityTest {
     launch()
     assertFirstBookIsMostRecent()
     clickOnSortMenu()
-    assertDescendingSortOptionIsSelected()
+    assertDescendingIsSelected()
   }
 
   @Test fun shouldSelectLatestClickedSortOption() = with(libraryActivity) {
@@ -81,10 +88,10 @@ class LibraryActivityTest {
     clickOnSortMenu()
     clickOnAscending()
     clickOnSortMenu()
-    assertAscendingSortOptionIsSelected()
+    assertAscendingIsSelected()
     clickOnDescending()
     clickOnSortMenu()
-    assertDescendingSortOptionIsSelected()
+    assertDescendingIsSelected()
   }
 
   @Test fun shouldReorderListWhenSortOrderChanges() = with(libraryActivity) {
@@ -100,9 +107,9 @@ class LibraryActivityTest {
     givenServiceReturnsDefaultBooks()
     launch()
     clickOnSortMenu()
-    assertDescendingSortOptionIsSelected()
+    assertDescendingIsSelected()
     clickOnDescending()
     assertFirstBookIsMostRecent()
-    assertSortOptionDialogIsNotPresent()
+    assertSortOptionDialogIsNotVisible()
   }
 }
