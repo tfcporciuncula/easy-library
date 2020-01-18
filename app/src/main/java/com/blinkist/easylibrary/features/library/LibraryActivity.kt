@@ -1,7 +1,6 @@
 package com.blinkist.easylibrary.features.library
 
 import android.os.Bundle
-import android.view.Menu
 import android.view.MenuItem
 import androidx.appcompat.app.AppCompatActivity
 import androidx.lifecycle.observe
@@ -25,10 +24,25 @@ class LibraryActivity : AppCompatActivity() {
   }
 
   private fun setupUi(binding: LibraryActivityBinding) {
+    setupToolbar(binding)
     setupSwipeRefreshLayout(binding)
     setupRecyclerView(binding)
     observeSnackbarEvents(binding)
     observeNavigationEvents()
+  }
+
+  private fun setupToolbar(binding: LibraryActivityBinding) = with(binding.toolbar) {
+    setTitle(R.string.app_name)
+    inflateMenu(R.menu.menu)
+    setOnMenuItemClickListener(::onMenuItemClicked)
+  }
+
+  private fun onMenuItemClicked(item: MenuItem) = when (item.itemId) {
+    R.id.menu_sort -> {
+      LibrarySortOptionBottomSheetDialog.show(supportFragmentManager)
+      true
+    }
+    else -> false
   }
 
   private fun setupSwipeRefreshLayout(binding: LibraryActivityBinding) {
@@ -50,18 +64,5 @@ class LibraryActivity : AppCompatActivity() {
     viewModel.select { navigationEvent }.observeEvent(this) {
       startActivity(WebViewActivity.newIntent(this, it))
     }
-  }
-
-  override fun onCreateOptionsMenu(menu: Menu): Boolean {
-    menuInflater.inflate(R.menu.menu, menu)
-    return true
-  }
-
-  override fun onOptionsItemSelected(item: MenuItem) = when (item.itemId) {
-    R.id.menu_sort -> {
-      LibrarySortOptionBottomSheetDialog.show(supportFragmentManager)
-      true
-    }
-    else -> super.onOptionsItemSelected(item)
   }
 }

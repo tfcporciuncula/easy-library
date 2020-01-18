@@ -7,24 +7,39 @@
   android:layout_height="match_parent"
   >
 
-  <androidx.swiperefreshlayout.widget.SwipeRefreshLayout
-    android:id="@+id/swipeRefreshLayout"
+  <LinearLayout
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:orientation="vertical"
     >
 
-    <androidx.recyclerview.widget.RecyclerView
-      android:id="@+id/recyclerView"
+    <com.google.android.material.appbar.MaterialToolbar
+      android:id="@+id/toolbar"
+      style="@style/Widget.MaterialComponents.Toolbar.Primary"
       android:layout_width="match_parent"
-      android:layout_height="match_parent"
-      android:clipToPadding="false"
-      android:paddingTop="@dimen/half_standard_margin"
-      android:paddingBottom="@dimen/half_standard_margin"
-      app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
-      tools:itemCount="4"
-      tools:listitem="@layout/book_item"
+      android:layout_height="wrap_content"
       />
 
-  </androidx.swiperefreshlayout.widget.SwipeRefreshLayout>
+    <androidx.swiperefreshlayout.widget.SwipeRefreshLayout
+      android:id="@+id/swipeRefreshLayout"
+      android:layout_width="match_parent"
+      android:layout_height="match_parent"
+      >
+
+      <androidx.recyclerview.widget.RecyclerView
+        android:id="@+id/recyclerView"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:clipToPadding="false"
+        android:paddingTop="@dimen/half_standard_margin"
+        android:paddingBottom="@dimen/half_standard_margin"
+        app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
+        tools:itemCount="4"
+        tools:listitem="@layout/book_item"
+        />
+
+    </androidx.swiperefreshlayout.widget.SwipeRefreshLayout>
+
+  </LinearLayout>
 
 </androidx.coordinatorlayout.widget.CoordinatorLayout>
