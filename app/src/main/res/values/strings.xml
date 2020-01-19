@@ -15,7 +15,4 @@
   <string name="sort_option_descending">Descending</string>
   <string name="sort_option_check_icon_content_description">Checked</string>
 
-  <!-- Shared Preferences -->
-  <string name="sort_order_key" translatable="false">com.blinkist.easylibrary.KEY_SORT_ORDER</string>
-
 </resources>

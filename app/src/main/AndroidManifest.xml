@@ -25,7 +25,10 @@
 
     </activity>
 
-    <activity android:name=".features.webview.WebViewActivity" />
+    <activity
+      android:name=".features.webview.WebViewActivity"
+      android:configChanges="orientation|screenSize|screenLayout|keyboardHidden|fontScale"
+      />
 
   </application>
 

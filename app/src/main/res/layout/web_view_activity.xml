@@ -18,14 +18,14 @@
     android:id="@+id/progressBarContainer"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
-    app:cardElevation="4dp"
+    app:cardElevation="@dimen/web_view_progress_bar_elevation"
     >
 
     <ProgressBar
       android:id="@+id/progressBar"
       style="@android:style/Widget.ProgressBar.Horizontal"
       android:layout_width="match_parent"
-      android:layout_height="4dp"
+      android:layout_height="@dimen/web_view_progress_bar_height"
       android:progressDrawable="@drawable/progress_horizontal"
       tools:progress="60"
       />

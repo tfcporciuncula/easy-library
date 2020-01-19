@@ -5,7 +5,12 @@
   <dimen name="standard_margin">16dp</dimen>
   <dimen name="cardCornerRadius">0dp</dimen>
 
+  <!-- Book Item -->
   <dimen name="book_cover_image_width">112dp</dimen>
   <dimen name="book_cover_image_height">136dp</dimen>
+
+  <!-- WebView -->
+  <dimen name="web_view_progress_bar_height">4dp</dimen>
+  <dimen name="web_view_progress_bar_elevation">4dp</dimen>
 
 </resources>
