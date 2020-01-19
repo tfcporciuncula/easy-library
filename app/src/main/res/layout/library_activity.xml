@@ -7,10 +7,30 @@
   android:layout_height="match_parent"
   >
 
-  <LinearLayout
+  <androidx.swiperefreshlayout.widget.SwipeRefreshLayout
+    android:id="@+id/swipeRefreshLayout"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:orientation="vertical"
+    app:layout_behavior="@string/appbar_scrolling_view_behavior"
+    >
+
+    <androidx.recyclerview.widget.RecyclerView
+      android:id="@+id/recyclerView"
+      android:layout_width="match_parent"
+      android:layout_height="match_parent"
+      android:clipToPadding="false"
+      android:paddingTop="@dimen/half_standard_margin"
+      android:paddingBottom="@dimen/half_standard_margin"
+      app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
+      tools:itemCount="4"
+      tools:listitem="@layout/book_item"
+      />
+
+  </androidx.swiperefreshlayout.widget.SwipeRefreshLayout>
+
+  <com.google.android.material.appbar.AppBarLayout
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
     >
 
     <com.google.android.material.appbar.MaterialToolbar
@@ -20,26 +40,6 @@
       android:layout_height="wrap_content"
       />
 
-    <androidx.swiperefreshlayout.widget.SwipeRefreshLayout
-      android:id="@+id/swipeRefreshLayout"
-      android:layout_width="match_parent"
-      android:layout_height="match_parent"
-      >
-
-      <androidx.recyclerview.widget.RecyclerView
-        android:id="@+id/recyclerView"
-        android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:clipToPadding="false"
-        android:paddingTop="@dimen/half_standard_margin"
-        android:paddingBottom="@dimen/half_standard_margin"
-        app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
-        tools:itemCount="4"
-        tools:listitem="@layout/book_item"
-        />
-
-    </androidx.swiperefreshlayout.widget.SwipeRefreshLayout>
-
-  </LinearLayout>
+  </com.google.android.material.appbar.AppBarLayout>
 
 </androidx.coordinatorlayout.widget.CoordinatorLayout>
