@@ -45,7 +45,7 @@ ext.versions = [
     'timber'         : '4.7.1',
     'threeTenBp'     : '1.4.1',
     'threeTenAbp'    : '1.2.2',
-    'truth'          : '1.0'
+    'truth'          : '1.0.1'
 ]
 
 ext.deps = [
