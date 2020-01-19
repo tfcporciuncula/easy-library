@@ -11,17 +11,18 @@ import com.blinkist.easylibrary.ktx.select
 import com.blinkist.easylibrary.livedata.NonNullMutableLiveData
 import com.blinkist.easylibrary.model.presentation.Book
 import com.blinkist.easylibrary.model.repositories.BookRepository
+import com.blinkist.easylibrary.system.NetworkChecker
 import com.tfcporciuncula.flow.Preference
 import kotlinx.coroutines.flow.combine
 import kotlinx.coroutines.flow.launchIn
 import timber.log.Timber
-import java.io.IOException
 import javax.inject.Inject
 
 class LibraryViewModel @Inject constructor(
   private val bookRepository: BookRepository,
   private val bookGrouper: BookGrouper,
-  @LibrarySortOrderPreference private val sortOrderPreference: Preference<LibrarySortOrder>
+  @LibrarySortOrderPreference private val sortOrderPreference: Preference<LibrarySortOrder>,
+  private val networkChecker: NetworkChecker
 ) : ViewModel() {
 
   private val state = NonNullMutableLiveData(initialValue = LibraryViewState())
@@ -51,8 +52,12 @@ class LibraryViewModel @Inject constructor(
   )
 
   private fun handleFailure(throwable: Throwable) {
-    val isNetworkFailure = throwable is IOException
-    if (!isNetworkFailure) Timber.e(throwable)
+    val isNetworkFailure = networkChecker.isOffline()
+    if (!isNetworkFailure) {
+      Timber.e(throwable, "Error updating books -- user is online.")
+    } else {
+      Timber.i(throwable, "Error updating books -- user is offline.")
+    }
 
     state.update {
       copy(
