@@ -75,7 +75,7 @@ class LibraryViewModel @Inject constructor(
 
   private fun onArrangeBooksClicked(sortOrder: LibrarySortOrder) = sortOrderPreference.set(sortOrder)
 
-  fun onItemClicked(book: Book) {
+  fun onBookClicked(book: Book) {
     state.update { copy(navigationEvent = NavigationEvent(book.url)) }
   }
 }

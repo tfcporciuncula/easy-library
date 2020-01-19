@@ -11,11 +11,11 @@ inline fun <T, A> LiveData<T>.select(
   crossinline property: T.() -> A
 ) = map(property).distinctUntilChanged()
 
-inline fun <E, T : LiveDataEvent<E>> LiveData<T?>.observeEvent(
+inline fun <T : LiveDataEvent> LiveData<T?>.observeEvent(
   owner: LifecycleOwner,
-  crossinline onEventNotHandled: (E) -> Unit
+  crossinline onEventNotHandled: (T) -> Unit
 ) = observe(owner) { event ->
   event?.let {
-    it.doIfNotHandled { content -> onEventNotHandled(content) }
+    event.doIfNotHandled { onEventNotHandled(event) }
   }
 }

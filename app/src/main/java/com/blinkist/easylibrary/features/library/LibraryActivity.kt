@@ -51,18 +51,20 @@ class LibraryActivity : AppCompatActivity() {
   }
 
   private fun setupRecyclerView(binding: LibraryActivityBinding) {
-    val adapter = LibraryAdapter(onBookClicked = viewModel::onItemClicked)
+    val adapter = LibraryAdapter(onBookClicked = viewModel::onBookClicked)
     binding.recyclerView.adapter = adapter
     viewModel.select { libraryItems }.observe(this, adapter::submitList)
   }
 
   private fun observeSnackbarEvents(binding: LibraryActivityBinding) {
-    viewModel.select { snackbarEvent }.observeEvent(this, binding.root::showSnackbar)
+    viewModel.select { snackbarEvent }.observeEvent(this) {
+      binding.root.showSnackbar(it.messageResId)
+    }
   }
 
   private fun observeNavigationEvents() {
     viewModel.select { navigationEvent }.observeEvent(this) {
-      startActivity(WebViewActivity.newIntent(this, it))
+      startActivity(WebViewActivity.newIntent(this, it.url))
     }
   }
 }

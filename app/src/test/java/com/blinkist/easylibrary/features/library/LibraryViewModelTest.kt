@@ -1,9 +1,11 @@
 package com.blinkist.easylibrary.features.library
 
 import androidx.arch.core.executor.testing.InstantTaskExecutorRule
+import com.blinkist.easylibrary.R
 import com.blinkist.easylibrary.model.newBook
 import com.blinkist.easylibrary.model.newWeekSection
 import com.blinkist.easylibrary.model.repositories.BookRepository
+import com.blinkist.easylibrary.system.NetworkChecker
 import com.blinkist.easylibrary.test.CoroutineRule
 import com.blinkist.easylibrary.test.getOrAwaitValue
 import com.google.common.truth.Truth.assertThat
@@ -34,6 +36,7 @@ class LibraryViewModelTest {
   @Mock private lateinit var bookRepository: BookRepository
   @Mock private lateinit var bookGrouper: BookGrouper
   @Mock private lateinit var sortOrderPreference: Preference<LibrarySortOrder>
+  @Mock private lateinit var networkChecker: NetworkChecker
 
   private lateinit var viewModel: LibraryViewModel
   private val viewModelState get() = viewModel.select { this }.getOrAwaitValue()
@@ -55,18 +58,31 @@ class LibraryViewModelTest {
     assertThat(viewModelState.libraryItems).isEqualTo(libraryItems)
   }
 
-  @Test fun `should emit snackbar event if updating books fails`() {
+  @Test fun `should show snackbar with network error message if updating books fails and user is offline`() {
     initViewModel()
 
     runBlocking { given(bookRepository.updateBooks()).will { throw IOException() } }
+    given(networkChecker.isOffline()).willReturn(true)
 
     viewModel.updateBooks()
 
-    assertThat(viewModelState.snackbarEvent).isNotNull()
+    assertThat(viewModelState.snackbarEvent!!.messageResId).isEqualTo(R.string.network_error_message)
   }
 
-  @Test fun `should not emit snackbar event if updating books succeeds`() {
+  @Test fun `should show snackbar with unexpected error message if updating books fails and user is online`() {
     initViewModel()
+
+    runBlocking { given(bookRepository.updateBooks()).will { throw IOException() } }
+    given(networkChecker.isOffline()).willReturn(false)
+
+    viewModel.updateBooks()
+
+    assertThat(viewModelState.snackbarEvent!!.messageResId).isEqualTo(R.string.unexpected_error_message)
+  }
+
+  @Test fun `should not show snackbar if updating books succeeds`() {
+    initViewModel()
+
     viewModel.updateBooks()
 
     assertThat(viewModelState.snackbarEvent).isNull()
@@ -107,6 +123,15 @@ class LibraryViewModelTest {
     assertThat(viewModelState.libraryItems).isEqualTo(libraryItemsReversed)
   }
 
+  @Test fun `should navigate to book url when book is clicked`() {
+    initViewModel()
+
+    val url = "bookUrl"
+    viewModel.onBookClicked(newBook(url = url))
+
+    assertThat(viewModelState.navigationEvent!!.url).isEqualTo(url)
+  }
+
   private fun givenSortOptionWillChange() {
     given(sortOrderPreference.asFlow()).willReturn(
       flow {
@@ -122,6 +147,6 @@ class LibraryViewModelTest {
   }
 
   private fun initViewModel() {
-    viewModel = LibraryViewModel(bookRepository, bookGrouper, sortOrderPreference)
+    viewModel = LibraryViewModel(bookRepository, bookGrouper, sortOrderPreference, networkChecker)
   }
 }

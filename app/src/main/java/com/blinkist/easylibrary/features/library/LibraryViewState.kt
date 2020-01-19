@@ -11,7 +11,7 @@ data class LibraryViewState(
   val navigationEvent: NavigationEvent? = null
 ) {
 
-  class SnackbarEvent(@StringRes messageResId: Int) : LiveDataEvent<Int>(messageResId)
+  class SnackbarEvent(@StringRes val messageResId: Int) : LiveDataEvent()
 
-  class NavigationEvent(url: String) : LiveDataEvent<String>(url)
+  class NavigationEvent(val url: String) : LiveDataEvent()
 }
