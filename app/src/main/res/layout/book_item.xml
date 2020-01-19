@@ -9,8 +9,6 @@
   android:layout_marginTop="@dimen/half_standard_margin"
   android:layout_marginEnd="@dimen/standard_margin"
   android:layout_marginBottom="@dimen/half_standard_margin"
-  android:clickable="true"
-  android:focusable="true"
   >
 
   <androidx.constraintlayout.widget.ConstraintLayout
@@ -22,7 +20,7 @@
       android:id="@+id/coverImageView"
       android:layout_width="@dimen/book_cover_image_width"
       android:layout_height="0dp"
-      android:contentDescription="@string/library_item_image_description"
+      android:importantForAccessibility="no"
       android:scaleType="centerCrop"
       app:layout_constraintBottom_toBottomOf="parent"
       app:layout_constraintHeight_min="@dimen/book_cover_image_min_height"
