@@ -17,6 +17,7 @@ class NetworkChecker @Inject constructor(context: Context) {
     if (Build.VERSION.SDK_INT >= 23) {
       connectivityManager.getNetworkCapabilities(connectivityManager.activeNetwork).hasInternetConnection()
     } else {
+      @Suppress("DEPRECATION")
       connectivityManager.activeNetworkInfo?.isConnectedOrConnecting ?: false
     }
 

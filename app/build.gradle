@@ -76,10 +76,8 @@ dependencies {
   implementation deps.androidx.preference
 
   // architecture components
-  implementation deps.androidx.lifecycle.extensions
-  implementation deps.androidx.lifecycle.ktx
-  implementation deps.androidx.lifecycle.liveDataKtx
   implementation deps.androidx.lifecycle.viewModelKtx
+  implementation deps.androidx.lifecycle.liveDataKtx
   testImplementation deps.androidx.lifecycle.test
   implementation deps.androidx.room.runtime
   implementation deps.androidx.room.ktx
@@ -110,12 +108,12 @@ dependencies {
   // glide
   implementation deps.glide
 
+  // timber
+  implementation deps.timber
+
   // jsr-310
   implementation deps.threeTenAbp
   testImplementation deps.threeTenBp
-
-  // timber
-  implementation deps.timber
 
   // flow preferences
   implementation deps.flowPreferences
