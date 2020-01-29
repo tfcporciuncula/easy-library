@@ -4,18 +4,20 @@ buildscript {
   repositories {
     mavenCentral()
     google()
-    maven { url 'https://plugins.gradle.org/m2/' }
     jcenter()
   }
 
   dependencies {
     classpath "com.android.tools.build:gradle:$versions.agp"
     classpath "org.jetbrains.kotlin:kotlin-gradle-plugin:$versions.kotlin"
-    classpath "org.jmailen.gradle:kotlinter-gradle:$versions.kotlinter"
   }
 }
 
-allprojects {
+plugins {
+  id 'org.jmailen.kotlinter' version '2.3.0' apply false
+}
+
+subprojects {
   repositories {
     mavenCentral()
     google()
