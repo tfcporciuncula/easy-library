@@ -78,10 +78,10 @@ dependencies {
   // architecture components
   implementation deps.androidx.lifecycle.viewModelKtx
   implementation deps.androidx.lifecycle.liveDataKtx
-  testImplementation deps.androidx.lifecycle.test
   implementation deps.androidx.room.runtime
   implementation deps.androidx.room.ktx
   kapt deps.androidx.room.compiler
+  testImplementation deps.androidx.archTesting
 
   // design
   implementation deps.material
