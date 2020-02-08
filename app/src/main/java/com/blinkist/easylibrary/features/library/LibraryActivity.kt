@@ -9,8 +9,8 @@ import com.blinkist.easylibrary.databinding.LibraryActivityBinding
 import com.blinkist.easylibrary.di.injector
 import com.blinkist.easylibrary.di.lazyViewModel
 import com.blinkist.easylibrary.features.webview.WebViewActivity
-import com.blinkist.easylibrary.ktx.observeEvent
-import com.blinkist.easylibrary.ktx.showSnackbar
+import com.blinkist.easylibrary.util.ktx.observeEvent
+import com.blinkist.easylibrary.util.ktx.showSnackbar
 
 class LibraryActivity : AppCompatActivity() {
 

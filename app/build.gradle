@@ -40,6 +40,7 @@ android {
 
 dependencies {
   implementation project(':database')
+  implementation project(':util')
 
   // kotlin
   implementation deps.kotlin.stdlib.jdk7

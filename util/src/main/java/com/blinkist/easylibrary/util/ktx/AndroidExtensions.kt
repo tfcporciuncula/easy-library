@@ -1,4 +1,4 @@
-package com.blinkist.easylibrary.ktx
+package com.blinkist.easylibrary.util.ktx
 
 import android.app.Activity
 import android.content.Context

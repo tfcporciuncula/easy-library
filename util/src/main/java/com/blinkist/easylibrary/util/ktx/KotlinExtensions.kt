@@ -1,4 +1,4 @@
-package com.blinkist.easylibrary.ktx
+package com.blinkist.easylibrary.util.ktx
 
 import kotlinx.coroutines.CoroutineExceptionHandler
 import kotlinx.coroutines.CoroutineScope

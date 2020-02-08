@@ -6,12 +6,12 @@ import com.blinkist.easylibrary.R
 import com.blinkist.easylibrary.di.SharedPreferencesModule.LibrarySortOrderPreference
 import com.blinkist.easylibrary.features.library.LibraryViewState.NavigationEvent
 import com.blinkist.easylibrary.features.library.LibraryViewState.SnackbarEvent
-import com.blinkist.easylibrary.ktx.launchCatching
-import com.blinkist.easylibrary.ktx.select
-import com.blinkist.easylibrary.livedata.NonNullMutableLiveData
 import com.blinkist.easylibrary.model.presentation.Book
 import com.blinkist.easylibrary.model.repositories.BookRepository
 import com.blinkist.easylibrary.system.NetworkChecker
+import com.blinkist.easylibrary.util.ktx.launchCatching
+import com.blinkist.easylibrary.util.ktx.select
+import com.blinkist.easylibrary.util.livedata.NonNullMutableLiveData
 import com.tfcporciuncula.flow.Preference
 import kotlinx.coroutines.flow.combine
 import kotlinx.coroutines.flow.launchIn

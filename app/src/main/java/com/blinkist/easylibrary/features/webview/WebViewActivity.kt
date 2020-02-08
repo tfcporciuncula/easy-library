@@ -9,8 +9,8 @@ import android.webkit.WebViewClient
 import androidx.appcompat.app.AppCompatActivity
 import androidx.core.view.isVisible
 import com.blinkist.easylibrary.databinding.WebViewActivityBinding
-import com.blinkist.easylibrary.ktx.newIntent
-import com.blinkist.easylibrary.ktx.unsyncLazy
+import com.blinkist.easylibrary.util.ktx.newIntent
+import com.blinkist.easylibrary.util.ktx.unsyncLazy
 
 class WebViewActivity : AppCompatActivity() {
 

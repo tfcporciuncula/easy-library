@@ -9,9 +9,9 @@ import androidx.recyclerview.widget.RecyclerView
 import com.blinkist.easylibrary.R
 import com.blinkist.easylibrary.databinding.BookItemBinding
 import com.blinkist.easylibrary.databinding.SectionItemBinding
-import com.blinkist.easylibrary.ktx.loadWithCrossFade
 import com.blinkist.easylibrary.model.presentation.Book
 import com.blinkist.easylibrary.model.presentation.WeekSection
+import com.blinkist.easylibrary.util.ktx.loadWithCrossFade
 
 class LibraryAdapter(
   private val onBookClicked: (Book) -> Unit

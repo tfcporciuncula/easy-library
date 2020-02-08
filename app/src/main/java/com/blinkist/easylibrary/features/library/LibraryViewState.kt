@@ -1,7 +1,7 @@
 package com.blinkist.easylibrary.features.library
 
 import androidx.annotation.StringRes
-import com.blinkist.easylibrary.livedata.LiveDataEvent
+import com.blinkist.easylibrary.util.livedata.LiveDataEvent
 
 data class LibraryViewState(
   val libraryItems: List<LibraryItem> = emptyList(),

@@ -1,0 +1,8 @@
+apply plugin: 'com.android.library'
+apply plugin: 'kotlin-android'
+
+dependencies {
+  implementation deps.material
+  implementation deps.androidx.lifecycle.liveDataKtx
+  implementation deps.glide
+}

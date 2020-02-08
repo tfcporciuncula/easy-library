@@ -1,4 +1,4 @@
-package com.blinkist.easylibrary.livedata
+package com.blinkist.easylibrary.util.livedata
 
 import androidx.lifecycle.LiveData
 
