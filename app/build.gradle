@@ -14,15 +14,6 @@ android {
     versionName '1.0'
     testInstrumentationRunner 'com.blinkist.easylibrary.TestInstrumentationRunner'
     testInstrumentationRunnerArguments clearPackageData: 'true'
-
-    javaCompileOptions {
-      annotationProcessorOptions {
-        arguments = [
-            "room.schemaLocation": "$projectDir/schemas".toString(),
-            "room.incremental"   : "true"
-        ]
-      }
-    }
   }
 
   testOptions {
@@ -62,6 +53,8 @@ android {
 }
 
 dependencies {
+  implementation project(':database')
+
   // kotlin
   implementation deps.kotlin.stdlib.jdk7
   implementation deps.kotlin.coroutines.core
@@ -78,9 +71,6 @@ dependencies {
   // architecture components
   implementation deps.androidx.lifecycle.viewModelKtx
   implementation deps.androidx.lifecycle.liveDataKtx
-  implementation deps.androidx.room.runtime
-  implementation deps.androidx.room.ktx
-  kapt deps.androidx.room.compiler
   testImplementation deps.androidx.archTesting
 
   // design

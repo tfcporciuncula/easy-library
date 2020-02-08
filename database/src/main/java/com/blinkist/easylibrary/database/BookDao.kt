@@ -5,7 +5,7 @@ import androidx.room.Insert
 import androidx.room.OnConflictStrategy
 import androidx.room.Query
 import androidx.room.Transaction
-import com.blinkist.easylibrary.model.local.LocalBook
+import com.blinkist.easylibrary.database.model.LocalBook
 import kotlinx.coroutines.flow.Flow
 
 @Dao

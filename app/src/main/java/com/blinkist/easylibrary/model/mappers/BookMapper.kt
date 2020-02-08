@@ -1,6 +1,6 @@
 package com.blinkist.easylibrary.model.mappers
 
-import com.blinkist.easylibrary.model.local.LocalBook
+import com.blinkist.easylibrary.database.model.LocalBook
 import com.blinkist.easylibrary.model.presentation.Book
 import com.blinkist.easylibrary.model.remote.RemoteBook
 import org.threeten.bp.format.DateTimeFormatter

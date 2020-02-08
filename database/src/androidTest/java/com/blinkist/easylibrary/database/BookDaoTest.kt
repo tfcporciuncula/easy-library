@@ -1,19 +1,27 @@
 package com.blinkist.easylibrary.database
 
 import androidx.test.ext.junit.runners.AndroidJUnit4
-import com.blinkist.easylibrary.model.local.LocalBook
-import com.blinkist.easylibrary.model.newLocalBook
-import com.blinkist.easylibrary.test.testInjector
+import com.blinkist.easylibrary.database.model.LocalBook
+import com.blinkist.easylibrary.database.model.newLocalBook
+import com.blinkist.easylibrary.database.test.DatabaseRule
 import com.google.common.truth.Truth.assertThat
 import kotlinx.coroutines.flow.first
 import kotlinx.coroutines.runBlocking
+import org.junit.Before
+import org.junit.Rule
 import org.junit.Test
 import org.junit.runner.RunWith
 
 @RunWith(AndroidJUnit4::class)
 class BookDaoTest {
 
-  private val bookDao = testInjector.inMemoryDatabase.bookDao()
+  @get:Rule var databaseRule = DatabaseRule()
+
+  private lateinit var bookDao: BookDao
+
+  @Before fun setUp() {
+    bookDao = databaseRule.database.bookDao()
+  }
 
   @Test fun testInsert() {
     val books = listOf(newLocalBook(id = 1), newLocalBook(id = 2))

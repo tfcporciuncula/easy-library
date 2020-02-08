@@ -1,0 +1,40 @@
+apply plugin: 'com.android.library'
+apply plugin: 'kotlin-android'
+apply plugin: 'kotlin-kapt'
+
+android {
+  compileSdkVersion buildConfig.compileSdk
+  buildToolsVersion buildConfig.buildTools
+
+  defaultConfig {
+    minSdkVersion buildConfig.minSdk
+    targetSdkVersion buildConfig.targetSdk
+
+    testInstrumentationRunner 'androidx.test.runner.AndroidJUnitRunner'
+
+    javaCompileOptions {
+      annotationProcessorOptions {
+        arguments = [
+            "room.schemaLocation": "$projectDir/schemas".toString(),
+            "room.incremental"   : "true"
+        ]
+      }
+    }
+  }
+}
+
+dependencies {
+  // room
+  api deps.androidx.room.runtime
+  implementation deps.androidx.room.ktx
+  kapt deps.androidx.room.compiler
+
+  // jsr-310
+  implementation deps.threeTenAbp
+
+  // instrumentation testing
+  androidTestImplementation deps.androidx.test.core
+  androidTestImplementation deps.androidx.test.runner
+  androidTestImplementation deps.androidx.test.junit
+  androidTestImplementation deps.truth
+}
