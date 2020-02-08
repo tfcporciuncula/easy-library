@@ -3,6 +3,7 @@ package com.blinkist.easylibrary.di
 import android.content.Context
 import androidx.room.Room
 import com.blinkist.easylibrary.database.EasyLibraryDatabase
+import com.blinkist.easylibrary.database.di.DaoModule
 import dagger.Module
 import dagger.Provides
 import javax.inject.Singleton

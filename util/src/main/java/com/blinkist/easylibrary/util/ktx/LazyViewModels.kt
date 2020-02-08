@@ -1,6 +1,6 @@
 @file:Suppress("UNCHECKED_CAST")
 
-package com.blinkist.easylibrary.di
+package com.blinkist.easylibrary.util.ktx
 
 import androidx.activity.viewModels
 import androidx.fragment.app.Fragment

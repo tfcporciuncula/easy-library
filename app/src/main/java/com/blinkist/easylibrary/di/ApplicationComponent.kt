@@ -1,6 +1,7 @@
 package com.blinkist.easylibrary.di
 
 import android.content.Context
+import com.blinkist.easylibrary.database.di.DatabaseModule
 import dagger.BindsInstance
 import dagger.Component
 import javax.inject.Singleton

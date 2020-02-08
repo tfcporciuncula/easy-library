@@ -7,7 +7,7 @@ import androidx.lifecycle.observe
 import com.blinkist.easylibrary.R
 import com.blinkist.easylibrary.databinding.LibraryActivityBinding
 import com.blinkist.easylibrary.di.injector
-import com.blinkist.easylibrary.di.lazyViewModel
+import com.blinkist.easylibrary.util.ktx.lazyViewModel
 import com.blinkist.easylibrary.features.webview.WebViewActivity
 import com.blinkist.easylibrary.util.ktx.observeEvent
 import com.blinkist.easylibrary.util.ktx.showSnackbar

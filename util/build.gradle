@@ -1,8 +1,24 @@
 apply plugin: 'com.android.library'
 apply plugin: 'kotlin-android'
+apply plugin: 'kotlin-kapt'
 
 dependencies {
-  implementation deps.material
+  // android
+  implementation deps.androidx.activityKtx
+  implementation deps.androidx.fragmentKtx
+
+  // architecture components
+  implementation deps.androidx.lifecycle.viewModelKtx
   implementation deps.androidx.lifecycle.liveDataKtx
+
+  // design
+  implementation deps.material
+
+  // dagger
+  implementation deps.dagger.dagger
+  kapt deps.dagger.compiler
+  kaptAndroidTest deps.dagger.compiler
+
+  // glide
   implementation deps.glide
 }

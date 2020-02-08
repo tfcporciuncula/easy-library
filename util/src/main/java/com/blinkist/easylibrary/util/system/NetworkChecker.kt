@@ -1,5 +1,6 @@
-package com.blinkist.easylibrary.system
+package com.blinkist.easylibrary.util.system
 
+import android.annotation.SuppressLint
 import android.content.Context
 import android.net.ConnectivityManager
 import android.net.NetworkCapabilities
@@ -13,6 +14,7 @@ class NetworkChecker @Inject constructor(context: Context) {
 
   private val connectivityManager = context.getSystemService(Context.CONNECTIVITY_SERVICE) as ConnectivityManager
 
+  @SuppressLint("MissingPermission")
   fun isOnline(): Boolean =
     if (Build.VERSION.SDK_INT >= 23) {
       connectivityManager.getNetworkCapabilities(connectivityManager.activeNetwork).hasInternetConnection()

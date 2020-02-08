@@ -1,4 +1,4 @@
-package com.blinkist.easylibrary.di
+package com.blinkist.easylibrary.database.di
 
 import android.content.Context
 import androidx.room.Room
