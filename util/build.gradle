@@ -1,6 +1,5 @@
 apply plugin: 'com.android.library'
 apply plugin: 'kotlin-android'
-apply plugin: 'kotlin-kapt'
 
 dependencies {
   // android
@@ -13,11 +12,6 @@ dependencies {
 
   // design
   implementation deps.material
-
-  // dagger
-  implementation deps.dagger.dagger
-  kapt deps.dagger.compiler
-  kaptAndroidTest deps.dagger.compiler
 
   // glide
   implementation deps.glide

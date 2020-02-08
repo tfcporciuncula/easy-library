@@ -1,4 +1,4 @@
-package com.blinkist.easylibrary.service
+package com.blinkist.easylibrary.network
 
 import com.squareup.moshi.FromJson
 import com.squareup.moshi.ToJson

@@ -2,7 +2,7 @@ package com.blinkist.easylibrary.model
 
 import com.blinkist.easylibrary.database.model.LocalBook
 import com.blinkist.easylibrary.model.mappers.BookMapper
-import com.blinkist.easylibrary.model.remote.RemoteBook
+import com.blinkist.easylibrary.network.model.RemoteBook
 import com.google.common.truth.Truth.assertThat
 import org.junit.Before
 import org.junit.Test

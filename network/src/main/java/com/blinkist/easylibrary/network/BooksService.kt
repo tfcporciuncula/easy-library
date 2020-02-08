@@ -1,6 +1,6 @@
-package com.blinkist.easylibrary.service
+package com.blinkist.easylibrary.network
 
-import com.blinkist.easylibrary.model.remote.RemoteBook
+import com.blinkist.easylibrary.network.model.RemoteBook
 import retrofit2.http.GET
 
 interface BooksService {

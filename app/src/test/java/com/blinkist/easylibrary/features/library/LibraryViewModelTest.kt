@@ -5,7 +5,7 @@ import com.blinkist.easylibrary.R
 import com.blinkist.easylibrary.model.newBook
 import com.blinkist.easylibrary.model.newWeekSection
 import com.blinkist.easylibrary.model.repositories.BookRepository
-import com.blinkist.easylibrary.util.system.NetworkChecker
+import com.blinkist.easylibrary.network.NetworkChecker
 import com.blinkist.easylibrary.test.CoroutineRule
 import com.blinkist.easylibrary.test.getOrAwaitValue
 import com.google.common.truth.Truth.assertThat

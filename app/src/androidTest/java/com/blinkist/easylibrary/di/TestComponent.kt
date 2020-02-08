@@ -6,8 +6,8 @@ import javax.inject.Singleton
 @Singleton
 @Component(
   modules = [
-    RetrofitTestModule::class,
     DatabaseTestModule::class,
+    NetworkTestModule::class,
     SharedPreferencesModule::class
   ]
 )

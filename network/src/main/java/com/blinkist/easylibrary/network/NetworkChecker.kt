@@ -1,4 +1,4 @@
-package com.blinkist.easylibrary.util.system
+package com.blinkist.easylibrary.network
 
 import android.annotation.SuppressLint
 import android.content.Context

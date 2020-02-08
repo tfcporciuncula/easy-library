@@ -1,7 +1,7 @@
-package com.blinkist.easylibrary.service
+package com.blinkist.easylibrary.network
 
-import com.blinkist.easylibrary.di.MoshiModule
-import com.blinkist.easylibrary.model.remote.RemoteBook
+import com.blinkist.easylibrary.network.di.MoshiModule
+import com.blinkist.easylibrary.network.model.RemoteBook
 import com.blinkist.easylibrary.test.RestMockRule
 import com.google.common.truth.Truth.assertThat
 import io.appflate.restmock.RESTMockServer

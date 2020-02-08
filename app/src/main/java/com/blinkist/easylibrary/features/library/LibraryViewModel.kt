@@ -8,7 +8,7 @@ import com.blinkist.easylibrary.features.library.LibraryViewState.NavigationEven
 import com.blinkist.easylibrary.features.library.LibraryViewState.SnackbarEvent
 import com.blinkist.easylibrary.model.presentation.Book
 import com.blinkist.easylibrary.model.repositories.BookRepository
-import com.blinkist.easylibrary.util.system.NetworkChecker
+import com.blinkist.easylibrary.network.NetworkChecker
 import com.blinkist.easylibrary.util.ktx.launchCatching
 import com.blinkist.easylibrary.util.ktx.select
 import com.blinkist.easylibrary.util.livedata.NonNullMutableLiveData
