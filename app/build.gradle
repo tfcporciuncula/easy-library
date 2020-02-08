@@ -3,13 +3,8 @@ apply plugin: 'kotlin-android'
 apply plugin: 'kotlin-kapt'
 
 android {
-  compileSdkVersion buildConfig.compileSdk
-  buildToolsVersion buildConfig.buildTools
-
   defaultConfig {
     applicationId 'com.blinkist.easylibrary'
-    minSdkVersion buildConfig.minSdk
-    targetSdkVersion buildConfig.targetSdk
     versionCode 1
     versionName '1.0'
     testInstrumentationRunner 'com.blinkist.easylibrary.TestInstrumentationRunner'
@@ -40,15 +35,6 @@ android {
 
   viewBinding {
     enabled = true
-  }
-
-  compileOptions {
-    sourceCompatibility JavaVersion.VERSION_1_8
-    targetCompatibility JavaVersion.VERSION_1_8
-  }
-
-  kotlinOptions {
-    jvmTarget = JavaVersion.VERSION_1_8
   }
 }
 

@@ -25,6 +25,29 @@ subprojects {
     jcenter()
   }
 
+  afterEvaluate { project ->
+    if (project.hasProperty('android')) {
+      android {
+        compileSdkVersion buildConfig.compileSdk
+        buildToolsVersion buildConfig.buildTools
+
+        defaultConfig {
+          minSdkVersion buildConfig.minSdk
+          targetSdkVersion buildConfig.targetSdk
+        }
+
+        compileOptions {
+          sourceCompatibility JavaVersion.VERSION_1_8
+          targetCompatibility JavaVersion.VERSION_1_8
+        }
+
+        kotlinOptions {
+          jvmTarget = JavaVersion.VERSION_1_8
+        }
+      }
+    }
+  }
+
   apply plugin: 'org.jmailen.kotlinter'
 
   kotlinter {
