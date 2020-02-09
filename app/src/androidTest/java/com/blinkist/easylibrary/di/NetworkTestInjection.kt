@@ -8,7 +8,14 @@ import dagger.Module
 import dagger.Provides
 import io.appflate.restmock.RESTMockServer
 
-@Module(includes = [OkHttpModule::class, BaseUrlTestModule::class, RetrofitModule::class, MoshiModule::class])
+@Module(
+  includes = [
+    BaseUrlTestModule::class,
+    OkHttpModule::class,
+    MoshiModule::class,
+    RetrofitModule::class
+  ]
+)
 object NetworkTestModule
 
 @Module

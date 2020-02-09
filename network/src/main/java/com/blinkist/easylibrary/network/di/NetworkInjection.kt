@@ -14,17 +14,15 @@ import retrofit2.converter.moshi.MoshiConverterFactory
 import javax.inject.Qualifier
 import javax.inject.Singleton
 
-@Module(includes = [OkHttpModule::class, BaseUrlModule::class, RetrofitModule::class, MoshiModule::class])
+@Module(
+  includes = [
+    BaseUrlModule::class,
+    OkHttpModule::class,
+    MoshiModule::class,
+    RetrofitModule::class
+  ]
+)
 object NetworkModule
-
-@Module
-object BaseUrlModule {
-
-  @Qualifier annotation class BaseUrl
-
-  @Provides @BaseUrl
-  fun provideBaseUrl(): String = RESTMockServer.getUrl()
-}
 
 @Module
 object RetrofitModule {
@@ -40,6 +38,15 @@ object RetrofitModule {
     .addConverterFactory(MoshiConverterFactory.create(moshi))
     .build()
     .create(BooksService::class.java)
+}
+
+@Module
+object BaseUrlModule {
+
+  @Qualifier annotation class BaseUrl
+
+  @Provides @BaseUrl
+  fun provideBaseUrl(): String = RESTMockServer.getUrl()
 }
 
 @Module
