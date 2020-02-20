@@ -44,7 +44,7 @@ dependencies {
   implementation project(':util')
 
   // kotlin
-  implementation deps.kotlin.stdlib.jdk7
+  implementation deps.kotlin.stdlib
   implementation deps.kotlin.coroutines.core
   implementation deps.kotlin.coroutines.android
   testImplementation deps.kotlin.coroutines.test

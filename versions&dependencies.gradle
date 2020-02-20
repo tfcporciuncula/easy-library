@@ -6,26 +6,26 @@ ext.buildConfig = [
 ]
 
 ext.versions = [
-    'agp'            : '3.6.0-rc02',
+    'agp'            : '3.6.0-rc03',
     'androidx'       : [
         'activityKtx'       : '1.1.0',
-        'appCompat'         : '1.2.0-alpha01',
+        'appCompat'         : '1.2.0-alpha02',
         'archTesting'       : '2.1.0',
         'constraintLayout'  : '2.0.0-beta4',
-        'coreKtx'           : '1.2.0-rc01',
-        'fragmentKtx'       : '1.2.0',
+        'coreKtx'           : '1.3.0-alpha01',
+        'fragmentKtx'       : '1.2.2',
         'lifecycle'         : '2.2.0',
         'preference'        : '1.1.0',
         'recyclerview'      : '1.2.0-alpha01',
-        'room'              : '2.2.3',
+        'room'              : '2.2.4',
         'swiperefreshlayout': '1.1.0-alpha03',
         'test'              : [
-            'core'        : '1.3.0-alpha03',
-            'orchestrator': '1.3.0-alpha03',
-            'espresso'    : '3.3.0-alpha03',
-            'junit'       : '1.1.2-alpha03',
-            'rules'       : '1.3.0-alpha03',
-            'runner'      : '1.3.0-alpha03',
+            'core'        : '1.3.0-alpha04',
+            'orchestrator': '1.3.0-alpha04',
+            'espresso'    : '3.3.0-alpha04',
+            'junit'       : '1.1.2-alpha04',
+            'rules'       : '1.3.0-alpha04',
+            'runner'      : '1.3.0-alpha04',
         ],
     ],
     'coroutines'     : '1.3.3',
@@ -34,11 +34,11 @@ ext.versions = [
     'glide'          : '4.11.0',
     'junit'          : '4.13',
     'kotlin'         : '1.3.61',
-    'leakcanary'     : '2.1',
+    'leakcanary'     : '2.2',
     'material'       : '1.2.0-alpha04',
     'mockito'        : '3.2.4',
     'moshi'          : '1.9.2',
-    'okhttp'         : '4.3.1',
+    'okhttp'         : '4.4.0',
     'restMock'       : '0.4.1',
     'retrofit'       : '2.7.1',
     'stetho'         : '1.5.1',
@@ -93,9 +93,7 @@ ext.deps = [
             'android': "org.jetbrains.kotlinx:kotlinx-coroutines-android:$versions.coroutines",
             'test'   : "org.jetbrains.kotlinx:kotlinx-coroutines-test:$versions.coroutines"
         ],
-        'stdlib'    : [
-            'jdk7': "org.jetbrains.kotlin:kotlin-stdlib-jdk7:$versions.kotlin"
-        ]
+        'stdlib'    : "org.jetbrains.kotlin:kotlin-stdlib-jdk8:$versions.kotlin"
     ],
     'leakcanary'     : "com.squareup.leakcanary:leakcanary-android:$versions.leakcanary",
     'material'       : "com.google.android.material:material:$versions.material",
