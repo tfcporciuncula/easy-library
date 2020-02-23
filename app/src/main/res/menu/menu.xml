@@ -1,12 +1,24 @@
 <?xml version="1.0" encoding="utf-8"?>
 <menu
-    xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:app="http://schemas.android.com/apk/res-auto">
+  xmlns:android="http://schemas.android.com/apk/res/android"
+  xmlns:app="http://schemas.android.com/apk/res-auto"
+  >
 
-    <item
-        android:id="@+id/menu_sort"
-        android:icon="@drawable/ic_sort"
-        android:title="@string/sort_menu_item_title"
-        app:showAsAction="always" />
+  <item
+    android:id="@+id/menu_theme"
+    android:icon="@drawable/ic_theme"
+    android:title="@string/theme_menu_item_title"
+    app:iconTint="@color/white"
+    app:showAsAction="always"
+    />
+
+  <item
+    android:id="@+id/menu_sort"
+    android:icon="@drawable/ic_sort"
+    android:title="@string/sort_menu_item_title"
+    app:iconTint="@color/white"
+    app:showAsAction="always"
+    />
+
 
 </menu>
