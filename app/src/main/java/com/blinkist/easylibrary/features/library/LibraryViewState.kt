@@ -13,5 +13,8 @@ data class LibraryViewState(
 
   class SnackbarEvent(@StringRes val messageResId: Int) : LiveDataEvent()
 
-  class NavigationEvent(val url: String) : LiveDataEvent()
+  sealed class NavigationEvent : LiveDataEvent() {
+    class ToWebView(val url: String) : NavigationEvent()
+    class ToSortOptionDialog : NavigationEvent()
+  }
 }

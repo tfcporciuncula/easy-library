@@ -7,6 +7,7 @@ import androidx.lifecycle.observe
 import com.blinkist.easylibrary.R
 import com.blinkist.easylibrary.databinding.LibraryActivityBinding
 import com.blinkist.easylibrary.di.injector
+import com.blinkist.easylibrary.features.library.LibraryViewState.NavigationEvent
 import com.blinkist.easylibrary.features.webview.WebViewActivity
 import com.blinkist.easylibrary.util.ktx.lazyViewModel
 import com.blinkist.easylibrary.util.ktx.observeEvent
@@ -39,8 +40,10 @@ class LibraryActivity : AppCompatActivity() {
 
   private fun onMenuItemClicked(item: MenuItem) = when (item.itemId) {
     R.id.menu_sort -> {
-      LibrarySortOptionBottomSheetDialog.show(supportFragmentManager)
-      true
+      viewModel.onSortMenuOptionClicked(); true
+    }
+    R.id.menu_theme -> {
+      viewModel.onThemeMenuOptionClicked(); true
     }
     else -> false
   }
@@ -64,7 +67,10 @@ class LibraryActivity : AppCompatActivity() {
 
   private fun observeNavigationEvents() {
     viewModel.select { navigationEvent }.observeEvent(this) {
-      startActivity(WebViewActivity.newIntent(this, it.url))
+      when (it) {
+        is NavigationEvent.ToSortOptionDialog -> LibrarySortOptionBottomSheetDialog.show(supportFragmentManager)
+        is NavigationEvent.ToWebView -> startActivity(WebViewActivity.newIntent(this, it.url))
+      }
     }
   }
 }
