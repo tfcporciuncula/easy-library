@@ -21,6 +21,9 @@ jobs:
       - name: Ktlint
         run: ./gradlew lintKotlin
 
+      - name: Detekt
+        run: ./gradlew detekt
+
       - name: Unit Tests
         run: ./gradlew testDebugUnitTest
 
