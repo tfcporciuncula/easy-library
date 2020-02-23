@@ -77,7 +77,7 @@ class LibraryViewModel @Inject constructor(
 
   fun onBookClicked(book: Book) = state.update { copy(navigationEvent = NavigationEvent.ToWebView(book.url)) }
 
-  fun onSortMenuOptionClicked() = state.update { copy(navigationEvent = NavigationEvent.ToSortOptionDialog()) }
+  fun onSortMenuOptionClicked() = state.update { copy(navigationEvent = NavigationEvent.ToSortOrderDialog()) }
 
   fun onThemeMenuOptionClicked() {
     // TODO

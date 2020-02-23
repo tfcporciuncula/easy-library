@@ -68,7 +68,7 @@ class LibraryActivity : AppCompatActivity() {
   private fun observeNavigationEvents() {
     viewModel.select { navigationEvent }.observeEvent(this) {
       when (it) {
-        is NavigationEvent.ToSortOptionDialog -> LibrarySortOptionBottomSheetDialog.show(supportFragmentManager)
+        is NavigationEvent.ToSortOrderDialog -> LibrarySortOrderBottomSheetDialog.show(supportFragmentManager)
         is NavigationEvent.ToWebView -> startActivity(WebViewActivity.newIntent(this, it.url))
       }
     }

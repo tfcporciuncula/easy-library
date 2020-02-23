@@ -15,6 +15,6 @@ data class LibraryViewState(
 
   sealed class NavigationEvent : LiveDataEvent() {
     class ToWebView(val url: String) : NavigationEvent()
-    class ToSortOptionDialog : NavigationEvent()
+    class ToSortOrderDialog : NavigationEvent()
   }
 }

@@ -10,14 +10,14 @@ import androidx.lifecycle.observe
 import com.blinkist.easylibrary.databinding.LibrarySortOptionDialogBinding
 import com.google.android.material.bottomsheet.BottomSheetDialogFragment
 
-private val TAG: String = LibrarySortOptionBottomSheetDialog::class.java.name
+private val TAG: String = LibrarySortOrderBottomSheetDialog::class.java.name
 
-class LibrarySortOptionBottomSheetDialog : BottomSheetDialogFragment() {
+class LibrarySortOrderBottomSheetDialog : BottomSheetDialogFragment() {
 
   companion object {
     fun show(manager: FragmentManager) {
-      val fragment = manager.findFragmentByTag(TAG) as LibrarySortOptionBottomSheetDialog?
-        ?: LibrarySortOptionBottomSheetDialog()
+      val fragment = manager.findFragmentByTag(TAG) as LibrarySortOrderBottomSheetDialog?
+        ?: LibrarySortOrderBottomSheetDialog()
       fragment.show(manager, TAG)
     }
   }
