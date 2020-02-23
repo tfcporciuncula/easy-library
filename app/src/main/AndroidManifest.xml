@@ -17,6 +17,11 @@
     android:theme="@style/AppTheme"
     >
 
+    <meta-data
+      android:name="preloaded_fonts"
+      android:resource="@array/preloaded_fonts"
+      />
+
     <activity android:name=".features.library.LibraryActivity">
 
       <intent-filter>
