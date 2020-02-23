@@ -51,10 +51,10 @@
     android:layout_marginTop="@dimen/standard_margin"
     android:layout_marginEnd="@dimen/standard_margin"
     android:contentDescription="@string/sort_option_check_icon_content_description"
-    android:tint="?colorAccent"
     app:layout_constraintEnd_toEndOf="parent"
     app:layout_constraintTop_toTopOf="@id/ascendingTextView"
     app:srcCompat="@drawable/ic_check"
+    app:tint="?colorAccent"
     />
 
   <ImageView
@@ -64,10 +64,10 @@
     android:layout_marginTop="@dimen/standard_margin"
     android:layout_marginEnd="@dimen/standard_margin"
     android:contentDescription="@string/sort_option_check_icon_content_description"
-    android:tint="?colorAccent"
     app:layout_constraintEnd_toEndOf="parent"
     app:layout_constraintTop_toTopOf="@id/descendingTextView"
     app:srcCompat="@drawable/ic_check"
+    app:tint="?colorAccent"
     />
 
 </androidx.constraintlayout.widget.ConstraintLayout>
