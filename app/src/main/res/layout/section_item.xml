@@ -11,6 +11,6 @@
   android:layout_marginBottom="@dimen/half_standard_margin"
   android:ellipsize="end"
   android:maxLines="1"
-  android:textAppearance="@style/TextAppearance.MaterialComponents.Headline5"
+  android:textAppearance="?textAppearanceHeadline5"
   tools:text="April 16, 2018 to April 22, 2018"
   />
