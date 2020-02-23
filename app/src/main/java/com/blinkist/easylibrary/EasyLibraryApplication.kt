@@ -18,11 +18,14 @@ class EasyLibraryApplication : Application(), DaggerComponentProvider {
   override fun onCreate() {
     super.onCreate()
 
+    initNightMode()
     initMockServer()
     initTimber()
     initThreeTen()
     initStetho()
   }
+
+  private fun initNightMode() = component.nightThemeManager.initializeNightMode()
 
   private fun initMockServer() = MockServer.setupAndStart(this)
 
