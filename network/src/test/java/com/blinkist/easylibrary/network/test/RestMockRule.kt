@@ -1,7 +1,6 @@
-package com.blinkist.easylibrary.test
+package com.blinkist.easylibrary.network.test
 
 import com.blinkist.easylibrary.network.di.MoshiModule
-import com.blinkist.easylibrary.network.di.OkHttpModule
 import com.blinkist.easylibrary.network.di.RetrofitModule
 import io.appflate.restmock.JVMFileParser
 import io.appflate.restmock.RESTMockServer

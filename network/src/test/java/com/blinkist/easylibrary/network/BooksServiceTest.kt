@@ -1,7 +1,7 @@
 package com.blinkist.easylibrary.network
 
 import com.blinkist.easylibrary.network.model.RemoteBook
-import com.blinkist.easylibrary.test.RestMockRule
+import com.blinkist.easylibrary.network.test.RestMockRule
 import com.google.common.truth.Truth.assertThat
 import io.appflate.restmock.RESTMockServer
 import io.appflate.restmock.utils.RequestMatchers.pathContains

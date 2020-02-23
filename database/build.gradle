@@ -26,7 +26,6 @@ dependencies {
   // dagger
   implementation deps.dagger.dagger
   kapt deps.dagger.compiler
-  kaptAndroidTest deps.dagger.compiler
 
   // jsr-310
   implementation deps.threeTenAbp
