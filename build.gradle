@@ -43,6 +43,7 @@ subprojects {
 
   apply from: rootProject.file('common.gradle')
   apply from: rootProject.file('ktlint.gradle')
+  apply from: rootProject.file('detekt.gradle')
 }
 
 task clean(type: Delete) {
