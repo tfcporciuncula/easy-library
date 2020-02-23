@@ -1,0 +1,30 @@
+afterEvaluate { project ->
+  if (project.hasProperty('android')) {
+    android {
+      compileSdkVersion buildConfig.compileSdk
+      buildToolsVersion buildConfig.buildTools
+
+      defaultConfig {
+        minSdkVersion buildConfig.minSdk
+        targetSdkVersion buildConfig.targetSdk
+        versionCode appVersion.major * 1000000 + appVersion.minor * 10000 + appVersion.patch * 100 + appVersion.build
+        versionName "$appVersion.major.$appVersion.minor.$appVersion.patch" + (appVersion.snapshot ? "-SNAPSHOT" : "")
+      }
+
+      compileOptions {
+        sourceCompatibility JavaVersion.VERSION_1_8
+        targetCompatibility JavaVersion.VERSION_1_8
+      }
+
+      kotlinOptions {
+        jvmTarget = JavaVersion.VERSION_1_8
+      }
+
+      buildTypes {
+        debug {
+          versionNameSuffix appVersion.snapshot ? "-dev" : ".$appVersion.build-dev"
+        }
+      }
+    }
+  }
+}

@@ -1,11 +1,11 @@
 buildscript {
-  apply from: rootProject.file('versions&dependencies.gradle')
-
   repositories {
     mavenCentral()
     google()
     jcenter()
   }
+
+  apply from: rootProject.file('dependencies.gradle')
 
   dependencies {
     classpath "com.android.tools.build:gradle:$versions.agp"
@@ -17,6 +17,21 @@ plugins {
   id 'org.jmailen.kotlinter' version '2.3.0' apply false
 }
 
+ext.buildConfig = [
+    'minSdk'    : 21,
+    'compileSdk': 29,
+    'targetSdk' : 29,
+    'buildTools': '29.0.3'
+]
+
+ext.appVersion = [
+    'major'   : 1,
+    'minor'   : 0,
+    'patch'   : 0,
+    'build'   : 0,
+    'snapshot': true
+]
+
 subprojects {
   repositories {
     mavenCentral()
@@ -25,38 +40,8 @@ subprojects {
     jcenter()
   }
 
-  afterEvaluate { project ->
-    if (project.hasProperty('android')) {
-      android {
-        compileSdkVersion buildConfig.compileSdk
-        buildToolsVersion buildConfig.buildTools
-
-        defaultConfig {
-          minSdkVersion buildConfig.minSdk
-          targetSdkVersion buildConfig.targetSdk
-          versionCode 1
-          versionName '1.0'
-        }
-
-        compileOptions {
-          sourceCompatibility JavaVersion.VERSION_1_8
-          targetCompatibility JavaVersion.VERSION_1_8
-        }
-
-        kotlinOptions {
-          jvmTarget = JavaVersion.VERSION_1_8
-        }
-      }
-    }
-  }
-
-  apply plugin: 'org.jmailen.kotlinter'
-
-  kotlinter {
-    indentSize = 2
-    experimentalRules = true
-    disabledRules = ["import-ordering"]
-  }
+  apply from: rootProject.file('common.gradle')
+  apply from: rootProject.file('ktlint.gradle')
 }
 
 task clean(type: Delete) {
