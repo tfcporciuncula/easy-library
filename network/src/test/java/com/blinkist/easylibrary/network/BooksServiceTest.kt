@@ -1,6 +1,5 @@
 package com.blinkist.easylibrary.network
 
-import com.blinkist.easylibrary.network.di.MoshiModule
 import com.blinkist.easylibrary.network.model.RemoteBook
 import com.blinkist.easylibrary.test.RestMockRule
 import com.google.common.truth.Truth.assertThat
@@ -10,8 +9,6 @@ import kotlinx.coroutines.runBlocking
 import org.junit.Rule
 import org.junit.Test
 import org.threeten.bp.LocalDate
-import retrofit2.Retrofit
-import retrofit2.converter.moshi.MoshiConverterFactory
 
 class BooksServiceTest {
 
@@ -39,18 +36,11 @@ class BooksServiceTest {
     ]
     """
 
-  private val booksService
-    get() = Retrofit.Builder()
-      .baseUrl(RESTMockServer.getUrl())
-      .addConverterFactory(MoshiConverterFactory.create(MoshiModule.provideMoshi()))
-      .build()
-      .create(BooksService::class.java)
-
   @Test fun `test books`() {
     RESTMockServer.whenGET(pathContains("books")).thenReturnString(200, books)
 
     runBlocking {
-      assertThat(booksService.books()).isEqualTo(
+      assertThat(restMockRule.booksService.books()).isEqualTo(
         listOf(
           RemoteBook(
             id = 1,

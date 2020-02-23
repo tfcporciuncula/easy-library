@@ -6,7 +6,6 @@ dependencies {
   // dagger
   implementation deps.dagger.dagger
   kapt deps.dagger.compiler
-  kaptAndroidTest deps.dagger.compiler
 
   // http
   implementation deps.okhttp.okhttp
