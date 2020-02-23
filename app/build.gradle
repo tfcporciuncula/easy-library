@@ -5,8 +5,6 @@ apply plugin: 'kotlin-kapt'
 android {
   defaultConfig {
     applicationId 'com.blinkist.easylibrary'
-    versionCode 1
-    versionName '1.0'
     testInstrumentationRunner 'com.blinkist.easylibrary.TestInstrumentationRunner'
     testInstrumentationRunnerArguments clearPackageData: 'true'
   }

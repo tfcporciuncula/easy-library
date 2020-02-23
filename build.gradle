@@ -34,6 +34,8 @@ subprojects {
         defaultConfig {
           minSdkVersion buildConfig.minSdk
           targetSdkVersion buildConfig.targetSdk
+          versionCode 1
+          versionName '1.0'
         }
 
         compileOptions {
