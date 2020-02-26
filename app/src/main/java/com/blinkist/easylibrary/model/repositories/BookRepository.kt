@@ -12,6 +12,8 @@ class BookRepository @Inject constructor(
   private val bookMapper: BookMapper
 ) {
 
+  suspend fun currentBooks() = bookDao.currentBooks()
+
   fun books() = bookDao.books().map { bookMapper.localToPresentation(it) }
 
   suspend fun updateBooks() = bookDao.clearAndInsert(bookMapper.remoteToLocal(booksService.books()))

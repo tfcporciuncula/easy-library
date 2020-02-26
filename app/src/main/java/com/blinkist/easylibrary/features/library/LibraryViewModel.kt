@@ -16,6 +16,7 @@ import com.blinkist.easylibrary.util.livedata.NonNullMutableLiveData
 import com.tfcporciuncula.flow.Preference
 import kotlinx.coroutines.flow.combine
 import kotlinx.coroutines.flow.launchIn
+import kotlinx.coroutines.launch
 import timber.log.Timber
 import javax.inject.Inject
 
@@ -39,7 +40,9 @@ class LibraryViewModel @Inject constructor(
       }
       .launchIn(viewModelScope)
 
-    updateBooks()
+    viewModelScope.launch {
+      if (bookRepository.currentBooks().isEmpty()) updateBooks()
+    }
   }
 
   fun <T> select(property: LibraryViewState.() -> T) = state.select(property)
