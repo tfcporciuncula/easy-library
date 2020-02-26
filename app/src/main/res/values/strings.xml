@@ -4,6 +4,7 @@
   <string name="app_name">Easy Library</string>
 
   <!-- Library Activity -->
+  <string name="library_title">Easy Library</string>
   <string name="sort_menu_item_title">Change sort order</string>
   <string name="theme_menu_item_title">Change theme</string>
   <string name="week_section_title">%1$s to %2$s</string>
