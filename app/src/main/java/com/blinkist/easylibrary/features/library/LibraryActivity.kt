@@ -25,6 +25,15 @@ class LibraryActivity : AppCompatActivity() {
     setupUi(binding)
   }
 
+  override fun recreate() = restartActivityWithFadeWhenThemeChanges()
+
+  private fun restartActivityWithFadeWhenThemeChanges() {
+    finish()
+    overridePendingTransition(android.R.anim.fade_in, android.R.anim.fade_out)
+    startActivity(intent)
+    overridePendingTransition(android.R.anim.fade_in, android.R.anim.fade_out)
+  }
+
   private fun setupUi(binding: LibraryActivityBinding) {
     setupToolbar(binding)
     setupThemePopup()
