@@ -1,7 +1,8 @@
 package com.blinkist.easylibrary.model.presentation
 
-import com.blinkist.easylibrary.features.library.LibraryItem
 import org.threeten.bp.LocalDate
+
+sealed class LibraryItem
 
 data class Book(
   val id: Long,
@@ -11,4 +12,9 @@ data class Book(
   val authors: String,
   val imageUrl: String,
   val url: String
-) : LibraryItem.Book()
+) : LibraryItem()
+
+data class WeekSection(
+  val initialDate: String,
+  val finalDate: String
+) : LibraryItem()

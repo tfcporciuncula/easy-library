@@ -9,6 +9,7 @@ import com.blinkist.easylibrary.databinding.LibraryActivityBinding
 import com.blinkist.easylibrary.di.injector
 import com.blinkist.easylibrary.features.library.LibraryViewState.NavigationEvent
 import com.blinkist.easylibrary.features.webview.WebViewActivity
+import com.blinkist.easylibrary.util.ktx.exhaustive
 import com.blinkist.easylibrary.util.ktx.lazyViewModel
 import com.blinkist.easylibrary.util.ktx.observeEvent
 import com.blinkist.easylibrary.util.ktx.observeOnTrue
@@ -92,7 +93,7 @@ class LibraryActivity : AppCompatActivity() {
       when (it) {
         is NavigationEvent.ToSortOrderDialog -> LibrarySortOrderBottomSheetDialog.show(supportFragmentManager)
         is NavigationEvent.ToWebView -> startActivity(WebViewActivity.newIntent(this, it.url))
-      }
+      }.exhaustive
     }
   }
 }

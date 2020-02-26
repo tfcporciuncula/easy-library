@@ -4,6 +4,8 @@ import kotlinx.coroutines.CoroutineExceptionHandler
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.launch
 
+inline val <T> T.exhaustive get() = this
+
 fun <T> unsyncLazy(initializer: () -> T) = lazy(LazyThreadSafetyMode.NONE, initializer)
 
 inline fun CoroutineScope.launchCatching(
