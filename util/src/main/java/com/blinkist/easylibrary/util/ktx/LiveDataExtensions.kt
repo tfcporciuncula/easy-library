@@ -19,3 +19,8 @@ inline fun <T : LiveDataEvent> LiveData<T?>.observeEvent(
     event.doIfNotHandled { onEventNotHandled(event) }
   }
 }
+
+inline fun LiveData<Boolean>.observeOnTrue(
+  owner: LifecycleOwner,
+  crossinline onTrue: () -> Unit
+) = observe(owner) { if (it) onTrue() }

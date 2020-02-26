@@ -2,6 +2,7 @@ package com.blinkist.easylibrary.features.library
 
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
+import com.blinkist.easylibrary.NightThemeManager
 import com.blinkist.easylibrary.R
 import com.blinkist.easylibrary.di.SharedPreferencesModule.LibrarySortOrderPreference
 import com.blinkist.easylibrary.features.library.LibraryViewState.NavigationEvent
@@ -22,7 +23,8 @@ class LibraryViewModel @Inject constructor(
   private val bookRepository: BookRepository,
   private val bookGrouper: BookGrouper,
   @LibrarySortOrderPreference private val sortOrderPreference: Preference<LibrarySortOrder>,
-  private val networkChecker: NetworkChecker
+  private val networkChecker: NetworkChecker,
+  private val nightThemeManager: NightThemeManager
 ) : ViewModel() {
 
   private val state = NonNullMutableLiveData(initialValue = LibraryViewState())
@@ -79,7 +81,17 @@ class LibraryViewModel @Inject constructor(
 
   fun onSortMenuOptionClicked() = state.update { copy(navigationEvent = NavigationEvent.ToSortOrderDialog()) }
 
-  fun onThemeMenuOptionClicked() {
-    // TODO
+  fun onThemeMenuOptionClicked() = state.update { copy(isThemePopupOpen = true) }
+
+  fun onThemeOptionClicked(menuItemId: Int) {
+    val nightMode = when (menuItemId) {
+      R.id.menu_theme_light -> NightThemeManager.NightMode.LIGHT
+      R.id.menu_theme_dark -> NightThemeManager.NightMode.DARK
+      R.id.menu_theme_default -> NightThemeManager.NightMode.DEFAULT
+      else -> throw IllegalArgumentException("Invalid menu item id: $menuItemId")
+    }
+    nightThemeManager.setNightMode(nightMode)
   }
+
+  fun onThemeMenuDismissed() = state.update { copy(isThemePopupOpen = false) }
 }

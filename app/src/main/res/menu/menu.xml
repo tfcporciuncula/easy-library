@@ -9,7 +9,7 @@
     android:icon="@drawable/ic_theme"
     android:title="@string/theme_menu_item_title"
     app:iconTint="@color/white"
-    app:showAsAction="always"
+    app:showAsAction="ifRoom"
     />
 
   <item
@@ -17,7 +17,7 @@
     android:icon="@drawable/ic_sort"
     android:title="@string/sort_menu_item_title"
     app:iconTint="@color/white"
-    app:showAsAction="always"
+    app:showAsAction="ifRoom"
     />
 
 </menu>

@@ -1,0 +1,10 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+
+  <style name="BaseTheme" parent="Theme.MaterialComponents.DayNight.NoActionBar">
+    <item name="colorPrimary">@color/bluishDark</item>
+    <item name="colorPrimaryDark">@color/darkerDark</item>
+    <item name="colorOnPrimary">?android:textColorPrimary</item>
+  </style>
+
+</resources>

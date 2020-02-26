@@ -10,6 +10,12 @@
   <string name="network_error_message">We couldn\'t fetch your books…</string>
   <string name="unexpected_error_message">Something went wrong…</string>
 
+  <!-- Theme menu-->
+  <string name="theme_menu_item_light">Light</string>
+  <string name="theme_menu_item_dark">Dark</string>
+  <string name="theme_menu_item_battery">Set by Battery Saver</string>
+  <string name="theme_menu_item_system">System default</string>
+
   <!-- Sort Option Dialog -->
   <string name="sort_option_ascending">Ascending</string>
   <string name="sort_option_descending">Descending</string>

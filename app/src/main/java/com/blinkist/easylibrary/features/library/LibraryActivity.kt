@@ -11,6 +11,7 @@ import com.blinkist.easylibrary.features.library.LibraryViewState.NavigationEven
 import com.blinkist.easylibrary.features.webview.WebViewActivity
 import com.blinkist.easylibrary.util.ktx.lazyViewModel
 import com.blinkist.easylibrary.util.ktx.observeEvent
+import com.blinkist.easylibrary.util.ktx.observeOnTrue
 import com.blinkist.easylibrary.util.ktx.showSnackbar
 
 class LibraryActivity : AppCompatActivity() {
@@ -26,6 +27,7 @@ class LibraryActivity : AppCompatActivity() {
 
   private fun setupUi(binding: LibraryActivityBinding) {
     setupToolbar(binding)
+    setupThemePopup()
     setupSwipeRefreshLayout(binding)
     setupRecyclerView(binding)
     observeSnackbarEvents(binding)
@@ -46,6 +48,17 @@ class LibraryActivity : AppCompatActivity() {
       viewModel.onThemeMenuOptionClicked(); true
     }
     else -> false
+  }
+
+  private fun setupThemePopup() {
+    viewModel.select { isThemePopupOpen }.observeOnTrue(this) {
+      ThemePopup.show(
+        context = this,
+        anchor = findViewById(R.id.menu_theme),
+        onItemClicked = viewModel::onThemeOptionClicked,
+        onDismissed = viewModel::onThemeMenuDismissed
+      )
+    }
   }
 
   private fun setupSwipeRefreshLayout(binding: LibraryActivityBinding) {

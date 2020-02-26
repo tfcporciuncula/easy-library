@@ -1,13 +1,17 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
 
-  <style name="AppTheme" parent="Theme.MaterialComponents.Light.NoActionBar">
-    <item name="colorPrimary">@color/colorPrimary</item>
-    <item name="colorPrimaryDark">@color/colorPrimaryDark</item>
-    <item name="colorAccent">@color/colorAccent</item>
-    <item name="android:textColorPrimary">@color/textColorPrimary</item>
+  <style name="BaseTheme" parent="Theme.MaterialComponents.DayNight.NoActionBar">
+    <item name="colorPrimary">@color/blueishGrey</item>
+    <item name="colorPrimaryDark">@color/darkerBlue</item>
+    <item name="android:textColorPrimary">@color/darkGrey</item>
+  </style>
+
+  <style name="AppTheme" parent="BaseTheme">
+    <item name="colorAccent">@color/someGreen</item>
 
     <item name="materialCardViewStyle">@style/CardViewStyle</item>
+    <item name="textAppearanceLargePopupMenu">@style/Subtitle1</item>
 
     <item name="textAppearanceHeadline1">@style/Headline1</item>
     <item name="textAppearanceHeadline2">@style/Headline2</item>
