@@ -1,13 +1,16 @@
 package com.blinkist.easylibrary.features.library
 
 import androidx.arch.core.executor.testing.InstantTaskExecutorRule
+import com.blinkist.easylibrary.NightThemeManager
 import com.blinkist.easylibrary.R
+import com.blinkist.easylibrary.features.library.LibraryViewState.NavigationEvent
 import com.blinkist.easylibrary.model.newBook
 import com.blinkist.easylibrary.model.newWeekSection
 import com.blinkist.easylibrary.model.repositories.BookRepository
 import com.blinkist.easylibrary.network.NetworkChecker
 import com.blinkist.easylibrary.test.CoroutineRule
 import com.blinkist.easylibrary.test.getOrAwaitValue
+import com.blinkist.easylibrary.test.isInstanceOf
 import com.google.common.truth.Truth.assertThat
 import com.tfcporciuncula.flow.Preference
 import kotlinx.coroutines.delay
@@ -37,6 +40,7 @@ class LibraryViewModelTest {
   @Mock private lateinit var bookGrouper: BookGrouper
   @Mock private lateinit var sortOrderPreference: Preference<LibrarySortOrder>
   @Mock private lateinit var networkChecker: NetworkChecker
+  @Mock private lateinit var nightThemeManager: NightThemeManager
 
   private lateinit var viewModel: LibraryViewModel
   private val viewModelState get() = viewModel.select { this }.getOrAwaitValue()
@@ -129,7 +133,59 @@ class LibraryViewModelTest {
     val url = "bookUrl"
     viewModel.onBookClicked(newBook(url = url))
 
-    assertThat(viewModelState.navigationEvent!!.url).isEqualTo(url)
+    val navigationEvent = viewModelState.navigationEvent!!
+    assertThat(navigationEvent).isInstanceOf<NavigationEvent.ToWebView>()
+    assertThat((navigationEvent as NavigationEvent.ToWebView).url).isEqualTo(url)
+  }
+
+  @Test fun `should navigate to sort dialog when sort menu item is clicked`() {
+    initViewModel()
+
+    viewModel.onSortMenuItemClicked()
+
+    val navigationEvent = viewModelState.navigationEvent!!
+    assertThat(navigationEvent).isInstanceOf<NavigationEvent.ToSortOrderDialog>()
+  }
+
+  @Test fun `should show theme popup when theme menu item is clicked`() {
+    initViewModel()
+
+    viewModel.onThemeMenuItemClicked()
+
+    assertThat(viewModelState.isThemePopupOpen).isTrue()
+  }
+
+  @Test fun `should not show theme popup after it is dismissed`() {
+    initViewModel()
+
+    viewModel.onThemeMenuItemClicked()
+    viewModel.onThemePopupDismissed()
+
+    assertThat(viewModelState.isThemePopupOpen).isFalse()
+  }
+
+  @Test fun `should set light mode when light item is clicked`() {
+    initViewModel()
+
+    viewModel.onThemePopupItemClicked(R.id.menu_theme_light)
+
+    verify(nightThemeManager).setNightMode(NightThemeManager.NightMode.LIGHT)
+  }
+
+  @Test fun `should set dark mode when dark item is clicked`() {
+    initViewModel()
+
+    viewModel.onThemePopupItemClicked(R.id.menu_theme_dark)
+
+    verify(nightThemeManager).setNightMode(NightThemeManager.NightMode.DARK)
+  }
+
+  @Test fun `should set light mode when default item is clicked`() {
+    initViewModel()
+
+    viewModel.onThemePopupItemClicked(R.id.menu_theme_default)
+
+    verify(nightThemeManager).setNightMode(NightThemeManager.NightMode.DEFAULT)
   }
 
   private fun givenSortOptionWillChange() {
@@ -147,6 +203,6 @@ class LibraryViewModelTest {
   }
 
   private fun initViewModel() {
-    viewModel = LibraryViewModel(bookRepository, bookGrouper, sortOrderPreference, networkChecker)
+    viewModel = LibraryViewModel(bookRepository, bookGrouper, sortOrderPreference, networkChecker, nightThemeManager)
   }
 }

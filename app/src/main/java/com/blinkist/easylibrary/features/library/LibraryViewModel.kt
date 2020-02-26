@@ -82,11 +82,11 @@ class LibraryViewModel @Inject constructor(
 
   fun onBookClicked(book: Book) = state.update { copy(navigationEvent = NavigationEvent.ToWebView(book.url)) }
 
-  fun onSortMenuOptionClicked() = state.update { copy(navigationEvent = NavigationEvent.ToSortOrderDialog()) }
+  fun onSortMenuItemClicked() = state.update { copy(navigationEvent = NavigationEvent.ToSortOrderDialog()) }
 
-  fun onThemeMenuOptionClicked() = state.update { copy(isThemePopupOpen = true) }
+  fun onThemeMenuItemClicked() = state.update { copy(isThemePopupOpen = true) }
 
-  fun onThemeOptionClicked(menuItemId: Int) {
+  fun onThemePopupItemClicked(menuItemId: Int) {
     val nightMode = when (menuItemId) {
       R.id.menu_theme_light -> NightThemeManager.NightMode.LIGHT
       R.id.menu_theme_dark -> NightThemeManager.NightMode.DARK
@@ -96,5 +96,5 @@ class LibraryViewModel @Inject constructor(
     nightThemeManager.setNightMode(nightMode)
   }
 
-  fun onThemeMenuDismissed() = state.update { copy(isThemePopupOpen = false) }
+  fun onThemePopupDismissed() = state.update { copy(isThemePopupOpen = false) }
 }

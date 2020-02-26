@@ -52,10 +52,10 @@ class LibraryActivity : AppCompatActivity() {
 
   private fun onMenuItemClicked(item: MenuItem) = when (item.itemId) {
     R.id.menu_sort -> {
-      viewModel.onSortMenuOptionClicked(); true
+      viewModel.onSortMenuItemClicked(); true
     }
     R.id.menu_theme -> {
-      viewModel.onThemeMenuOptionClicked(); true
+      viewModel.onThemeMenuItemClicked(); true
     }
     else -> false
   }
@@ -65,8 +65,8 @@ class LibraryActivity : AppCompatActivity() {
       ThemePopup.show(
         context = this,
         anchor = findViewById(R.id.menu_theme),
-        onItemClicked = viewModel::onThemeOptionClicked,
-        onDismissed = viewModel::onThemeMenuDismissed
+        onItemClicked = viewModel::onThemePopupItemClicked,
+        onDismissed = viewModel::onThemePopupDismissed
       )
     }
   }
