@@ -3,6 +3,7 @@ package com.blinkist.easylibrary.features.webview
 import android.content.Context
 import android.graphics.Bitmap
 import android.os.Bundle
+import android.view.View
 import android.webkit.WebChromeClient
 import android.webkit.WebView
 import android.webkit.WebViewClient
@@ -27,7 +28,13 @@ class WebViewActivity : AppCompatActivity() {
   override fun onCreate(savedInstanceState: Bundle?) {
     super.onCreate(savedInstanceState)
     setContentView(binding.root)
+    hideStatusBar()
     setupWebView()
+  }
+
+  private fun hideStatusBar() {
+    window.decorView.systemUiVisibility =
+      View.SYSTEM_UI_FLAG_LAYOUT_STABLE or View.SYSTEM_UI_FLAG_FULLSCREEN or View.SYSTEM_UI_FLAG_LAYOUT_FULLSCREEN
   }
 
   private fun setupWebView() = with(binding) {
