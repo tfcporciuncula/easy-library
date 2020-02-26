@@ -22,7 +22,7 @@ object SharedPreferencesModule {
   @Provides @ThemePreference
   fun provideThemeOrderPreference(flowSharedPreferences: FlowSharedPreferences) = flowSharedPreferences.getEnum(
     key = "com.blinkist.easylibrary.KEY_THEME",
-    defaultValue = NightThemeManager.NightMode.SYSTEM_DEFAULT
+    defaultValue = NightThemeManager.NightMode.DEFAULT
   )
 
   @Qualifier annotation class LibrarySortOrderPreference
