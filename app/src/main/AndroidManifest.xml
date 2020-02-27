@@ -22,7 +22,10 @@
       android:resource="@array/preloaded_fonts"
       />
 
-    <activity android:name=".features.library.LibraryActivity">
+    <activity
+      android:name=".features.library.LibraryActivity"
+      android:theme="@style/SplashTheme"
+      >
 
       <intent-filter>
         <action android:name="android.intent.action.MAIN" />
@@ -33,7 +36,7 @@
 
     <activity
       android:name=".features.webview.WebViewActivity"
-      android:configChanges="orientation|screenSize|screenLayout|keyboardHidden|fontScale"
+      android:configChanges="orientation|screenSize|screenLayout|keyboardHidden|fontScale|uiMode"
       />
 
   </application>

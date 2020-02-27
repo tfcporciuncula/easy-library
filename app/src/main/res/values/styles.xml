@@ -1,6 +1,10 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
 
+  <style name="SplashTheme" parent="BaseTheme">
+    <item name="android:windowBackground">@drawable/splash_screen</item>
+  </style>
+
   <style name="BaseTheme" parent="Theme.MaterialComponents.DayNight.NoActionBar">
     <item name="colorPrimary">@color/blueishGrey</item>
     <item name="colorPrimaryDark">@color/darkerBlue</item>
