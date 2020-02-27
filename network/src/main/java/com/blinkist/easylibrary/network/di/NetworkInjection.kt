@@ -4,7 +4,9 @@ import com.blinkist.easylibrary.network.BooksService
 import com.blinkist.easylibrary.network.LocalDateAdapter
 import com.blinkist.easylibrary.network.OffsetDateTimeAdapter
 import com.blinkist.easylibrary.network.di.BaseUrlModule.BaseUrl
+import com.blinkist.easylibrary.network.ktx.lazyCallFactory
 import com.squareup.moshi.Moshi
+import dagger.Lazy
 import dagger.Module
 import dagger.Provides
 import io.appflate.restmock.RESTMockServer
@@ -30,11 +32,11 @@ object RetrofitModule {
   @Provides @Singleton
   fun provideBooksService(
     @BaseUrl baseUrl: String,
-    okHttpClient: OkHttpClient,
+    okHttpClient: Lazy<OkHttpClient>,
     moshi: Moshi
   ): BooksService = Retrofit.Builder()
     .baseUrl(baseUrl)
-    .client(okHttpClient)
+    .lazyCallFactory(okHttpClient)
     .addConverterFactory(MoshiConverterFactory.create(moshi))
     .build()
     .create(BooksService::class.java)

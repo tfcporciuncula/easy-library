@@ -2,6 +2,7 @@ package com.blinkist.easylibrary.network.test
 
 import com.blinkist.easylibrary.network.di.MoshiModule
 import com.blinkist.easylibrary.network.di.RetrofitModule
+import dagger.Lazy
 import io.appflate.restmock.JVMFileParser
 import io.appflate.restmock.RESTMockServer
 import io.appflate.restmock.RESTMockServerStarter
@@ -15,7 +16,7 @@ class RestMockRule : TestWatcher() {
   val booksService by lazy(LazyThreadSafetyMode.NONE) {
     RetrofitModule.provideBooksService(
       baseUrl = RESTMockServer.getUrl(),
-      okHttpClient = OkHttpClient.Builder().build(),
+      okHttpClient = Lazy { OkHttpClient.Builder().build() },
       moshi = MoshiModule.provideMoshi()
     )
   }
