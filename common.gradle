@@ -26,5 +26,9 @@ afterEvaluate { project ->
         }
       }
     }
+
+    extensions.findByName('kapt')?.arguments {
+      arg("dagger.fastInit", "enabled")
+    }
   }
 }
