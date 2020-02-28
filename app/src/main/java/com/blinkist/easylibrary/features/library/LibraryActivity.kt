@@ -48,8 +48,6 @@ class LibraryActivity : AppCompatActivity() {
   }
 
   private fun setupToolbar(binding: LibraryActivityBinding) = with(binding.toolbar) {
-    setTitle(R.string.library_title)
-    inflateMenu(R.menu.menu)
     setOnMenuItemClickListener(::onMenuItemClicked)
   }
 
