@@ -6,6 +6,7 @@ import androidx.appcompat.app.AppCompatActivity
 import androidx.lifecycle.observe
 import com.blinkist.easylibrary.R
 import com.blinkist.easylibrary.databinding.LibraryActivityBinding
+import com.blinkist.easylibrary.databinding.LibraryActivityContainerBinding
 import com.blinkist.easylibrary.di.injector
 import com.blinkist.easylibrary.features.library.LibraryViewState.NavigationEvent
 import com.blinkist.easylibrary.features.webview.WebViewActivity
@@ -22,9 +23,9 @@ class LibraryActivity : AppCompatActivity() {
   override fun onCreate(savedInstanceState: Bundle?) {
     resetThemeFromSplashScreen()
     super.onCreate(savedInstanceState)
-    val binding = LibraryActivityBinding.inflate(layoutInflater)
+    val binding = LibraryActivityContainerBinding.inflate(layoutInflater)
     setContentView(binding.root)
-    setupUi(binding)
+    setupUi(binding.libraryActivity)
   }
 
   private fun resetThemeFromSplashScreen() = setTheme(R.style.AppTheme)
