@@ -5,9 +5,8 @@ apply plugin: 'kotlin-kapt'
 dependencies {
   implementation project(':models')
 
-  // dagger
-  implementation deps.dagger.dagger
-  kapt deps.dagger.compiler
+  // kotlin
+  implementation deps.kotlin.stdlib
 
   // http
   api deps.okhttp.okhttp
@@ -19,6 +18,10 @@ dependencies {
   // moshi
   api deps.moshi.moshi
   kapt deps.moshi.kotlinCodegen
+
+  // dagger
+  implementation deps.dagger.dagger
+  kapt deps.dagger.compiler
 
   // jsr-310
   implementation deps.threeTenAbp

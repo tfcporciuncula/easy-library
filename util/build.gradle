@@ -2,9 +2,14 @@ apply plugin: 'com.android.library'
 apply plugin: 'kotlin-android'
 
 dependencies {
+  // kotlin
+  implementation deps.kotlin.stdlib
+
   // android
+  implementation deps.androidx.appCompat
   implementation deps.androidx.activityKtx
   implementation deps.androidx.fragmentKtx
+  implementation deps.androidx.coreKtx
 
   // architecture components
   implementation deps.androidx.lifecycle.viewModelKtx
