@@ -1,8 +1,8 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
 
-  <style name="SplashTheme" parent="BaseTheme">
-    <item name="android:windowBackground">@drawable/splash_screen</item>
+  <style name="LauncherTheme" parent="BaseTheme">
+    <item name="android:windowBackground">@drawable/launcher_screen</item>
   </style>
 
   <style name="BaseTheme" parent="Theme.MaterialComponents.DayNight.NoActionBar">

@@ -21,14 +21,11 @@ class LibraryActivity : AppCompatActivity() {
   private val viewModel by lazyViewModel { injector.libraryViewModel }
 
   override fun onCreate(savedInstanceState: Bundle?) {
-    resetThemeFromSplashScreen()
     super.onCreate(savedInstanceState)
     val binding = LibraryActivityContainerBinding.inflate(layoutInflater)
     setContentView(binding.root)
     setupUi(binding.libraryActivity)
   }
-
-  private fun resetThemeFromSplashScreen() = setTheme(R.style.AppTheme)
 
   override fun recreate() = restartActivityWithFadeWhenThemeChanges()
 
