@@ -1,4 +1,4 @@
-package com.blinkist.easylibrary.model.presentation
+package com.blinkist.easylibrary.models.presentation
 
 import org.threeten.bp.LocalDate
 

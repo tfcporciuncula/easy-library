@@ -1,7 +1,7 @@
 package com.blinkist.easylibrary.features.library
 
 import androidx.annotation.StringRes
-import com.blinkist.easylibrary.model.presentation.LibraryItem
+import com.blinkist.easylibrary.models.presentation.LibraryItem
 import com.blinkist.easylibrary.util.livedata.LiveDataEvent
 
 data class LibraryViewState(

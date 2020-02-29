@@ -3,6 +3,8 @@ apply plugin: 'kotlin-android'
 apply plugin: 'kotlin-kapt'
 
 dependencies {
+  implementation project(':models')
+
   // dagger
   implementation deps.dagger.dagger
   kapt deps.dagger.compiler
@@ -14,7 +16,7 @@ dependencies {
   implementation(deps.restMock) { exclude group: 'androidx.test' }
   implementation deps.okhttp.mockwebserver
 
-  // json
+  // moshi
   api deps.moshi.moshi
   kapt deps.moshi.kotlinCodegen
 

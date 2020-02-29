@@ -1,6 +1,6 @@
 package com.blinkist.easylibrary.network
 
-import com.blinkist.easylibrary.network.model.RemoteBook
+import com.blinkist.easylibrary.models.remote.RemoteBook
 import com.blinkist.easylibrary.network.test.RestMockRule
 import com.google.common.truth.Truth.assertThat
 import io.appflate.restmock.RESTMockServer
@@ -42,7 +42,7 @@ class BooksServiceTest {
     runBlocking {
       assertThat(restMockRule.booksService.books()).isEqualTo(
         listOf(
-          RemoteBook(
+          com.blinkist.easylibrary.models.remote.RemoteBook(
             id = 1,
             title = "book1",
             authors = "author1",
@@ -50,7 +50,7 @@ class BooksServiceTest {
             thumbnail = "thumbnail1",
             url = "url1"
           ),
-          RemoteBook(
+          com.blinkist.easylibrary.models.remote.RemoteBook(
             id = 2,
             title = "book2",
             authors = "author2",

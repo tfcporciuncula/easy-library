@@ -1,8 +1,8 @@
 package com.blinkist.easylibrary.features.library
 
-import com.blinkist.easylibrary.model.presentation.Book
-import com.blinkist.easylibrary.model.presentation.LibraryItem
-import com.blinkist.easylibrary.model.presentation.WeekSection
+import com.blinkist.easylibrary.models.presentation.Book
+import com.blinkist.easylibrary.models.presentation.LibraryItem
+import com.blinkist.easylibrary.models.presentation.WeekSection
 import org.threeten.bp.ZoneId
 import java.text.SimpleDateFormat
 import java.util.Calendar

@@ -1,5 +1,6 @@
 package com.blinkist.easylibrary.database.model
 
+import com.blinkist.easylibrary.models.local.LocalBook
 import org.threeten.bp.LocalDate
 
 fun newLocalBook(

@@ -1,4 +1,4 @@
-package com.blinkist.easylibrary.database.model
+package com.blinkist.easylibrary.models.local
 
 import androidx.room.ColumnInfo
 import androidx.room.Entity

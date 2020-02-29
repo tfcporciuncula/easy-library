@@ -18,6 +18,8 @@ android {
 }
 
 dependencies {
+  implementation project(':models')
+
   // room
   api deps.androidx.room.runtime
   implementation deps.androidx.room.ktx

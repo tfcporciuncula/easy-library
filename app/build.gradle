@@ -44,6 +44,7 @@ android {
 dependencies {
   implementation project(':database')
   implementation project(':network')
+  implementation project(':models')
   implementation project(':util')
 
   // kotlin
