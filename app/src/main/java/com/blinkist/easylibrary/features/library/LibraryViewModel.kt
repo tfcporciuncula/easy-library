@@ -41,7 +41,7 @@ class LibraryViewModel @Inject constructor(
       .launchIn(viewModelScope)
 
     viewModelScope.launch {
-      if (bookRepository.currentBooks().isEmpty()) updateBooks()
+      if (bookRepository.hasNoBooks()) updateBooks()
     }
   }
 

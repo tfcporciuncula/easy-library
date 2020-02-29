@@ -47,6 +47,7 @@ class LibraryViewModelTest {
 
   @Before fun setup() {
     given(bookRepository.books()).willReturn(flowOf(emptyList()))
+    runBlocking { given(bookRepository.hasNoBooks()).willReturn(false) }
     given(sortOrderPreference.asFlow()).willReturn(flowOf(LibrarySortOrder.DEFAULT))
   }
 
@@ -60,6 +61,16 @@ class LibraryViewModelTest {
     initViewModel()
 
     assertThat(viewModelState.libraryItems).isEqualTo(libraryItems)
+  }
+
+  @Test fun `should update books after initialization if there are no books`() {
+    runBlocking {
+      given(bookRepository.hasNoBooks()).willReturn(true)
+
+      initViewModel()
+
+      verify(bookRepository).updateBooks()
+    }
   }
 
   @Test fun `should show snackbar with network error message if updating books fails and user is offline`() {

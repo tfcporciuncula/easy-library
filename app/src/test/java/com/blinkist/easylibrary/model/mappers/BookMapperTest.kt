@@ -1,7 +1,6 @@
-package com.blinkist.easylibrary.model
+package com.blinkist.easylibrary.model.mappers
 
 import com.blinkist.easylibrary.database.model.LocalBook
-import com.blinkist.easylibrary.model.mappers.BookMapper
 import com.blinkist.easylibrary.network.model.RemoteBook
 import com.google.common.truth.Truth.assertThat
 import org.junit.Before

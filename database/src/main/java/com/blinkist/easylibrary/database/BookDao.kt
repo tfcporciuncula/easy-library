@@ -14,8 +14,8 @@ interface BookDao {
   @Query("SELECT * FROM books")
   fun books(): Flow<List<LocalBook>>
 
-  @Query("SELECT * FROM books")
-  suspend fun currentBooks(): List<LocalBook>
+  @Query("SELECT COUNT(*) FROM books")
+  suspend fun count(): Int
 
   @Insert(onConflict = OnConflictStrategy.REPLACE)
   suspend fun insert(localBooks: List<LocalBook>)
