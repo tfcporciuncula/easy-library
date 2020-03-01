@@ -1,9 +1,19 @@
-package com.blinkist.easylibrary.model
+package com.blinkist.easylibrary.test
 
+import com.blinkist.easylibrary.models.local.LocalBook
 import com.blinkist.easylibrary.models.presentation.Book
 import com.blinkist.easylibrary.models.presentation.WeekSection
 import com.blinkist.easylibrary.models.remote.RemoteBook
 import org.threeten.bp.LocalDate
+
+fun newLocalBook(
+  id: Long = 2020,
+  publishedDate: String = "2019-03-03",
+  title: String = "title.",
+  authors: String = "authors.",
+  thumbnail: String = "thumbnail.",
+  url: String = "url"
+) = LocalBook(id, LocalDate.parse(publishedDate), title, authors, thumbnail, url)
 
 fun newRemoteBook(
   id: Long = 1010,

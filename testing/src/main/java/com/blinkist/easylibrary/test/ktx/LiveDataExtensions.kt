@@ -1,4 +1,4 @@
-package com.blinkist.easylibrary.test
+package com.blinkist.easylibrary.test.ktx
 
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.Observer

@@ -1,9 +1,9 @@
 package com.blinkist.easylibrary.database
 
 import androidx.test.ext.junit.runners.AndroidJUnit4
-import com.blinkist.easylibrary.database.model.newLocalBook
 import com.blinkist.easylibrary.database.test.DatabaseRule
 import com.blinkist.easylibrary.models.local.LocalBook
+import com.blinkist.easylibrary.test.newLocalBook
 import com.google.common.truth.Truth.assertThat
 import kotlinx.coroutines.flow.first
 import kotlinx.coroutines.runBlocking

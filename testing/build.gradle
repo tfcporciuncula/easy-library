@@ -1,0 +1,30 @@
+apply plugin: 'com.android.library'
+apply plugin: 'kotlin-android'
+
+dependencies {
+  implementation project(':models')
+
+  // kotlin
+  implementation deps.kotlin.stdlib
+  implementation deps.kotlin.coroutines.core
+  implementation deps.kotlin.coroutines.test
+
+  // architecture components
+  implementation deps.androidx.lifecycle.liveDataKtx
+
+  // design
+  implementation deps.androidx.recyclerview
+  implementation deps.androidx.swiperefreshlayout
+
+  // jsr-310
+  implementation deps.threeTenAbp
+
+  // testing
+  implementation deps.androidx.test.core
+  implementation deps.androidx.test.runner
+  implementation deps.androidx.test.rules
+  implementation deps.androidx.test.junit
+  implementation deps.androidx.test.espresso.core
+  implementation deps.restMock
+  implementation deps.truth
+}

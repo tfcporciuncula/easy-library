@@ -36,6 +36,7 @@ dependencies {
   implementation deps.threeTenAbp
 
   // instrumentation testing
+  androidTestImplementation project(':testing')
   androidTestImplementation deps.androidx.test.core
   androidTestImplementation deps.androidx.test.runner
   androidTestImplementation deps.androidx.test.junit

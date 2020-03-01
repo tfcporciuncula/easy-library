@@ -26,16 +26,6 @@ android {
     }
   }
 
-  sourceSets {
-    String sharedTestDir = 'src/sharedTest/java'
-    test {
-      java.srcDir sharedTestDir
-    }
-    androidTest {
-      java.srcDir sharedTestDir
-    }
-  }
-
   viewBinding {
     enabled = true
   }
@@ -96,17 +86,18 @@ dependencies {
   debugImplementation deps.okhttp.loggingInterceptor
 
   // unit testing
+  testImplementation project(':testing')
   testImplementation deps.junit
   testImplementation deps.mockito
   testImplementation deps.truth
 
   // instrumentation testing
+  androidTestImplementation project(':testing')
   androidTestImplementation deps.androidx.test.core
   androidTestImplementation deps.androidx.test.runner
   androidTestImplementation deps.androidx.test.rules
   androidTestImplementation deps.androidx.test.junit
   androidTestImplementation deps.androidx.test.espresso.core
-  androidTestImplementation deps.androidx.test.espresso.contrib
   androidTestImplementation deps.truth
   androidTestImplementation deps.restMock
   androidTestImplementation deps.okhttp.mockwebserver

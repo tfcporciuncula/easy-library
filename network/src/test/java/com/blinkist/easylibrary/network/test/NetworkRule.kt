@@ -11,7 +11,7 @@ import okhttp3.OkHttpClient
 import org.junit.rules.TestWatcher
 import org.junit.runner.Description
 
-class RestMockRule : TestWatcher() {
+class NetworkRule : TestWatcher() {
 
   val booksService by lazy(LazyThreadSafetyMode.NONE) {
     RetrofitModule.provideBooksService(

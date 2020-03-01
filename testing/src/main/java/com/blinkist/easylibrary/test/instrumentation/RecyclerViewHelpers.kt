@@ -1,7 +1,8 @@
-package com.blinkist.easylibrary.test
+package com.blinkist.easylibrary.test.instrumentation
 
 import android.view.View
 import androidx.recyclerview.widget.RecyclerView
+import androidx.swiperefreshlayout.widget.SwipeRefreshLayout
 import androidx.test.espresso.NoMatchingViewException
 import androidx.test.espresso.ViewAssertion
 import androidx.test.espresso.matcher.BoundedMatcher
@@ -34,4 +35,13 @@ fun atPosition(position: Int, itemMatcher: Matcher<View>): Matcher<View> =
       val viewHolder = view.findViewHolderForAdapterPosition(position) ?: return false
       return itemMatcher.matches(viewHolder.itemView)
     }
+  }
+
+fun isRefreshing(): Matcher<View> =
+  object : BoundedMatcher<View, SwipeRefreshLayout>(SwipeRefreshLayout::class.java) {
+    override fun describeTo(description: Description) {
+      description.appendText("is refreshing")
+    }
+
+    override fun matchesSafely(view: SwipeRefreshLayout) = view.isRefreshing
   }

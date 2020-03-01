@@ -13,10 +13,10 @@ import androidx.test.espresso.matcher.ViewMatchers.isDisplayed
 import androidx.test.espresso.matcher.ViewMatchers.withId
 import androidx.test.espresso.matcher.ViewMatchers.withText
 import com.blinkist.easylibrary.R
-import com.blinkist.easylibrary.test.LazyActivityTestRule
-import com.blinkist.easylibrary.test.RecyclerViewItemCountAssertion.Companion.withItemCount
-import com.blinkist.easylibrary.test.atPosition
-import com.blinkist.easylibrary.test.isRefreshing
+import com.blinkist.easylibrary.test.instrumentation.LazyActivityTestRule
+import com.blinkist.easylibrary.test.instrumentation.RecyclerViewItemCountAssertion.Companion.withItemCount
+import com.blinkist.easylibrary.test.instrumentation.atPosition
+import com.blinkist.easylibrary.test.instrumentation.isRefreshing
 import com.google.android.material.snackbar.Snackbar
 import io.appflate.restmock.RESTMockServer
 import io.appflate.restmock.utils.RequestMatchers.pathContains

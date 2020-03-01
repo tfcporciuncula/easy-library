@@ -1,4 +1,4 @@
-package com.blinkist.easylibrary.test
+package com.blinkist.easylibrary.test.instrumentation
 
 import android.app.Activity
 import android.content.Context

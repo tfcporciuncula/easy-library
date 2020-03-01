@@ -1,4 +1,4 @@
-package com.blinkist.easylibrary.test
+package com.blinkist.easylibrary.test.rules
 
 import kotlinx.coroutines.CoroutineDispatcher
 import kotlinx.coroutines.Dispatchers

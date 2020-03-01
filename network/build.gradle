@@ -17,7 +17,6 @@ dependencies {
 
   // moshi
   api deps.moshi.moshi
-  kapt deps.moshi.kotlinCodegen
 
   // dagger
   implementation deps.dagger.dagger
@@ -31,6 +30,7 @@ dependencies {
   debugImplementation deps.okhttp.loggingInterceptor
 
   // unit testing
+  testImplementation project(':testing')
   testImplementation deps.junit
   testImplementation deps.truth
   testImplementation deps.kotlin.coroutines.core

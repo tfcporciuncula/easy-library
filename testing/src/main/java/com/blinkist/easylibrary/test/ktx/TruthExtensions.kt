@@ -1,4 +1,4 @@
-package com.blinkist.easylibrary.test
+package com.blinkist.easylibrary.test.ktx
 
 import com.google.common.truth.Subject
 
