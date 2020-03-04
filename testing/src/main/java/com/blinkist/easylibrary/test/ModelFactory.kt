@@ -1,3 +1,5 @@
+@file:Suppress("LongParameterList")
+
 package com.blinkist.easylibrary.test
 
 import com.blinkist.easylibrary.models.local.LocalBook
