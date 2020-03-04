@@ -19,12 +19,38 @@ import javax.inject.Singleton
 @Module(
   includes = [
     BaseUrlModule::class,
+    BaseOkHttpModule::class,
     OkHttpModule::class,
     MoshiModule::class,
     RetrofitModule::class
   ]
 )
 object NetworkModule
+
+@Module
+object BaseUrlModule {
+
+  @Qualifier annotation class BaseUrl
+
+  @Provides @BaseUrl
+  fun provideBaseUrl(): String = RESTMockServer.getUrl()
+}
+
+@Module
+object BaseOkHttpModule {
+
+  @Provides fun provideOkHttpClientBuilder() = OkHttpClient.Builder()
+    .sslSocketFactory(RESTMockServer.getSSLSocketFactory(), RESTMockServer.getTrustManager())
+}
+
+@Module
+object MoshiModule {
+
+  @Provides fun provideMoshi(): Moshi = Moshi.Builder()
+    .add(OffsetDateTimeAdapter())
+    .add(LocalDateAdapter())
+    .build()
+}
 
 @Module
 object RetrofitModule {
@@ -40,22 +66,4 @@ object RetrofitModule {
     .addConverterFactory(MoshiConverterFactory.create(moshi))
     .build()
     .create(BooksService::class.java)
-}
-
-@Module
-object BaseUrlModule {
-
-  @Qualifier annotation class BaseUrl
-
-  @Provides @BaseUrl
-  fun provideBaseUrl(): String = RESTMockServer.getUrl()
-}
-
-@Module
-object MoshiModule {
-
-  @Provides fun provideMoshi(): Moshi = Moshi.Builder()
-    .add(OffsetDateTimeAdapter())
-    .add(LocalDateAdapter())
-    .build()
 }
