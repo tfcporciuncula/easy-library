@@ -3,6 +3,7 @@ ext.versions = [
     'androidx'       : [
         'activityKtx'       : '1.1.0',
         'appCompat'         : '1.2.0-alpha02',
+        'browser'           : '1.3.0-alpha01',
         'archTesting'       : '2.1.0',
         'constraintLayout'  : '2.0.0-beta4',
         'coreKtx'           : '1.3.0-alpha01',
@@ -45,6 +46,7 @@ ext.deps = [
     'androidx'       : [
         'activityKtx'       : "androidx.activity:activity-ktx:$versions.androidx.activityKtx",
         'appCompat'         : "androidx.appcompat:appcompat:$versions.androidx.appCompat",
+        'browser'           : "androidx.browser:browser:$versions.browser",
         'archTesting'       : "androidx.arch.core:core-testing:$versions.androidx.archTesting",
         'constraintLayout'  : "androidx.constraintlayout:constraintlayout:$versions.androidx.constraintLayout",
         'coreKtx'           : "androidx.core:core-ktx:$versions.androidx.coreKtx",

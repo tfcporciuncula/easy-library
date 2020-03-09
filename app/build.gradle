@@ -49,6 +49,7 @@ dependencies {
   implementation deps.androidx.fragmentKtx
   implementation deps.androidx.coreKtx
   implementation deps.androidx.preference
+  implementation deps.androidx.browser
 
   // architecture components
   implementation deps.androidx.lifecycle.viewModelKtx
