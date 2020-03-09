@@ -25,6 +25,14 @@ afterEvaluate { project ->
           versionNameSuffix appVersion.snapshot ? '-dev' : ".$appVersion.build-dev"
         }
       }
+
+      sourceSets {
+        androidTest.java.srcDirs += 'src/androidTest/kotlin'
+        debug.java.srcDirs += 'src/debug/kotlin'
+        main.java.srcDirs += 'src/main/kotlin'
+        release.java.srcDirs += 'src/release/kotlin'
+        test.java.srcDirs += 'src/test/kotlin'
+      }
     }
 
     extensions.findByName('kapt')?.arguments {
