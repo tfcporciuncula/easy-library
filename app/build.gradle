@@ -14,11 +14,21 @@ android {
     execution 'ANDROIDX_TEST_ORCHESTRATOR'
   }
 
+  signingConfigs {
+    release {
+      storeFile file("/bla/upload-keystore.jks")
+      storePassword "xx"
+      keyAlias "upload"
+      keyPassword 'xx'
+    }
+  }
+
   buildTypes {
     release {
       minifyEnabled true
       shrinkResources true
       proguardFiles getDefaultProguardFile('proguard-android-optimize.txt'), 'proguard-rules.pro'
+      signingConfig signingConfigs.release
     }
 
     debug {
