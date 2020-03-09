@@ -8,7 +8,7 @@ afterEvaluate { project ->
         minSdkVersion buildConfig.minSdk
         targetSdkVersion buildConfig.targetSdk
         versionCode appVersion.major * 1000000 + appVersion.minor * 10000 + appVersion.patch * 100 + appVersion.build
-        versionName "$appVersion.major.$appVersion.minor.$appVersion.patch" + (appVersion.snapshot ? "-SNAPSHOT" : "")
+        versionName "$appVersion.major.$appVersion.minor.$appVersion.patch" + (appVersion.snapshot ? '-SNAPSHOT' : '')
       }
 
       compileOptions {
@@ -22,13 +22,13 @@ afterEvaluate { project ->
 
       buildTypes {
         debug {
-          versionNameSuffix appVersion.snapshot ? "-dev" : ".$appVersion.build-dev"
+          versionNameSuffix appVersion.snapshot ? '-dev' : ".$appVersion.build-dev"
         }
       }
     }
 
     extensions.findByName('kapt')?.arguments {
-      arg("dagger.fastInit", "enabled")
+      arg('dagger.fastInit', 'enabled')
     }
   }
 }
