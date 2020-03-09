@@ -2,17 +2,17 @@ package com.blinkist.easylibrary
 
 import android.app.Application
 import com.blinkist.easylibrary.di.ApplicationComponent
-import com.blinkist.easylibrary.di.DaggerApplicationComponent
 import com.blinkist.easylibrary.di.DaggerComponentProvider
 import com.blinkist.easylibrary.network.MockServer
 import com.blinkist.easylibrary.util.ktx.unsyncLazy
 import com.jakewharton.threetenabp.AndroidThreeTen
+import dagger.Dagger
 import timber.log.Timber
 
 class EasyLibraryApplication : Application(), DaggerComponentProvider {
 
   override val component: ApplicationComponent by unsyncLazy {
-    DaggerApplicationComponent.factory().create(applicationContext)
+    Dagger.factory(ApplicationComponent.Factory::class.java).create(applicationContext)
   }
 
   override fun onCreate() {

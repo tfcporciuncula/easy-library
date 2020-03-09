@@ -10,12 +10,19 @@ buildscript {
   dependencies {
     classpath "com.android.tools.build:gradle:$versions.agp"
     classpath "org.jetbrains.kotlin:kotlin-gradle-plugin:$versions.kotlin"
+    classpath 'com.soundcloud.delect:delect-plugin:0.2.1'
   }
 }
 
 plugins {
   id 'org.jmailen.kotlinter' version '2.3.0' apply false
   id 'io.gitlab.arturbosch.detekt' version '1.6.0' apply false
+}
+
+apply plugin: 'com.soundcloud.delect'
+
+delect {
+  addReflectAnnotationProcessor = false
 }
 
 ext.buildConfig = [
