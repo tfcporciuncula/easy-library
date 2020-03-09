@@ -52,6 +52,7 @@ dependencies {
 
   // architecture components
   implementation deps.androidx.lifecycle.viewModelKtx
+  implementation deps.androidx.lifecycle.viewModelSavedState
   implementation deps.androidx.lifecycle.liveDataKtx
   testImplementation deps.androidx.archTesting
 

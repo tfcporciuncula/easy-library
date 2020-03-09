@@ -50,8 +50,9 @@ ext.deps = [
         'coreKtx'           : "androidx.core:core-ktx:$versions.androidx.coreKtx",
         'fragmentKtx'       : "androidx.fragment:fragment-ktx:$versions.androidx.fragmentKtx",
         'lifecycle'         : [
-            'viewModelKtx': "androidx.lifecycle:lifecycle-viewmodel-ktx:$versions.androidx.lifecycle",
-            'liveDataKtx' : "androidx.lifecycle:lifecycle-livedata-ktx:$versions.androidx.lifecycle",
+            'viewModelKtx'       : "androidx.lifecycle:lifecycle-viewmodel-ktx:$versions.androidx.lifecycle",
+            'viewModelSavedState': "androidx.lifecycle:lifecycle-viewmodel-savedstate:$versions.androidx.lifecycle",
+            'liveDataKtx'        : "androidx.lifecycle:lifecycle-livedata-ktx:$versions.androidx.lifecycle"
         ],
         'preference'        : "androidx.preference:preference:$versions.androidx.preference",
         'recyclerview'      : "androidx.recyclerview:recyclerview:$versions.androidx.recyclerview",
