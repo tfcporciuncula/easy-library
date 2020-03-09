@@ -99,6 +99,7 @@ dependencies {
   androidTestImplementation deps.androidx.test.rules
   androidTestImplementation deps.androidx.test.junit
   androidTestImplementation deps.androidx.test.espresso.core
+  androidTestImplementation deps.androidx.test.espresso.contrib
   androidTestImplementation deps.truth
   androidTestImplementation deps.restMock
   androidTestImplementation deps.okhttp.mockwebserver
