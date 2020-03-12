@@ -1,6 +1,6 @@
 package com.blinkist.easylibrary.network
 
-import com.blinkist.easylibrary.models.remote.RemoteBook
+import com.blinkist.easylibrary.network.models.RemoteBook
 import com.blinkist.easylibrary.network.test.NetworkRule
 import com.google.common.truth.Truth.assertThat
 import io.appflate.restmock.RESTMockServer

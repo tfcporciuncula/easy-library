@@ -1,4 +1,4 @@
-package com.blinkist.easylibrary.models.remote
+package com.blinkist.easylibrary.network.models
 
 import com.squareup.moshi.JsonClass
 import org.threeten.bp.LocalDate

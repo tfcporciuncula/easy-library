@@ -3,6 +3,7 @@ apply plugin: 'kotlin-android'
 
 dependencies {
   implementation project(':models')
+  implementation project(':network-models')
 
   // kotlin
   implementation deps.kotlin.stdlib

@@ -2,7 +2,7 @@ package com.blinkist.easylibrary.model.mappers
 
 import com.blinkist.easylibrary.models.local.LocalBook
 import com.blinkist.easylibrary.models.presentation.Book
-import com.blinkist.easylibrary.models.remote.RemoteBook
+import com.blinkist.easylibrary.network.models.RemoteBook
 import org.threeten.bp.format.DateTimeFormatter
 import javax.inject.Inject
 

@@ -5,7 +5,7 @@ package com.blinkist.easylibrary.test
 import com.blinkist.easylibrary.models.local.LocalBook
 import com.blinkist.easylibrary.models.presentation.Book
 import com.blinkist.easylibrary.models.presentation.WeekSection
-import com.blinkist.easylibrary.models.remote.RemoteBook
+import com.blinkist.easylibrary.network.models.RemoteBook
 import org.threeten.bp.LocalDate
 
 fun newLocalBook(

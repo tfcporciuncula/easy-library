@@ -1,6 +1,7 @@
 include ':app'
 include ':database'
 include ':network'
+include ':network-models'
 include ':testing'
 include ':models'
 include ':util'
