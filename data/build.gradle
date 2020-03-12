@@ -3,9 +3,11 @@ apply plugin: 'kotlin-android'
 apply plugin: 'kotlin-kapt'
 
 dependencies {
-  api project(':models')
-  api project(':database')
-  api project(':network')
+  implementation project(':models')
+  implementation project(':database')
+  implementation project(':network')
+  implementation project(':database-models')
+  implementation project(':network-models')
 
   // kotlin
   implementation deps.kotlin.stdlib

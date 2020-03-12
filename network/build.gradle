@@ -3,13 +3,13 @@ apply plugin: 'kotlin-android'
 apply plugin: 'kotlin-kapt'
 
 dependencies {
-  api project(':network-models')
+  implementation project(':network-models')
 
   // kotlin
   implementation deps.kotlin.stdlib
 
   // http
-  api deps.okhttp.okhttp
+  implementation deps.okhttp.okhttp
   implementation deps.retrofit.retrofit
   implementation deps.retrofit.moshiConverter
   implementation(deps.restMock) { exclude group: 'androidx.test' }

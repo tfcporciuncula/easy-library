@@ -18,7 +18,7 @@ android {
 }
 
 dependencies {
-  api project(':database-models')
+  implementation project(':database-models')
 
   // kotlin
   implementation deps.kotlin.stdlib
