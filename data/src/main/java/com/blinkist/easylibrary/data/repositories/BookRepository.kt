@@ -1,7 +1,7 @@
-package com.blinkist.easylibrary.model.repositories
+package com.blinkist.easylibrary.data.repositories
 
+import com.blinkist.easylibrary.data.mappers.BookMapper
 import com.blinkist.easylibrary.database.BookDao
-import com.blinkist.easylibrary.model.mappers.BookMapper
 import com.blinkist.easylibrary.network.BooksService
 import kotlinx.coroutines.flow.map
 import javax.inject.Inject

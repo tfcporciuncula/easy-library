@@ -1,4 +1,4 @@
-package com.blinkist.easylibrary.model.mappers
+package com.blinkist.easylibrary.data.mappers
 
 import com.blinkist.easylibrary.database.models.LocalBook
 import com.blinkist.easylibrary.models.presentation.Book

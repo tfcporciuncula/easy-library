@@ -4,7 +4,7 @@ import androidx.arch.core.executor.testing.InstantTaskExecutorRule
 import com.blinkist.easylibrary.NightThemeManager
 import com.blinkist.easylibrary.R
 import com.blinkist.easylibrary.features.library.LibraryViewState.NavigationEvent
-import com.blinkist.easylibrary.model.repositories.BookRepository
+import com.blinkist.easylibrary.data.repositories.BookRepository
 import com.blinkist.easylibrary.network.NetworkChecker
 import com.blinkist.easylibrary.test.ktx.getOrAwaitValue
 import com.blinkist.easylibrary.test.ktx.isInstanceOf

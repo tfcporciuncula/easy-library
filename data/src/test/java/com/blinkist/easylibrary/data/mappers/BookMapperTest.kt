@@ -1,15 +1,12 @@
-package com.blinkist.easylibrary.model.mappers
+package com.blinkist.easylibrary.data.mappers
 
 import com.blinkist.easylibrary.database.models.LocalBook
 import com.blinkist.easylibrary.network.models.RemoteBook
 import com.google.common.truth.Truth.assertThat
 import org.junit.Before
 import org.junit.Test
-import org.junit.runner.RunWith
-import org.mockito.junit.MockitoJUnitRunner
 import org.threeten.bp.LocalDate
 
-@RunWith(MockitoJUnitRunner::class)
 class BookMapperTest {
 
   private lateinit var bookMapper: BookMapper

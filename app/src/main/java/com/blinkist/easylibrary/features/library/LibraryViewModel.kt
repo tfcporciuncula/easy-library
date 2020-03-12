@@ -4,12 +4,12 @@ import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.blinkist.easylibrary.NightThemeManager
 import com.blinkist.easylibrary.R
+import com.blinkist.easylibrary.data.repositories.BookRepository
 import com.blinkist.easylibrary.di.SharedPreferencesModule.LibrarySortOrderPreference
 import com.blinkist.easylibrary.features.library.LibraryViewState.NavigationEvent
 import com.blinkist.easylibrary.features.library.LibraryViewState.SnackbarEvent
-import com.blinkist.easylibrary.model.repositories.BookRepository
 import com.blinkist.easylibrary.models.presentation.Book
-import com.blinkist.easylibrary.network.NetworkChecker
+import com.blinkist.easylibrary.util.NetworkChecker
 import com.blinkist.easylibrary.util.ktx.launchCatching
 import com.blinkist.easylibrary.util.ktx.select
 import com.blinkist.easylibrary.util.livedata.NonNullMutableLiveData

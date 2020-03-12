@@ -1,4 +1,4 @@
-package com.blinkist.easylibrary.network
+package com.blinkist.easylibrary.util
 
 import android.content.Context
 import io.appflate.restmock.RESTMockOptions

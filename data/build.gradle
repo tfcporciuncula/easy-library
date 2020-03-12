@@ -1,0 +1,25 @@
+apply plugin: 'com.android.library'
+apply plugin: 'kotlin-android'
+apply plugin: 'kotlin-kapt'
+
+dependencies {
+  api project(':models')
+  api project(':database')
+  api project(':network')
+
+  // kotlin
+  implementation deps.kotlin.stdlib
+  implementation deps.kotlin.coroutines.core
+
+  // dagger
+  implementation deps.dagger.dagger
+  kapt deps.dagger.compiler
+
+  // jsr-310
+  implementation deps.threeTenAbp
+
+  // unit testing
+  testImplementation project(':testing')
+  testImplementation deps.junit
+  testImplementation deps.truth
+}

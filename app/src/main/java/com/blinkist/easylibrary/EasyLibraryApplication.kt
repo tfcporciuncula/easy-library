@@ -4,7 +4,7 @@ import android.app.Application
 import com.blinkist.easylibrary.di.ApplicationComponent
 import com.blinkist.easylibrary.di.DaggerApplicationComponent
 import com.blinkist.easylibrary.di.DaggerComponentProvider
-import com.blinkist.easylibrary.network.MockServer
+import com.blinkist.easylibrary.util.MockServer
 import com.blinkist.easylibrary.util.ktx.unsyncLazy
 import com.jakewharton.threetenabp.AndroidThreeTen
 import timber.log.Timber
