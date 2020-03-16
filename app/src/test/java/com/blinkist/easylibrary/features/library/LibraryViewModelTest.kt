@@ -3,14 +3,14 @@ package com.blinkist.easylibrary.features.library
 import androidx.arch.core.executor.testing.InstantTaskExecutorRule
 import com.blinkist.easylibrary.NightThemeManager
 import com.blinkist.easylibrary.R
-import com.blinkist.easylibrary.features.library.LibraryViewState.NavigationEvent
 import com.blinkist.easylibrary.data.repositories.BookRepository
-import com.blinkist.easylibrary.network.NetworkChecker
+import com.blinkist.easylibrary.features.library.LibraryViewState.NavigationEvent
 import com.blinkist.easylibrary.test.ktx.getOrAwaitValue
 import com.blinkist.easylibrary.test.ktx.isInstanceOf
 import com.blinkist.easylibrary.test.newBook
 import com.blinkist.easylibrary.test.newWeekSection
 import com.blinkist.easylibrary.test.rules.CoroutineRule
+import com.blinkist.easylibrary.util.NetworkChecker
 import com.google.common.truth.Truth.assertThat
 import com.tfcporciuncula.flow.Preference
 import kotlinx.coroutines.delay
