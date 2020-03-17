@@ -9,7 +9,7 @@ dependencies {
   implementation deps.kotlin.stdlib
 
   // http
-  implementation deps.okhttp.okhttp
+  api deps.okhttp.okhttp
   implementation deps.retrofit.retrofit
   implementation deps.retrofit.moshiConverter
   implementation(deps.restMock) { exclude group: 'androidx.test' }
