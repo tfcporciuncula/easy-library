@@ -3,11 +3,13 @@ buildscript {
     mavenCentral()
     google()
     jcenter()
+    maven { url 'http://storage.googleapis.com/r8-releases/raw' }
   }
 
   apply from: rootProject.file('dependencies.gradle')
 
   dependencies {
+    classpath "com.android.tools:r8:$versions.r8"
     classpath "com.android.tools.build:gradle:$versions.agp"
     classpath "org.jetbrains.kotlin:kotlin-gradle-plugin:$versions.kotlin"
   }
